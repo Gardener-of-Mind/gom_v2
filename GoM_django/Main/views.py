@@ -23,4 +23,13 @@ def login(request):
 	return render(request,'login.html')	
 
 def register(request):
+	if request.POST:
+		username= request.POST['username']
+		email_id= request.POST['email']
+		password = request.POST['password']
+		try:
+			user = User.objects.create(username= username, email= email_id,password= password)
+		except:
+			return HttpResponse('Error')
+		return HttpResponseRedirect('../questions/')
 	return render(request,'register.html')		
