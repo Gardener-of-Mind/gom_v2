@@ -51,3 +51,4 @@ def questions(request):
 		return query
 	query= query.objects.all().order_by('id')[0]
 	return render(request,'initial_survey.html', {'query' : query})
+
