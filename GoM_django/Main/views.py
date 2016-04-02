@@ -20,7 +20,17 @@ def index(request):
 	return render(request,'index.html')
 
 def login(request):
-	return render(request,'login.html')	
+	if request.POST:
+		username= request.POST['username']
+		password= request.POST['password']
+		user= authenticate(username=username, password=password)
+		if user:
+			login(request,user)
+			profile= user_profile.objects.filter(user=user)
+			if profile.questions == False:
+				return HttpResponseRedirect('../questions/')
+			return HttpResponseRedirect('../dashboard/')
+	return render(request,'login.html')
 
 def register(request):
 	if request.POST:
@@ -32,4 +42,12 @@ def register(request):
 		except:
 			return HttpResponse('Error')
 		return HttpResponseRedirect('../questions/')
-	return render(request,'register.html')		
+	return render(request,'register.html')
+
+def questions(request):
+	if request.POST:
+		qid= int(request.POST['qid'])
+		query= question.objects.get(id=qid)
+		return query
+	query= query.objects.all().order_by('id')[0]
+	return render(request,'initial_survey.html', {'query' : query})
