@@ -49,6 +49,5 @@ def questions(request):
 		qid= int(request.POST['qid'])
 		query= question.objects.get(id=qid)
 		return query
-	query= query.objects.all().order_by('id')[0]
-	return render(request,'initial_survey.html', {'query' : query})
+	return render(request,'initial_survey.html')
 
