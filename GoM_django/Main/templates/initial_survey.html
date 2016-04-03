@@ -1,3 +1,4 @@
+{% load staticfiles %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,16 +8,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    
+
     <!-- StyleSheets -->
     <link href="{% static 'assets/global/plugins/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css" />
     <link href="{% static 'assets/global/plugins/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'assets/pages/css/initial-survey.css' %}" rel="stylesheet" type="text/css" />
 
 </head>
 <body>
 <!-- Navigation -->
     <div class="header">
-    	<img src="logo.png" class="logo">
+        <img src="{% static 'assets/pages/img/logo.png' %}"  class="logo" alt="" /> 
     </div>
 </body>
 </html>
