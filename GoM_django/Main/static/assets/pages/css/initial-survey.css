@@ -1,0 +1,18 @@
+/* Header Styling */
+.header {
+	position: fixed;
+	top:0;
+	left: 0;
+	height: 80px;
+	width: 100%;
+	padding: 10px 20px;
+	border-bottom: 10px solid #3F5A6C;
+    text-align: center;
+    background: #25BDA8;
+    z-index: 50;
+}
+
+.header .logo {
+	height: 50px;
+	max-width: 100%;
+}
