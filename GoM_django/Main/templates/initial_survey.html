@@ -2,8 +2,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Initial Survey</title>
 	<meta charset="utf-8">
+	<title>Initial Survey</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
@@ -14,11 +14,169 @@
     <link href="{% static 'assets/global/plugins/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet" type="text/css" />
     <link href="{% static 'assets/pages/css/initial-survey.css' %}" rel="stylesheet" type="text/css" />
 
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="{% static 'assets/global/img/favicon.ico' %}" /> </head>
+
 </head>
 <body>
-<!-- Navigation -->
+	<!-- Navigation -->
     <div class="header">
         <img src="{% static 'assets/pages/img/logo.png' %}"  class="logo" alt="" /> 
     </div>
+	<!-- Navigation End-->
+    
+    <!-- Page Content -->
+    <div class="container body-box">
+        <!-- survey type start -->
+        <div class="row white-bg survey-type">
+        	<button class="survey-type-btn" data-type="anxiety" >Anxiety</button>
+        	<button class="survey-type-btn" data-type="depression" >Depression</button>
+        	<button class="survey-type-btn" data-type="stress" >Stress</button>
+        </div>
+        <!-- survey type end -->
+
+        <!-- survey fields start -->
+        <div class="row white-bg survey-form">
+        	<div class="col-sm-12">
+				<div style="overflow: auto;">
+					<span class="pull-left progress-data"><strong>Anxiety</strong></span>
+					<span class="pull-right progress-data progress-percent">0% COMPLETED</span>
+				</div>
+        		<div class="progress-back">
+					<div class="progress-front"></div>
+				</div>
+        	</div>
+            <div class="col-sm-12">
+                <div class="ques">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
+            </div>
+            <div class="col-sm-12 mcq-type">
+	            <div class="col-sm-6">
+	                <label>
+	                <div class="mcq">
+                        <input type="checkbox" value="">Option A
+                    </div>
+                    </label>
+	            </div>
+	            <div class="col-sm-6">
+	                <label><div class="mcq">
+                        <input type="checkbox" value="">Option B
+                    </div></label>
+	            </div>
+	            <div class="col-sm-6">
+	                <label><div class="mcq">
+                        <input type="checkbox" value="">Option C
+                    </div></label>
+	            </div>
+	            <div class="col-sm-6">
+	                <label><div class="mcq">
+                        <input type="checkbox" value="">Option D
+                    </div></label>
+	            </div>
+            </div>
+            <div class="col-sm-12 slider-type">
+	            <div class="slider">
+					<div id="demo-simple-slider" class="dragdealer">
+					  <div class="handle green-circle">
+					  	<div class="icon"></div>
+					  </div>
+					</div>
+					<table class="scale">
+						<tr>
+							<td>1</td>
+							<td>2</td>
+							<td>3</td>
+							<td>4</td>
+							<td>5</td>
+							<td>6</td>
+							<td>7</td>
+							<td>8</td>
+							<td>9</td>
+							<td>10</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+			<div class="col-sm-12 yes-no-type">
+				<div class="yes-no">
+					<span class="yes-no-ques">szdfd caytjvbn cuvkbln</span>
+						<span class="yes-no-option yes-no-cross"><i class="fa fa-close"></i><span class="yes-no-tag">NO</span></span>
+						<span class="yes-no-option yes-no-tick"><i class="fa fa-check"></i><span class="yes-no-tag">YES</span></span>
+					
+				</div>
+			</div>
+			<div class="col-sm-12 main  radio-type">
+				<div class="col-sm-6">
+					<div class="radioholder">
+					<input type="radio" name="projecttype" value="Website" checked>
+					<label for="pt_website">Website</label>
+					</div>
+				</div>
+				<div class="col-sm-6">
+					<div class="radioholder">
+					<input type="radio" name="projecttype" value="Mobile">
+					<label for="pt_mobile">Mobile</label>
+					</div>
+				</div>
+				<div class="col-sm-6">
+					<div class="radioholder">
+					<input type="radio" name="projecttype" value="Application">
+					<label for="pt_application">Application</label>
+					</div>
+				</div>
+				<div class="col-sm-6">
+					<div class="radioholder">
+					<input type="radio" name="projecttype" value="Illustration">
+					<label for="pt_illustration">Illustration</label>
+					</div>
+				</div>	
+			</div>
+			<div class="col-sm-12 select-type" style="z-index: 1;">
+				<div class="selectholder">
+					<label>CHOOSE SOME OPTION</label>
+					<select>
+					  <option value="0">Some Option </option>
+					  <option value="1">Some Option 1</option>
+					  <option value="2">Some Option 2</option>
+					  <option value="3">Some Option 3</option>
+					  <option value="4">Some Option 4</option>
+					  <option value="5">Some Option 5</option>
+					</select>
+				</div>
+			</div>
+			<div class="col-sm-12 text-type">
+				<textarea class="survey-textarea" placeholder="Just to give us a flavour..."></textarea>	
+			</div>
+			<div class="col-sm-12 text-center">
+				<div class="next-ques">NEXT QUESTION</div>	
+			</div>
+			<div class="col-sm-12 form-done text-center">
+				THANK YOU! Form has been successfully completed.
+			</div>
+        </div>
+        <!-- survey fields end -->
+
+        <!-- Footer -->
+        <footer>
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <p>Copyright &copy; 2016 ManaMaali</p>
+                </div>
+            </div>
+            <!-- /.row -->
+        </footer>
+    </div>
+    <!-- /.container -->
+
+    <!-- BEGIN CORE PLUGINS -->
+    <script src="{% static 'assets/global/plugins/jquery.min.js' %}" type="text/javascript"></script>
+    <!-- END CORE PLUGINS -->
+    <!-- BEGIN PAGE LEVEL SCRIPTS -->
+    <script src="{% static 'assets/pages/scripts/initial-survey.js' %}" type="text/javascript"></script>
+    <!-- END PAGE LEVEL SCRIPTS -->
 </body>
 </html>
