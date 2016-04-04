@@ -13,13 +13,13 @@ from django.core.mail import send_mail, EmailMessage
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 from django.db import IntegrityError
-
+from Main.models import *
 
 # Create your views here.
 def index(request):
 	return render(request,'index.html')
 
-def login(request):
+def user_login(request):
 	if request.POST:
 		username= request.POST['username']
 		password= request.POST['password']
@@ -37,10 +37,15 @@ def register(request):
 		username= request.POST['username']
 		email_id= request.POST['email']
 		password = request.POST['password']
-		try:
-			user = User.objects.create(username= username, email= email_id,password= password)
-		except:
-			return HttpResponse('Error')
+		# try:
+		user = User.objects.create_user(username= username, email= email_id,password= password)
+		user.set_password(user.password)
+		profile=user_profile(user=user,email_id=email_id)
+		profile.save()
+		user2= authenticate(username=username,password=password)
+		login(request,user2)
+		# except:
+		# 	return HttpResponse('Error')
 		return HttpResponseRedirect('../dashboard/')
 	return render(request,'register.html')
 
@@ -51,6 +56,7 @@ def questions(request):
 		return query
 	return render(request,'initial_survey.html')
 
+@login_required
 def dashboard(request):
 	user=request.user
 	try:

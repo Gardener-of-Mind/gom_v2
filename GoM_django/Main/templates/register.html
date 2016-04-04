@@ -49,6 +49,7 @@
         <div class="content">
             <!-- BEGIN REGISTRATION FORM -->
             <form class="register-form" action="." method="post" >
+                {% csrf_token %}
                 <h3>Sign Up</h3>
                 <p> Enter your account details below: </p>
                 <div class="form-group">

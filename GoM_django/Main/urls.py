@@ -18,7 +18,7 @@ from Main import views
 
 urlpatterns = [
     url(r'^$', views.index),
-    url(r'^login/$', views.login),
+    url(r'^login/$', views.user_login),
     url(r'^register/$', views.register),
     url(r'^questions/$', views.questions),
     url(r'^dashboard/$', views.dashboard),
