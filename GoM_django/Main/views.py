@@ -28,7 +28,7 @@ def login(request):
 			login(request,user)
 			profile= user_profile.objects.filter(user=user)
 			if profile.questions == False:
-				return HttpResponseRedirect('../questions/')
+				return HttpResponseRedirect('../dashboard/')
 			return HttpResponseRedirect('../dashboard/')
 	return render(request,'login.html')
 
@@ -41,7 +41,7 @@ def register(request):
 			user = User.objects.create(username= username, email= email_id,password= password)
 		except:
 			return HttpResponse('Error')
-		return HttpResponseRedirect('../questions/')
+		return HttpResponseRedirect('../dashboard/')
 	return render(request,'register.html')
 
 def questions(request):
@@ -51,3 +51,10 @@ def questions(request):
 		return query
 	return render(request,'initial_survey.html')
 
+def dashboard(request):
+	user=request.user
+	try:
+		profile= user_profile.objects.get(user=user)
+	except:
+		pass
+	return render(request,'dashboard.html',{'profile': profile})

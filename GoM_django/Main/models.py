@@ -25,7 +25,6 @@ class user_profile(models.Model):
 
 class question(models.Model):
 	text=models.CharField(max_length=1000)
-	answer= models.CharField(max_length=1000, blank=True, default='')
 	query_type= models.CharField(max_length=50)
 	option1= models.CharField(max_length=1000, blank=True)
 	option2= models.CharField(max_length=1000, blank=True)
