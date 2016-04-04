@@ -26,9 +26,9 @@ def user_login(request):
 		user= authenticate(username=username, password=password)
 		if user:
 			login(request,user)
-			profile= user_profile.objects.filter(user=user)
-			if profile.questions == False:
-				return HttpResponseRedirect('../dashboard/')
+			# profile= user_profile.objects.filter(user=user)
+			# if profile.questions == False:
+				# return HttpResponseRedirect('../dashboard/')
 			return HttpResponseRedirect('../dashboard/')
 	return render(request,'login.html')
 
@@ -61,6 +61,16 @@ def dashboard(request):
 	user=request.user
 	try:
 		profile= user_profile.objects.get(user=user)
+		return render(request,'user/dashboard.html',{'profile': profile})
+	except:
+		pass			
+	try:
+		profile= coach_profile.objects.get(user=user)
+		return render(request,'coach/dashboard.html',{'profile': profile})
 	except:
 		pass
-	return render(request,'dashboard.html',{'profile': profile})
+	try:
+		profile= admin_profile.objects.get(user=user)
+		return render(request,'admin/dashboard.html',{'profile': profile})
+	except:
+		pass		

@@ -1,0 +1,148 @@
+body {
+	background: #eee;
+	font-size: 16px;
+}
+/* Header Styling */
+.header {
+	position: fixed;
+	top:0;
+	left: 0;
+	height: 80px;
+	width: 100%;
+	padding: 10px 20px;
+	border-bottom: 10px solid #3F5A6C;
+    text-align: center;
+    background: #25BDA8;
+    z-index: 50;
+}
+
+.header .logo {
+	height: 50px;
+	max-width: 100%;
+}
+
+/* white-container */
+.container.body-box {
+	opacity: 0;
+	padding-top: 240px;
+	-webkit-transition: all 0.3s ease-in;
+	-moz-transition: all 0.3s ease-in;
+	transition: all 0.3s ease-in;
+	margin-top: 40px;
+	/*display: none;*/
+}
+
+.white-bg {
+	max-width: 900px;
+	background: white;
+    margin: 20px auto;
+    padding: 20px 50px;
+}
+
+
+/*Survey Type*/
+.survey-type {
+
+}
+
+/*Survey Form*/
+.survey-form {
+	display: none;
+}
+
+/*Progress Bar*/
+.progress-back {
+  background-color: #ccc;
+  height: 3px;
+  width: 100%;
+  margin: auto;
+  position: relative;
+}
+
+.progress-front {
+  /*background: -webkit-gradient(linear, left top, right top, color-stop(0%,#87d4d7), color-stop(100%,#8bfbff));*/
+  background: -webkit-gradient(linear, left top, right top, color-stop(0%,#39A9A4), color-stop(100%,#25BDA8));
+  height: 2px;
+  width: 0%;
+  -webkit-transition: all 0.2s ease-in-out;
+  -moz-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+}
+
+.progress-data {
+	color: #666;
+	font-size: 1em;
+	font-style: italic;
+	padding: 2px;
+}
+
+/* MCQ - Checkbox */
+
+/*MCQ*/
+
+.mcq {
+	text-align: center;
+    font-size: 1.2em;
+    padding: 15px 20px;
+    margin: 10px 0;
+    border: 2px solid #eee;
+    background: #eee;
+    border-radius: 2px;
+    cursor: pointer;
+    -webkit-transition: all 0.2s ease-in;
+    -moz-transition: all 0.2s ease-in;
+    transition: all 0.2s ease-in;
+}
+.mcq:hover{
+    background: #f0f0f0;
+    border: 2px solid #38c0cb;
+}
+.mcq.selected {
+	background: #25BDA8;
+    color: #f0f0f0;
+    border: 2px solid #2A817C;
+}
+.mcq input[type="checkbox"] {
+	display: none;
+}
+
+/*Yes-No Fields*/
+.yes-no {
+	overflow: hidden;
+	border-radius: 2px;
+	font-size: 1.3em;
+	background: #eee;
+	height: 50px;
+	margin: 0.5em 0;
+}
+
+.yes-no-ques {
+	line-height: 30px;
+	padding: 10px 20px;
+	float: left;
+}
+.yes-no-option {
+	float: right;
+	color: #fff;
+    height: 50px;
+    width: 90px;
+    font-size: 1.3em;
+    line-height: 50px;
+    text-align: center;
+    cursor: pointer;
+    padding: 0 5px;
+}
+.yes-no-option.inactive {opacity: 0.5;}
+.yes-no-tag {
+	padding: 0 4px;
+
+}
+@media screen and (max-width: 750px) {
+    .yes-no-tag{display: none;}
+    .yes-no-option{width: 50px;}
+}
+.yes-no-tick {background: #15BB65; }
+.yes-no-tick.active {background: #03B358; }
+
+.yes-no-cross {background: #EA8586; }
+.yes-no-cross.active {background: #E65051; }

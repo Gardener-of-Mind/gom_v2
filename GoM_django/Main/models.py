@@ -23,6 +23,42 @@ class user_profile(models.Model):
 		return str(self.name)
 
 
+
+class coach_profile(models.Model):
+	user = models.OneToOneField(User, null=True)	
+	GENDERS = (
+		('M', 'Male'),
+		('F', 'Female'),
+	)
+	name = models.CharField(max_length=200)
+	gender = models.CharField(max_length=1, choices=GENDERS)
+	phone_one = models.BigIntegerField(blank=True,null=True)
+	email_id = models.EmailField(unique=True)
+	class Meta:
+		verbose_name_plural = 'coach_profile'
+	def __unicode__(self):
+		return str(self.name)
+
+
+
+
+class admin_profile(models.Model):
+	user = models.OneToOneField(User, null=True)	
+	GENDERS = (
+		('M', 'Male'),
+		('F', 'Female'),
+	)
+	name = models.CharField(max_length=200)
+	gender = models.CharField(max_length=1, choices=GENDERS)
+	phone_one = models.BigIntegerField(blank=True,null=True)
+	email_id = models.EmailField(unique=True)
+
+	class Meta:
+		verbose_name_plural = 'admin_profile'
+	def __unicode__(self):
+		return str(self.name)
+
+
 class question(models.Model):
 	text=models.CharField(max_length=1000)
 	query_type= models.CharField(max_length=50)
