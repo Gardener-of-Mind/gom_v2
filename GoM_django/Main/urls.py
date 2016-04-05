@@ -19,7 +19,10 @@ from Main import views
 urlpatterns = [
     url(r'^$', views.index),
     url(r'^login/$', views.user_login),
+    url(r'^logout/$', views.user_logout),
     url(r'^register/$', views.register),
+    url(r'^profile_overview/(?P<profile_id>[0-9]+)/$', views.profile_overview),
+    url(r'^profile/edit/$', views.edit_profile),
     url(r'^questions/$', views.questions),
     url(r'^dashboard/$', views.dashboard),
 
