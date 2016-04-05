@@ -48,7 +48,7 @@
                 <!-- BEGIN LOGO -->
                 <div class="page-logo">
                     <a href="index.html">
-                        <img src="{% static 'assets/layouts/layout/img/logo.png" alt="logo" class="logo-default" /> </a>
+                        <img src="{% static 'assets/layouts/layout/img/logo.png' %}" alt="logo" class="logo-default" /> </a>
                     <div class="menu-toggler sidebar-toggler"> </div>
                 </div>
                 <!-- END LOGO -->
@@ -177,7 +177,7 @@
                                         <li>
                                             <a href="#">
                                                 <span class="photo">
-                                                    <img src="{% static 'assets/layouts/layout3/img/avatar2.jpg" class="img-circle" alt=""> </span>
+                                                    <img src="{% static 'assets/layouts/layout3/img/avatar2.jpg' %} " class="img-circle" alt=""> </span>
                                                 <span class="subject">
                                                     <span class="from"> Lisa Wong </span>
                                                     <span class="time">Just Now </span>
@@ -188,7 +188,7 @@
                                         <li>
                                             <a href="#">
                                                 <span class="photo">
-                                                    <img src="{% static 'assets/layouts/layout3/img/avatar3.jpg" class="img-circle" alt=""> </span>
+                                                    <img src="{% static 'assets/layouts/layout3/img/avatar3.jpg' %} " class="img-circle" alt=""> </span>
                                                 <span class="subject">
                                                     <span class="from"> Richard Doe </span>
                                                     <span class="time">16 mins </span>
@@ -199,7 +199,7 @@
                                         <li>
                                             <a href="#">
                                                 <span class="photo">
-                                                    <img src="{% static 'assets/layouts/layout3/img/avatar1.jpg" class="img-circle" alt=""> </span>
+                                                    <img src="{% static 'assets/layouts/layout3/img/avatar1.jpg' %} " class="img-circle" alt=""> </span>
                                                 <span class="subject">
                                                     <span class="from"> Bob Nilson </span>
                                                     <span class="time">2 hrs </span>
@@ -210,7 +210,7 @@
                                         <li>
                                             <a href="#">
                                                 <span class="photo">
-                                                    <img src="{% static 'assets/layouts/layout3/img/avatar2.jpg" class="img-circle" alt=""> </span>
+                                                    <img src="{% static 'assets/layouts/layout3/img/avatar2.jpg' %} " class="img-circle" alt=""> </span>
                                                 <span class="subject">
                                                     <span class="from"> Lisa Wong </span>
                                                     <span class="time">40 mins </span>
@@ -221,7 +221,7 @@
                                         <li>
                                             <a href="#">
                                                 <span class="photo">
-                                                    <img src="{% static 'assets/layouts/layout3/img/avatar3.jpg" class="img-circle" alt=""> </span>
+                                                    <img src="{% static 'assets/layouts/layout3/img/avatar3.jpg' %} " class="img-circle" alt=""> </span>
                                                 <span class="subject">
                                                     <span class="from"> Richard Doe </span>
                                                     <span class="time">46 mins </span>
@@ -349,13 +349,13 @@
                         <!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
                         <li class="dropdown dropdown-user">
                             <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-                                <img alt="" class="img-circle" src="{% static 'assets/layouts/layout/img/avatar3_small.jpg" />
+                                <img alt="" class="img-circle" src="{% static 'assets/layouts/layout/img/avatar3_small.jpg' %} " />
                                 <span class="username username-hide-on-mobile"> Nick </span>
                                 <i class="fa fa-angle-down"></i>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-default">
                                 <li>
-                                    <a href="page_user_profile_1.html">
+                                    <a href="../">
                                         <i class="icon-user"></i> My Profile </a>
                                 </li>
                                 <li>
@@ -411,7 +411,7 @@
                 <!-- BEGIN SIDEBAR -->
                 <!-- DOC: Set data-auto-scroll="false" to disable the sidebar from auto scrolling/focusing -->
                 <!-- DOC: Change data-auto-speed="200" to adjust the sub menu slide up/down speed -->
-                <div class="page-sidebar navbar-collapse collapse" data-auto-scroll="false">
+                <div class="page-sidebar navbar-collapse collapse">
                     <!-- BEGIN SIDEBAR MENU -->
                     <!-- DOC: Apply "page-sidebar-menu-light" class right after "page-sidebar-menu" to enable light sidebar menu style(without borders) -->
                     <!-- DOC: Apply "page-sidebar-menu-hover-submenu" class right after "page-sidebar-menu" to enable hoverable(hover vs accordion) sub menu mode -->
@@ -447,7 +447,7 @@
                             <!-- END RESPONSIVE QUICK SEARCH FORM -->
                         </li>
                         <li class="nav-item start ">
-                            <a href="../../" class="nav-link">
+                            <a href="../../dashboard/" class="nav-link">
                                 <i class="icon-home"></i>
                                 <span class="title">Dashboard</span>
                             </a>
@@ -621,7 +621,7 @@
                                 <div class="portlet light profile-sidebar-portlet ">
                                     <!-- SIDEBAR USERPIC -->
                                     <div class="profile-userpic">
-                                        <img src="{% static 'assets/pages/media/profile/profile_user.jpg" class="img-responsive" alt=""> </div>
+                                        <img src="{% static 'assets/pages/media/profile/profile_user.jpg' %} " class="img-responsive" alt=""> </div>
                                     <!-- END SIDEBAR USERPIC -->
                                     <!-- SIDEBAR USER TITLE -->
                                     <div class="profile-usertitle">
@@ -639,15 +639,15 @@
                                     <div class="profile-usermenu">
                                         <ul class="nav">
                                             <li>
-                                                <a href="page_user_profile_1.html">
+                                                <a href="../">
                                                     <i class="icon-home"></i> Overview </a>
                                             </li>
                                             <li class="active">
-                                                <a href="page_user_profile_1_account.html">
+                                                <a href="javascript:;">
                                                     <i class="icon-settings"></i> Account Settings </a>
                                             </li>
                                             <li>
-                                                <a href="page_user_profile_1_help.html">
+                                                <a href="../help/">
                                                     <i class="icon-info"></i> Help </a>
                                             </li>
                                         </ul>
@@ -722,7 +722,7 @@
                                                 <div class="tab-content">
                                                     <!-- PERSONAL INFO TAB -->
                                                     <div class="tab-pane active" id="tab_1_1">
-                                                        <form role="form" action="#">
+                                                        <form role="form" action="." method="post">
                                                             <div class="form-group">
                                                                 <label class="control-label">First Name</label>
                                                                 <input type="text" placeholder="John" class="form-control" /> </div>
@@ -746,8 +746,8 @@
                                                                 <label class="control-label">Website Url</label>
                                                                 <input type="text" placeholder="http://www.mywebsite.com" class="form-control" /> </div>
                                                             <div class="margiv-top-10">
-                                                                <a href="javascript:;" class="btn green"> Save Changes </a>
-                                                                <a href="javascript:;" class="btn default"> Cancel </a>
+                                                                <button type="submit" class="btn green"> Save Changes </button>
+                                                                <a href="." class="btn default"> Cancel </a>
                                                             </div>
                                                         </form>
                                                     </div>
@@ -908,14 +908,14 @@
                                         <div class="media-status">
                                             <span class="badge badge-success">8</span>
                                         </div>
-                                        <img class="media-object" src="{% static 'assets/layouts/layout/img/avatar3.jpg" alt="...">
+                                        <img class="media-object" src="{% static 'assets/layouts/layout/img/avatar3.jpg' %} " alt="...">
                                         <div class="media-body">
                                             <h4 class="media-heading">Bob Nilson</h4>
                                             <div class="media-heading-sub"> Project Manager </div>
                                         </div>
                                     </li>
                                     <li class="media">
-                                        <img class="media-object" src="{% static 'assets/layouts/layout/img/avatar1.jpg" alt="...">
+                                        <img class="media-object" src="{% static 'assets/layouts/layout/img/avatar1.jpg' %} " alt="...">
                                         <div class="media-body">
                                             <h4 class="media-heading">Nick Larson</h4>
                                             <div class="media-heading-sub"> Art Director </div>
@@ -925,14 +925,14 @@
                                         <div class="media-status">
                                             <span class="badge badge-danger">3</span>
                                         </div>
-                                        <img class="media-object" src="{% static 'assets/layouts/layout/img/avatar4.jpg" alt="...">
+                                        <img class="media-object" src="{% static 'assets/layouts/layout/img/avatar4.jpg' %} " alt="...">
                                         <div class="media-body">
                                             <h4 class="media-heading">Deon Hubert</h4>
                                             <div class="media-heading-sub"> CTO </div>
                                         </div>
                                     </li>
                                     <li class="media">
-                                        <img class="media-object" src="{% static 'assets/layouts/layout/img/avatar2.jpg" alt="...">
+                                        <img class="media-object" src="{% static 'assets/layouts/layout/img/avatar2.jpg' %} " alt="...">
                                         <div class="media-body">
                                             <h4 class="media-heading">Ella Wong</h4>
                                             <div class="media-heading-sub"> CEO </div>
@@ -945,7 +945,7 @@
                                         <div class="media-status">
                                             <span class="badge badge-warning">2</span>
                                         </div>
-                                        <img class="media-object" src="{% static 'assets/layouts/layout/img/avatar6.jpg" alt="...">
+                                        <img class="media-object" src="{% static 'assets/layouts/layout/img/avatar6.jpg' %} " alt="...">
                                         <div class="media-body">
                                             <h4 class="media-heading">Lara Kunis</h4>
                                             <div class="media-heading-sub"> CEO, Loop Inc </div>
@@ -956,7 +956,7 @@
                                         <div class="media-status">
                                             <span class="label label-sm label-success">new</span>
                                         </div>
-                                        <img class="media-object" src="{% static 'assets/layouts/layout/img/avatar7.jpg" alt="...">
+                                        <img class="media-object" src="{% static 'assets/layouts/layout/img/avatar7.jpg' %} " alt="...">
                                         <div class="media-body">
                                             <h4 class="media-heading">Ernie Kyllonen</h4>
                                             <div class="media-heading-sub"> Project Manager,
@@ -964,7 +964,7 @@
                                         </div>
                                     </li>
                                     <li class="media">
-                                        <img class="media-object" src="{% static 'assets/layouts/layout/img/avatar8.jpg" alt="...">
+                                        <img class="media-object" src="{% static 'assets/layouts/layout/img/avatar8.jpg' %} " alt="...">
                                         <div class="media-body">
                                             <h4 class="media-heading">Lisa Stone</h4>
                                             <div class="media-heading-sub"> CTO, Keort Inc </div>
@@ -975,14 +975,14 @@
                                         <div class="media-status">
                                             <span class="badge badge-success">7</span>
                                         </div>
-                                        <img class="media-object" src="{% static 'assets/layouts/layout/img/avatar9.jpg" alt="...">
+                                        <img class="media-object" src="{% static 'assets/layouts/layout/img/avatar9.jpg' %} " alt="...">
                                         <div class="media-body">
                                             <h4 class="media-heading">Deon Portalatin</h4>
                                             <div class="media-heading-sub"> CFO, H&D LTD </div>
                                         </div>
                                     </li>
                                     <li class="media">
-                                        <img class="media-object" src="{% static 'assets/layouts/layout/img/avatar10.jpg" alt="...">
+                                        <img class="media-object" src="{% static 'assets/layouts/layout/img/avatar10.jpg' %} " alt="...">
                                         <div class="media-body">
                                             <h4 class="media-heading">Irina Savikova</h4>
                                             <div class="media-heading-sub"> CEO, Tizda Motors Inc </div>
@@ -992,7 +992,7 @@
                                         <div class="media-status">
                                             <span class="badge badge-danger">4</span>
                                         </div>
-                                        <img class="media-object" src="{% static 'assets/layouts/layout/img/avatar11.jpg" alt="...">
+                                        <img class="media-object" src="{% static 'assets/layouts/layout/img/avatar11.jpg' %} " alt="...">
                                         <div class="media-body">
                                             <h4 class="media-heading">Maria Gomez</h4>
                                             <div class="media-heading-sub"> Manager, Infomatic Inc </div>
@@ -1009,7 +1009,7 @@
                                     </div>
                                     <div class="page-quick-sidebar-chat-user-messages">
                                         <div class="post out">
-                                            <img class="avatar" alt="" src="{% static 'assets/layouts/layout/img/avatar3.jpg" />
+                                            <img class="avatar" alt="" src="{% static 'assets/layouts/layout/img/avatar3.jpg' %} " />
                                             <div class="message">
                                                 <span class="arrow"></span>
                                                 <a href="javascript:;" class="name">Bob Nilson</a>
@@ -1018,7 +1018,7 @@
                                             </div>
                                         </div>
                                         <div class="post in">
-                                            <img class="avatar" alt="" src="{% static 'assets/layouts/layout/img/avatar2.jpg" />
+                                            <img class="avatar" alt="" src="{% static 'assets/layouts/layout/img/avatar2.jpg' %} " />
                                             <div class="message">
                                                 <span class="arrow"></span>
                                                 <a href="javascript:;" class="name">Ella Wong</a>
@@ -1027,7 +1027,7 @@
                                             </div>
                                         </div>
                                         <div class="post out">
-                                            <img class="avatar" alt="" src="{% static 'assets/layouts/layout/img/avatar3.jpg" />
+                                            <img class="avatar" alt="" src="{% static 'assets/layouts/layout/img/avatar3.jpg' %} " />
                                             <div class="message">
                                                 <span class="arrow"></span>
                                                 <a href="javascript:;" class="name">Bob Nilson</a>
@@ -1036,7 +1036,7 @@
                                             </div>
                                         </div>
                                         <div class="post in">
-                                            <img class="avatar" alt="" src="{% static 'assets/layouts/layout/img/avatar2.jpg" />
+                                            <img class="avatar" alt="" src="{% static 'assets/layouts/layout/img/avatar2.jpg' %} " />
                                             <div class="message">
                                                 <span class="arrow"></span>
                                                 <a href="javascript:;" class="name">Ella Wong</a>
@@ -1045,7 +1045,7 @@
                                             </div>
                                         </div>
                                         <div class="post out">
-                                            <img class="avatar" alt="" src="{% static 'assets/layouts/layout/img/avatar3.jpg" />
+                                            <img class="avatar" alt="" src="{% static 'assets/layouts/layout/img/avatar3.jpg' %} " />
                                             <div class="message">
                                                 <span class="arrow"></span>
                                                 <a href="javascript:;" class="name">Bob Nilson</a>
@@ -1054,7 +1054,7 @@
                                             </div>
                                         </div>
                                         <div class="post in">
-                                            <img class="avatar" alt="" src="{% static 'assets/layouts/layout/img/avatar2.jpg" />
+                                            <img class="avatar" alt="" src="{% static 'assets/layouts/layout/img/avatar2.jpg' %} " />
                                             <div class="message">
                                                 <span class="arrow"></span>
                                                 <a href="javascript:;" class="name">Ella Wong</a>
@@ -1063,7 +1063,7 @@
                                             </div>
                                         </div>
                                         <div class="post out">
-                                            <img class="avatar" alt="" src="{% static 'assets/layouts/layout/img/avatar3.jpg" />
+                                            <img class="avatar" alt="" src="{% static 'assets/layouts/layout/img/avatar3.jpg' %} " />
                                             <div class="message">
                                                 <span class="arrow"></span>
                                                 <a href="javascript:;" class="name">Bob Nilson</a>
@@ -1072,7 +1072,7 @@
                                             </div>
                                         </div>
                                         <div class="post in">
-                                            <img class="avatar" alt="" src="{% static 'assets/layouts/layout/img/avatar2.jpg" />
+                                            <img class="avatar" alt="" src="{% static 'assets/layouts/layout/img/avatar2.jpg' %} " />
                                             <div class="message">
                                                 <span class="arrow"></span>
                                                 <a href="javascript:;" class="name">Ella Wong</a>
@@ -1081,7 +1081,7 @@
                                             </div>
                                         </div>
                                         <div class="post out">
-                                            <img class="avatar" alt="" src="{% static 'assets/layouts/layout/img/avatar3.jpg" />
+                                            <img class="avatar" alt="" src="{% static 'assets/layouts/layout/img/avatar3.jpg' %} " />
                                             <div class="message">
                                                 <span class="arrow"></span>
                                                 <a href="javascript:;" class="name">Bob Nilson</a>
@@ -1431,33 +1431,33 @@
         </div>
         <!-- END FOOTER -->
         <!--[if lt IE 9]>
-<script src="{% static 'assets/global/plugins/respond.min.js"></script>
-<script src="{% static 'assets/global/plugins/excanvas.min.js"></script> 
+<script src="{% static 'assets/global/plugins/respond.min.js' %} "></script>
+<script src="{% static 'assets/global/plugins/excanvas.min.js' %} "></script> 
 <![endif]-->
         <!-- BEGIN CORE PLUGINS -->
-        <script src="{% static 'assets/global/plugins/jquery.min.js" type="text/javascript"></script>
-        <script src="{% static 'assets/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
-        <script src="{% static 'assets/global/plugins/js.cookie.min.js" type="text/javascript"></script>
-        <script src="{% static 'assets/global/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js" type="text/javascript"></script>
-        <script src="{% static 'assets/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
-        <script src="{% static 'assets/global/plugins/jquery.blockui.min.js" type="text/javascript"></script>
-        <script src="{% static 'assets/global/plugins/uniform/jquery.uniform.min.js" type="text/javascript"></script>
-        <script src="{% static 'assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js" type="text/javascript"></script>
+        <script src="{% static 'assets/global/plugins/jquery.min.js' %} " type="text/javascript"></script>
+        <script src="{% static 'assets/global/plugins/bootstrap/js/bootstrap.min.js' %} " type="text/javascript"></script>
+        <script src="{% static 'assets/global/plugins/js.cookie.min.js' %} " type="text/javascript"></script>
+        <script src="{% static 'assets/global/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js' %} " type="text/javascript"></script>
+        <script src="{% static 'assets/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js' %} " type="text/javascript"></script>
+        <script src="{% static 'assets/global/plugins/jquery.blockui.min.js' %} " type="text/javascript"></script>
+        <script src="{% static 'assets/global/plugins/uniform/jquery.uniform.min.js' %} " type="text/javascript"></script>
+        <script src="{% static 'assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js' %} " type="text/javascript"></script>
         <!-- END CORE PLUGINS -->
         <!-- BEGIN PAGE LEVEL PLUGINS -->
-        <script src="{% static 'assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.js" type="text/javascript"></script>
-        <script src="{% static 'assets/global/plugins/jquery.sparkline.min.js" type="text/javascript"></script>
+        <script src="{% static 'assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.js' %} " type="text/javascript"></script>
+        <script src="{% static 'assets/global/plugins/jquery.sparkline.min.js' %} " type="text/javascript"></script>
         <!-- END PAGE LEVEL PLUGINS -->
         <!-- BEGIN THEME GLOBAL SCRIPTS -->
-        <script src="{% static 'assets/global/scripts/app.min.js" type="text/javascript"></script>
+        <script src="{% static 'assets/global/scripts/app.min.js' %} " type="text/javascript"></script>
         <!-- END THEME GLOBAL SCRIPTS -->
         <!-- BEGIN PAGE LEVEL SCRIPTS -->
-        <script src="{% static 'assets/pages/scripts/profile.min.js" type="text/javascript"></script>
+        <script src="{% static 'assets/pages/scripts/profile.min.js' %} " type="text/javascript"></script>
         <!-- END PAGE LEVEL SCRIPTS -->
         <!-- BEGIN THEME LAYOUT SCRIPTS -->
-        <script src="{% static 'assets/layouts/layout/scripts/layout.min.js" type="text/javascript"></script>
-        <script src="{% static 'assets/layouts/layout/scripts/demo.min.js" type="text/javascript"></script>
-        <script src="{% static 'assets/layouts/global/scripts/quick-sidebar.min.js" type="text/javascript"></script>
+        <script src="{% static 'assets/layouts/layout/scripts/layout.min.js' %} " type="text/javascript"></script>
+        <script src="{% static 'assets/layouts/layout/scripts/demo.min.js' %} " type="text/javascript"></script>
+        <script src="{% static 'assets/layouts/global/scripts/quick-sidebar.min.js' %} " type="text/javascript"></script>
         <!-- END THEME LAYOUT SCRIPTS -->
     </body>
 
