@@ -15,6 +15,8 @@ class user_profile(models.Model):
 	city = models.CharField(max_length=20)
 	phone_one = models.BigIntegerField(blank=True,null=True)
 	email_id = models.EmailField(unique=True)
+	occupation= models.CharField(max_length=200, default='', blank=True)
+	about_me= models.TextField(default='')
 	questions= models.BooleanField(default=False)
 	anxiety_score= models.IntegerField(blank=True,null=True)
 	class Meta:

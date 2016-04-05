@@ -42,12 +42,20 @@ def register(request):
 		user.set_password(user.password)
 		profile=user_profile(user=user,email_id=email_id)
 		profile.save()
-		user2= authenticate(username=username,password=password)
-		login(request,user2)
+		auth_user= authenticate(username=username,password=password)
+		login(request,auth_user)
 		# except:
 		# 	return HttpResponse('Error')
-		return HttpResponseRedirect('../dashboard/')
+		return HttpResponseRedirect('../profile/edit/')
 	return render(request,'register.html')
+
+
+def user_logout(request):
+    logout(request)
+    return redirect('../')
+
+
+
 
 def questions(request):
 	if request.POST:
@@ -74,3 +82,45 @@ def dashboard(request):
 		return render(request,'admin/dashboard.html',{'profile': profile})
 	except:
 		pass		
+	return HttpResponse('Profile Not Found')
+
+@login_required
+def edit_profile(request):
+	user=request.user
+	try:
+		profile= user_profile.objects.get(user=user)
+	except:
+		pass			
+	try:
+		profile= coach_profile.objects.get(user=user)
+	except:
+		pass
+	try:
+		profile= admin_profile.objects.get(user=user)
+	except:
+		pass
+	if 'profile' not in locals():
+		return HttpResponse('Error')
+	else:
+		return render(request,'user/profile_account.html', {'profile':profile})
+
+
+@login_required
+def profile_overview(request):
+	user=request.user
+	try:
+		profile= user_profile.objects.get(user=user)
+	except:
+		pass			
+	try:
+		profile= coach_profile.objects.get(user=user)
+	except:
+		pass
+	try:
+		profile= admin_profile.objects.get(user=user)
+	except:
+		pass
+	if 'profile' not in locals():
+		return HttpResponse('Error')
+	else:
+		return render(request,'user/profile_overview.html', {'profile':profile})
