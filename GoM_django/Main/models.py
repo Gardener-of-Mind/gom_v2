@@ -1,7 +1,40 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.db import models
+from mongoengine import *
 
 
+class gauss(Document):
+    email = StringField(required=True)
+    first_name = StringField(max_length=50)
+    last_name = StringField(max_length=50)
+
+
+
+class survey_questions(Document):
+	text=StringField(max_length=1000)
+	query_type= StringField(max_length=50)
+	option1= StringField(max_length=1000, blank=True)
+	option2= StringField(max_length=1000, blank=True)
+	option3= StringField(max_length=1000, blank=True)
+	option4= StringField(max_length=1000, blank=True)
+	option5= StringField(max_length=1000, blank=True)
+	option6= StringField(max_length=1000, blank=True)
+	option7= StringField(max_length=1000, blank=True)
+	option8= StringField(max_length=1000, blank=True)
+	option9= StringField(max_length=1000, blank=True)
+	option10= StringField(max_length=1000, blank=True)
+	score= IntField(blank=True,null=True)
+	category= StringField(max_length=50,blank=True)
+	class Meta:
+		verbose_name_plural = 'Questions'
+	def __unicode__(self):
+		return str(self.text)
+
+class survey_answers(Document):
+	answers = ListField(null=True)
+	question= ReferenceField(survey_questions)
+	user_id= IntField(null=True)
 
 class user_profile(models.Model):
 	user = models.OneToOneField(User, null=True)	

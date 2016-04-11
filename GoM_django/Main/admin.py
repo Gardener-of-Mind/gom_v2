@@ -15,3 +15,4 @@ class AdminAdmin(admin.ModelAdmin):
 admin.site.register(user_profile, ProfileAdmin)
 admin.site.register(coach_profile, CoachAdmin)
 admin.site.register(admin_profile, AdminAdmin)
+# admin.site.register(survey_questions)

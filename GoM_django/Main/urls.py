@@ -25,5 +25,4 @@ urlpatterns = [
     url(r'^profile/edit/$', views.edit_profile),
     url(r'^questions/$', views.questions),
     url(r'^dashboard/$', views.dashboard),
-
 ]

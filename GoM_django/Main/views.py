@@ -12,9 +12,11 @@ from django.template import Context
 from django.core.mail import send_mail, EmailMessage
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
+from django.core import serializers
 from django.db import IntegrityError
 from Main.models import *
-
+import json
+from django.forms.models import model_to_dict
 # Create your views here.
 def index(request):
 	return render(request,'index.html')
@@ -56,13 +58,19 @@ def user_logout(request):
 
 
 
-
 def questions(request):
 	if request.POST:
 		qid= int(request.POST['qid'])
 		query= question.objects.get(id=qid)
 		return query
-	return render(request,'initial_survey.html')
+	questions_list = survey_questions.objects.all()
+	queries= questions_list.to_json()
+	# data = serializers.serialize("json", questions_list)
+	return HttpResponse(queries)
+
+
+	return render(request,'initial_survey.html', {'questions':data})
+
 
 @login_required
 def dashboard(request):
