@@ -66,11 +66,18 @@ def questions(request):
 	questions_list = survey_questions.objects.all()
 	queries= questions_list.to_json()
 	# data = serializers.serialize("json", questions_list)
-	return HttpResponse(queries)
+	# return HttpResponse(queries)
 
 
-	return render(request,'initial_survey.html', {'questions':data})
+	return render(request,'initial_survey.html', {'questions':queries})
 
+def query(request):
+	if request.POST:
+		category= request.POST['category']
+		if category == 'anxiety':
+			questions_list = survey_questions.objects(category='anxiety')
+			queries= questions_list.to_json()
+			return HttpResponse(queries)
 
 @login_required
 def dashboard(request):

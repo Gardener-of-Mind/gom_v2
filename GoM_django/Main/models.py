@@ -14,16 +14,7 @@ class gauss(Document):
 class survey_questions(Document):
 	text=StringField(max_length=1000)
 	query_type= StringField(max_length=50)
-	option1= StringField(max_length=1000, blank=True)
-	option2= StringField(max_length=1000, blank=True)
-	option3= StringField(max_length=1000, blank=True)
-	option4= StringField(max_length=1000, blank=True)
-	option5= StringField(max_length=1000, blank=True)
-	option6= StringField(max_length=1000, blank=True)
-	option7= StringField(max_length=1000, blank=True)
-	option8= StringField(max_length=1000, blank=True)
-	option9= StringField(max_length=1000, blank=True)
-	option10= StringField(max_length=1000, blank=True)
+	options = ListField(null=True)	
 	score= IntField(blank=True,null=True)
 	category= StringField(max_length=50,blank=True)
 	class Meta:
