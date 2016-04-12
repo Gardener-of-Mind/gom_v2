@@ -625,13 +625,12 @@
                                     <!-- END SIDEBAR USERPIC -->
                                     <!-- SIDEBAR USER TITLE -->
                                     <div class="profile-usertitle">
-                                        <div class="profile-usertitle-name"> Marcus Doe </div>
-                                        <div class="profile-usertitle-job"> Developer </div>
+                                        <div class="profile-usertitle-name"> {{profile.name}} </div>
+                                        <div class="profile-usertitle-job"> USER </div>
                                     </div>
                                     <!-- END SIDEBAR USER TITLE -->
                                     <!-- SIDEBAR BUTTONS -->
                                     <div class="profile-userbuttons">
-                                        <button type="button" class="btn btn-circle green btn-sm">Follow</button>
                                         <button type="button" class="btn btn-circle red btn-sm">Message</button>
                                     </div>
                                     <!-- END SIDEBAR BUTTONS -->
@@ -723,31 +722,33 @@
                                                     <!-- PERSONAL INFO TAB -->
                                                     <div class="tab-pane active" id="tab_1_1">
                                                         <form role="form" action="." method="post">
+                                                            {% csrf_token %}
                                                             <div class="form-group">
                                                                 <label class="control-label">First Name</label>
-                                                                <input type="text" placeholder="John" class="form-control" /> </div>
+                                                                <input name='name' type="text" placeholder="John" class="form-control" value="{{profile.name}}" /> </div>
                                                             <div class="form-group">
-                                                                <label class="control-label">Last Name</label>
-                                                                <input type="text" placeholder="Doe" class="form-control" /> </div>
+                                                                <label class="control-label">Gender</label>
+                                                                <input name='gender' type="text" placeholder="Doe" class="form-control" value="{{profile.gender}}" /> </div>
                                                             <div class="form-group">
                                                                 <label class="control-label">Mobile Number</label>
-                                                                <input type="text" placeholder="+1 646 580 DEMO (6284)" class="form-control" /> </div>
+                                                                <input name='phone' type="text" placeholder="+1 646 580 DEMO (6284)" class="form-control" value="{{profile.phone}}" /> </div>
                                                             <div class="form-group">
-                                                                <label class="control-label">Interests</label>
-                                                                <input type="text" placeholder="Design, Web etc." class="form-control" /> </div>
+                                                                <label class="control-label">College</label>
+                                                                <input name='college' type="text" placeholder="Design, Web etc." class="form-control" value="{{profile.college}}" /> </div>
                                                             <div class="form-group">
                                                                 <label class="control-label">Occupation</label>
-                                                                <input type="text" placeholder="Web Developer" class="form-control" /> </div>
+                                                                <input name='occupation' type="text" placeholder="Web Developer" class="form-control" value="{{profile.occupation}}" /> </div>
                                                             <div class="form-group">
-                                                                <label class="control-label">About</label>
-                                                                <textarea class="form-control" rows="3" placeholder="We are KeenThemes!!!"></textarea>
+                                                                <label class="control-label">City</label>
+                                                                <input name ='city' type="text" placeholder="Delhi" class="form-control" value="{{profile.city}}" /> </div>                                                           
+                                                            <div class="form-group">
+                                                                <label  class="control-label">About</label>
+                                                                <textarea name= 'about_me' class="form-control" rows="3" placeholder="We are KeenThemes!!!"> {{profile.about_me}}</textarea>
                                                             </div>
-                                                            <div class="form-group">
-                                                                <label class="control-label">Website Url</label>
-                                                                <input type="text" placeholder="http://www.mywebsite.com" class="form-control" /> </div>
+
                                                             <div class="margiv-top-10">
                                                                 <button type="submit" class="btn green"> Save Changes </button>
-                                                                <a href="." class="btn default"> Cancel </a>
+                                                                <a href="../" class="btn default"> Cancel </a>
                                                             </div>
                                                         </form>
                                                     </div>

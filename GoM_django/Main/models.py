@@ -37,11 +37,11 @@ class user_profile(models.Model):
 	gender = models.CharField(max_length=1, choices=GENDERS)
 	college = models.CharField(max_length=200, default='')
 	city = models.CharField(max_length=20)
-	phone_one = models.BigIntegerField(blank=True,null=True)
+	phone = models.BigIntegerField(blank=True,null=True)
 	email_id = models.EmailField(unique=True)
 	occupation= models.CharField(max_length=200, default='', blank=True)
 	about_me= models.TextField(default='')
-	questions= models.BooleanField(default=False)
+	# questions= models.BooleanField(default=False)
 	anxiety_score= models.IntegerField(blank=True,null=True)
 	class Meta:
 		verbose_name_plural = 'user_profile'

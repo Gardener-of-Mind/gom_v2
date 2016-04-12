@@ -117,6 +117,25 @@ def edit_profile(request):
 	if 'profile' not in locals():
 		return HttpResponse('Error')
 	else:
+		if request.POST:
+			name = str(request.POST['name'])
+			gender = str(request.POST['gender'])
+			college = str(request.POST['college'])
+			city = str(request.POST['city'])
+			occupation = str(request.POST['occupation'])
+			phone = int(request.POST['phone'])
+			about_me = str(request.POST['about_me'])
+
+			profile.name= name
+			profile.gender= gender
+			profile.college = college
+			profile.occupation = occupation
+			profile.phone = phone
+			profile.city= city
+			profile.about_me = about_me
+			profile.save()
+			return HttpResponseRedirect('.')
+
 		return render(request,'user/profile_account.html', {'profile':profile})
 
 
