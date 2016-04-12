@@ -26,4 +26,5 @@ urlpatterns = [
     url(r'^questions/$', views.questions),
     url(r'^query/$', views.query),
     url(r'^dashboard/$', views.dashboard),
+    url(r'^diary/$', views.diary),
 ]

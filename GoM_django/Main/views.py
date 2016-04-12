@@ -158,3 +158,10 @@ def profile_overview(request):
 		return HttpResponse('Error')
 	else:
 		return render(request,'user/profile_overview.html', {'profile':profile})
+
+
+@login_required
+def diary(request):
+	user= request.user
+	profile= user.user_profile
+	return render(request,'user/diary.html',{"profile": profile})
