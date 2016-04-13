@@ -27,27 +27,6 @@ class survey_answers(Document):
 	question= ReferenceField(survey_questions)
 	user_id= IntField(null=True)
 
-class user_profile(models.Model):
-	user = models.OneToOneField(User, null=True)	
-	GENDERS = (
-		('M', 'Male'),
-		('F', 'Female'),
-	)
-	name = models.CharField(max_length=200)
-	gender = models.CharField(max_length=1, choices=GENDERS)
-	college = models.CharField(max_length=200, default='')
-	city = models.CharField(max_length=20)
-	phone = models.BigIntegerField(blank=True,null=True)
-	email_id = models.EmailField(unique=True)
-	occupation= models.CharField(max_length=200, default='', blank=True)
-	about_me= models.TextField(default='')
-	# questions= models.BooleanField(default=False)
-	anxiety_score= models.IntegerField(blank=True,null=True)
-	class Meta:
-		verbose_name_plural = 'user_profile'
-	def __unicode__(self):
-		return str(self.name)
-
 
 
 class coach_profile(models.Model):
@@ -65,6 +44,28 @@ class coach_profile(models.Model):
 	def __unicode__(self):
 		return str(self.name)
 
+
+class user_profile(models.Model):
+	user = models.OneToOneField(User, null=True)	
+	GENDERS = (
+		('M', 'Male'),
+		('F', 'Female'),
+	)
+	name = models.CharField(max_length=200)
+	gender = models.CharField(max_length=1, choices=GENDERS)
+	college = models.CharField(max_length=200, default='')
+	city = models.CharField(max_length=20)
+	phone = models.BigIntegerField(blank=True,null=True)
+	email_id = models.EmailField(unique=True)
+	occupation= models.CharField(max_length=200, default='', blank=True)
+	about_me= models.TextField(default='')
+	coach = models.ForeignKey(coach_profile, null=True, default=None)
+	# questions= models.BooleanField(default=False)
+	anxiety_score= models.IntegerField(blank=True,null=True)
+	class Meta:
+		verbose_name_plural = 'user_profile'
+	def __unicode__(self):
+		return str(self.name)
 
 
 

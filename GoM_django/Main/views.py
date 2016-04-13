@@ -89,7 +89,8 @@ def dashboard(request):
 		pass			
 	try:
 		profile= coach_profile.objects.get(user=user)
-		return render(request,'coach/dashboard.html',{'profile': profile})
+		user_profile_obs = profile.user_profile_set.all()
+		return render(request,'coach/dashboard.html',{'profile': profile, 'user_profiles' : user_profile_obs})
 	except:
 		pass
 	try:
@@ -165,3 +166,20 @@ def diary(request):
 	user= request.user
 	profile= user.user_profile
 	return render(request,'user/diary.html',{"profile": profile})
+
+
+
+@login_required
+def coach_user_profile(request,user_id):
+	user= request.user
+	try:
+		profile = coach_profile.objects.get(user=user)
+	except:
+		return HttpResponse('Coach Object Error')
+
+	try:
+		user_profile_ob = user_profile.objects.get(id= int(user_id))
+	except:
+		return HttpResponse('User Profile object error')
+
+	return render(request,'coach/user_details.html', {'profile' : profile, 'user_profile' : user_profile_ob})
