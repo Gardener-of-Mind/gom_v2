@@ -59,7 +59,8 @@ class user_profile(models.Model):
 	email_id = models.EmailField(unique=True)
 	occupation= models.CharField(max_length=200, default='', blank=True)
 	about_me= models.TextField(default='')
-	coach = models.ForeignKey(coach_profile, null=True, default=None)
+	coach = models.ForeignKey(coach_profile, null=True, default=None, blank= True)
+	profile_pic= models.ImageField(blank=True, upload_to='pictures', null=True)	
 	# questions= models.BooleanField(default=False)
 	anxiety_score= models.IntegerField(blank=True,null=True)
 	class Meta:
