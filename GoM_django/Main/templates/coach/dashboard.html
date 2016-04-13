@@ -531,6 +531,7 @@
                                 <div class="portlet-body">
                                     <div class="mt-element-card mt-card-round mt-element-overlay">
                                         <div class="row">
+                                        	{% for profile_ob in user_profiles %}
                                             <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
                                                 <div class="mt-card-item">
                                                     <div class="mt-card-avatar mt-overlay-1">
@@ -538,7 +539,7 @@
                                                         <div class="mt-overlay">
                                                             <ul class="mt-info">
                                                                 <li>
-                                                                    <a class="btn default btn-outline" href="javascript:;">
+                                                                    <a class="btn default btn-outline" href="./{{profile_ob.id}}/">
                                                                         <i class="icon-magnifier"></i>
                                                                     </a>
                                                                 </li>
@@ -551,36 +552,12 @@
                                                         </div>
                                                     </div>
                                                     <div class="mt-card-content">
-                                                        <h3 class="mt-card-name">Jennifer Lawrence</h3>
-                                                        <p class="mt-card-desc font-grey-mint">Occupation</p>
+                                                        <h3 class="mt-card-name">{{profile_ob.name}}</h3>
+                                                        <p class="mt-card-desc font-grey-mint">{{profile_ob.occupation}}</p>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
-                                                <div class="mt-card-item">
-                                                    <div class="mt-card-avatar mt-overlay-1">
-                                                        <img src="{% static 'assets/pages/img/avatars/team5.jpg' %}">
-                                                        <div class="mt-overlay">
-                                                            <ul class="mt-info">
-                                                                <li>
-                                                                    <a class="btn default btn-outline" href="javascript:;">
-                                                                        <i class="icon-magnifier"></i>
-                                                                    </a>
-                                                                </li>
-                                                                <li>
-                                                                    <a class="btn default btn-outline" href="javascript:;">
-                                                                        <i class="icon-link"></i>
-                                                                    </a>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                    <div class="mt-card-content">
-                                                        <h3 class="mt-card-name">Jennifer Lawrence</h3>
-                                                        <p class="mt-card-desc font-grey-mint">Occupation</p>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            {% endfor %}
                                         </div>
                                     </div>
                                 </div>
