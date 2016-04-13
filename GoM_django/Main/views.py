@@ -22,6 +22,9 @@ def index(request):
 	return render(request,'index.html')
 
 def user_login(request):
+	if request.user:
+		return HttpResponseRedirect('../dashboard/')
+
 	if request.POST:
 		username= request.POST['username']
 		password= request.POST['password']
@@ -33,6 +36,7 @@ def user_login(request):
 				# return HttpResponseRedirect('../dashboard/')
 			return HttpResponseRedirect('../dashboard/')
 	return render(request,'login.html')
+
 
 def register(request):
 	if request.POST:
@@ -71,6 +75,7 @@ def questions(request):
 
 	return render(request,'initial_survey.html', {'questions':queries})
 
+
 def query(request):
 	if request.POST:
 		category= request.POST['category']
@@ -78,6 +83,7 @@ def query(request):
 			questions_list = survey_questions.objects(category='anxiety')
 			queries= questions_list.to_json()
 			return HttpResponse(queries)
+
 
 @login_required
 def dashboard(request):
@@ -99,6 +105,7 @@ def dashboard(request):
 	except:
 		pass		
 	return HttpResponse('Profile Not Found')
+
 
 @login_required
 def edit_profile(request):
@@ -165,7 +172,7 @@ def profile_overview(request):
 def diary(request):
 	user= request.user
 	profile= user.user_profile
-	return render(request,'user/diary.html',{"profile": profile})
+	return render(request,'user/diary.html', {"profile": profile})
 
 
 
@@ -183,3 +190,8 @@ def coach_user_profile(request,user_id):
 		return HttpResponse('User Profile object error')
 
 	return render(request,'coach/user_details.html', {'profile' : profile, 'user_profile' : user_profile_ob})
+
+
+def test_pic(request):
+	pro  = user_profile.objects.get(id=3)
+	return render_to_response('test.html', {'pro' : pro }, context_instance = RequestContext(request))
