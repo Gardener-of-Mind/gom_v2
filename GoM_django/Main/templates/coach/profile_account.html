@@ -9,38 +9,39 @@
 
     <head>
         <meta charset="utf-8" />
-        <title>ManaMaali | Dashboard</title>
+        <title>ManaMaali | Profile Account</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta content="width=device-width, initial-scale=1" name="viewport" />
         <meta content="" name="description" />
         <meta content="" name="author" />
         <!-- BEGIN GLOBAL MANDATORY STYLES -->
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css" />
-        <link href="{% static 'assets/global/plugins/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css" />
-        <link href="{% static 'assets/global/plugins/simple-line-icons/simple-line-icons.min.css' %}" rel="stylesheet" type="text/css" />
-        <link href="{% static 'assets/global/plugins/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet" type="text/css" />
-        <link href="{% static 'assets/global/plugins/uniform/css/uniform.default.css' %}" rel="stylesheet" type="text/css" />
-        <link href="{% static 'assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css' %}" rel="stylesheet" type="text/css" />
+        <link href="{% static 'assets/global/plugins/font-awesome/css/font-awesome.min.css' %} " rel="stylesheet" type="text/css" />
+        <link href="{% static 'assets/global/plugins/simple-line-icons/simple-line-icons.min.css' %} " rel="stylesheet" type="text/css" />
+        <link href="{% static 'assets/global/plugins/bootstrap/css/bootstrap.min.css' %} " rel="stylesheet" type="text/css" />
+        <link href="{% static 'assets/global/plugins/uniform/css/uniform.default.css' %} " rel="stylesheet" type="text/css" />
+        <link href="{% static 'assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css' %} " rel="stylesheet" type="text/css" />
         <!-- END GLOBAL MANDATORY STYLES -->
         <!-- BEGIN PAGE LEVEL PLUGINS -->
-        <link href="{% static 'assets/global/plugins/bootstrap-daterangepicker/daterangepicker.min.css' %}" rel="stylesheet" type="text/css" />
-        <link href="{% static 'assets/global/plugins/morris/morris.css' %}" rel="stylesheet" type="text/css" />
-        <link href="{% static 'assets/global/plugins/fullcalendar/fullcalendar.min.css' %}" rel="stylesheet" type="text/css" />
-        <link href="{% static 'assets/global/plugins/jqvmap/jqvmap/jqvmap.css' %}" rel="stylesheet" type="text/css" />
+        <link href="{% static 'assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.css' %} " rel="stylesheet" type="text/css" />
         <!-- END PAGE LEVEL PLUGINS -->
         <!-- BEGIN THEME GLOBAL STYLES -->
-        <link href="{% static 'assets/global/css/components-md.min.css' %}" rel="stylesheet" id="style_components" type="text/css" />
-        <link href="{% static 'assets/global/css/plugins-md.min.css' %}" rel="stylesheet" type="text/css" />
+        <link href="{% static 'assets/global/css/components-md.min.css' %} " rel="stylesheet" id="style_components" type="text/css" />
+        <link href="{% static 'assets/global/css/plugins-md.min.css' %} " rel="stylesheet" type="text/css" />
         <!-- END THEME GLOBAL STYLES -->
+        <!-- BEGIN PAGE LEVEL STYLES -->
+        <link href="{% static 'assets/pages/css/profile.min.css' %} " rel="stylesheet" type="text/css" />
+        <!-- END PAGE LEVEL STYLES -->
         <!-- BEGIN THEME LAYOUT STYLES -->
-        <link href="{% static 'assets/layouts/layout/css/layout.min.css' %}" rel="stylesheet" type="text/css" />
-        <link href="{% static 'assets/layouts/layout/css/themes/darkblue.min.css' %}" rel="stylesheet" type="text/css" id="style_color" />
+        <link href="{% static 'assets/layouts/layout/css/layout.min.css' %} " rel="stylesheet" type="text/css" />
+        <link href="{% static 'assets/layouts/layout/css/themes/darkblue.min.css' %} " rel="stylesheet" type="text/css" id="style_color" />
+        <link href="{% static 'assets/layouts/layout/css/custom.min.css' %} " rel="stylesheet" type="text/css" />
         <link href="{% static 'assets/layouts/layout/css/custom.css' %}" rel="stylesheet" type="text/css" />
         <!-- END THEME LAYOUT STYLES -->
-        <link rel="shortcut icon" href="{% static 'assets/global/img/favicon.ico' %}" />  </head>
+        <link rel="shortcut icon" href="favicon.ico" /> </head>
     <!-- END HEAD -->
 
-    <body class="page-header-fixed page-sidebar-closed-hide-logo page-content-white page-md">
+    <body class="page-header-fixed page-sidebar-closed-hide-logo page-container-bg-solid page-content-white page-sidebar-closed page-md page-sidebar-fixed">
         <!-- BEGIN HEADER -->
         <div class="page-header navbar navbar-fixed-top">
             <!-- BEGIN HEADER INNER -->
@@ -159,81 +160,6 @@
                             </ul>
                         </li>
                         <!-- END NOTIFICATION DROPDOWN -->
-                        <!-- BEGIN INBOX DROPDOWN -->
-                        <!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
-                        <li class="dropdown dropdown-extended dropdown-inbox" id="header_inbox_bar">
-                            <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-                                <i class="icon-envelope-open"></i>
-                                <span class="badge badge-default"> 4 </span>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li class="external">
-                                    <h3>You have
-                                        <span class="bold">7 New</span> Messages</h3>
-                                    <a href="app_inbox.html">view all</a>
-                                </li>
-                                <li>
-                                    <ul class="dropdown-menu-list scroller" style="height: 275px;" data-handle-color="#637283">
-                                        <li>
-                                            <a href="#">
-                                                <span class="photo">
-                                                    <img src="{% static 'assets/layouts/layout/img/avatar2.jpg' %}" class="img-circle" alt=""> </span>
-                                                <span class="subject">
-                                                    <span class="from"> USER </span>
-                                                    <span class="time">Just Now </span>
-                                                </span>
-                                                <span class="message"> Vivamus sed auctor nibh congue nibh. auctor nibh auctor nibh... </span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <span class="photo">
-                                                    <img src="{% static 'assets/layouts/layout/img/avatar3.jpg' %}" class="img-circle" alt=""> </span>
-                                                <span class="subject">
-                                                    <span class="from"> Richard Doe </span>
-                                                    <span class="time">16 mins </span>
-                                                </span>
-                                                <span class="message"> Vivamus sed congue nibh auctor nibh congue nibh. auctor nibh auctor nibh... </span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <span class="photo">
-                                                    <img src="{% static 'assets/layouts/layout/img/avatar1.jpg' %}" class="img-circle" alt=""> </span>
-                                                <span class="subject">
-                                                    <span class="from"> Bob Nilson </span>
-                                                    <span class="time">2 hrs </span>
-                                                </span>
-                                                <span class="message"> Vivamus sed nibh auctor nibh congue nibh. auctor nibh auctor nibh... </span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <span class="photo">
-                                                    <img src="{% static 'assets/layouts/layout/img/avatar2.jpg' %}" class="img-circle" alt=""> </span>
-                                                <span class="subject">
-                                                    <span class="from"> Lisa Wong </span>
-                                                    <span class="time">40 mins </span>
-                                                </span>
-                                                <span class="message"> Vivamus sed auctor 40% nibh congue nibh... </span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <span class="photo">
-                                                    <img src="{% static 'assets/layouts/layout/img/avatar3.jpg' %}" class="img-circle" alt=""> </span>
-                                                <span class="subject">
-                                                    <span class="from"> Richard Doe </span>
-                                                    <span class="time">46 mins </span>
-                                                </span>
-                                                <span class="message"> Vivamus sed congue nibh auctor nibh congue nibh. auctor nibh auctor nibh... </span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </li>
-                        <!-- END INBOX DROPDOWN -->
                         <!-- BEGIN TODO DROPDOWN -->
                         <!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
                         <li class="dropdown dropdown-extended dropdown-tasks" id="header_task_bar">
@@ -349,13 +275,13 @@
                         <!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
                         <li class="dropdown dropdown-user">
                             <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-                                <img alt="" class="img-circle" src="{% static 'assets/layouts/layout/img/avatar3_small.jpg' %}" />
-                                <span class="username username-hide-on-mobile"> COACH </span>
+                                <img alt="" class="img-circle" src="{% static 'assets/layouts/layout/img/avatar3_small.jpg' %} " />
+                                <span class="username username-hide-on-mobile"> Nick </span>
                                 <i class="fa fa-angle-down"></i>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-default">
                                 <li>
-                                    <a href="page_user_profile_1.html">
+                                    <a href="../">
                                         <i class="icon-user"></i> My Profile </a>
                                 </li>
                                 <li>
@@ -380,7 +306,7 @@
                                         <i class="icon-lock"></i> Lock Screen </a>
                                 </li>
                                 <li>
-                                    <a href="page_user_login_1.html">
+                                    <a href="../../logout/">
                                         <i class="icon-key"></i> Log Out </a>
                                 </li>
                             </ul>
@@ -446,13 +372,13 @@
                             </form>
                             <!-- END RESPONSIVE QUICK SEARCH FORM -->
                         </li>
-                        <li class="nav-item start   active open">
-                            <a href="javascript:;" class="nav-link">
+                        <li class="nav-item start ">
+                            <a href="../../dashboard/" class="nav-link">
                                 <i class="icon-home"></i>
                                 <span class="title">Dashboard</span>
                             </a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item  active open">
                             <a href="javascript:;" class="nav-link nav-toggle">
                                 <i class="icon-user"></i>
                                 <span class="title">Profile</span>
@@ -460,21 +386,21 @@
                                 <span class="arrow open"></span>
                             </a>
                             <ul class="sub-menu">
-                                <li class="nav-item start ">
-                                    <a href="../profile/" class="nav-link ">
+                                <li class="nav-item  ">
+                                    <a href="../" class="nav-link ">
                                         <i class="icon-user"></i>
                                         <span class="title">Overview</span>
                                     </a>
                                 </li>
-                                <li class="nav-item  ">
-                                    <a href="../profile/edit/" class="nav-link ">
+                                <li class="nav-item  active open">
+                                    <a href="javascript:;" class="nav-link ">
                                         <i class="icon-wrench"></i>
                                         <span class="title">Account Settings</span>
                                         <span class="selected"></span>
                                     </a>
                                 </li>
-                                <li class="nav-item  active open">
-                                    <a href="../profile/help/" class="nav-link ">
+                                <li class="nav-item  ">
+                                    <a href="../help/" class="nav-link ">
                                         <i class="icon-support"></i>
                                         <span class="title">Help</span>
                                     </a>
@@ -493,98 +419,342 @@
                 <!-- BEGIN CONTENT BODY -->
                 <div class="page-content">
                     <!-- BEGIN PAGE HEADER-->
+                    <!-- BEGIN THEME PANEL -->
+                    <div class="theme-panel hidden-xs hidden-sm">
+                        <div class="toggler"> </div>
+                        <div class="toggler-close"> </div>
+                        <div class="theme-options">
+                            <div class="theme-option theme-colors clearfix">
+                                <span> THEME COLOR </span>
+                                <ul>
+                                    <li class="color-default current tooltips" data-style="default" data-container="body" data-original-title="Default"> </li>
+                                    <li class="color-darkblue tooltips" data-style="darkblue" data-container="body" data-original-title="Dark Blue"> </li>
+                                    <li class="color-blue tooltips" data-style="blue" data-container="body" data-original-title="Blue"> </li>
+                                    <li class="color-grey tooltips" data-style="grey" data-container="body" data-original-title="Grey"> </li>
+                                    <li class="color-light tooltips" data-style="light" data-container="body" data-original-title="Light"> </li>
+                                    <li class="color-light2 tooltips" data-style="light2" data-container="body" data-html="true" data-original-title="Light 2"> </li>
+                                </ul>
+                            </div>
+                            <div class="theme-option">
+                                <span> Layout </span>
+                                <select class="layout-option form-control input-sm">
+                                    <option value="fluid" selected="selected">Fluid</option>
+                                    <option value="boxed">Boxed</option>
+                                </select>
+                            </div>
+                            <div class="theme-option">
+                                <span> Header </span>
+                                <select class="page-header-option form-control input-sm">
+                                    <option value="fixed" selected="selected">Fixed</option>
+                                    <option value="default">Default</option>
+                                </select>
+                            </div>
+                            <div class="theme-option">
+                                <span> Top Menu Dropdown</span>
+                                <select class="page-header-top-dropdown-style-option form-control input-sm">
+                                    <option value="light" selected="selected">Light</option>
+                                    <option value="dark">Dark</option>
+                                </select>
+                            </div>
+                            <div class="theme-option">
+                                <span> Sidebar Mode</span>
+                                <select class="sidebar-option form-control input-sm">
+                                    <option value="fixed">Fixed</option>
+                                    <option value="default" selected="selected">Default</option>
+                                </select>
+                            </div>
+                            <div class="theme-option">
+                                <span> Sidebar Menu </span>
+                                <select class="sidebar-menu-option form-control input-sm">
+                                    <option value="accordion" selected="selected">Accordion</option>
+                                    <option value="hover">Hover</option>
+                                </select>
+                            </div>
+                            <div class="theme-option">
+                                <span> Sidebar Style </span>
+                                <select class="sidebar-style-option form-control input-sm">
+                                    <option value="default" selected="selected">Default</option>
+                                    <option value="light">Light</option>
+                                </select>
+                            </div>
+                            <div class="theme-option">
+                                <span> Sidebar Position </span>
+                                <select class="sidebar-pos-option form-control input-sm">
+                                    <option value="left" selected="selected">Left</option>
+                                    <option value="right">Right</option>
+                                </select>
+                            </div>
+                            <div class="theme-option">
+                                <span> Footer </span>
+                                <select class="page-footer-option form-control input-sm">
+                                    <option value="fixed">Fixed</option>
+                                    <option value="default" selected="selected">Default</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END THEME PANEL -->
                     <!-- BEGIN PAGE BAR -->
                     <div class="page-bar">
                         <ul class="page-breadcrumb">
                             <li>
-                                <a href="index.html">Home</a>
+                                <a href="./../../">Home</a>
                                 <i class="fa fa-circle"></i>
                             </li>
                             <li>
-                                <span>Dashboard</span>
+                                <a href="./../">Profile</a>
+                                <i class="fa fa-circle"></i>
+                            </li>
+                            <li>
+                                <span>Edit</span>
                             </li>
                         </ul>
                         <div class="page-toolbar">
-                            <div id="dashboard-report-range" class="pull-right tooltips btn btn-sm" data-container="body" data-placement="bottom" data-original-title="Change dashboard date range">
-                                <i class="icon-calendar"></i>&nbsp;
-                                <span class="thin uppercase hidden-xs"></span>&nbsp;
-                                <i class="fa fa-angle-down"></i>
+                            <div class="btn-group pull-right">
+                                <button type="button" class="btn green btn-sm btn-outline dropdown-toggle" data-toggle="dropdown"> Actions
+                                    <i class="fa fa-angle-down"></i>
+                                </button>
+                                <ul class="dropdown-menu pull-right" role="menu">
+                                    <li>
+                                        <a href="#">
+                                            <i class="icon-bell"></i> Action</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <i class="icon-shield"></i> Another action</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <i class="icon-user"></i> Something else here</a>
+                                    </li>
+                                    <li class="divider"> </li>
+                                    <li>
+                                        <a href="#">
+                                            <i class="icon-bag"></i> Separated link</a>
+                                    </li>
+                                </ul>
                             </div>
                         </div>
                     </div>
                     <!-- END PAGE BAR -->
                     <!-- BEGIN PAGE TITLE-->
-                    <h3 class="page-title"> Dashboard
-                        <small>dashboard & statistics</small>
+                    <h3 class="page-title"> User Profile | Account Edit
+                        <small>user account settings</small>
                     </h3>
                     <!-- END PAGE TITLE-->
                     <!-- END PAGE HEADER-->
                     <div class="row">
-                    	<div class="col-md-12">
-                            <div class="portlet light portlet-fit bordered">
-                                <div class="portlet-title">
-                                    <div class="caption">
-                                        <i class=" icon-layers font-green"></i>
-                                        <span class="caption-subject font-green bold uppercase">My Students</span>
+                        <div class="col-md-12">
+                            <!-- BEGIN PROFILE SIDEBAR -->
+                            <div class="profile-sidebar">
+                                <!-- PORTLET MAIN -->
+                                <div class="portlet light profile-sidebar-portlet ">
+                                    <!-- SIDEBAR USERPIC -->
+                                    <div class="profile-userpic">
+                                        <img src="{% static 'assets/pages/media/profile/profile_user.jpg' %} " class="img-responsive" alt=""> </div>
+                                    <!-- END SIDEBAR USERPIC -->
+                                    <!-- SIDEBAR USER TITLE -->
+                                    <div class="profile-usertitle">
+                                        <div class="profile-usertitle-name"> {{profile.name}} </div>
+                                        <div class="profile-usertitle-job"> USER </div>
+                                    </div>
+                                    <!-- END SIDEBAR USER TITLE -->
+                                    <!-- SIDEBAR MENU -->
+                                    <div class="profile-usermenu">
+                                        <ul class="nav">
+                                            <li>
+                                                <a href="../">
+                                                    <i class="icon-home"></i> Overview </a>
+                                            </li>
+                                            <li class="active">
+                                                <a href="javascript:;">
+                                                    <i class="icon-settings"></i> Account Settings </a>
+                                            </li>
+                                            <li>
+                                                <a href="../help/">
+                                                    <i class="icon-info"></i> Help </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <!-- END MENU -->
+                                </div>
+                                <!-- END PORTLET MAIN -->
+                                <!-- PORTLET MAIN -->
+                                <div class="portlet light ">
+                                    <!-- STAT -->
+                                    <div class="row list-separated profile-stat">
+                                        <div class="col-md-4 col-sm-4 col-xs-6">
+                                            <div class="uppercase profile-stat-title"> 37 </div>
+                                            <div class="uppercase profile-stat-text"> Surveys Taken</div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-4 col-xs-6">
+                                            <div class="uppercase profile-stat-title"> 61 </div>
+                                            <div class="uppercase profile-stat-text"> Pending Tasks </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-4 col-xs-6">
+                                            <div class="uppercase profile-stat-title"> 51 </div>
+                                            <div class="uppercase profile-stat-text"> Completed Tasks </div>
+                                        </div>
+                                    </div>
+                                    <!-- END STAT -->
+                                    <div>
+                                        <h4 class="profile-desc-title">About Me</h4>
+                                        <span class="profile-desc-text"> {{profile.about_me}} </span>
                                     </div>
                                 </div>
-                                <div class="portlet-body">
-                                    <div class="mt-element-card mt-card-round mt-element-overlay">
-                                        <div class="row">
-                                            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
-                                                <div class="mt-card-item">
-                                                    <div class="mt-card-avatar mt-overlay-1">
-                                                        <img src="{% static 'assets/pages/img/avatars/team5.jpg' %}">
-                                                        <div class="mt-overlay">
-                                                            <ul class="mt-info">
-                                                                <li>
-                                                                    <a class="btn default btn-outline" href="javascript:;">
-                                                                        <i class="icon-magnifier"></i>
-                                                                    </a>
-                                                                </li>
-                                                                <li>
-                                                                    <a class="btn default btn-outline" href="javascript:;">
-                                                                        <i class="icon-link"></i>
-                                                                    </a>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                    <div class="mt-card-content">
-                                                        <h3 class="mt-card-name">Jennifer Lawrence</h3>
-                                                        <p class="mt-card-desc font-grey-mint">Occupation</p>
-                                                    </div>
+                                <!-- END PORTLET MAIN -->
+                            </div>
+                            <!-- END BEGIN PROFILE SIDEBAR -->
+                            <!-- BEGIN PROFILE CONTENT -->
+                            <div class="profile-content">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="portlet light ">
+                                            <div class="portlet-title tabbable-line">
+                                                <div class="caption caption-md">
+                                                    <i class="icon-globe theme-font hide"></i>
+                                                    <span class="caption-subject font-blue-madison bold uppercase">Profile Account</span>
                                                 </div>
+                                                <ul class="nav nav-tabs">
+                                                    <li class="active">
+                                                        <a href="#tab_1_1" data-toggle="tab">Personal Info</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#tab_1_2" data-toggle="tab">Change Avatar</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#tab_1_3" data-toggle="tab">Change Password</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#tab_1_4" data-toggle="tab">Privacy Settings</a>
+                                                    </li>
+                                                </ul>
                                             </div>
-                                            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
-                                                <div class="mt-card-item">
-                                                    <div class="mt-card-avatar mt-overlay-1">
-                                                        <img src="{% static 'assets/pages/img/avatars/team5.jpg' %}">
-                                                        <div class="mt-overlay">
-                                                            <ul class="mt-info">
-                                                                <li>
-                                                                    <a class="btn default btn-outline" href="javascript:;">
-                                                                        <i class="icon-magnifier"></i>
-                                                                    </a>
-                                                                </li>
-                                                                <li>
-                                                                    <a class="btn default btn-outline" href="javascript:;">
-                                                                        <i class="icon-link"></i>
-                                                                    </a>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
+                                            <div class="portlet-body">
+                                                <div class="tab-content">
+                                                    <!-- PERSONAL INFO TAB -->
+                                                    <div class="tab-pane active" id="tab_1_1">
+                                                        <form role="form" action="." method="post">
+                                                            {% csrf_token %}
+                                                            <div class="form-group">
+                                                                <label class="control-label">Name</label>
+                                                                <input name='name' type="text" placeholder="Name" class="form-control" value="{{profile.name}}" /> </div>
+                                                            <div class="form-group">
+                                                                <label class="control-label">Gender</label>
+                                                                <select name='gender' type="text" placeholder="" class="form-control">
+                                                                    <option value="M" >Male</option>
+                                                                    <option value="F" {% if profile.gender == 'F' %} selected {% endif %}>Female</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label class="control-label">Mobile Number</label>
+                                                                <input name='phone' type="text" placeholder="Mobile Number" class="form-control" value="{{profile.phone}}" /> </div>
+                                                            <div class="form-group">
+                                                                <label class="control-label">College</label>
+                                                                <input name='college' type="text" placeholder="College" class="form-control" value="{{profile.college}}" /> </div>
+                                                            <div class="form-group">
+                                                                <label class="control-label">Occupation</label>
+                                                                <input name='occupation' type="text" placeholder="Occupation" class="form-control" value="{{profile.occupation}}" /> </div>
+                                                            <div class="form-group">
+                                                                <label class="control-label">City</label>
+                                                                <input name ='city' type="text" placeholder="City" class="form-control" value="{{profile.city}}" /> </div>                                                           
+                                                            <div class="form-group">
+                                                                <label  class="control-label">About</label>
+                                                                <textarea name= 'about_me' class="form-control" rows="3" placeholder="Write something abour yourself.">{{profile.about_me}}</textarea>
+                                                            </div>
+
+                                                            <div class="margiv-top-10">
+                                                                <button type="submit" class="btn green"> Save Changes </button>
+                                                                <a href="../" class="btn default"> Back </a>
+                                                            </div>
+                                                        </form>
                                                     </div>
-                                                    <div class="mt-card-content">
-                                                        <h3 class="mt-card-name">Jennifer Lawrence</h3>
-                                                        <p class="mt-card-desc font-grey-mint">Occupation</p>
+                                                    <!-- END PERSONAL INFO TAB -->
+                                                    <!-- CHANGE AVATAR TAB -->
+                                                    <div class="tab-pane" id="tab_1_2">
+                                                        <p> Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum
+                                                            eiusmod. </p>
+                                                        <form action="#" role="form">
+                                                            <div class="form-group">
+                                                                <div class="fileinput fileinput-new" data-provides="fileinput">
+                                                                    <div class="fileinput-new thumbnail" style="width: 200px; height: 150px;">
+                                                                        <img src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=no+image" alt="" /> </div>
+                                                                    <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px;"> </div>
+                                                                    <div>
+                                                                        <span class="btn default btn-file">
+                                                                            <span class="fileinput-new"> Select image </span>
+                                                                            <span class="fileinput-exists"> Change </span>
+                                                                            <input type="file" name="..."> </span>
+                                                                        <a href="javascript:;" class="btn default fileinput-exists" data-dismiss="fileinput"> Remove </a>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="clearfix margin-top-10">
+                                                                    <span class="label label-danger">NOTE! </span>
+                                                                    <span>Attached image thumbnail is supported in Latest Firefox, Chrome, Opera, Safari and Internet Explorer 10 only </span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="margin-top-10">
+                                                                <a href="javascript:;" class="btn green"> Submit </a>
+                                                                <a href="javascript:;" class="btn default"> Cancel </a>
+                                                            </div>
+                                                        </form>
                                                     </div>
+                                                    <!-- END CHANGE AVATAR TAB -->
+                                                    <!-- CHANGE PASSWORD TAB -->
+                                                    <div class="tab-pane" id="tab_1_3">
+                                                        <form action="#">
+                                                            <div class="form-group">
+                                                                <label class="control-label">Current Password</label>
+                                                                <input type="password" class="form-control" /> </div>
+                                                            <div class="form-group">
+                                                                <label class="control-label">New Password</label>
+                                                                <input type="password" class="form-control" /> </div>
+                                                            <div class="form-group">
+                                                                <label class="control-label">Re-type New Password</label>
+                                                                <input type="password" class="form-control" /> </div>
+                                                            <div class="margin-top-10">
+                                                                <a href="javascript:;" class="btn green"> Change Password </a>
+                                                                <a href="javascript:;" class="btn default"> Cancel </a>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                    <!-- END CHANGE PASSWORD TAB -->
+                                                    <!-- PRIVACY SETTINGS TAB -->
+                                                    <div class="tab-pane" id="tab_1_4">
+                                                        <form action="#">
+                                                            <table class="table table-light table-hover">
+                                                                <tr>
+                                                                    <td> Would like your data to be used for the research</td>
+                                                                    <td>
+                                                                        <label class="uniform-inline">
+                                                                            <input type="radio" name="optionsRadios1" value="Y" /> Yes </label>
+                                                                        <label class="uniform-inline">
+                                                                            <input type="radio" name="optionsRadios1" value="N" checked/> No </label>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td> Would you like to recieve updates. </td>
+                                                                    <td>
+                                                                        <label class="uniform-inline">
+                                                                            <input type="checkbox" value="" /> Yes </label>
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+                                                            <!--end profile-settings-->
+                                                            <div class="margin-top-10">
+                                                                <a href="javascript:;" class="btn red"> Save Changes </a>
+                                                                <a href="./../" class="btn default"> Back </a>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                    <!-- END PRIVACY SETTINGS TAB -->
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                            <!-- END PROFILE CONTENT -->
                         </div>
                     </div>
                 </div>
@@ -642,14 +812,14 @@
                                         <div class="media-status">
                                             <span class="badge badge-success">8</span>
                                         </div>
-                                        <img class="media-object" src="{% static 'assets/layouts/layout/img/avatar3.jpg' %}" alt="...">
+                                        <img class="media-object" src="{% static 'assets/layouts/layout/img/avatar3.jpg' %} " alt="...">
                                         <div class="media-body">
                                             <h4 class="media-heading">Bob Nilson</h4>
                                             <div class="media-heading-sub"> Project Manager </div>
                                         </div>
                                     </li>
                                     <li class="media">
-                                        <img class="media-object" src="{% static 'assets/layouts/layout/img/avatar1.jpg' %}" alt="...">
+                                        <img class="media-object" src="{% static 'assets/layouts/layout/img/avatar1.jpg' %} " alt="...">
                                         <div class="media-body">
                                             <h4 class="media-heading">Nick Larson</h4>
                                             <div class="media-heading-sub"> Art Director </div>
@@ -659,14 +829,14 @@
                                         <div class="media-status">
                                             <span class="badge badge-danger">3</span>
                                         </div>
-                                        <img class="media-object" src="{% static 'assets/layouts/layout/img/avatar4.jpg' %}" alt="...">
+                                        <img class="media-object" src="{% static 'assets/layouts/layout/img/avatar4.jpg' %} " alt="...">
                                         <div class="media-body">
                                             <h4 class="media-heading">Deon Hubert</h4>
                                             <div class="media-heading-sub"> CTO </div>
                                         </div>
                                     </li>
                                     <li class="media">
-                                        <img class="media-object" src="{% static 'assets/layouts/layout/img/avatar2.jpg' %}" alt="...">
+                                        <img class="media-object" src="{% static 'assets/layouts/layout/img/avatar2.jpg' %} " alt="...">
                                         <div class="media-body">
                                             <h4 class="media-heading">Ella Wong</h4>
                                             <div class="media-heading-sub"> CEO </div>
@@ -679,7 +849,7 @@
                                         <div class="media-status">
                                             <span class="badge badge-warning">2</span>
                                         </div>
-                                        <img class="media-object" src="{% static 'assets/layouts/layout/img/avatar6.jpg' %}" alt="...">
+                                        <img class="media-object" src="{% static 'assets/layouts/layout/img/avatar6.jpg' %} " alt="...">
                                         <div class="media-body">
                                             <h4 class="media-heading">Lara Kunis</h4>
                                             <div class="media-heading-sub"> CEO, Loop Inc </div>
@@ -690,7 +860,7 @@
                                         <div class="media-status">
                                             <span class="label label-sm label-success">new</span>
                                         </div>
-                                        <img class="media-object" src="{% static 'assets/layouts/layout/img/avatar7.jpg' %}" alt="...">
+                                        <img class="media-object" src="{% static 'assets/layouts/layout/img/avatar7.jpg' %} " alt="...">
                                         <div class="media-body">
                                             <h4 class="media-heading">Ernie Kyllonen</h4>
                                             <div class="media-heading-sub"> Project Manager,
@@ -698,7 +868,7 @@
                                         </div>
                                     </li>
                                     <li class="media">
-                                        <img class="media-object" src="{% static 'assets/layouts/layout/img/avatar8.jpg' %}" alt="...">
+                                        <img class="media-object" src="{% static 'assets/layouts/layout/img/avatar8.jpg' %} " alt="...">
                                         <div class="media-body">
                                             <h4 class="media-heading">Lisa Stone</h4>
                                             <div class="media-heading-sub"> CTO, Keort Inc </div>
@@ -709,14 +879,14 @@
                                         <div class="media-status">
                                             <span class="badge badge-success">7</span>
                                         </div>
-                                        <img class="media-object" src="{% static 'assets/layouts/layout/img/avatar9.jpg' %}" alt="...">
+                                        <img class="media-object" src="{% static 'assets/layouts/layout/img/avatar9.jpg' %} " alt="...">
                                         <div class="media-body">
                                             <h4 class="media-heading">Deon Portalatin</h4>
                                             <div class="media-heading-sub"> CFO, H&D LTD </div>
                                         </div>
                                     </li>
                                     <li class="media">
-                                        <img class="media-object" src="{% static 'assets/layouts/layout/img/avatar10.jpg' %}" alt="...">
+                                        <img class="media-object" src="{% static 'assets/layouts/layout/img/avatar10.jpg' %} " alt="...">
                                         <div class="media-body">
                                             <h4 class="media-heading">Irina Savikova</h4>
                                             <div class="media-heading-sub"> CEO, Tizda Motors Inc </div>
@@ -726,7 +896,7 @@
                                         <div class="media-status">
                                             <span class="badge badge-danger">4</span>
                                         </div>
-                                        <img class="media-object" src="{% static 'assets/layouts/layout/img/avatar11.jpg' %}" alt="...">
+                                        <img class="media-object" src="{% static 'assets/layouts/layout/img/avatar11.jpg' %} " alt="...">
                                         <div class="media-body">
                                             <h4 class="media-heading">Maria Gomez</h4>
                                             <div class="media-heading-sub"> Manager, Infomatic Inc </div>
@@ -743,7 +913,7 @@
                                     </div>
                                     <div class="page-quick-sidebar-chat-user-messages">
                                         <div class="post out">
-                                            <img class="avatar" alt="" src="{% static 'assets/layouts/layout/img/avatar3.jpg' %}" />
+                                            <img class="avatar" alt="" src="{% static 'assets/layouts/layout/img/avatar3.jpg' %} " />
                                             <div class="message">
                                                 <span class="arrow"></span>
                                                 <a href="javascript:;" class="name">Bob Nilson</a>
@@ -752,7 +922,7 @@
                                             </div>
                                         </div>
                                         <div class="post in">
-                                            <img class="avatar" alt="" src="{% static 'assets/layouts/layout/img/avatar2.jpg' %}" />
+                                            <img class="avatar" alt="" src="{% static 'assets/layouts/layout/img/avatar2.jpg' %} " />
                                             <div class="message">
                                                 <span class="arrow"></span>
                                                 <a href="javascript:;" class="name">Ella Wong</a>
@@ -761,7 +931,7 @@
                                             </div>
                                         </div>
                                         <div class="post out">
-                                            <img class="avatar" alt="" src="{% static 'assets/layouts/layout/img/avatar3.jpg' %}" />
+                                            <img class="avatar" alt="" src="{% static 'assets/layouts/layout/img/avatar3.jpg' %} " />
                                             <div class="message">
                                                 <span class="arrow"></span>
                                                 <a href="javascript:;" class="name">Bob Nilson</a>
@@ -770,7 +940,7 @@
                                             </div>
                                         </div>
                                         <div class="post in">
-                                            <img class="avatar" alt="" src="{% static 'assets/layouts/layout/img/avatar2.jpg' %}" />
+                                            <img class="avatar" alt="" src="{% static 'assets/layouts/layout/img/avatar2.jpg' %} " />
                                             <div class="message">
                                                 <span class="arrow"></span>
                                                 <a href="javascript:;" class="name">Ella Wong</a>
@@ -779,7 +949,7 @@
                                             </div>
                                         </div>
                                         <div class="post out">
-                                            <img class="avatar" alt="" src="{% static 'assets/layouts/layout/img/avatar3.jpg' %}" />
+                                            <img class="avatar" alt="" src="{% static 'assets/layouts/layout/img/avatar3.jpg' %} " />
                                             <div class="message">
                                                 <span class="arrow"></span>
                                                 <a href="javascript:;" class="name">Bob Nilson</a>
@@ -788,7 +958,7 @@
                                             </div>
                                         </div>
                                         <div class="post in">
-                                            <img class="avatar" alt="" src="{% static 'assets/layouts/layout/img/avatar2.jpg' %}" />
+                                            <img class="avatar" alt="" src="{% static 'assets/layouts/layout/img/avatar2.jpg' %} " />
                                             <div class="message">
                                                 <span class="arrow"></span>
                                                 <a href="javascript:;" class="name">Ella Wong</a>
@@ -797,7 +967,7 @@
                                             </div>
                                         </div>
                                         <div class="post out">
-                                            <img class="avatar" alt="" src="{% static 'assets/layouts/layout/img/avatar3.jpg' %}" />
+                                            <img class="avatar" alt="" src="{% static 'assets/layouts/layout/img/avatar3.jpg' %} " />
                                             <div class="message">
                                                 <span class="arrow"></span>
                                                 <a href="javascript:;" class="name">Bob Nilson</a>
@@ -806,7 +976,7 @@
                                             </div>
                                         </div>
                                         <div class="post in">
-                                            <img class="avatar" alt="" src="{% static 'assets/layouts/layout/img/avatar2.jpg' %}" />
+                                            <img class="avatar" alt="" src="{% static 'assets/layouts/layout/img/avatar2.jpg' %} " />
                                             <div class="message">
                                                 <span class="arrow"></span>
                                                 <a href="javascript:;" class="name">Ella Wong</a>
@@ -815,7 +985,7 @@
                                             </div>
                                         </div>
                                         <div class="post out">
-                                            <img class="avatar" alt="" src="{% static 'assets/layouts/layout/img/avatar3.jpg' %}" />
+                                            <img class="avatar" alt="" src="{% static 'assets/layouts/layout/img/avatar3.jpg' %} " />
                                             <div class="message">
                                                 <span class="arrow"></span>
                                                 <a href="javascript:;" class="name">Bob Nilson</a>
@@ -1164,54 +1334,35 @@
         </div>
         <!-- END FOOTER -->
         <!--[if lt IE 9]>
-<script src="{% static 'assets/global/plugins/respond.min.js"></script>
-<script src="{% static 'assets/global/plugins/excanvas.min.js"></script> 
+<script src="{% static 'assets/global/plugins/respond.min.js' %} "></script>
+<script src="{% static 'assets/global/plugins/excanvas.min.js' %} "></script> 
 <![endif]-->
         <!-- BEGIN CORE PLUGINS -->
-        <script src="{% static 'assets/global/plugins/jquery.min.js' %}" type="text/javascript"></script>
-        <script src="{% static 'assets/global/plugins/bootstrap/js/bootstrap.min.js' %}" type="text/javascript"></script>
-        <script src="{% static 'assets/global/plugins/js.cookie.min.js' %}" type="text/javascript"></script>
-        <script src="{% static 'assets/global/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js' %}" type="text/javascript"></script>
-        <script src="{% static 'assets/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js' %}" type="text/javascript"></script>
-        <script src="{% static 'assets/global/plugins/jquery.blockui.min.js' %}" type="text/javascript"></script>
-        <script src="{% static 'assets/global/plugins/uniform/jquery.uniform.min.js' %}" type="text/javascript"></script>
-        <script src="{% static 'assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js' %}" type="text/javascript"></script>
+        <script src="{% static 'assets/global/plugins/jquery.min.js' %} " type="text/javascript"></script>
+        <script src="{% static 'assets/global/plugins/bootstrap/js/bootstrap.min.js' %} " type="text/javascript"></script>
+        <script src="{% static 'assets/global/plugins/js.cookie.min.js' %} " type="text/javascript"></script>
+        <script src="{% static 'assets/global/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js' %} " type="text/javascript"></script>
+        <script src="{% static 'assets/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js' %} " type="text/javascript"></script>
+        <script src="{% static 'assets/global/plugins/jquery.blockui.min.js' %} " type="text/javascript"></script>
+        <script src="{% static 'assets/global/plugins/uniform/jquery.uniform.min.js' %} " type="text/javascript"></script>
+        <script src="{% static 'assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js' %} " type="text/javascript"></script>
         <!-- END CORE PLUGINS -->
         <!-- BEGIN PAGE LEVEL PLUGINS -->
-        <script src="{% static 'assets/global/plugins/moment.min.js' %}" type="text/javascript"></script>
-        <script src="{% static 'assets/global/plugins/bootstrap-daterangepicker/daterangepicker.js' %}" type="text/javascript"></script>
-        <script src="{% static 'assets/global/plugins/morris/morris.min.js' %}" type="text/javascript"></script>
-        <script src="{% static 'assets/global/plugins/morris/raphael-min.js' %}" type="text/javascript"></script>
-        <script src="{% static 'assets/global/plugins/counterup/jquery.waypoints.min.js' %}" type="text/javascript"></script>
-        <script src="{% static 'assets/global/plugins/counterup/jquery.counterup.min.js' %}" type="text/javascript"></script>
-        <script src="{% static 'assets/global/plugins/amcharts/amcharts/amcharts.js' %}" type="text/javascript"></script>
-        <script src="{% static 'assets/global/plugins/amcharts/amcharts/serial.js' %}" type="text/javascript"></script>
-        <script src="{% static 'assets/global/plugins/amcharts/amcharts/pie.js' %}" type="text/javascript"></script>
-        <script src="{% static 'assets/global/plugins/amcharts/amcharts/radar.js' %}" type="text/javascript"></script>
-        <script src="{% static 'assets/global/plugins/amcharts/amcharts/themes/light.js' %}" type="text/javascript"></script>
-        <script src="{% static 'assets/global/plugins/amcharts/amcharts/themes/patterns.js' %}" type="text/javascript"></script>
-        <script src="{% static 'assets/global/plugins/amcharts/amcharts/themes/chalk.js' %}" type="text/javascript"></script>
-        <script src="{% static 'assets/global/plugins/amcharts/ammap/ammap.js' %}" type="text/javascript"></script>
-        <script src="{% static 'assets/global/plugins/amcharts/ammap/maps/js/worldLow.js' %}" type="text/javascript"></script>
-        <script src="{% static 'assets/global/plugins/amcharts/amstockcharts/amstock.js' %}" type="text/javascript"></script>
-        <script src="{% static 'assets/global/plugins/fullcalendar/fullcalendar.min.js' %}" type="text/javascript"></script>
-        <script src="{% static 'assets/global/plugins/flot/jquery.flot.min.js' %}" type="text/javascript"></script>
-        <script src="{% static 'assets/global/plugins/flot/jquery.flot.resize.min.js' %}" type="text/javascript"></script>
-        <script src="{% static 'assets/global/plugins/flot/jquery.flot.categories.min.js' %}" type="text/javascript"></script>
-        <script src="{% static 'assets/global/plugins/jquery-easypiechart/jquery.easypiechart.min.js' %}" type="text/javascript"></script>
-        <script src="{% static 'assets/global/plugins/jquery.sparkline.min.js' %}" type="text/javascript"></script>
+        <script src="{% static 'assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.js' %} " type="text/javascript"></script>
+        <script src="{% static 'assets/global/plugins/jquery.sparkline.min.js' %} " type="text/javascript"></script>
         <!-- END PAGE LEVEL PLUGINS -->
         <!-- BEGIN THEME GLOBAL SCRIPTS -->
-        <script src="{% static 'assets/global/scripts/app.min.js' %}" type="text/javascript"></script>
+        <script src="{% static 'assets/global/scripts/app.min.js' %} " type="text/javascript"></script>
         <!-- END THEME GLOBAL SCRIPTS -->
         <!-- BEGIN PAGE LEVEL SCRIPTS -->
-        <script src="{% static 'assets/pages/scripts/dashboard.min.js' %}" type="text/javascript"></script>
+        <script src="{% static 'assets/pages/scripts/profile.min.js' %} " type="text/javascript"></script>
         <!-- END PAGE LEVEL SCRIPTS -->
         <!-- BEGIN THEME LAYOUT SCRIPTS -->
-        <script src="{% static 'assets/layouts/layout/scripts/layout.min.js' %}" type="text/javascript"></script>
-        <script src="{% static 'assets/layouts/layout/scripts/demo.min.js' %}" type="text/javascript"></script>
-        <script src="{% static 'assets/layouts/global/scripts/quick-sidebar.min.js' %}" type="text/javascript"></script>
+        <script src="{% static 'assets/layouts/layout/scripts/layout.min.js' %} " type="text/javascript"></script>
+        <script src="{% static 'assets/layouts/layout/scripts/demo.min.js' %} " type="text/javascript"></script>
+        <script src="{% static 'assets/layouts/global/scripts/quick-sidebar.min.js' %} " type="text/javascript"></script>
         <!-- END THEME LAYOUT SCRIPTS -->
+
     </body>
 
 </html>

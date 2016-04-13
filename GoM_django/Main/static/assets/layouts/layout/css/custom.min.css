@@ -1,0 +1,11 @@
+.logo-default {
+	margin: 2px 4px 2px 4px !important;
+	height: 36px;
+}
+
+.portlet-fullscreen .slimScrollDiv{
+	height: calc(100% - 20px) !important;
+}
+.portlet-fullscreen .scroller{
+	height: 100% !important;
+}
