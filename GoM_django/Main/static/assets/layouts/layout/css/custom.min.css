@@ -9,3 +9,10 @@
 .portlet-fullscreen .scroller{
 	height: 100% !important;
 }
+
+.mt-action-buttons {
+	width: 165px !important;
+}
+.mt-action-row{
+	margin-bottom: 2px !important;
+}

@@ -22,9 +22,6 @@ def index(request):
 	return render(request,'index.html')
 
 def user_login(request):
-	if request.user:
-		return HttpResponseRedirect('../dashboard/')
-
 	if request.POST:
 		username= request.POST['username']
 		password= request.POST['password']
