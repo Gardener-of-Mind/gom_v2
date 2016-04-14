@@ -103,7 +103,7 @@ def survey_submit(request):
 	if request.POST:
 		answers_list = request.POST.getlist('answers')
 		survey_id = str(request.POST['survey_id'])
-		survey_ob = survey.objects(id=survey_id).first)()
+		survey_ob = survey.objects(id=survey_id).first()
 		questions = survey_questions.objects(survey=survey_ob) 
 		category = str(survey_ob.category)
 		k=0

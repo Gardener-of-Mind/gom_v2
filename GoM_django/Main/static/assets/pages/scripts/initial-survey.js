@@ -23,7 +23,7 @@ function showForm() {
 // 	});
 // }
 
-function getSurvey(category) {
+function getSurvey(sid) {
 	$.ajax({
 		url : '../query/',
 		method: 'POST',
@@ -31,7 +31,7 @@ function getSurvey(category) {
         headers : {
             "X-CSRFToken" : getCookie('csrftoken')
         },
-		data: ({"category":category}),
+		data: ({"oid":sid}),
 		success: function(response) {
 			resetSurvey();
 			startSurvey(JSON.parse(response));
@@ -66,7 +66,7 @@ $(document).ready(function(){
 
 	// click handler for type
 	$('.survey-type-btn').click(function(){
-		getSurvey($(this).data('type'));
+		getSurvey($(this).data('sid'));
 	});
 	
 });
