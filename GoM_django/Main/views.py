@@ -22,6 +22,7 @@ from django.forms.models import model_to_dict
 def index(request):
 	return render(request,'index.html')
 
+
 def user_login(request):
 	if request.user.is_authenticated():
 		return HttpResponseRedirect('../dashboard/')
@@ -71,28 +72,58 @@ def user_logout(request):
     return redirect('../')
 
 
-
 def questions(request):
 	if request.POST:
-		qid= int(request.POST['qid'])
-		query= question.objects.get(id=qid)
-		return query
-	questions_list = survey_questions.objects.all()
-	queries= questions_list.to_json()
+		survey_id = str(request.POST['oid'])
+		survey = survey.objects(id=survey_id)
+		questions_list = survey_questions.objects(survey= survey).order_by('id')
+	surveys= survey.objects.all()
+	surveys= survey.to_json()
 	# data = serializers.serialize("json", questions_list)
 	# return HttpResponse(queries)
-
-
-	return render(request,'initial_survey.html', {'questions':queries})
+	return render(request,'initial_survey.html', {'surveys':surveys})
 
 
 def query(request):
 	if request.POST:
-		category= request.POST['category']
+		survey_id = str(request.POST['oid'])
+		survey = survey.objects(id=survey_id)
+		questions_list = survey_questions.objects(survey= survey).order_by('id')
+		queries= questions_list.to_json()
+		return HttpResponse(queries)
+
+
+def survey_submit(request):
+	user = request.user
+	try:
+		profile =user.user_profile
+	except:
+		return HttpResponse('Profile object error')
+
+	if request.POST:
+		answers_list = request.POST.getlist('answers')
+		survey_id = str(request.POST['survey_id'])
+		survey_ob = survey.objects(id=survey_id).first)()
+		questions = survey_questions.objects(survey=survey_ob) 
+		category = str(survey_ob.category)
+		k=0
+		total_score= 0
+		for query in questions:
+			answer = answers_list[k]
+			try:
+				answer_index = query.options.index(str(answer))
+				score = query.score['answer_index'] 
+			except:
+				pass
+			total_score+= score
+			k+=1
+
 		if category == 'anxiety':
-			questions_list = survey_questions.objects(category='anxiety')
-			queries= questions_list.to_json()
-			return HttpResponse(queries)
+			profile.anxiety_score += total_score
+
+		return HttpResponseRedirect('../dashboard/') 
+
+
 
 
 @login_required
@@ -211,7 +242,21 @@ def profile_overview(request):
 def diary(request):
 	user= request.user
 	profile= user.user_profile
-	return render(request,'user/diary.html', {"profile": profile})
+	if request.POST:
+		oid = str(request.POST.get('oid',False))
+		text = str(request.POST['text'])
+		try:
+			diary = Diary.objects(id= oid)
+			diary.text_data = text
+			diary.save()
+		except:
+			diary = Diary(text_data=text, user_id =int(profile.id))
+			diary.save()
+		# diary = diary.to_json()
+		return HttpResponseRedirect('.')
+	diaries= Diary.objects(user_id = int(profile.id))
+	diaries= diaries.to_json()
+	return render(request,'user/diary.html', {"profile": profile, "diaries" : diaries})
 
 
 
