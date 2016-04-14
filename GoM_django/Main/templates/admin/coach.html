@@ -35,7 +35,7 @@
         <!-- BEGIN THEME LAYOUT STYLES -->
         <link href="{% static 'assets/layouts/layout/css/layout.min.css' %}" rel="stylesheet" type="text/css" />
         <link href="{% static 'assets/layouts/layout/css/themes/darkblue.min.css' %}" rel="stylesheet" type="text/css" id="style_color" />
-        <link href="{% static 'assets/layouts/layout/css/custom.min.css' %}" rel="stylesheet" type="text/css" />
+        <link href="{% static 'assets/layouts/layout/css/custom.css' %}" rel="stylesheet" type="text/css" />
         <!-- END THEME LAYOUT STYLES -->
         <link rel="shortcut icon" href="{% static 'assets/global/img/favicon.ico' %}" />  </head>
     <!-- END HEAD -->
@@ -447,7 +447,7 @@
                             <!-- END RESPONSIVE QUICK SEARCH FORM -->
                         </li>
                         <li class="nav-item start   active open">
-                            <a href="javascript:;" class="nav-link">
+                            <a href="../dashboard/" class="nav-link">
                                 <i class="icon-home"></i>
                                 <span class="title">Dashboard</span>
                             </a>
@@ -482,7 +482,7 @@
                             </ul>
                         </li>
                         <li class="nav-item start   active open">
-                            <a href="../coaches/" class="nav-link">
+                            <a href="javascript:;" class="nav-link">
                                 <i class="icon-home"></i>
                                 <span class="title">Approved Coaches</span>
                             </a>
@@ -503,7 +503,11 @@
                     <div class="page-bar">
                         <ul class="page-breadcrumb">
                             <li>
-                                <a href="javascript:;">Home</a>
+                                <a href="../dashboard/">Home</a>
+                                <i class="fa fa-circle"></i>
+                            </li>
+                            <li>
+                                <span>Coaches</span>
                             </li>
                         </ul>
                         <div class="page-toolbar">
@@ -522,276 +526,44 @@
                     <!-- END PAGE TITLE-->
                     <!-- END PAGE HEADER-->
                     <div class="row">
-                        <div class="col-md-12">
-                            <div class="portlet light bordered">
-                                <div class="portlet-title tabbable-line">
+                    	<div class="col-md-12">
+                            <div class="portlet light portlet-fit bordered">
+                                <div class="portlet-title">
                                     <div class="caption">
-                                        <i class=" icon-graduation font-green"></i>
-                                        <span class="caption-subject font-green bold uppercase">Coach Applicants</span>
+                                        <i class=" icon-layers font-green"></i>
+                                        <span class="caption-subject font-green bold uppercase">Coaches</span>
                                     </div>
-                                    <ul class="nav nav-tabs">
-                                        <li class="active">
-                                            <a href="#tab_actions_pending" data-toggle="tab" aria-expanded="false"> Pending </a>
-                                        </li>
-                                    </ul>
                                 </div>
                                 <div class="portlet-body">
-                                    <div class="tab-content">
-                                        <div class="tab-pane active" id="tab_actions_pending">
-                                            <!-- BEGIN: Actions -->
-                                            <div class="mt-actions">
-                                                <div class="mt-action">
-                                                    <div class="mt-action-img">
-                                                        <img src="../assets/pages/media/users/avatar10.jpg"> </div>
-                                                    <div class="mt-action-body">
-                                                        <div class="mt-action-row">
-                                                            <div class="mt-action-info ">
-                                                                <div class="mt-action-details ">
-                                                                    <span class="mt-action-author">Natasha Kim</span>
-                                                                    <p class="mt-action-desc">pending for approval pending for approval pending for approval pending for approval</p>
-                                                                </div>
-                                                            </div>
-                                                            <div class="mt-action-datetime ">
-                                                                <span class="mt-action-date">3 jun</span>
-                                                                <span class="mt-action-dot bg-green"></span>
-                                                                <span class="mt=action-time">9:30-13:00</span>
-                                                            </div>
-                                                            <div class="mt-action-buttons ">
-                                                                <div class="btn-group btn-group-circle">
-                                                                    <button type="button" class="btn btn-outline green btn-sm">Appove</button>
-                                                                    <button type="button" class="btn btn-outline red btn-sm">Reject</button>
-                                                                </div>
-                                                            </div>
+                                    <div class="mt-element-card mt-card-round mt-element-overlay">
+                                        <div class="row">
+                                        	{% for profile_ob in user_profiles %}
+                                            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                                                <div class="mt-card-item">
+                                                    <div class="mt-card-avatar mt-overlay-1">
+                                                        <img src="{% static 'assets/pages/img/avatars/team5.jpg' %}">
+                                                        <div class="mt-overlay">
+                                                            <ul class="mt-info">
+                                                                <li>
+                                                                    <a class="btn default btn-outline" href="./{{profile_ob.id}}/">
+                                                                        <i class="icon-magnifier"></i>
+                                                                    </a>
+                                                                </li>
+                                                                <li>
+                                                                    <a class="btn default btn-outline" href="javascript:;">
+                                                                        <i class="icon-link"></i>
+                                                                    </a>
+                                                                </li>
+                                                            </ul>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div class="mt-action">
-                                                    <div class="mt-action-img">
-                                                        <img src="../assets/pages/media/users/avatar3.jpg"> </div>
-                                                    <div class="mt-action-body">
-                                                        <div class="mt-action-row">
-                                                            <div class="mt-action-info ">
-                                                                <div class="mt-action-details ">
-                                                                    <span class="mt-action-author">Gavin Bond</span>
-                                                                    <p class="mt-action-desc">pending for approval</p>
-                                                                </div>
-                                                            </div>
-                                                            <div class="mt-action-datetime ">
-                                                                <span class="mt-action-date">3 jun</span>
-                                                                <span class="mt-action-dot bg-red"></span>
-                                                                <span class="mt=action-time">9:30-13:00</span>
-                                                            </div>
-                                                            <div class="mt-action-buttons ">
-                                                                <div class="btn-group btn-group-circle">
-                                                                    <button type="button" class="btn btn-outline green btn-sm">Appove</button>
-                                                                    <button type="button" class="btn btn-outline red btn-sm">Reject</button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="mt-action">
-                                                    <div class="mt-action-img">
-                                                        <img src="../assets/pages/media/users/avatar2.jpg"> </div>
-                                                    <div class="mt-action-body">
-                                                        <div class="mt-action-row">
-                                                            <div class="mt-action-info ">
-                                                                <div class="mt-action-details ">
-                                                                    <span class="mt-action-author">Diana Berri</span>
-                                                                    <p class="mt-action-desc">pending for approval pending for approval pending for approval pending for approval</p>
-                                                                </div>
-                                                            </div>
-                                                            <div class="mt-action-datetime ">
-                                                                <span class="mt-action-date">3 jun</span>
-                                                                <span class="mt-action-dot bg-green"></span>
-                                                                <span class="mt=action-time">9:30-13:00</span>
-                                                            </div>
-                                                            <div class="mt-action-buttons ">
-                                                                <div class="btn-group btn-group-circle">
-                                                                    <button type="button" class="btn btn-outline green btn-sm">Appove</button>
-                                                                    <button type="button" class="btn btn-outline red btn-sm">Reject</button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="mt-action">
-                                                    <div class="mt-action-img">
-                                                        <img src="../assets/pages/media/users/avatar7.jpg"> </div>
-                                                    <div class="mt-action-body">
-                                                        <div class="mt-action-row">
-                                                            <div class="mt-action-info ">
-                                                                <div class="mt-action-details ">
-                                                                    <span class="mt-action-author">John Clark</span>
-                                                                    <p class="mt-action-desc">pending for approval pending for approval pending for approval pending for approval</p>
-                                                                </div>
-                                                            </div>
-                                                            <div class="mt-action-datetime ">
-                                                                <span class="mt-action-date">3 jun</span>
-                                                                <span class="mt-action-dot bg-red"></span>
-                                                                <span class="mt=action-time">9:30-13:00</span>
-                                                            </div>
-                                                            <div class="mt-action-buttons ">
-                                                                <div class="btn-group btn-group-circle">
-                                                                    <button type="button" class="btn btn-outline green btn-sm">Appove</button>
-                                                                    <button type="button" class="btn btn-outline red btn-sm">Reject</button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="mt-action">
-                                                    <div class="mt-action-img">
-                                                        <img src="../assets/pages/media/users/avatar8.jpg"> </div>
-                                                    <div class="mt-action-body">
-                                                        <div class="mt-action-row">
-                                                            <div class="mt-action-info ">
-                                                                <div class="mt-action-details ">
-                                                                    <span class="mt-action-author">Donna Clarkson </span>
-                                                                    <p class="mt-action-desc">pending for approval pending for approval pending for approval pending for approval</p>
-                                                                </div>
-                                                            </div>
-                                                            <div class="mt-action-datetime ">
-                                                                <span class="mt-action-date">3 jun</span>
-                                                                <span class="mt-action-dot bg-green"></span>
-                                                                <span class="mt=action-time">9:30-13:00</span>
-                                                            </div>
-                                                            <div class="mt-action-buttons ">
-                                                                <div class="btn-group btn-group-circle">
-                                                                    <button type="button" class="btn btn-outline green btn-sm">Appove</button>
-                                                                    <button type="button" class="btn btn-outline red btn-sm">Reject</button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="mt-action">
-                                                    <div class="mt-action-img">
-                                                        <img src="../assets/pages/media/users/avatar10.jpg"> </div>
-                                                    <div class="mt-action-body">
-                                                        <div class="mt-action-row">
-                                                            <div class="mt-action-info ">
-                                                                <div class="mt-action-details ">
-                                                                    <span class="mt-action-author">Natasha Kim</span>
-                                                                    <p class="mt-action-desc">pending for approval pending for approval pending for approval pending for approval</p>
-                                                                </div>
-                                                            </div>
-                                                            <div class="mt-action-datetime ">
-                                                                <span class="mt-action-date">3 jun</span>
-                                                                <span class="mt-action-dot bg-green"></span>
-                                                                <span class="mt=action-time">9:30-13:00</span>
-                                                            </div>
-                                                            <div class="mt-action-buttons ">
-                                                                <div class="btn-group btn-group-circle">
-                                                                    <button type="button" class="btn btn-outline green btn-sm">Appove</button>
-                                                                    <button type="button" class="btn btn-outline red btn-sm">Reject</button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="mt-action">
-                                                    <div class="mt-action-img">
-                                                        <img src="../assets/pages/media/users/avatar3.jpg"> </div>
-                                                    <div class="mt-action-body">
-                                                        <div class="mt-action-row">
-                                                            <div class="mt-action-info ">
-                                                                <div class="mt-action-details ">
-                                                                    <span class="mt-action-author">Gavin Bond</span>
-                                                                    <p class="mt-action-desc">pending for approval</p>
-                                                                </div>
-                                                            </div>
-                                                            <div class="mt-action-datetime ">
-                                                                <span class="mt-action-date">3 jun</span>
-                                                                <span class="mt-action-dot bg-red"></span>
-                                                                <span class="mt=action-time">9:30-13:00</span>
-                                                            </div>
-                                                            <div class="mt-action-buttons ">
-                                                                <div class="btn-group btn-group-circle">
-                                                                    <button type="button" class="btn btn-outline green btn-sm">Appove</button>
-                                                                    <button type="button" class="btn btn-outline red btn-sm">Reject</button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="mt-action">
-                                                    <div class="mt-action-img">
-                                                        <img src="../assets/pages/media/users/avatar2.jpg"> </div>
-                                                    <div class="mt-action-body">
-                                                        <div class="mt-action-row">
-                                                            <div class="mt-action-info ">
-                                                                <div class="mt-action-details ">
-                                                                    <span class="mt-action-author">Diana Berri</span>
-                                                                    <p class="mt-action-desc">pending for approval pending for approval pending for approval pending for approval</p>
-                                                                </div>
-                                                            </div>
-                                                            <div class="mt-action-datetime ">
-                                                                <span class="mt-action-date">3 jun</span>
-                                                                <span class="mt-action-dot bg-green"></span>
-                                                                <span class="mt=action-time">9:30-13:00</span>
-                                                            </div>
-                                                            <div class="mt-action-buttons ">
-                                                                <div class="btn-group btn-group-circle">
-                                                                    <button type="button" class="btn btn-outline green btn-sm">Appove</button>
-                                                                    <button type="button" class="btn btn-outline red btn-sm">Reject</button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="mt-action">
-                                                    <div class="mt-action-img">
-                                                        <img src="../assets/pages/media/users/avatar7.jpg"> </div>
-                                                    <div class="mt-action-body">
-                                                        <div class="mt-action-row">
-                                                            <div class="mt-action-info ">
-                                                                <div class="mt-action-details ">
-                                                                    <span class="mt-action-author">John Clark</span>
-                                                                    <p class="mt-action-desc">pending for approval pending for approval pending for approval pending for approval</p>
-                                                                </div>
-                                                            </div>
-                                                            <div class="mt-action-datetime ">
-                                                                <span class="mt-action-date">3 jun</span>
-                                                                <span class="mt-action-dot bg-red"></span>
-                                                                <span class="mt=action-time">9:30-13:00</span>
-                                                            </div>
-                                                            <div class="mt-action-buttons ">
-                                                                <div class="btn-group btn-group-circle">
-                                                                    <button type="button" class="btn btn-outline green btn-sm">Appove</button>
-                                                                    <button type="button" class="btn btn-outline red btn-sm">Reject</button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="mt-action">
-                                                    <div class="mt-action-img">
-                                                        <img src="../assets/pages/media/users/avatar8.jpg"> </div>
-                                                    <div class="mt-action-body">
-                                                        <div class="mt-action-row">
-                                                            <div class="mt-action-info ">
-                                                                <div class="mt-action-details ">
-                                                                    <span class="mt-action-author">Donna Clarkson </span>
-                                                                    <p class="mt-action-desc">pending for approval pending for approval pending for approval pending for approval</p>
-                                                                </div>
-                                                            </div>
-                                                            <div class="mt-action-datetime ">
-                                                                <span class="mt-action-date">3 jun</span>
-                                                                <span class="mt-action-dot bg-green"></span>
-                                                                <span class="mt=action-time">9:30-13:00</span>
-                                                            </div>
-                                                            <div class="mt-action-buttons ">
-                                                                <div class="btn-group btn-group-circle">
-                                                                    <button type="button" class="btn btn-outline green btn-sm">Appove</button>
-                                                                    <button type="button" class="btn btn-outline red btn-sm">Reject</button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                                                    <div class="mt-card-content">
+                                                        <h3 class="mt-card-name">{{profile_ob.name}}</h3>
+                                                        <p class="mt-card-desc font-grey-mint">{{profile_ob.occupation}}</p>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <!-- END: Actions -->
+                                            {% endfor %}
                                         </div>
                                     </div>
                                 </div>
