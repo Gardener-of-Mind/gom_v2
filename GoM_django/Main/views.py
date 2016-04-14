@@ -217,6 +217,24 @@ def coach_user_profile(request,user_id):
 	return render(request,'coach/user_details.html', {'profile' : profile, 'user_profile' : user_profile_ob})
 
 
+
+@login_required
+def approved_coaches(request):
+	user = request.user
+	try:
+		profile = admin_profile.objects.get(user=user)
+	except:
+		return HttpResponse('Admin object Error')
+
+	coach_obs = coach_profile.objects.filter(status=True)
+	return render(request, 'admin/approved_coach.html', {'profile' : profile, 'coach_obs' : coach_obs})
+
+
+
+
+
 def test_pic(request):
 	pro  = user_profile.objects.all()[0]
 	return render_to_response('test.html', {'pro' : pro }, context_instance = RequestContext(request))
+
+
