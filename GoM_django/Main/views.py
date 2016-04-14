@@ -22,6 +22,9 @@ def index(request):
 	return render(request,'index.html')
 
 def user_login(request):
+	if request.user.is_authenticated():
+		return HttpResponseRedirect('../dashboard/')
+
 	if request.POST:
 		username= request.POST['username']
 		password= request.POST['password']
@@ -98,7 +101,8 @@ def dashboard(request):
 		pass
 	try:
 		profile= admin_profile.objects.get(user=user)
-		return render(request,'admin/dashboard.html',{'profile': profile})
+		coach_obs = coach_profile.objects.filter(status=False)
+		return render(request,'admin/dashboard.html',{'profile': profile, 'coach_obs' : coach_obs})
 	except:
 		pass		
 	return HttpResponse('Profile Not Found')
@@ -110,18 +114,14 @@ def edit_profile(request):
 	try:
 		profile= user_profile.objects.get(user=user)
 	except:
-		pass			
-	try:
-		profile= coach_profile.objects.get(user=user)
-	except:
-		pass
-	try:
-		profile= admin_profile.objects.get(user=user)
-	except:
-		pass
+		return HttpResponse('Error')
+
+
 	if 'profile' not in locals():
 		return HttpResponse('Error')
 	else:
+		if request.POST.get('profile_pic',False):
+			return HttpResponse(str(request.POST['profile_pic']) + '  saf')
 		if request.POST:
 			name = str(request.POST['name'])
 			gender = str(request.POST['gender'])
