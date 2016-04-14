@@ -45,10 +45,19 @@ def register(request):
 		email_id= request.POST['email']
 		password = request.POST['password']
 		# try:
-		user = User.objects.create_user(username= username, email= email_id,password= password)
+		try:
+			user = User.objects.create_user(username= username, email= email_id,password= password)
+		except:
+			error = "Username is already Taken"
+			return render(request, 'register.html', {'error' : error} )
 		user.set_password(user.password)
-		profile=user_profile(user=user,email_id=email_id)
-		profile.save()
+		try:
+			profile=user_profile(user=user,email_id=email_id)
+			profile.save()
+		except:
+			error = "Email Address is already taken"
+			user.delete()
+			return render(request, 'register.html', {'error' : error})
 		auth_user= authenticate(username=username,password=password)
 		login(request,auth_user)
 		# except:
@@ -122,7 +131,12 @@ def edit_profile(request):
 		return HttpResponse('Error')
 	else:
 		if request.POST.get('profile_pic',False):
-			return HttpResponse(str(request.POST['profile_pic']) + '  saf')
+			# try:
+			profile.profile_pic = request.FILES['display_pic']
+			profile.save()
+			return HttpResponseRedirect('.')
+			# except:
+				# return HttpResponse('Error')
 		if request.POST:
 			try:
 				name = str(request.POST['name'])
