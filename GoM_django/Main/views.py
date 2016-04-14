@@ -18,6 +18,7 @@ from Main.models import *
 import json
 from django.forms.models import model_to_dict
 # Create your views here.
+
 def index(request):
 	return render(request,'index.html')
 
@@ -123,13 +124,40 @@ def edit_profile(request):
 		if request.POST.get('profile_pic',False):
 			return HttpResponse(str(request.POST['profile_pic']) + '  saf')
 		if request.POST:
-			name = str(request.POST['name'])
-			gender = str(request.POST['gender'])
-			college = str(request.POST['college'])
-			city = str(request.POST['city'])
-			occupation = str(request.POST['occupation'])
-			phone = int(request.POST['phone'])
-			about_me = str(request.POST['about_me'])
+			try:
+				name = str(request.POST['name'])
+			except:
+				name = ''
+			
+			try:
+				gender = str(request.POST['gender'])
+			except:
+				gender = 'M'
+
+			try:
+				college = str(request.POST['college'])
+			except:
+				college = ''
+
+			try:
+				city = str(request.POST['city'])
+			except:
+				city = ''
+
+			try:
+				occupation = str(request.POST['occupation'])
+			except:
+				occupation = ''
+
+			try:
+				phone = int(request.POST['phone'])
+			except:
+				phone = 0
+
+			try:
+				about_me = str(request.POST['about_me'])
+			except:
+				about_me = ''
 
 			profile.name= name
 			profile.gender= gender
@@ -190,5 +218,5 @@ def coach_user_profile(request,user_id):
 
 
 def test_pic(request):
-	pro  = user_profile.objects.get(id=3)
+	pro  = user_profile.objects.all()[0]
 	return render_to_response('test.html', {'pro' : pro }, context_instance = RequestContext(request))

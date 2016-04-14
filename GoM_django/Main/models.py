@@ -40,6 +40,9 @@ class coach_profile(models.Model):
 	gender = models.CharField(max_length=1, choices=GENDERS)
 	phone_one = models.BigIntegerField(blank=True,null=True)
 	email_id = models.EmailField(unique=True)
+	about_me= models.TextField(default='')	
+	city = models.CharField(max_length=20, null=True)
+	profile_pic= models.ImageField(blank=True, upload_to='pictures', null=True, default='pictures/default.jpg')		
 	status = models.BooleanField(default=False)
 	class Meta:
 		verbose_name_plural = 'coach_profile'
@@ -56,7 +59,7 @@ class user_profile(models.Model):
 	name = models.CharField(max_length=200)
 	gender = models.CharField(max_length=1, choices=GENDERS)
 	college = models.CharField(max_length=200, default='')
-	city = models.CharField(max_length=20)
+	city = models.CharField(max_length=20, null=True)
 	phone = models.BigIntegerField(blank=True,null=True)
 	email_id = models.EmailField(unique=True)
 	occupation= models.CharField(max_length=200, default='', blank=True)
@@ -82,6 +85,7 @@ class admin_profile(models.Model):
 	gender = models.CharField(max_length=1, choices=GENDERS)
 	phone_one = models.BigIntegerField(blank=True,null=True)
 	email_id = models.EmailField(unique=True)
+	profile_pic= models.ImageField(blank=True, upload_to='pictures', null=True, default='pictures/default.jpg')	
 
 	class Meta:
 		verbose_name_plural = 'admin_profile'
