@@ -10,13 +10,26 @@ class gauss(Document):
     last_name = StringField(max_length=50)
 
 
+class Diary(Document):
+    modified_date = DateTimeField()
+    text_data = StringField(required= True)
+    user_id = IntField(required=True)
+
+    def save(self, *args, **kwargs):
+        self.modified_date = timezone.now()
+        return super(Diary, self).save(*args, **kwargs)
+
+
+class survey(Document):
+    name= StringField(max_length=50,blank=True)
+    category= StringField(max_length=50,blank=True)
 
 class survey_questions(Document):
     text=StringField(max_length=1000)
     query_type= StringField(max_length=50)
     options = ListField(null=True)  
-    score= IntField(blank=True,null=True)
-    category= StringField(max_length=50,blank=True)
+    score= ListField(blank=True,null=True)
+    survey= ReferenceField(survey)
     class Meta:
         verbose_name_plural = 'Questions'
     def __unicode__(self):
