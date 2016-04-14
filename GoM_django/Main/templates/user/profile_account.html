@@ -275,7 +275,7 @@
                         <!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
                         <li class="dropdown dropdown-user">
                             <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-                                <img alt="" class="img-circle" src="{% static 'assets/layouts/layout/img/avatar3_small.jpg' %} " />
+                                <img alt="" class="img-circle" src={% if profile.profile_pic %} "{{profile.profile_pic.url}} " {% else %} "/media/pictures/default.jpg" {% endif %} />
                                 <span class="username username-hide-on-mobile"> Nick </span>
                                 <i class="fa fa-angle-down"></i>
                             </a>
@@ -551,7 +551,7 @@
                                 <div class="portlet light profile-sidebar-portlet ">
                                     <!-- SIDEBAR USERPIC -->
                                     <div class="profile-userpic">
-                                        <img src="{% static 'assets/pages/media/profile/profile_user.jpg' %} " class="img-responsive" alt=""> </div>
+                                         <img src= {% if profile.profile_pic %} "{{profile.profile_pic.url}}" {% else %} "/media/pictures/default.jpg" {% endif %} class="img-responsive" alt="">  </div>
                                     <!-- END SIDEBAR USERPIC -->
                                     <!-- SIDEBAR USER TITLE -->
                                     <div class="profile-usertitle">
@@ -674,8 +674,9 @@
                                                     <div class="tab-pane" id="tab_1_2">
                                                         <p> Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum
                                                             eiusmod. </p>
-                                                        <form action="." method='POST' role="form">
+                                                        <form action="." method='POST' role="form" enctype = "multipart/form-data">
                                                             {% csrf_token %}
+
                                                             <div class="form-group">
                                                                 <div class="fileinput fileinput-new" data-provides="fileinput">
                                                                     <div class="fileinput-new thumbnail" style="width: 200px; height: 150px;">
@@ -685,7 +686,7 @@
                                                                         <span class="btn default btn-file">
                                                                             <span class="fileinput-new"> Select image </span>
                                                                             <span class="fileinput-exists"> Change </span>
-                                                                            <input type="file" name="..."> </span>
+                                                                            <input type="file" name="display_pic"> </span>
                                                                         <a href="javascript:;" class="btn default fileinput-exists" data-dismiss="fileinput"> Remove </a>
                                                                     </div>
                                                                 </div>
@@ -813,7 +814,7 @@
                                         <div class="media-status">
                                             <span class="badge badge-success">8</span>
                                         </div>
-                                        <img class="media-object" src="{% static 'assets/layouts/layout/img/avatar3.jpg' %} " alt="...">
+                                        <img class="media-object" src="{% static 'assets/layouts/layout/img/avatar.jpg' %} " alt="...">
                                         <div class="media-body">
                                             <h4 class="media-heading">Bob Nilson</h4>
                                             <div class="media-heading-sub"> Project Manager </div>

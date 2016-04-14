@@ -18,6 +18,7 @@ from Main.models import *
 import json
 from django.forms.models import model_to_dict
 # Create your views here.
+
 def index(request):
 	return render(request,'index.html')
 
@@ -44,10 +45,19 @@ def register(request):
 		email_id= request.POST['email']
 		password = request.POST['password']
 		# try:
-		user = User.objects.create_user(username= username, email= email_id,password= password)
+		try:
+			user = User.objects.create_user(username= username, email= email_id,password= password)
+		except:
+			error = "Username is already Taken"
+			return render(request, 'register.html', {'error' : error} )
 		user.set_password(user.password)
-		profile=user_profile(user=user,email_id=email_id)
-		profile.save()
+		try:
+			profile=user_profile(user=user,email_id=email_id)
+			profile.save()
+		except:
+			error = "Email Address is already taken"
+			user.delete()
+			return render(request, 'register.html', {'error' : error})
 		auth_user= authenticate(username=username,password=password)
 		login(request,auth_user)
 		# except:
@@ -121,15 +131,47 @@ def edit_profile(request):
 		return HttpResponse('Error')
 	else:
 		if request.POST.get('profile_pic',False):
-			return HttpResponse(str(request.POST['profile_pic']) + '  saf')
+			# try:
+			profile.profile_pic = request.FILES['display_pic']
+			profile.save()
+			return HttpResponseRedirect('.')
+			# except:
+				# return HttpResponse('Error')
 		if request.POST:
-			name = str(request.POST['name'])
-			gender = str(request.POST['gender'])
-			college = str(request.POST['college'])
-			city = str(request.POST['city'])
-			occupation = str(request.POST['occupation'])
-			phone = int(request.POST['phone'])
-			about_me = str(request.POST['about_me'])
+			try:
+				name = str(request.POST['name'])
+			except:
+				name = ''
+			
+			try:
+				gender = str(request.POST['gender'])
+			except:
+				gender = 'M'
+
+			try:
+				college = str(request.POST['college'])
+			except:
+				college = ''
+
+			try:
+				city = str(request.POST['city'])
+			except:
+				city = ''
+
+			try:
+				occupation = str(request.POST['occupation'])
+			except:
+				occupation = ''
+
+			try:
+				phone = int(request.POST['phone'])
+			except:
+				phone = 0
+
+			try:
+				about_me = str(request.POST['about_me'])
+			except:
+				about_me = ''
 
 			profile.name= name
 			profile.gender= gender
@@ -189,6 +231,24 @@ def coach_user_profile(request,user_id):
 	return render(request,'coach/user_details.html', {'profile' : profile, 'user_profile' : user_profile_ob})
 
 
+
+@login_required
+def approved_coaches(request):
+	user = request.user
+	try:
+		profile = admin_profile.objects.get(user=user)
+	except:
+		return HttpResponse('Admin object Error')
+
+	coach_obs = coach_profile.objects.filter(status=True)
+	return render(request, 'admin/approved_coach.html', {'profile' : profile, 'coach_obs' : coach_obs})
+
+
+
+
+
 def test_pic(request):
-	pro  = user_profile.objects.get(id=3)
+	pro  = user_profile.objects.all()[0]
 	return render_to_response('test.html', {'pro' : pro }, context_instance = RequestContext(request))
+
+
