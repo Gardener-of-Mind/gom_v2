@@ -38,7 +38,7 @@ class coach_profile(models.Model):
     )
     name = models.CharField(max_length=200)
     gender = models.CharField(max_length=1, choices=GENDERS)
-    phone_one = models.BigIntegerField(blank=True,null=True)
+    phone_one = models.BigIntegerField(blank=True,null=True, default='')
     email_id = models.EmailField(unique=True)
     about_me= models.TextField(default='')  
     city = models.CharField(max_length=20, null=True)
@@ -67,7 +67,7 @@ class user_profile(models.Model):
     name = models.CharField(max_length=200)
     gender = models.CharField(max_length=1, choices=GENDERS)
     college = models.CharField(max_length=200, default='')
-    city = models.CharField(max_length=20, null=True)
+    city = models.CharField(max_length=20, null=True, default='')
     phone = models.BigIntegerField(blank=True,null=True)
     email_id = models.EmailField(unique=True)
     occupation= models.CharField(max_length=200, default='', blank=True)
@@ -102,10 +102,4 @@ class admin_profile(models.Model):
 
 
 
-
-
-
-class User(models.Model):
-    created     = models.DateTimeField(editable=False)
-    modified    = models.DateTimeField()
 
