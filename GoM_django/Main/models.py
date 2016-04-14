@@ -29,6 +29,7 @@ class survey_answers(Document):
 
 
 
+
 class coach_profile(models.Model):
 	user = models.OneToOneField(User, null=True)	
 	GENDERS = (
@@ -39,6 +40,7 @@ class coach_profile(models.Model):
 	gender = models.CharField(max_length=1, choices=GENDERS)
 	phone_one = models.BigIntegerField(blank=True,null=True)
 	email_id = models.EmailField(unique=True)
+	status = models.BooleanField(default=False)
 	class Meta:
 		verbose_name_plural = 'coach_profile'
 	def __unicode__(self):
@@ -86,24 +88,3 @@ class admin_profile(models.Model):
 	def __unicode__(self):
 		return str(self.name)
 
-
-class question(models.Model):
-	text=models.CharField(max_length=1000)
-	query_type= models.CharField(max_length=50)
-	option1= models.CharField(max_length=1000, blank=True)
-	option2= models.CharField(max_length=1000, blank=True)
-	option3= models.CharField(max_length=1000, blank=True)
-	option4= models.CharField(max_length=1000, blank=True)
-	option6= models.CharField(max_length=1000, blank=True)
-	option7= models.CharField(max_length=1000, blank=True)
-	option8= models.CharField(max_length=1000, blank=True)
-	option9= models.CharField(max_length=1000, blank=True)
-	option10= models.CharField(max_length=1000, blank=True)
-	score= models.IntegerField(blank=True,null=True)
-	category= models.CharField(max_length=50,blank=True)
-	class Meta:
-		verbose_name_plural = 'Questions'
-	def __unicode__(self):
-		return str(self.text)
-
-		
