@@ -34,6 +34,8 @@ urlpatterns = [
     url(r'^dashboard/$', views.dashboard),
     url(r'^diary/$', views.diary),
     url(r'^dashboard/(?P<user_id>[0-9]+)/$', views.coach_user_profile),
+    url(r'^coachlist/$', views.approved_coaches),
+
     
     url(r'^test/$', views.test_pic),
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

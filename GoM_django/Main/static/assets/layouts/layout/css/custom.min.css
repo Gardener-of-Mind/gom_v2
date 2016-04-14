@@ -16,3 +16,8 @@
 .mt-action-row{
 	margin-bottom: 2px !important;
 }
+
+.mt-actions .mt-action .mt-action-img>img {
+	height: 40px;
+	width: 40px;
+}
