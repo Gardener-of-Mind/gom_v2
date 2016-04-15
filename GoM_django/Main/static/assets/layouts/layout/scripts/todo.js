@@ -19,20 +19,25 @@ var AppTodo = function () {
 
         $('#todo-task-modal .diary-modal-save').on("click",function(){
             var dairyObj = {};
-            dairyObj.title = $('#todo-task-modal .diary-modal-title').val();
-            dairyObj.message= $('#todo-task-modal .diary-modal-message').val();
-            dairyObj.did = $('#todo-task-modal .diary-modal-save').data('did');
-            $.ajax({
-                url:'..//',
-                method:'POST',
-                data: dairyObj,
-                success:function(response){
-                    console.log(response);
-                },
-                error: function(){
-                    alert("Try Again!");
-                }
-            })
+            dairyObj["title"] = $('#todo-task-modal .diary-modal-title').val();
+            dairyObj["text"] = $('#todo-task-modal .diary-modal-message').val();
+            dairyObj["oid"] = $('#todo-task-modal .diary-modal-save').data('did');
+            if(dairyObj["title"] != "" && dairyObj["text"] != "") {
+                $.ajax({
+                    url:'.',
+                    method:'POST',
+                    data: dairyObj,
+                    success:function(response){
+                        console.log(response);
+                    },
+                    error: function(){
+                        alert("Try Again!");
+                    }
+                });
+            }
+            else
+                alert("Empty title or message");
+            
         });
 
         $('.add-diary').on("click",function(){

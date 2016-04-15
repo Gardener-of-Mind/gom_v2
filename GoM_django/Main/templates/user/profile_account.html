@@ -271,22 +271,18 @@
                             </ul>
                         </li>
                         <!-- END TODO DROPDOWN -->
-                        <!-- BEGIN USER LOGIN DROPDOWN -->
+                         <!-- BEGIN USER LOGIN DROPDOWN -->
                         <!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
                         <li class="dropdown dropdown-user">
                             <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-                                <img alt="" class="img-circle" src={% if profile.profile_pic %} "{{profile.profile_pic.url}} " {% else %} "/media/pictures/default.jpg" {% endif %} />
-                                <span class="username username-hide-on-mobile"> Nick </span>
+                                <img alt="" class="img-circle user-dp" src="{{profile.profile_pic.url}}" />
+                                <span class="username username-hide-on-mobile user-name"> {{profile.name}} </span>
                                 <i class="fa fa-angle-down"></i>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-default">
                                 <li>
-                                    <a href="../">
+                                    <a href="../profile/">
                                         <i class="icon-user"></i> My Profile </a>
-                                </li>
-                                <li>
-                                    <a href="app_calendar.html">
-                                        <i class="icon-calendar"></i> My Calendar </a>
                                 </li>
                                 <li>
                                     <a href="app_inbox.html">
@@ -301,10 +297,6 @@
                                     </a>
                                 </li>
                                 <li class="divider"> </li>
-                                <li>
-                                    <a href="page_user_lock_1.html">
-                                        <i class="icon-lock"></i> Lock Screen </a>
-                                </li>
                                 <li>
                                     <a href="../../logout/">
                                         <i class="icon-key"></i> Log Out </a>
@@ -406,6 +398,42 @@
                                     </a>
                                 </li>
                             </ul>
+                        </li>
+                        <li class="nav-item ">
+                            <a href="javascript:;" class="nav-link">
+                                <i class="icon-puzzle"></i>
+                                <span class="title">My Activities</span>
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a href="javascript:;" class="nav-link">
+                                <i class="icon-book-open"></i>
+                                <span class="title">My Survey</span>
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a href="javascript:;" class="nav-link">
+                                <i class="icon-bubbles"></i>
+                                <span class="title">Chat-Box</span>
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a href="javascript:;" class="nav-link">
+                                <i class="icon-graph"></i>
+                                <span class="title">My Reports</span>
+                            </a>
+                        </li>
+                        <li class="nav-item active open">
+                            <a href="../../diary/" class="nav-link">
+                                <i class="icon-notebook"></i>
+                                <span class="title">My Diary</span>
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a href="javascript:;" class="nav-link">
+                                <i class="icon-loop"></i>
+                                <span class="title">Feedback</span>
+                            </a>
                         </li>
                     </ul>
                     <!-- END SIDEBAR MENU -->
