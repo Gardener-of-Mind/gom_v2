@@ -23,7 +23,7 @@ function showForm() {
 // 	});
 // }
 
-function getSurvey(category) {
+function getSurvey(sid) {
 	$.ajax({
 		url : '../query/',
 		method: 'POST',
@@ -31,10 +31,10 @@ function getSurvey(category) {
         headers : {
             "X-CSRFToken" : getCookie('csrftoken')
         },
-		data: ({"category":category}),
+		data: ({"oid":sid}),
 		success: function(response) {
 			resetSurvey();
-			startSurvey(JSON.parse(response));
+			startSurvey(JSON.parse(response),sid);
 		},
 		error: function() {
 			console.log("error");
@@ -42,15 +42,15 @@ function getSurvey(category) {
 	});
 }
 
-function sendSurvey(answers) {
+function sendSurvey(answers,sid) {
 	$.ajax({
-		url : '../postanswer/',
+		url : '../submit_survey/',
 		method: 'POST',
 		cache: false,
         headers : {
             "X-CSRFToken" : getCookie('csrftoken')
         },
-		data: answers,
+		data: {"oid":sid,"answers":answer},
 		success: function(response) {
 			window.location.href = './../dashboard/';
 		},
@@ -66,13 +66,13 @@ $(document).ready(function(){
 
 	// click handler for type
 	$('.survey-type-btn').click(function(){
-		getSurvey($(this).data('type'));
+		getSurvey($(this).data('sid'));
 	});
 	
 });
 
 
-function startSurvey(quesAll) {
+function startSurvey(quesAll,sid) {
 	var answers = new Array();
 	var index = 0, qlength = quesAll.length;
 
@@ -91,7 +91,7 @@ function startSurvey(quesAll) {
 				generateQuestion(quesAll[index]);
 			}
 			else {
-				sendSurvey(answers);
+				sendSurvey(answers,sid);
 			}
 		}
 		
