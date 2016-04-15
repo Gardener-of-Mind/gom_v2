@@ -75,20 +75,21 @@ def user_logout(request):
 def questions(request):
 	if request.POST:
 		survey_id = str(request.POST['oid'])
-		survey = survey.objects(id=survey_id)
+		surveys = survey.objects(id=survey_id)
 		questions_list = survey_questions.objects(survey= survey).order_by('id')
-	surveys= survey.objects.all()
-	surveys= survey.to_json()
+	surveys= survey.objects.all().first()
+	oid = surveys.id
+	surveys= surveys.to_json()
 	# data = serializers.serialize("json", questions_list)
 	# return HttpResponse(queries)
-	return render(request,'initial_survey.html', {'surveys':surveys})
+	return render(request,'initial_survey.html', {'oid':oid})
 
 
 def query(request):
 	if request.POST:
 		survey_id = str(request.POST['oid'])
-		survey = survey.objects(id=survey_id)
-		questions_list = survey_questions.objects(survey= survey).order_by('id')
+		survey_ob = survey.objects(id=survey_id).first()
+		questions_list = survey_questions.objects(survey= survey_ob).order_by('id')
 		queries= questions_list.to_json()
 		return HttpResponse(queries)
 

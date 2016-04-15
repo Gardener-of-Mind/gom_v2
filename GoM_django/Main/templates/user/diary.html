@@ -29,7 +29,10 @@
         <!-- BEGIN THEME LAYOUT STYLES -->
         <link href="{% static 'assets/layouts/layout/css/layout.min.css' %}" rel="stylesheet" type="text/css" />
         <link href="{% static 'assets/layouts/layout/css/themes/darkblue.min.css' %}" rel="stylesheet" type="text/css" id="style_color" />
+        <link href="{% static 'assets/layouts/layout/css/todo.css' %}" rel="stylesheet" type="text/css" />
+        
         <link href="{% static 'assets/layouts/layout/css/custom.min.css' %}" rel="stylesheet" type="text/css" />
+
         <!-- END THEME LAYOUT STYLES -->
         <link rel="shortcut icon" href="favicon.ico" /> </head>
     <!-- END HEAD -->
@@ -470,8 +473,10 @@
                     <div class="note note-info">
                         <div class="pull-left">Click the Add button to add more notes to diary.</div>
                         <div class="pull-right">
-                            <a href="javascript:;" class="btn btn-circle red-sunglo btn-sm">
-                                            <i class="fa fa-plus"></i> Add </a>
+                            <!-- <a href="javascript:;" class="btn btn-circle red-sunglo btn-sm">
+                                 Add 
+                            </a> -->
+                            <button class="btn btn-circle btn-sm red todo-bold" data-toggle="modal" href="#todo-task-modal"><i class="fa fa-plus"></i>Add New Note</button>
                         </div>
                         <div class="clearfix"></div>
                     </div>
@@ -486,8 +491,8 @@
                                         <span class="caption-helper">Date</span>
                                     </div>
                                     <div class="actions">
-                                        <a href="javascript:;" class="btn btn-circle btn-default btn-sm">
-                                            <i class="fa fa-pencil"></i> Edit </a>
+                                        <button class="btn btn-circle btn-default btn-sm" data-toggle="modal" href="#todo-task-modal">
+                                            <i class="fa fa-pencil"></i> Edit </button>
                                         <a href="javascript:;" class="btn btn-circle btn-default btn-sm delete">
                                             <i class="fa fa-trash"></i> Delete </a>
                                         <a class="btn btn-circle btn-icon-only btn-default fullscreen" href="javascript:;"> </a>
@@ -523,7 +528,30 @@
                             <!-- END Portlet PORTLET-->
                         </div>
                     </div>
-                    
+                    <div id="todo-task-modal" class="modal fade" role="dialog" aria-labelledby="myModalLabel10" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content scroller" style="height: 100%;" data-always-visible="1" data-rail-visible="0">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                    <p class="todo-task-modal-title todo-inline">Title:
+                                        <input class="form-control input-inline input-medium todo-task-due todo-inline" size="16" type="text" value="" placeholder="Enter Title" />
+                                    </p>
+                                    <p class="todo-task-modal-title todo-inline">Due:
+                                        <input class="form-control input-inline input-medium date-picker todo-task-due todo-inline" size="16" type="text" value="10/01/2015" disabled />
+                                    </p>
+                                </div>
+                                <div class="modal-body todo-task-modal-body todo-task-modal-bg">
+                                    <div class="form-group">
+                                    <textarea class="form-control" rows="20" ></textarea>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button class="btn default" data-dismiss="modal" aria-hidden="true">Close</button>
+                                    <button class="btn green">Submit</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <!-- END CONTENT BODY -->
             </div>
@@ -1115,11 +1143,21 @@
         <script src="{% static 'assets/global/plugins/uniform/jquery.uniform.min.js' %}" type="text/javascript"></script>
         <script src="{% static 'assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js' %}" type="text/javascript"></script>
         <!-- END CORE PLUGINS -->
+        <!-- BEGIN PAGE LEVEL PLUGINS -->
+        <script src="{% static 'assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js' %}" type="text/javascript"></script>
+        <script src="{% static 'assets/global/plugins/select2/js/select2.full.min.js' %}" type="text/javascript"></script>
+        <script src="{% static 'assets/global/plugins/jquery-multi-select/js/jquery.multi-select.js' %}" type="text/javascript"></script>
+        <!-- END PAGE LEVEL PLUGINS -->
         <!-- BEGIN THEME GLOBAL SCRIPTS -->
         <script src="{% static 'assets/global/scripts/app.min.js' %}" type="text/javascript"></script>
         <!-- END THEME GLOBAL SCRIPTS -->
+        <!-- BEGIN PAGE LEVEL SCRIPTS -->
+        <script src="{% static 'assets/layouts/layout/js/todo.js' %}" type="text/javascript"></script>
+        <script src="{% static 'assets/pages/scripts/components-date-time-pickers.min.js' %}" type="text/javascript"></script>
+        <!-- END PAGE LEVEL SCRIPTS -->
         <!-- BEGIN THEME LAYOUT SCRIPTS -->
         <script src="{% static 'assets/layouts/layout/scripts/layout.min.js' %}" type="text/javascript"></script>
+        <script src="{% static 'assets/layouts/layout/scripts/demo.min.js' %}" type="text/javascript"></script>
         <script src="{% static 'assets/layouts/global/scripts/quick-sidebar.min.js' %}" type="text/javascript"></script>
         <!-- END THEME LAYOUT SCRIPTS -->
     </body>
