@@ -7,17 +7,40 @@ var AppTodo = function () {
 
     var _initComponents = function() {
         
-        // init datepicker
-        // $('.todo-taskbody-due').datepicker({
-        //     rtl: App.isRTL(),
-        //     orientation: "left",
-        //     autoclose: true
-        // });
+        $('.edit-diary').on("click",function(){
+            $parent = $(this).closest('.portlet.light.bordered');
+            console.log("yo",$parent,$(parent).find('.diary-title'));
+            $('#todo-task-modal .diary-modal-title').val($parent.find('.diary-title').html());
+            $('#todo-task-modal .diary-modal-date').val($parent.find('.diary-date').html());
+            $('#todo-task-modal .diary-modal-message').val($parent.find('.diary-message').html());
+            $('#todo-task-modal .diary-modal-save').data('did',$(this).data('did'));
 
-        // init tags        
-        // $(".todo-taskbody-tags").select2({
-        //     tags: ["Testing", "Important", "Info", "Pending", "Completed", "Requested", "Approved"]
-        // });
+        });
+
+        $('#todo-task-modal .diary-modal-save').on("click",function(){
+            var dairyObj = {};
+            dairyObj.title = $('#todo-task-modal .diary-modal-title').val();
+            dairyObj.message= $('#todo-task-modal .diary-modal-message').val();
+            dairyObj.did = $('#todo-task-modal .diary-modal-save').data('did');
+            $.ajax({
+                url:'..//',
+                method:'POST',
+                data: dairyObj,
+                success:function(response){
+                    console.log(response);
+                },
+                error: function(){
+                    alert("Try Again!");
+                }
+            })
+        });
+
+        $('.add-diary').on("click",function(){
+            $('#todo-task-modal .diary-modal-title').val("");
+            $('#todo-task-modal .diary-modal-date').val(new Date().toLocaleDateString());
+            $('#todo-task-modal .diary-modal-message').val("");
+            $('#todo-task-modal .diary-modal-save').data('did',"");
+        })
     }
 
     var _handleProjectListMenu = function() {
