@@ -249,11 +249,12 @@ def diary(request):
 		oid = str(request.POST.get('oid',False))
 		text = str(request.POST['text'])
 		try:
-			diary = Diary.objects(id= oid)
+			diary = Diary.objects(id= oid).first()
 			diary.text_data = text
 			diary.save()
 		except:
-			diary = Diary(text_data=text, user_id =int(profile.id))
+			title = str(request.POST['title'])
+			diary = Diary(title=title,text_data=text, user_id =int(profile.id))
 			diary.save()
 		# diary = diary.to_json()
 		return HttpResponseRedirect('.')

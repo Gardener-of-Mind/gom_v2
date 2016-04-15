@@ -12,6 +12,7 @@ class gauss(Document):
 
 class Diary(Document):
     modified_date = DateTimeField()
+    title = StringField(required=True)
     text_data = StringField(required= True)
     user_id = IntField(required=True)
 
