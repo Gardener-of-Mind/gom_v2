@@ -29,6 +29,8 @@ urlpatterns = [
     url(r'^register/$', views.register),
     url(r'^profile/$', views.profile_overview),
     url(r'^profile/edit/$', views.edit_profile),
+    url(r'^profile/help/$', views.profile_help),
+
     url(r'^questions/$', views.questions),
     url(r'^query/$', views.query),
     url(r'^survey_submit/$', views.survey_submit),

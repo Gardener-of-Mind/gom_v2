@@ -53,7 +53,7 @@ def register(request):
 			return render(request, 'register.html', {'error' : error} )
 		user.set_password(user.password)
 		try:
-			profile=user_profile(user=user,email_id=email_id)
+			profile=user_profile(user=user,email_id=email_id, name=username)
 			profile.save()
 		except:
 			error = "Email Address is already taken"
@@ -63,7 +63,7 @@ def register(request):
 		login(request,auth_user)
 		# except:
 		# 	return HttpResponse('Error')
-		return HttpResponseRedirect('../profile/edit/')
+		return HttpResponseRedirect('../questions/')
 	return render(request,'register.html')
 
 
@@ -85,6 +85,7 @@ def questions(request):
 	return render(request,'initial_survey.html', {'oid':oid})
 
 
+
 def query(request):
 	if request.POST:
 		survey_id = str(request.POST['oid'])
@@ -102,27 +103,28 @@ def survey_submit(request):
 		return HttpResponse('Profile object error')
 
 	if request.POST:
-		answers_list = request.POST.getlist('answers')
-		survey_id = str(request.POST['survey_id'])
+		answers_list = request.POST.getlist('answers[]')
+		# return HttpResponse(str(answers_list))
+		survey_id = str(request.POST['oid'])
 		survey_ob = survey.objects(id=survey_id).first()
 		questions = survey_questions.objects(survey=survey_ob) 
 		category = str(survey_ob.category)
 		k=0
 		total_score= 0
-		for query in questions:
-			answer = answers_list[k]
-			try:
-				answer_index = query.options.index(str(answer))
-				score = query.score['answer_index'] 
-			except:
-				pass
-			total_score+= score
-			k+=1
+		# for query in questions:
+		# 	answer = answers_list[k]
+		# 	try:
+		# 		answer_index = query.options.index(str(answer))
+		# 		score = query.score['answer_index'] 
+		# 	except:
+		# 		pass
+		# 	total_score+= score
+		# 	k+=1
 
-		if category == 'anxiety':
-			profile.anxiety_score += total_score
+		# if category == 'anxiety':
+		# 	profile.anxiety_score += total_score
 
-		return HttpResponseRedirect('../dashboard/') 
+		return HttpResponseRedirect('../profile/edit/') 
 
 
 
@@ -247,11 +249,12 @@ def diary(request):
 		oid = str(request.POST.get('oid',False))
 		text = str(request.POST['text'])
 		try:
-			diary = Diary.objects(id= oid)
+			diary = Diary.objects(id= oid).first()
 			diary.text_data = text
 			diary.save()
 		except:
-			diary = Diary(text_data=text, user_id =int(profile.id))
+			title = str(request.POST['title'])
+			diary = Diary(title=title,text_data=text, user_id =int(profile.id))
 			diary.save()
 		# diary = diary.to_json()
 		return HttpResponseRedirect('.')
@@ -298,3 +301,7 @@ def test_pic(request):
 	return render_to_response('test.html', {'pro' : pro }, context_instance = RequestContext(request))
 
 
+def profile_help(request):
+	user = request.user
+	profile= user_profile.objects.get(user=user)
+	return render(request,'user/profile_help.html', {'profile' : profile})
