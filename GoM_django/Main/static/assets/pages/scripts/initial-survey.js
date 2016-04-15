@@ -53,7 +53,7 @@ function sendSurvey(answers,sid) {
         },
 		data: {"oid":sid,"answers[]":answers},
 		success: function(response) {
-			window.location.href = './../dashboard/';
+			window.location.href = './../profile/edit/';
 		},
 		error: function() {
 			alert("error");

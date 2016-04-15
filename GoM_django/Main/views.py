@@ -53,7 +53,7 @@ def register(request):
 			return render(request, 'register.html', {'error' : error} )
 		user.set_password(user.password)
 		try:
-			profile=user_profile(user=user,email_id=email_id)
+			profile=user_profile(user=user,email_id=email_id, name=username)
 			profile.save()
 		except:
 			error = "Email Address is already taken"
@@ -63,7 +63,7 @@ def register(request):
 		login(request,auth_user)
 		# except:
 		# 	return HttpResponse('Error')
-		return HttpResponseRedirect('../profile/edit/')
+		return HttpResponseRedirect('../questions/')
 	return render(request,'register.html')
 
 
@@ -124,7 +124,7 @@ def survey_submit(request):
 		# if category == 'anxiety':
 		# 	profile.anxiety_score += total_score
 
-		return HttpResponseRedirect('../dashboard/') 
+		return HttpResponseRedirect('../profile/edit/') 
 
 
 
@@ -301,3 +301,7 @@ def test_pic(request):
 	return render_to_response('test.html', {'pro' : pro }, context_instance = RequestContext(request))
 
 
+def profile_help(request):
+	user = request.user
+	profile= user_profile.objects.get(user=user)
+	return render(request,'user/profile_help.html', {'profile' : profile})
