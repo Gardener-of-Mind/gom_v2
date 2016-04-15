@@ -43,14 +43,15 @@ function getSurvey(sid) {
 }
 
 function sendSurvey(answers,sid) {
+	console.log(answers);
 	$.ajax({
-		url : '../submit_survey/',
+		url : '../survey_submit/',
 		method: 'POST',
 		cache: false,
         headers : {
             "X-CSRFToken" : getCookie('csrftoken')
         },
-		data: {"oid":sid,"answers":answer},
+		data: {"oid":sid,"answers[]":answers},
 		success: function(response) {
 			window.location.href = './../dashboard/';
 		},
@@ -347,11 +348,10 @@ function resetSurvey(){
 }
 
 function getAnswerObj(qid) {
-	var ansObj = new Object();
-	ansObj["_id"] = qid;
+	var ansObj = "";
 	switch($('.option-type').data("option-type")) {
 		case "dual" 		:   if($('.option-type .active').length != 0) {
-									ansObj["answer"] = $('.option-type .active  span').html();
+									ansObj = ($('.option-type .active  span').html());
 								}
 								else {
 									alert("Choose one of the option!");
@@ -359,7 +359,7 @@ function getAnswerObj(qid) {
 								}
 								break;
 		case "dropdownbox"	:   if($('.option-type option:selected').val() !=  "...") {
-									ansObj["answer"] = $('.option-type option:selected').val();
+									ansObj = ($('.option-type option:selected').val());
 								}
 								else {
 									alert("Choose one of the option apart from ...!");
@@ -367,7 +367,7 @@ function getAnswerObj(qid) {
 								}
 								break;
 		case "radio" 		:   if($('.option-type input[type="radio"]:checked').length != 0) {
-									ansObj["answer"] = $('.option-type input[type="radio"]:checked').val();
+									ansObj = ($('.option-type input[type="radio"]:checked').val());
 								}
 								else {
 									alert("Choose one of the option!");
@@ -375,7 +375,7 @@ function getAnswerObj(qid) {
 								}
 								break;
 		case "checkbox" 	:   if($('.option-type input[type="checkbox"]:checked').length != 0) {
-									ansObj["answer"] = $('.options-cont input[type="checkbox"]:checked').map(function () {return this.value;}).get();
+									ansObj = ($('.options-cont input[type="checkbox"]:checked').map(function () {return this.value;}).get());
 								}
 								else {
 									alert("Choose atleast one of the option!");
@@ -384,10 +384,10 @@ function getAnswerObj(qid) {
 								break;
 
 								break;
-		case "rating" 		:   ansObj["answer"] = getSliderValue()[0];
+		case "rating" 		:   ansObj = (getSliderValue()[0]);
 								break;
 		case "text" 		:   if($('.survey-textarea').val()!="") {
-									ansObj["answer"] = $('.survey-textarea').val();
+									ansObj = ($('.survey-textarea').val());
 								}
 								else {
 									alert("Enter some text!");

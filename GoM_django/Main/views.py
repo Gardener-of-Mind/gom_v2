@@ -103,25 +103,26 @@ def survey_submit(request):
 		return HttpResponse('Profile object error')
 
 	if request.POST:
-		answers_list = request.POST.getlist('answers')
-		survey_id = str(request.POST['survey_id'])
+		answers_list = request.POST.getlist('answers[]')
+		# return HttpResponse(str(answers_list))
+		survey_id = str(request.POST['oid'])
 		survey_ob = survey.objects(id=survey_id).first()
 		questions = survey_questions.objects(survey=survey_ob) 
 		category = str(survey_ob.category)
 		k=0
 		total_score= 0
-		for query in questions:
-			answer = answers_list[k]
-			try:
-				answer_index = query.options.index(str(answer))
-				score = query.score['answer_index'] 
-			except:
-				pass
-			total_score+= score
-			k+=1
+		# for query in questions:
+		# 	answer = answers_list[k]
+		# 	try:
+		# 		answer_index = query.options.index(str(answer))
+		# 		score = query.score['answer_index'] 
+		# 	except:
+		# 		pass
+		# 	total_score+= score
+		# 	k+=1
 
-		if category == 'anxiety':
-			profile.anxiety_score += total_score
+		# if category == 'anxiety':
+		# 	profile.anxiety_score += total_score
 
 		return HttpResponseRedirect('../dashboard/') 
 
