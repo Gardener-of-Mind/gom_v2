@@ -311,4 +311,35 @@ def profile_help(request):
 def add_survey(request):
 	user = request.user
 	profile = admin_profile.objects.get(user=user)
+	if request.POST['survey']:
+		name = request.POST['name']
+		category = request.POST['category']
+		survey_ob = survey(name=str(name), category= str(category))
+		survey_ob.save()
+		survey_id = survey_ob.id
+		return HttpResponse(str(survey_id))
+	elif request.POST['questions']:
+		survey_id = str(request.POST['survey_id'])
+		survey_ob = survey.objects(id=survey_id).first()
+
+		text = request.POST['text']
+		query_type = request.POST['query_type']
+		options = request.POST.getlist('options[]')
+		score = request.POST.getlist('score[]')
+
+		questions_ob = survey_questions(text=text, query_type=query_type, options=options, score=score, survey=survey_ob)
+		questions_ob.save()
+		return HttpResponse('success')
+
 	return render(request, 'admin/survey_add.html', {'profile' : profile})
+
+
+def view_surveys(request):
+	if request.POST:
+		survey_id = request.POST['survey_id']
+		survey_ob = survey.objects(id=survey_id).first()
+		survey_ob = survey_ob.to_json()
+		return render(request, 'admin/survey_view.html', {'survey_ob' : survey_ob})
+	surveys = survey.objects.all()
+	# surveys = surveys.to_json()
+	return render(request, 'admin/surveys.html', {'surveys' : surveys})
