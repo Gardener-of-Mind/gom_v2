@@ -305,3 +305,10 @@ def profile_help(request):
 	user = request.user
 	profile= user_profile.objects.get(user=user)
 	return render(request,'user/profile_help.html', {'profile' : profile})
+
+
+
+def add_survey(request):
+	user = request.user
+	profile = admin_profile.objects.get(user=user)
+	return render(request, 'admin/survey_add.html', {'profile' : profile})
