@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>ManaMaali</title>
+</head>
+<body>
+{% for survey in surveys %}
+name: {{survey.name}} <br>
+category: {{survey.category}} <br>
+id: {{survey.id}}<br>
+{% endfor %}
+</body>
+</html>
+

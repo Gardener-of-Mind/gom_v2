@@ -21,15 +21,19 @@ var FormWizard = function () {
                 $.ajax({
                     url:'.',
                     method:'POST',
+                    headers : {
+                        "X-CSRFToken" : getCookie('csrftoken')
+                    },
                     data: {'survey':true,'name':$('[name="sName"]').val(),'category':$('[name="sCategory"]').val()},
                     success: function(response) {
-                        surveyId = response.survey_id;
+                        console.log(response);
+                        surveyId = response;
                     },
                     error: function() {
                         alert("Some Error occured");
                         window.location.reload();
                     }
-                })
+                });
             }
 
             var addOption = function(val) {
@@ -38,7 +42,7 @@ var FormWizard = function () {
             }
 
             var addScore = function(val) {
-               var html = ' <div class="form-group"> <label class="control-label col-md-3">Score for Option '+val+'<span class="required"> * </span> </label> <div class="col-md-4"> <input type="number" class="form-control surveyScores" id="questionText" name="questionText" /> <span class="help-block"> Please enter the score. </span> </div> </div>';
+               var html = ' <div class="form-group"> <label class="control-label col-md-3">Score for Option '+val+'<span class="required"> * </span> </label> <div class="col-md-4"> <input type="number" class="form-control surveyScores" id="questionText" name="questionText" value="0" /> <span class="help-block"> Please enter the score. </span> </div> </div>';
                 $('#tempDiv').append(html);
            }
             var resetQuestion = function() {
@@ -48,7 +52,7 @@ var FormWizard = function () {
                 $('#tempDiv').html("");
             };
 
-            var sendQuestion = function() {     
+            var sendQuestion = function(type) {     
                 var quesObj = {
                     'questions' : true,
                     'survey_id': surveyId,
@@ -60,9 +64,17 @@ var FormWizard = function () {
                 $.ajax({
                     url:'.',
                     method:'POST',
+                    headers : {
+                        "X-CSRFToken" : getCookie('csrftoken')
+                    },
                     data: quesObj,
                     success: function(response) {
-                        resetQuestion();
+                        if(type="add") {
+                            resetQuestion();
+                        }
+                        else if(type == "submit") {
+                            window.location.href= "..";
+                        }
                     },
                     error: function() {
                         alert("Some Error occured!\n Try submitting again");
@@ -158,7 +170,6 @@ var FormWizard = function () {
                     $('#form_wizard_1').find('.button-next').hide();
                     $('#form_wizard_1').find('.button-add-question').show();
                     $('#form_wizard_1').find('.button-submit').show();
-                    displayConfirm();
                 } else {
                     $('#form_wizard_1').find('.button-next').show();
                     $('#form_wizard_1').find('.button-submit').hide();
@@ -189,7 +200,7 @@ var FormWizard = function () {
                     if (form.valid() == false) {
                         return false;
                     }
-
+                    startSurvey();
                     handleTitle(tab, navigation, index);
                 },
                 onTabShow: function (tab, navigation, index) {
@@ -203,14 +214,14 @@ var FormWizard = function () {
                     });
                 }
             });
-            console.log('yo');
             $('#form_wizard_1 .button-submit').click(function () {
-                window.location.href = "../"
+                sendQuestion('submit');
             }).hide();
 
             // hide add question button and submit button
             $('#form_wizard_1').find('.button-add-question').hide();
-            $('#form_wizard_1').find('.button-submit').hide();
+            $('#form_wizard_1').find('.button-add-question').hide();
+            $('#addOptions').hide();
 
             $('#addOptions').on("click",function(){
                 addOption($('.surveyOptions').length + 1);
@@ -218,24 +229,26 @@ var FormWizard = function () {
             });
 
             $('.button-add-question').on("click",function(){
-
+                sendQuestion('add');
             })
 
             //apply validation on select2 dropdown value change, this only needed for chosen dropdown integration.
             $('#questionType', form).change(function () {
                 form.validate().element($(this)); //revalidate the chosen dropdown value and show error or success message for the input
                 $('#addOptions').hide();    
+                $('#tempDiv').html('');
                 if( ["checkbox","radio","dropdownbox"].indexOf($(this).val()) != -1 )  {
                     $('#addOptions').show();    
                 }
-                else if ( $(this).val() == "rating" ) {
-                    for( var val in ["Yes","No"] ) {
+                else if ( $(this).val() == "dual" ) {
+                    console.log("rating");
+                    for( var val in {"Yes":'',"No":''} ) {
                         addScore(val);
                     }
                 }
                 else if ( $(this).val() == "rating" ) {
                     for( var val in [1,2,3,4,5,6,7,8,9,10] ) {
-                        addScore(val);
+                        addScore(parseInt(val)+1);
                     }
                 }
             });
@@ -248,3 +261,19 @@ var FormWizard = function () {
 jQuery(document).ready(function() {
     FormWizard.init();
 });
+
+function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie != '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = jQuery.trim(cookies[i]);
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
