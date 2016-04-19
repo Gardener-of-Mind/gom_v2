@@ -311,6 +311,7 @@ def profile_help(request):
 def add_survey(request):
 	user = request.user
 	profile = admin_profile.objects.get(user=user)
+
 	if request.POST:
 		if 'survey' in request.POST:
 			name = request.POST['name']
@@ -331,6 +332,7 @@ def add_survey(request):
 			questions_ob = survey_questions(text=text, query_type=query_type, options=options, score=score, survey=survey_ob)
 			questions_ob.save()
 			return HttpResponse('success')
+
 	return render(request, 'admin/survey_add.html', {'profile' : profile})
 
 
