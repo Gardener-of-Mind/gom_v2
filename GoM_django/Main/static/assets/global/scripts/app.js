@@ -1,6 +1,3 @@
-/**
-Core script to handle the entire theme and core functions
-**/
 var App = function() {
 
     // IE mode
@@ -1043,5 +1040,5 @@ var App = function() {
 }();
 
 jQuery(document).ready(function() {    
-   App.init(); // init metronic core componets
+   App.init(); // init core componets
 });
