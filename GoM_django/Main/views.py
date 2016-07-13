@@ -375,9 +375,6 @@ def profile_help(request):
     return render(request,'user/profile_help.html', {'profile' : profile})
 
 
-
-
-
 def add_survey(request):
     user = request.user
     profile = admin_profile.objects.get(user=user)
@@ -386,24 +383,29 @@ def add_survey(request):
         if 'survey' in request.POST:
             name = request.POST['name']
             category = request.POST['category']
-            survey_ob = survey(name=str(name), category= str(category))
-            survey_ob.save()
+            survey = Survey(name=str(name), category=str(category))
+            survey.save()
             survey_id = survey_ob.id
             return HttpResponse(str(survey_id))
+
         elif 'questions' in request.POST:
             survey_id = str(request.POST['survey_id'])
-            survey_ob = survey.objects(id=survey_id).first()
+            survey = Survey.objects(id=survey_id).first()
 
             text = request.POST['text']
             query_type = request.POST['query_type']
             options = request.POST.getlist('options[]')
             score = request.POST.getlist('score[]')
 
-            questions_ob = survey_questions(text=text, query_type=query_type, options=options, score=score, survey=survey_ob)
-            questions_ob.save()
+            question = Question(text=text, query_type=query_type,
+                                options=options, score=score,
+                                survey=survey_ob)
+            question.save()
+            survey.questions.append(question)
+            survey.save()
             return HttpResponse('success')
 
-    return render(request, 'admin/survey_add.html', {'profile' : profile})
+    return render(request, 'admin/survey_add.html', {'profile': profile})
 
 
 def view_surveys(request):
