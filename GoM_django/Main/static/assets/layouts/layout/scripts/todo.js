@@ -6,7 +6,7 @@ var AppTodo = function () {
     // private functions & variables
 
     var _initComponents = function() {
-        
+
         $('.edit-diary').on("click",function(){
             $parent = $(this).closest('.portlet.light.bordered');
             console.log("yo",$parent,$(parent).find('.diary-title'));
@@ -24,13 +24,41 @@ var AppTodo = function () {
             dairyObj["oid"] = $('#todo-task-modal .diary-modal-save').data('did');
             if(dairyObj["title"] != "" && dairyObj["text"] != "") {
                 $.ajax({
-                    url:'.',
+                    url:'/diary/',
                     method:'POST',
                     headers : {
                         "X-CSRFToken" : getCookie('csrftoken')
                     },
                     data: dairyObj,
                     success:function(response){
+                        $('#todo-task-modal').hide();
+                        $('.diaries').prepend(''+
+                            '<div class="portlet light bordered">'+
+                                '<div class="portlet-title">'+
+                                    '<div class="caption font-green-sharp">'+
+                                        '<i class="icon-speech font-green-sharp"></i>'+
+                                        '<span class="caption-subject bold uppercase diary-title">'+
+                                            response.title+
+                                        ' </span>'+
+                                        '<span class="caption-helper diary-date">'+
+                                            response.modified_date+
+                                        '</span>'+
+                                    '</div>'+
+                                    '<div class="actions">'+
+                                        '<button class="btn btn-circle btn-default btn-sm edit-diary" data-toggle="modal" href="#todo-task-modal" data-did="123">'+
+                                            '<i class="fa fa-pencil"></i> Edit </button>'+
+                                        '<a href="javascript:;" class="btn btn-circle btn-default btn-sm delete">'+
+                                            '<i class="fa fa-trash"></i> Delete </a>'+
+                                        '<a class="btn btn-circle btn-icon-only btn-default fullscreen" href="javascript:;"> </a>'+
+                                    '</div>'+
+                                '</div>'+
+                                '<div class="portlet-body">'+
+                                    '<div class="scroller diary-message" style="height:200px" data-rail-visible="1" data-rail-color="yellow" data-handle-color="#a1b2bd">'+
+                                        response.text_data+
+                                    '</div>'+
+                                '</div>'+
+                            '</div>');
+
                         console.log(response);
                     },
                     error: function(){
@@ -40,7 +68,7 @@ var AppTodo = function () {
             }
             else
                 alert("Empty title or message");
-            
+
         });
 
         $('.add-diary').on("click",function(){
@@ -64,12 +92,12 @@ var AppTodo = function () {
 
         //main function
         init: function () {
-            _initComponents();     
+            _initComponents();
             _handleProjectListMenu();
 
             App.addResizeHandler(function(){
-                _handleProjectListMenu();    
-            });       
+                _handleProjectListMenu();
+            });
         }
 
     };
