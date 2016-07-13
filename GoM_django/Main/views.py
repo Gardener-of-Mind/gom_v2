@@ -145,7 +145,7 @@ def dashboard(request):
 			task_ob = Task.objects(id=task_id).first()
 			tasks.append(task_ob)
 
-		assigned_activity = user_profile_ob.assigned_activity
+		assigned_activity = user_activity_ob.assigned_activity
 		all_tasks = Task.objects(activity= assigned_activity)
 		pending_tasks= list(set(all_tasks) - set(completed_tasks))
 
