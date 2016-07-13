@@ -22,51 +22,51 @@ from django.http import JsonResponse
 # Create your views here.
 
 def index(request):
-	return render(request,'index.html')
+    return render(request,'index.html')
 
 
 def user_login(request):
-	if request.user.is_authenticated():
-		return HttpResponseRedirect('../dashboard/')
+    if request.user.is_authenticated():
+        return HttpResponseRedirect('../dashboard/')
 
-	if request.POST:
-		username= request.POST['username']
-		password= request.POST['password']
-		user= authenticate(username=username, password=password)
-		if user:
-			login(request,user)
-			# profile= user_profile.objects.filter(user=user)
-			# if profile.questions == False:
-				# return HttpResponseRedirect('../dashboard/')
-			return HttpResponseRedirect('../dashboard/')
-	return render(request,'login.html')
+    if request.POST:
+        username= request.POST['username']
+        password= request.POST['password']
+        user= authenticate(username=username, password=password)
+        if user:
+            login(request,user)
+            # profile= user_profile.objects.filter(user=user)
+            # if profile.questions == False:
+                # return HttpResponseRedirect('../dashboard/')
+            return HttpResponseRedirect('../dashboard/')
+    return render(request,'login.html')
 
 
 def register(request):
-	if request.POST:
-		username= request.POST['username']
-		email_id= request.POST['email']
-		password = request.POST['password']
-		# try:
-		try:
-			user = User.objects.create_user(username= username, email= email_id,password= password)
-		except:
-			error = "Username is already Taken"
-			return render(request, 'register.html', {'error' : error} )
-		user.set_password(user.password)
-		try:
-			profile=user_profile(user=user,email_id=email_id, name=username)
-			profile.save()
-		except:
-			error = "Email Address is already taken"
-			user.delete()
-			return render(request, 'register.html', {'error' : error})
-		auth_user= authenticate(username=username,password=password)
-		login(request,auth_user)
-		# except:
-		# 	return HttpResponse('Error')
-		return HttpResponseRedirect('../questions/')
-	return render(request,'register.html')
+    if request.POST:
+        username= request.POST['username']
+        email_id= request.POST['email']
+        password = request.POST['password']
+        # try:
+        try:
+            user = User.objects.create_user(username= username, email= email_id,password= password)
+        except:
+            error = "Username is already Taken"
+            return render(request, 'register.html', {'error' : error} )
+        user.set_password(user.password)
+        try:
+            profile=user_profile(user=user,email_id=email_id, name=username)
+            profile.save()
+        except:
+            error = "Email Address is already taken"
+            user.delete()
+            return render(request, 'register.html', {'error' : error})
+        auth_user= authenticate(username=username,password=password)
+        login(request,auth_user)
+        # except:
+        #     return HttpResponse('Error')
+        return HttpResponseRedirect('../questions/')
+    return render(request,'register.html')
 
 
 def user_logout(request):
@@ -75,60 +75,60 @@ def user_logout(request):
 
 
 def questions(request):
-	if request.POST:
-		survey_id = str(request.POST['oid'])
-		surveys = survey.objects(id=survey_id)
-		questions_list = survey_questions.objects(survey= survey).order_by('id')
-	surveys= survey.objects.all().first()
-	oid = surveys.id
-	surveys= surveys.to_json()
-	# data = serializers.serialize("json", questions_list)
-	# return HttpResponse(queries)
-	return render(request,'initial_survey.html', {'oid':oid})
+    if request.POST:
+        survey_id = str(request.POST['oid'])
+        surveys = survey.objects(id=survey_id)
+        questions_list = survey_questions.objects(survey= survey).order_by('id')
+    surveys= survey.objects.all().first()
+    oid = surveys.id
+    surveys= surveys.to_json()
+    # data = serializers.serialize("json", questions_list)
+    # return HttpResponse(queries)
+    return render(request,'initial_survey.html', {'oid':oid})
 
 
 
 def query(request):
-	if request.POST:
-		survey_id = str(request.POST['oid'])
-		survey_ob = survey.objects(id=survey_id).first()
-		questions_list = survey_questions.objects(survey= survey_ob).order_by('id')
-		queries= questions_list.to_json()
-		return HttpResponse(queries)
+    if request.POST:
+        survey_id = str(request.POST['oid'])
+        survey_ob = survey.objects(id=survey_id).first()
+        questions_list = survey_questions.objects(survey= survey_ob).order_by('id')
+        queries= questions_list.to_json()
+        return HttpResponse(queries)
 
 
 
 
 def survey_submit(request):
-	user = request.user
-	try:
-		profile =user.user_profile
-	except:
-		return HttpResponse('Profile object error')
+    user = request.user
+    try:
+        profile =user.user_profile
+    except:
+        return HttpResponse('Profile object error')
 
-	if request.POST:
-		answers_list = request.POST.getlist('answers[]')
-		# return HttpResponse(str(answers_list))
-		survey_id = str(request.POST['oid'])
-		survey_ob = survey.objects(id=survey_id).first()
-		questions = survey_questions.objects(survey=survey_ob)
-		category = str(survey_ob.category)
-		k=0
-		total_score= 0
-		# for query in questions:
-		# 	answer = answers_list[k]
-		# 	try:
-		# 		answer_index = query.options.index(str(answer))
-		# 		score = query.score['answer_index']
-		# 	except:
-		# 		pass
-		# 	total_score+= score
-		# 	k+=1
+    if request.POST:
+        answers_list = request.POST.getlist('answers[]')
+        # return HttpResponse(str(answers_list))
+        survey_id = str(request.POST['oid'])
+        survey_ob = survey.objects(id=survey_id).first()
+        questions = survey_questions.objects(survey=survey_ob)
+        category = str(survey_ob.category)
+        k=0
+        total_score= 0
+        # for query in questions:
+        #     answer = answers_list[k]
+        #     try:
+        #         answer_index = query.options.index(str(answer))
+        #         score = query.score['answer_index']
+        #     except:
+        #         pass
+        #     total_score+= score
+        #     k+=1
 
-		# if category == 'anxiety':
-		# 	profile.anxiety_score += total_score
+        # if category == 'anxiety':
+        #     profile.anxiety_score += total_score
 
-		return HttpResponseRedirect('../profile/edit/')
+        return HttpResponseRedirect('../profile/edit/')
 
 
 
@@ -137,107 +137,107 @@ def survey_submit(request):
 
 @login_required
 def dashboard(request):
-	user=request.user
-	try:
-		profile= user_profile.objects.get(user=user)
-		user_activity_ob = UserActivity(id= int(user.id))
-		completed_tasks = user_activity_ob.completed_tasks
-		tasks=[]
-		for task_id in completed_tasks:
-			task_ob = Task.objects(id=task_id).first()
-			tasks.append(task_ob)
+    user=request.user
+    try:
+        profile= user_profile.objects.get(user=user)
+        user_activity_ob = UserActivity(id= int(user.id))
+        completed_tasks = user_activity_ob.completed_tasks
+        tasks=[]
+        for task_id in completed_tasks:
+            task_ob = Task.objects(id=task_id).first()
+            tasks.append(task_ob)
 
-		assigned_activity = user_activity_ob.assigned_activity
-		all_tasks = Task.objects(activity= assigned_activity)
-		pending_tasks= list(set(all_tasks) - set(completed_tasks))
+        assigned_activity = user_activity_ob.assigned_activity
+        all_tasks = Task.objects(activity= assigned_activity)
+        pending_tasks= list(set(all_tasks) - set(completed_tasks))
 
 
-		return render(request,'user/dashboard.html',{'profile': profile, 'completed_tasks' : completed_tasks, 'pending_tasks' :pending_tasks})
-	except:
-		pass
-	try:
-		profile= coach_profile.objects.get(user=user)
-		user_profile_obs = profile.user_profile_set.all()
-		return render(request,'coach/dashboard.html',{'profile': profile, 'user_profiles' : user_profile_obs})
-	except:
-		pass
-	try:
-		profile= admin_profile.objects.get(user=user)
-		coach_obs = coach_profile.objects.filter(status=False)
-		return render(request,'admin/dashboard.html',{'profile': profile, 'coach_obs' : coach_obs})
-	except:
-		pass
-	return HttpResponse('Profile Not Found')
+        return render(request,'user/dashboard.html',{'profile': profile, 'completed_tasks' : completed_tasks, 'pending_tasks' :pending_tasks})
+    except:
+        pass
+    try:
+        profile= coach_profile.objects.get(user=user)
+        user_profile_obs = profile.user_profile_set.all()
+        return render(request,'coach/dashboard.html',{'profile': profile, 'user_profiles' : user_profile_obs})
+    except:
+        pass
+    try:
+        profile= admin_profile.objects.get(user=user)
+        coach_obs = coach_profile.objects.filter(status=False)
+        return render(request,'admin/dashboard.html',{'profile': profile, 'coach_obs' : coach_obs})
+    except:
+        pass
+    return HttpResponse('Profile Not Found')
 
 
 
 
 @login_required
 def edit_profile(request):
-	user=request.user
-	try:
-		profile= user_profile.objects.get(user=user)
-	except:
-		return HttpResponse('Error')
+    user=request.user
+    try:
+        profile= user_profile.objects.get(user=user)
+    except:
+        return HttpResponse('Error')
 
 
-	if 'profile' not in locals():
-		return HttpResponse('Error')
-	else:
-		if request.POST.get('profile_pic',False):
-			# try:
-			profile.profile_pic = request.FILES['display_pic']
-			profile.save()
-			return HttpResponseRedirect('.')
-			# except:
-				# return HttpResponse('Error')
-		if request.POST:
-			try:
-				name = str(request.POST['name'])
-			except:
-				name = ''
+    if 'profile' not in locals():
+        return HttpResponse('Error')
+    else:
+        if request.POST.get('profile_pic',False):
+            # try:
+            profile.profile_pic = request.FILES['display_pic']
+            profile.save()
+            return HttpResponseRedirect('.')
+            # except:
+                # return HttpResponse('Error')
+        if request.POST:
+            try:
+                name = str(request.POST['name'])
+            except:
+                name = ''
 
-			try:
-				gender = str(request.POST['gender'])
-			except:
-				gender = 'M'
+            try:
+                gender = str(request.POST['gender'])
+            except:
+                gender = 'M'
 
-			try:
-				college = str(request.POST['college'])
-			except:
-				college = ''
+            try:
+                college = str(request.POST['college'])
+            except:
+                college = ''
 
-			try:
-				city = str(request.POST['city'])
-			except:
-				city = ''
+            try:
+                city = str(request.POST['city'])
+            except:
+                city = ''
 
-			try:
-				occupation = str(request.POST['occupation'])
-			except:
-				occupation = ''
+            try:
+                occupation = str(request.POST['occupation'])
+            except:
+                occupation = ''
 
-			try:
-				phone = int(request.POST['phone'])
-			except:
-				phone = 0
+            try:
+                phone = int(request.POST['phone'])
+            except:
+                phone = 0
 
-			try:
-				about_me = str(request.POST['about_me'])
-			except:
-				about_me = ''
+            try:
+                about_me = str(request.POST['about_me'])
+            except:
+                about_me = ''
 
-			profile.name= name
-			profile.gender= gender
-			profile.college = college
-			profile.occupation = occupation
-			profile.phone = phone
-			profile.city= city
-			profile.about_me = about_me
-			profile.save()
-			return HttpResponseRedirect('.')
+            profile.name= name
+            profile.gender= gender
+            profile.college = college
+            profile.occupation = occupation
+            profile.phone = phone
+            profile.city= city
+            profile.about_me = about_me
+            profile.save()
+            return HttpResponseRedirect('.')
 
-		return render(request,'user/profile_account.html', {'profile':profile})
+        return render(request,'user/profile_account.html', {'profile':profile})
 
 
 
@@ -245,23 +245,23 @@ def edit_profile(request):
 
 @login_required
 def profile_overview(request):
-	user=request.user
-	try:
-		profile= user_profile.objects.get(user=user)
-	except:
-		pass
-	try:
-		profile= coach_profile.objects.get(user=user)
-	except:
-		pass
-	try:
-		profile= admin_profile.objects.get(user=user)
-	except:
-		pass
-	if 'profile' not in locals():
-		return HttpResponse('Error')
-	else:
-		return render(request,'user/profile_overview.html', {'profile':profile})
+    user=request.user
+    try:
+        profile= user_profile.objects.get(user=user)
+    except:
+        pass
+    try:
+        profile= coach_profile.objects.get(user=user)
+    except:
+        pass
+    try:
+        profile= admin_profile.objects.get(user=user)
+    except:
+        pass
+    if 'profile' not in locals():
+        return HttpResponse('Error')
+    else:
+        return render(request,'user/profile_overview.html', {'profile':profile})
 
 
 
@@ -269,23 +269,23 @@ def profile_overview(request):
 
 @login_required
 def diary(request):
-	user= request.user
-	profile= user.user_profile
-	if request.POST:
-		oid = str(request.POST.get('oid',False))
-		text = str(request.POST['text'])
-		try:
-			diary = Diary.objects(id= oid).first()
-			diary.text_data = text
-			diary.save()
-		except:
-			title = str(request.POST['title'])
-			diary = Diary(title=title,text_data=text, user_id =int(profile.id))
-			diary.save()
-		diary = {"title": diary.title, "modified_date": diary.modified_date.strftime('%B %d, %Y, %I:%M %p'), "text_data": diary.text_data}
-		return JsonResponse(diary)
-	diaries= Diary.objects(user_id = int(profile.id))
-	return render(request,'user/diary.html', {"profile": profile, "diaries" : diaries})
+    user= request.user
+    profile= user.user_profile
+    if request.POST:
+        oid = str(request.POST.get('oid',False))
+        text = str(request.POST['text'])
+        try:
+            diary = Diary.objects(id= oid).first()
+            diary.text_data = text
+            diary.save()
+        except:
+            title = str(request.POST['title'])
+            diary = Diary(title=title,text_data=text, user_id =int(profile.id))
+            diary.save()
+        diary = {"title": diary.title, "modified_date": diary.modified_date.strftime('%B %d, %Y, %I:%M %p'), "text_data": diary.text_data}
+        return JsonResponse(diary)
+    diaries= Diary.objects(user_id = int(profile.id))
+    return render(request,'user/diary.html', {"profile": profile, "diaries" : diaries})
 
 
 
@@ -293,31 +293,31 @@ def diary(request):
 
 @login_required
 def coach_user_profile(request,user_id):
-	user= request.user
-	try:
-		profile = coach_profile.objects.get(user=user)
-	except:
-		return HttpResponse('Coach Object Error')
+    user= request.user
+    try:
+        profile = coach_profile.objects.get(user=user)
+    except:
+        return HttpResponse('Coach Object Error')
 
-	try:
-		user_profile_ob = user_profile.objects.get(id= int(user_id))
-	except:
-		return HttpResponse('User Profile object error')
+    try:
+        user_profile_ob = user_profile.objects.get(id= int(user_id))
+    except:
+        return HttpResponse('User Profile object error')
 
-	return render(request,'coach/user_details.html', {'profile' : profile, 'user_profile' : user_profile_ob})
+    return render(request,'coach/user_details.html', {'profile' : profile, 'user_profile' : user_profile_ob})
 
 
 
 @login_required
 def approved_coaches(request):
-	user = request.user
-	try:
-		profile = admin_profile.objects.get(user=user)
-	except:
-		return HttpResponse('Admin object Error')
+    user = request.user
+    try:
+        profile = admin_profile.objects.get(user=user)
+    except:
+        return HttpResponse('Admin object Error')
 
-	coach_obs = coach_profile.objects.filter(status=True)
-	return render(request, 'admin/approved_coach.html', {'profile' : profile, 'coach_obs' : coach_obs})
+    coach_obs = coach_profile.objects.filter(status=True)
+    return render(request, 'admin/approved_coach.html', {'profile' : profile, 'coach_obs' : coach_obs})
 
 
 
@@ -326,56 +326,56 @@ def approved_coaches(request):
 
 
 def test_pic(request):
-	pro  = user_profile.objects.all()[0]
-	return render_to_response('test.html', {'pro' : pro }, context_instance = RequestContext(request))
+    pro  = user_profile.objects.all()[0]
+    return render_to_response('test.html', {'pro' : pro }, context_instance = RequestContext(request))
 
 
 def profile_help(request):
-	user = request.user
-	profile= user_profile.objects.get(user=user)
-	return render(request,'user/profile_help.html', {'profile' : profile})
+    user = request.user
+    profile= user_profile.objects.get(user=user)
+    return render(request,'user/profile_help.html', {'profile' : profile})
 
 
 
 
 
 def add_survey(request):
-	user = request.user
-	profile = admin_profile.objects.get(user=user)
+    user = request.user
+    profile = admin_profile.objects.get(user=user)
 
-	if request.POST:
-		if 'survey' in request.POST:
-			name = request.POST['name']
-			category = request.POST['category']
-			survey_ob = survey(name=str(name), category= str(category))
-			survey_ob.save()
-			survey_id = survey_ob.id
-			return HttpResponse(str(survey_id))
-		elif 'questions' in request.POST:
-			survey_id = str(request.POST['survey_id'])
-			survey_ob = survey.objects(id=survey_id).first()
+    if request.POST:
+        if 'survey' in request.POST:
+            name = request.POST['name']
+            category = request.POST['category']
+            survey_ob = survey(name=str(name), category= str(category))
+            survey_ob.save()
+            survey_id = survey_ob.id
+            return HttpResponse(str(survey_id))
+        elif 'questions' in request.POST:
+            survey_id = str(request.POST['survey_id'])
+            survey_ob = survey.objects(id=survey_id).first()
 
-			text = request.POST['text']
-			query_type = request.POST['query_type']
-			options = request.POST.getlist('options[]')
-			score = request.POST.getlist('score[]')
+            text = request.POST['text']
+            query_type = request.POST['query_type']
+            options = request.POST.getlist('options[]')
+            score = request.POST.getlist('score[]')
 
-			questions_ob = survey_questions(text=text, query_type=query_type, options=options, score=score, survey=survey_ob)
-			questions_ob.save()
-			return HttpResponse('success')
+            questions_ob = survey_questions(text=text, query_type=query_type, options=options, score=score, survey=survey_ob)
+            questions_ob.save()
+            return HttpResponse('success')
 
-	return render(request, 'admin/survey_add.html', {'profile' : profile})
+    return render(request, 'admin/survey_add.html', {'profile' : profile})
 
 
 def view_surveys(request):
-	if request.POST:
-		survey_id = request.POST['survey_id']
-		survey_ob = survey.objects(id=survey_id).first()
-		survey_ob = survey_ob.to_json()
-		return render(request, 'admin/survey_view.html', {'survey_ob' : survey_ob})
-	surveys = survey.objects.all()
-	# surveys = surveys.to_json()
-	return render(request, 'admin/surveys.html', {'surveys' : surveys})
+    if request.POST:
+        survey_id = request.POST['survey_id']
+        survey_ob = survey.objects(id=survey_id).first()
+        survey_ob = survey_ob.to_json()
+        return render(request, 'admin/survey_view.html', {'survey_ob' : survey_ob})
+    surveys = survey.objects.all()
+    # surveys = surveys.to_json()
+    return render(request, 'admin/surveys.html', {'surveys' : surveys})
 
 
 
@@ -383,40 +383,40 @@ def view_surveys(request):
 # Activity Views here
 
 def add_activity(request):
-	user= request.user
-	profile = admin_profile.profile.objects.get(user=user)
+    user= request.user
+    profile = admin_profile.profile.objects.get(user=user)
 
-	if request.POST:
-		if 'activity' in request.POST:
-			name = request.POST['name']
-			category = request.POST['category']
-			activity_ob = Activity(name=name, category=category)
-			activity_ob.save()			
-			acitivity_id = activity_ob.id
-			return HttpResponse(str(acitivity_id))
-		
-		elif 'task' in request.POST:
-			acitivity_id = str(request.POST['activity_id'])
-			activity_ob = Activity.objects(id=acitivity_id).first()
-			title = str(request.POST['title'])
-			details = str(request.POST['details'])
-			task_ob = Task(title= title, details= details, activity= activity_ob)
-			task_ob.save()
-			return HttpResponse('success')
+    if request.POST:
+        if 'activity' in request.POST:
+            name = request.POST['name']
+            category = request.POST['category']
+            activity_ob = Activity(name=name, category=category)
+            activity_ob.save()            
+            acitivity_id = activity_ob.id
+            return HttpResponse(str(acitivity_id))
+        
+        elif 'task' in request.POST:
+            acitivity_id = str(request.POST['activity_id'])
+            activity_ob = Activity.objects(id=acitivity_id).first()
+            title = str(request.POST['title'])
+            details = str(request.POST['details'])
+            task_ob = Task(title= title, details= details, activity= activity_ob)
+            task_ob.save()
+            return HttpResponse('success')
 
-	return render('request', 'admin/add_activity.html', {'profile' : profile} )
+    return render('request', 'admin/add_activity.html', {'profile' : profile} )
 
 
 
 def view_activities(request):
-	if request.POST:
-		acitivity_id = request.POST['acitivity_id']
-		activity_ob = Activity.objects(id=acitivity_id).first()
-		activity_ob = activity_ob.to_json()
-		return render(request, 'admin/activity_view.html', {'activity_ob' : activity_ob})
-	activities = Activity.objects.all()
-	activities = acitivities.to_json()
-	return render(request, '', {'acitivities' : activities})
+    if request.POST:
+        acitivity_id = request.POST['acitivity_id']
+        activity_ob = Activity.objects(id=acitivity_id).first()
+        activity_ob = activity_ob.to_json()
+        return render(request, 'admin/activity_view.html', {'activity_ob' : activity_ob})
+    activities = Activity.objects.all()
+    activities = acitivities.to_json()
+    return render(request, '', {'acitivities' : activities})
 
 
 
@@ -425,30 +425,30 @@ def view_activities(request):
 #input:POST: user_id, activity_id
 #output: respones : 'success'
 def assign_activity(request):
-	if request.POST:
-		user_id = int(request.POST['user_id'])
-		acitivty_id = str(request.POST['acitivty_id']) 
-		activity_ob = Activity.objects(id=acitivty_id).first()
-		user_activity_ob = UserActivity(user_id = user_id, assigned_activity= activity_ob)
-		uesr_activity_ob.save()
-		return HttpResponse('success')
+    if request.POST:
+        user_id = int(request.POST['user_id'])
+        acitivty_id = str(request.POST['acitivty_id']) 
+        activity_ob = Activity.objects(id=acitivty_id).first()
+        user_activity_ob = UserActivity(user_id = user_id, assigned_activity= activity_ob)
+        uesr_activity_ob.save()
+        return HttpResponse('success')
 
 
 #input=POST: task_id, user_activity_id
 #output=response: 'success'
 def complete_task(request):
-	user = request.user
-	user_profile = user_profile.objects.get(user=user)
-	
-	task_id = str(request.POST['task_id'])
-	user_activity_id = str(request.POST['user_activity_id'])
+    user = request.user
+    user_profile = user_profile.objects.get(user=user)
+    
+    task_id = str(request.POST['task_id'])
+    user_activity_id = str(request.POST['user_activity_id'])
 
-	user_activity_ob = UserActivity(id= user_activity_id)
-	task_ob = Task(id =task_id).first()
+    user_activity_ob = UserActivity(id= user_activity_id)
+    task_ob = Task(id =task_id).first()
 
-	user_activity_ob.update_one(push__completed_tasks= task_ob)
+    user_activity_ob.update_one(push__completed_tasks= task_ob)
 
-	return HttpResponse('success')
+    return HttpResponse('success')
 
 
 
@@ -457,4 +457,4 @@ def complete_task(request):
 
 
 def flow(request):
-	return render(request, 'flow/index.html')
+    return render(request, 'flow/index.html')
