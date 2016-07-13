@@ -53,4 +53,6 @@ urlpatterns = [
     url(r'^test/$', views.test_pic),
 
     url(r'^flow/$', views.flow),
+    url(r'^survey/take/$', views.take_survey),
+    url(r'^survey/default/$', views.default_surveys),
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
