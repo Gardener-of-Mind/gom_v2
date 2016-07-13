@@ -59,7 +59,6 @@ class Question(Document):
     text = StringField(max_length=3000)
     query_type = StringField(max_length=50)
     options = ListField(EmbeddedDocumentField(Option))
-    survey = ReferenceField(Survey)
 
     class Meta:
         verbose_name_plural = 'Questions'
