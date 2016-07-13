@@ -33,15 +33,24 @@ urlpatterns = [
 
     url(r'^questions/$', views.questions),
     url(r'^query/$', views.query),
+   
     url(r'^survey_submit/$', views.survey_submit),
-
+    url(r'^surveys/add/$', views.add_survey),
     url(r'^survey_view/$', views.view_surveys),
 
+   
     url(r'^dashboard/$', views.dashboard),
     url(r'^diary/$', views.diary),
     url(r'^dashboard/(?P<user_id>[0-9]+)/$', views.coach_user_profile),
     url(r'^coachlist/$', views.approved_coaches),
 
-    
+
+    url(r'^activity/add/$', views.add_activity),
+    url(r'^activity_view/$', views.view_activities),
+    url(r'^assign_activity/$', views.assign_activity),
+    url(r'^complete_task/$', views.complete_task),
+
     url(r'^test/$', views.test_pic),
+
+    url(r'^flow/$', views.flow),
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

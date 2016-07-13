@@ -21,6 +21,8 @@ class Diary(Document):
         return super(Diary, self).save(*args, **kwargs)
 
 
+# Survey Models
+
 class survey(Document):
     name= StringField(max_length=50,blank=True)
     category= StringField(max_length=50,blank=True)
@@ -41,6 +43,36 @@ class survey_answers(Document):
     question= ReferenceField(survey_questions)
     user_id= IntField(null=True)
 
+
+#Activity Models
+
+
+class Activity(Document):
+    name= StringField(max_length=50,blank=True)
+    category= StringField(max_length=50,blank=True)
+
+
+class Task(Document):
+    title = StringField(max_length=100)
+    details = StringField(max_length=500,blank=True)
+    activity = ReferenceField(Activity)
+
+    class Meta:
+        verbose_name_plural = 'Task'
+    def __unicode__(self):
+        return str(self.text)
+
+
+class UserActivity(Document):
+    completed_tasks = ListField(ReferenceField(Task))
+    assigned_activity = ReferenceField(Activity)
+    user_id= IntField(null=True)
+
+
+
+
+
+# Relational DB models
 
 
 

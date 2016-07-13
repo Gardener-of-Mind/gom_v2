@@ -95,6 +95,8 @@ def query(request):
 		return HttpResponse(queries)
 
 
+
+
 def survey_submit(request):
 	user = request.user
 	try:
@@ -107,7 +109,7 @@ def survey_submit(request):
 		# return HttpResponse(str(answers_list))
 		survey_id = str(request.POST['oid'])
 		survey_ob = survey.objects(id=survey_id).first()
-		questions = survey_questions.objects(survey=survey_ob) 
+		questions = survey_questions.objects(survey=survey_ob)
 		category = str(survey_ob.category)
 		k=0
 		total_score= 0
@@ -115,7 +117,7 @@ def survey_submit(request):
 		# 	answer = answers_list[k]
 		# 	try:
 		# 		answer_index = query.options.index(str(answer))
-		# 		score = query.score['answer_index'] 
+		# 		score = query.score['answer_index']
 		# 	except:
 		# 		pass
 		# 	total_score+= score
@@ -124,7 +126,9 @@ def survey_submit(request):
 		# if category == 'anxiety':
 		# 	profile.anxiety_score += total_score
 
-		return HttpResponseRedirect('../profile/edit/') 
+		return HttpResponseRedirect('../profile/edit/')
+
+
 
 
 
@@ -134,9 +138,21 @@ def dashboard(request):
 	user=request.user
 	try:
 		profile= user_profile.objects.get(user=user)
-		return render(request,'user/dashboard.html',{'profile': profile})
+		user_activity_ob = UserActivity(id= int(user.id))
+		completed_tasks = user_activity_ob.completed_tasks
+		tasks=[]
+		for task_id in completed_tasks:
+			task_ob = Task.objects(id=task_id).first()
+			tasks.append(task_ob)
+
+		assigned_activity = user_profile_ob.assigned_activity
+		all_tasks = Task.objects(activity= assigned_activity)
+		pending_tasks= list(set(all_tasks) - set(completed_tasks))
+
+
+		return render(request,'user/dashboard.html',{'profile': profile, 'completed_tasks' : completed_tasks, 'pending_tasks' :pending_tasks})
 	except:
-		pass			
+		pass
 	try:
 		profile= coach_profile.objects.get(user=user)
 		user_profile_obs = profile.user_profile_set.all()
@@ -148,8 +164,10 @@ def dashboard(request):
 		coach_obs = coach_profile.objects.filter(status=False)
 		return render(request,'admin/dashboard.html',{'profile': profile, 'coach_obs' : coach_obs})
 	except:
-		pass		
+		pass
 	return HttpResponse('Profile Not Found')
+
+
 
 
 @login_required
@@ -176,7 +194,7 @@ def edit_profile(request):
 				name = str(request.POST['name'])
 			except:
 				name = ''
-			
+
 			try:
 				gender = str(request.POST['gender'])
 			except:
@@ -220,13 +238,16 @@ def edit_profile(request):
 		return render(request,'user/profile_account.html', {'profile':profile})
 
 
+
+
+
 @login_required
 def profile_overview(request):
 	user=request.user
 	try:
 		profile= user_profile.objects.get(user=user)
 	except:
-		pass			
+		pass
 	try:
 		profile= coach_profile.objects.get(user=user)
 	except:
@@ -239,6 +260,9 @@ def profile_overview(request):
 		return HttpResponse('Error')
 	else:
 		return render(request,'user/profile_overview.html', {'profile':profile})
+
+
+
 
 
 @login_required
@@ -261,6 +285,8 @@ def diary(request):
 	diaries= Diary.objects(user_id = int(profile.id))
 	diaries= diaries.to_json()
 	return render(request,'user/diary.html', {"profile": profile, "diaries" : diaries})
+
+
 
 
 
@@ -296,6 +322,8 @@ def approved_coaches(request):
 
 
 
+
+
 def test_pic(request):
 	pro  = user_profile.objects.all()[0]
 	return render_to_response('test.html', {'pro' : pro }, context_instance = RequestContext(request))
@@ -308,28 +336,32 @@ def profile_help(request):
 
 
 
+
+
 def add_survey(request):
 	user = request.user
 	profile = admin_profile.objects.get(user=user)
-	if request.POST['survey']:
-		name = request.POST['name']
-		category = request.POST['category']
-		survey_ob = survey(name=str(name), category= str(category))
-		survey_ob.save()
-		survey_id = survey_ob.id
-		return HttpResponse(str(survey_id))
-	elif request.POST['questions']:
-		survey_id = str(request.POST['survey_id'])
-		survey_ob = survey.objects(id=survey_id).first()
 
-		text = request.POST['text']
-		query_type = request.POST['query_type']
-		options = request.POST.getlist('options[]')
-		score = request.POST.getlist('score[]')
+	if request.POST:
+		if 'survey' in request.POST:
+			name = request.POST['name']
+			category = request.POST['category']
+			survey_ob = survey(name=str(name), category= str(category))
+			survey_ob.save()
+			survey_id = survey_ob.id
+			return HttpResponse(str(survey_id))
+		elif 'questions' in request.POST:
+			survey_id = str(request.POST['survey_id'])
+			survey_ob = survey.objects(id=survey_id).first()
 
-		questions_ob = survey_questions(text=text, query_type=query_type, options=options, score=score, survey=survey_ob)
-		questions_ob.save()
-		return HttpResponse('success')
+			text = request.POST['text']
+			query_type = request.POST['query_type']
+			options = request.POST.getlist('options[]')
+			score = request.POST.getlist('score[]')
+
+			questions_ob = survey_questions(text=text, query_type=query_type, options=options, score=score, survey=survey_ob)
+			questions_ob.save()
+			return HttpResponse('success')
 
 	return render(request, 'admin/survey_add.html', {'profile' : profile})
 
@@ -343,3 +375,85 @@ def view_surveys(request):
 	surveys = survey.objects.all()
 	# surveys = surveys.to_json()
 	return render(request, 'admin/surveys.html', {'surveys' : surveys})
+
+
+
+
+# Activity Views here
+
+def add_activity(request):
+	user= request.user
+	profile = admin_profile.profile.objects.get(user=user)
+
+	if request.POST:
+		if 'activity' in request.POST:
+			name = request.POST['name']
+			category = request.POST['category']
+			activity_ob = Activity(name=name, category=category)
+			activity_ob.save()			
+			acitivity_id = activity_ob.id
+			return HttpResponse(str(acitivity_id))
+		
+		elif 'task' in request.POST:
+			acitivity_id = str(request.POST['activity_id'])
+			activity_ob = Activity.objects(id=acitivity_id).first()
+			title = str(request.POST['title'])
+			details = str(request.POST['details'])
+			task_ob = Task(title= title, details= details, activity= activity_ob)
+			task_ob.save()
+			return HttpResponse('success')
+
+	return render('request', 'admin/add_activity.html', {'profile' : profile} )
+
+
+
+def view_activities(request):
+	if request.POST:
+		acitivity_id = request.POST['acitivity_id']
+		activity_ob = Activity.objects(id=acitivity_id).first()
+		activity_ob = activity_ob.to_json()
+		return render(request, 'admin/activity_view.html', {'activity_ob' : activity_ob})
+	activities = Activity.objects.all()
+	activities = acitivities.to_json()
+	return render(request, '', {'acitivities' : activities})
+
+
+
+
+
+#input:POST: user_id, activity_id
+#output: respones : 'success'
+def assign_activity(request):
+	if request.POST:
+		user_id = int(request.POST['user_id'])
+		acitivty_id = str(request.POST['acitivty_id']) 
+		activity_ob = Activity.objects(id=acitivty_id).first()
+		user_activity_ob = UserActivity(user_id = user_id, assigned_activity= activity_ob)
+		uesr_activity_ob.save()
+		return HttpResponse('success')
+
+
+#input=POST: task_id, user_activity_id
+#output=response: 'success'
+def complete_task(request):
+	user = request.user
+	user_profile = user_profile.objects.get(user=user)
+	
+	task_id = str(request.POST['task_id'])
+	user_activity_id = str(request.POST['user_activity_id'])
+
+	user_activity_ob = UserActivity(id= user_activity_id)
+	task_ob = Task(id =task_id).first()
+
+	user_activity_ob.update_one(push__completed_tasks= task_ob)
+
+	return HttpResponse('success')
+
+
+
+
+
+
+
+def flow(request):
+	return render(request, 'flow/index.html')
