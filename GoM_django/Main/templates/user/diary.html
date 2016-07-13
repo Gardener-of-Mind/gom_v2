@@ -472,15 +472,16 @@
                         </div>
                         <div class="clearfix"></div>
                     </div>
-                    <div class="row">
+                    <div class="row diaries">
                         <div class="col-md-12">
+                            {% for entry in diaries reversed %}
                             <!-- BEGIN Portlet PORTLET-->
                             <div class="portlet light bordered">
                                 <div class="portlet-title">
                                     <div class="caption font-green-sharp">
                                         <i class="icon-speech font-green-sharp"></i>
-                                        <span class="caption-subject bold uppercase diary-title">Title</span>
-                                        <span class="caption-helper diary-date">Date</span>
+                                        <span class="caption-subject bold uppercase diary-title">{{ entry.title }}</span>
+                                        <span class="caption-helper diary-date">{{ entry.modified_date }}</span>
                                     </div>
                                     <div class="actions">
                                         <button class="btn btn-circle btn-default btn-sm edit-diary" data-toggle="modal" href="#todo-task-modal" data-did="123">
@@ -491,10 +492,11 @@
                                     </div>
                                 </div>
                                 <div class="portlet-body">
-                                    <div class="scroller diary-message" style="height:200px" data-rail-visible="1" data-rail-color="yellow" data-handle-color="#a1b2bd">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
+                                    <div class="scroller diary-message" style="height:200px" data-rail-visible="1" data-rail-color="yellow" data-handle-color="#a1b2bd">{{ entry.text_data }}</div>
                                 </div>
                             </div>
                             <!-- END Portlet PORTLET-->
+                            {% endfor %}
                         </div>
                     </div>
                     <div id="todo-task-modal" class="modal fade" role="dialog" aria-labelledby="myModalLabel10" aria-hidden="true">

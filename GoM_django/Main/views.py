@@ -17,6 +17,8 @@ from django.db import IntegrityError
 from Main.models import *
 import json
 from django.forms.models import model_to_dict
+from django.http import JsonResponse
+
 # Create your views here.
 
 def index(request):
@@ -280,10 +282,9 @@ def diary(request):
 			title = str(request.POST['title'])
 			diary = Diary(title=title,text_data=text, user_id =int(profile.id))
 			diary.save()
-		# diary = diary.to_json()
-		return HttpResponseRedirect('.')
+		diary = {"title": diary.title, "modified_date": diary.modified_date.strftime('%B %d, %Y, %I:%M %p'), "text_data": diary.text_data}
+		return JsonResponse(diary)
 	diaries= Diary.objects(user_id = int(profile.id))
-	diaries= diaries.to_json()
 	return render(request,'user/diary.html', {"profile": profile, "diaries" : diaries})
 
 
