@@ -21,6 +21,7 @@ from django.http import JsonResponse
 from django.core.urlresolvers import reverse
 from GoM_django.settings import DEFAULT_SURVEY_CONFIG, BASE_DIR
 import pickle
+import bson
 # Create your views here.
 
 
@@ -100,13 +101,14 @@ def default_surveys(request):
         if survey_id is None:
             return JsonResponse({'message':
                             'This Survey is Not available at the Moment.'})
-        redirect_url = reverse('take_survey', kwargs={'survey_id': survey_id})
+        redirect_url = '/survey/take/%s' % str(survey_id)
         return HttpResponseRedirect(redirect_url)
     return render(request, 'default_survey.html')
 
 
 @login_required
 def take_survey(request, survey_id):
+    survey_id = bson.objectid.ObjectId(survey_id)
     survey = Survey.objects(id=survey_id).first()
     user_response = SurveyResponses.objects(user_id=request.user.id,
                                             survey=survey).first()
