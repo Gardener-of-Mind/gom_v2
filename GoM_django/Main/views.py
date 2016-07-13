@@ -19,8 +19,8 @@ import json
 from django.forms.models import model_to_dict
 from django.http import JsonResponse
 from django.core.urlresolvers import reverse
-from GoM_django.settings import DEFAULT_SURVEY_CONFIG
-
+from GoM_django.settings import DEFAULT_SURVEY_CONFIG, BASE_DIR
+import pickle
 # Create your views here.
 
 
@@ -80,6 +80,16 @@ def user_logout(request):
 
 # New Survey Views
 # ----------------------------------------------------------------------------
+
+
+def update_default_setting(request):
+    if request.POST:
+        survey_type = request.POST['survey_type']
+        survey_id = request.POST['survey_id']
+        DEFAULT_SURVEY_CONFIG[survey_type] = survey_id
+        fileObject = open(BASE_DIR + '/default_survey_settings.config', 'wb')
+        pickle.dump(DEFAULT_SURVEY_CONFIG, fileObject)
+        fileObject.close()
 
 
 @login_required
