@@ -44,6 +44,61 @@ class survey_answers(Document):
     user_id= IntField(null=True)
 
 
+# Models for Survey
+
+class Option(EmbeddedDocument):
+    text = StringField(max_length=500)
+    survey_score = IntField(default=0)
+    anxiety_score = IntField(default=0)
+    depression_score = IntField(default=0)
+    stress_score = IntField(default=0)
+
+
+class Question(Document):
+    """ Stores Question Details and Evaluation Scheme"""
+    text = StringField(max_length=3000)
+    query_type = StringField(max_length=50)
+    options = ListField(EmbeddedDocumentField(Option))
+    survey = ReferenceField(Survey)
+
+    class Meta:
+        verbose_name_plural = 'Questions'
+
+    def __unicode__(self):
+        return str(self.text)
+
+
+class Response(Document):
+    """ Here response_per_option mirrors the response for Multi Correct
+    Options. Text Response for option-less questioss. For others we
+    note downn the index of the option."""
+    question = ReferenceField(Question)
+    response_per_option = ListField()
+    text_response = StringField(max_length=500)
+    single_option = IntField(null=True)  # Index of slected option.
+
+
+class Survey(Document):
+    """ Used to identify a survey. Common across all copies and forks.
+    Also referenced by answer collections.
+    Whenever a question is replaced we update all SurveyResponses that
+    refer to that particular question. If an old attempted question is edited
+    then no effect. """
+    name = StringField(max_length=50)
+    category = StringField(max_length=50)
+    questions = ListField(ReferenceField(Question))
+
+
+class SurveyResponses(Document):
+    """ references User. references a particular survey. Keeps track of the answers
+        Keeps track of the next question to be answered."""
+    user_id = IntField()
+    survey = ReferenceField(Survey)
+    current_question = ReferenceField(Question, null=True)
+    responses = ListField(ReferenceField(Response))
+    survey_score = IntField()
+
+
 #Activity Models
 
 
