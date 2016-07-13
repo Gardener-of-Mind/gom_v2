@@ -18,6 +18,8 @@ from Main.models import *
 import json
 from django.forms.models import model_to_dict
 from django.http import JsonResponse
+from django.core.urlresolvers import reverse
+from GoM_django.settings import DEFAULT_SURVEY_CONFIG
 
 # Create your views here.
 
@@ -75,6 +77,40 @@ def register(request):
 def user_logout(request):
     logout(request)
     return redirect('../')
+
+# New Survey Views
+# ----------------------------------------------------------------------------
+
+
+@login_required
+def default_surveys(request):
+    if request.POST:
+        survey_type = request.POST['survey_type']
+        survey_id = DEFAULT_SURVEY_CONFIG[survey_type]
+        if survey_id is None:
+            return JsonResponse({'message':
+                            'This Survey is Not available at the Moment.'})
+        redirect_url = reverse('take_survey', kwargs={'survey_id': survey_id})
+        return HttpResponseRedirect(redirect_url)
+    return render(request, 'default_survey.html')
+
+
+@login_required
+def take_survey(request, survey_id):
+    survey = Survey.objects(id=survey_id).first()
+    user_response = SurveyResponses.objects(user_id=request.user.id,
+                                            survey=survey).first()
+    if request.POST:
+        pass  # Handle submission and set question
+
+    if user_response is None:
+        current_question = survey.questions.first()
+    else:
+        current_question = user_response.current_question
+    current_question = current_question.to_json()
+    return render(request, 'question.html', {'question': current_question})
+
+# ----------------------------------------------------------------------------
 
 
 def questions(request):
