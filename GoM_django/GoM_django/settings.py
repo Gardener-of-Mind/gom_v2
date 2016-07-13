@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 import mongoengine
+import pickle
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -124,3 +125,15 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 #     % (_MONGODB_USER, _MONGODB_PASSWD, _MONGODB_HOST, _MONGODB_NAME)
 
 mongoengine.connect('gauss_DB')
+
+# Default Surveys Settings
+
+if not os.path.isfile(BASE_DIR + '/default_survey_settings.config'):
+    fileObject = open(BASE_DIR + '/default_survey_settings.config', 'wb')
+    DEFAULT_SURVEY_CONFIG = {'Anxiety': None, 'Depression': None, 'Stress': None}
+    pickle.dump(DEFAULT_SURVEY_CONFIG, fileObject)
+    fileObject.close()
+
+fileObject = open(BASE_DIR + '/default_survey_settings.config', 'r')
+DEFAULT_SURVEY_CONFIG = pickle.load(fileObject)
+fileObject.close()
