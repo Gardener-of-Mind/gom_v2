@@ -41,3 +41,6 @@ $('.add-condition').click(() => {
   question.conditions.push(condition);
   renderCondition(condition);
 });
+
+$('.add-condition.btn').click();
+$('#score').focus();

@@ -1,4 +1,16 @@
-function condition(operator, value, negate = 0) {
+export const conditionOperators = {
+  'lesser than': 'lt',
+  'greater than': 'gt',
+  'equal to': 'eq',
+};
+
+export const groupOperators = {
+  and: 'and',
+  or: 'or',
+};
+
+
+export function condition(operator, value, negate = 0) {
   return {
     operator,
     value,
@@ -6,77 +18,59 @@ function condition(operator, value, negate = 0) {
   };
 }
 
-function group(conditions, operator = '') {
+export function group(conditions, operator = '') {
   return {
     conditions,
     operator,
   };
 }
 
-function evaluateCondition(x, c) {
-  let result;
-  switch (c.operator) {
+export function evaluate(x, expr) {
+  if ('conditions' in expr) {
+    return expr.conditions.
+      map((c) => evaluate(x, c)).
+      reduce((result, cResult) => {
+        switch (expr.operator) {
+          case 'and':
+            return result && cResult;
+
+          case 'or':
+            return result || cResult;
+
+          default:
+            console.error('Invalid group operator:', expr);
+            return -1;
+        }
+      });
+  }
+
+  switch (expr.operator) {
     case 'lt':
-      result = (x < c.value);
-      break;
+      return expr.negate ?
+        (x >= expr.value) :
+        (x < expr.value);
 
     case 'gt':
-      result = (x > c.value);
-      break;
-
-    case 'le':
-      result = (x <= c.value);
-      break;
-
-    case 'ge':
-      result = (x >= c.value);
-      break;
+      return expr.negate ?
+        (x <= expr.value) :
+        (x > expr.value);
 
     case 'eq':
-      result = (x === c.value);
-      break;
-
-    case 'ne':
-      result = (x !== c.value);
-      break;
+      return expr.negate ?
+        (x !== expr.value) :
+        (x === expr.value);
 
     default:
-      console.error('Invalid condition operator:', c);
+      console.error('Invalid condition operator:', expr);
+      return -1;
   }
-  if (c.negate) {
-    result = !result;
-  }
-  return result;
 }
 
-function evaluateGroup(x, g) {
-  return g.conditions.
-    map((c) => {
-      if ('conditions' in c) {
-        return evaluateGroup(x, c);
-      }
-      return evaluateCondition(x, c);
-    }).
-    reduce((result, cResult) => {
-      switch (g.operator) {
-        case 'and':
-          return result && cResult;
+// const c1 = condition('eq', 10);
+// const c2 = condition('gt', 100, 1);
+// const c3 = condition('gt', 0);
 
-        case 'or':
-          return result || cResult;
+// const g1 = group([c1, c2], 'or');
+// const expr = group([g1, c3], 'and');
 
-        default:
-          console.log('Invalid group operator:', g);
-          return -1;
-      }
-    });
-}
-
-const c1 = condition('lt', 10);
-const c2 = condition('gt', 100, 1);
-const c3 = condition('eq', 50);
-
-const g1 = group([c1, c2], 'or');
-const g2 = group([g1, c3], 'and');
-
-console.log(evaluateGroup(10, group([c1])));
+// console.log(evaluate(10, expr));
