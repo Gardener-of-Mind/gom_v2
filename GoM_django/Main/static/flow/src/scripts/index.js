@@ -29,25 +29,55 @@ $('#load-prev').click(() => {
 });
 
 $('#submit').click(() => {
-  if (questions.some((q) => q.conditions.length === 0)) {
-    const errQuestionsList = questions.
-      filter((q) => q.conditions.length === 0).
-      map((q) => `Q ${1 + q.idx})`).
-      join('\n');
+  const noDefaultConditionQuestions = questions.
+    filter((q) => q.conditions.length === 0);
 
-    alert(`At least default condition must be set:\n${errQuestionsList}`);
-    return;
+  if (noDefaultConditionQuestions.length) {
+    alert(`At least default condition must be set:\n${noDefaultConditionQuestions.
+      map((q) => `Q ${1 + q.idx})`).
+      join('\n')
+    }
+  `);
   }
 
   questions.forEach((q) => {
-    if (q.conditions.slice(1).some((c) => !c.value)) {
-      const errQuestionsList = q.conditions.slice(1).
-        filter((c) => !c.value).
-        map((c) => `Q ${1 + q.idx}) - ${c.idx}`).
-        join('\n');
+    const noToQuestions = q.conditions.
+      filter((c) => !c.to);
 
-      alert(`At least default condition must be set:\n${errQuestionsList}`);
-      return;
+    if (noToQuestions.length) {
+      alert(`No destination question set:\n${noToQuestions.
+        map((c) => `Q ${1 + q.idx}) -> ${c.idx ?
+          `Condition ${c.idx}` :
+          'Default condition'
+        }`).
+        join('\n')
+      }
+    `);
+    }
+
+    const incorrectToQuestions = q.conditions.
+      filter((c) => c.to < 0 || c.to >= questions.length);
+
+    if (incorrectToQuestions.length) {
+      alert(`Incorrect destination question set:\n${incorrectToQuestions.
+        map((c) => `Q ${1 + q.idx}) -> ${c.idx ?
+          `Condition ${c.idx}` :
+          'Default condition'
+        }`).
+        join('\n')
+      }
+    `);
+    }
+
+    const noValueQuestions = q.conditions.slice(1).
+        filter((c) => !c.value);
+
+    if (noValueQuestions.length) {
+      alert(`At least default condition must be set:\n${noValueQuestions.
+        map((c) => `Q ${1 + q.idx}) - ${c.idx}`).
+        join('\n')
+      }
+    `);
     }
   });
 

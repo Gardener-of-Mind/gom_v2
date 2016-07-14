@@ -31,7 +31,11 @@ function render(condition) {
 }
 
 export default function renderCondition(condition) {
-  $('.condition .heading #to')[0].onchange = (e) => { condition.to = +e.target.value - 1; };
+  $('.condition .heading #to')[0].onchange = (e) => {
+    condition.to = +e.target.value.length ?
+      +e.target.value - 1 :
+      '';
+  };
 
   const $handle = $(`<button class="btn">${condition.default ? 'D' : condition.idx}</button>`);
   $handle.click(() => { render(condition); });
