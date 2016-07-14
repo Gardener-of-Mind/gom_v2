@@ -3,3 +3,5 @@ GoM_django/db.sqlite3
 
 bundle*
 node_modules/
+
+default_survey_settings.config
