@@ -29,6 +29,28 @@ $('#load-prev').click(() => {
 });
 
 $('#submit').click(() => {
+  if (questions.some((q) => q.conditions.length === 0)) {
+    const errQuestionsList = questions.
+      filter((q) => q.conditions.length === 0).
+      map((q) => `Q ${1 + q.idx})`).
+      join('\n');
+
+    alert(`At least default condition must be set:\n${errQuestionsList}`);
+    return;
+  }
+
+  questions.forEach((q) => {
+    if (q.conditions.slice(1).some((c) => !c.value)) {
+      const errQuestionsList = q.conditions.slice(1).
+        filter((c) => !c.value).
+        map((c) => `Q ${1 + q.idx}) - ${c.idx}`).
+        join('\n');
+
+      alert(`At least default condition must be set:\n${errQuestionsList}`);
+      return;
+    }
+  });
+
   const data = questions.map((q) =>
     q.conditions.map(({ from, to, value }) =>
       ({ from, to, value })));
