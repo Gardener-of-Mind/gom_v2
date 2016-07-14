@@ -29,6 +29,14 @@ $('#load-prev').click(() => {
 });
 
 $('#submit').click(() => {
+  /*
+    Invalid fLow reasons:
+      1. No default condition
+      2. No destination set in condition
+      3. Incorrect destination question set in condition
+      4. No value for testing set in condition
+  */
+
   const noDefaultConditionQuestions = questions.
     filter((q) => q.conditions.length === 0);
 
