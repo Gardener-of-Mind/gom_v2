@@ -397,7 +397,7 @@ def add_survey(request):
             category = request.POST['category']
             survey = Survey(name=str(name), category=str(category))
             survey.save()
-            survey_id = survey_ob.id
+            survey_id = survey.id
             return HttpResponse(str(survey_id))
 
         elif 'questions' in request.POST:
@@ -444,10 +444,10 @@ def add_activity(request):
             name = request.POST['name']
             category = request.POST['category']
             activity_ob = Activity(name=name, category=category)
-            activity_ob.save()            
+            activity_ob.save()
             acitivity_id = activity_ob.id
             return HttpResponse(str(acitivity_id))
-        
+
         elif 'task' in request.POST:
             acitivity_id = str(request.POST['activity_id'])
             activity_ob = Activity.objects(id=acitivity_id).first()
@@ -480,7 +480,7 @@ def view_activities(request):
 def assign_activity(request):
     if request.POST:
         user_id = int(request.POST['user_id'])
-        acitivty_id = str(request.POST['acitivty_id']) 
+        acitivty_id = str(request.POST['acitivty_id'])
         activity_ob = Activity.objects(id=acitivty_id).first()
         user_activity_ob = UserActivity(user_id = user_id, assigned_activity= activity_ob)
         uesr_activity_ob.save()
@@ -492,7 +492,7 @@ def assign_activity(request):
 def complete_task(request):
     user = request.user
     user_profile = user_profile.objects.get(user=user)
-    
+
     task_id = str(request.POST['task_id'])
     user_activity_id = str(request.POST['user_activity_id'])
 

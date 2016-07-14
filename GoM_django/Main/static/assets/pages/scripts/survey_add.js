@@ -11,7 +11,7 @@ var FormWizard = function () {
             $("#questionType").select2({
                 placeholder: "Select",
                 allowClear: true,
-                width: 'auto', 
+                width: 'auto',
                 escapeMarkup: function (m) {
                     return m;
                 }
@@ -42,7 +42,32 @@ var FormWizard = function () {
             }
 
             var addScore = function(val) {
-               var html = ' <div class="form-group"> <label class="control-label col-md-3">Score for Option '+val+'<span class="required"> * </span> </label> <div class="col-md-4"> <input type="number" class="form-control surveyScores" id="questionText" name="questionText" value="0" /> <span class="help-block"> Please enter the score. </span> </div> </div>';
+               var html = ''+
+               '<div class="form-group">'+
+                   '<label class="control-label col-md-3">'+
+                    'Score for Option '+val+
+                    '<span class="required"> * </span>'+
+                   '</label>'+
+                   '<div class="col-md-4">'+
+                        '<div class="input-group">'+
+                            '<span class="input-group-addon" style="text-align:right;width:100px;">Anxiety</span>'+
+                            '<input type="number" class="form-control surveyScores" id="questionText" name="questionText" value="0" />'+
+                        '</div>'+
+                        '<div class="input-group">'+
+                            '<span class="input-group-addon" style="text-align:right;width:100px;">Depression</span>'+
+                            '<input type="number" class="form-control surveyScores" id="questionText" name="questionText" value="0" />'+
+                        '</div>'+
+                        '<div class="input-group">'+
+                            '<span class="input-group-addon" style="text-align:right;width:100px;">Stress</span>'+
+                            '<input type="number" class="form-control surveyScores" id="questionText" name="questionText" value="0" />'+
+                        '</div>'+
+                        '<div class="input-group">'+
+                            '<span class="input-group-addon" style="text-align:right;width:100px;">Survey</span>'+
+                            '<input type="number" class="form-control surveyScores" id="questionText" name="questionText" value="0" />'+
+                        '</div>'+
+                       '<span class="help-block"> Please enter the scores. </span>'+
+                   '</div>'+
+               '</div>';
                 $('#tempDiv').append(html);
            }
             var resetQuestion = function() {
@@ -52,7 +77,7 @@ var FormWizard = function () {
                 $('#tempDiv').html("");
             };
 
-            var sendQuestion = function(type) {     
+            var sendQuestion = function(type) {
                 var quesObj = {
                     'questions' : true,
                     'survey_id': surveyId,
@@ -118,7 +143,7 @@ var FormWizard = function () {
                     }
                 },
 
-                invalidHandler: function (event, validator) { //display error alert on form submit   
+                invalidHandler: function (event, validator) { //display error alert on form submit
                     success.hide();
                     error.show();
                     App.scrollTo(error, -200);
@@ -184,13 +209,13 @@ var FormWizard = function () {
                 onTabClick: function (tab, navigation, index, clickedIndex) {
                     return false;
                     console.log(tab,"onTabClick");
-                    
+
                     success.hide();
                     error.hide();
                     if (form.valid() == false) {
                         return false;
                     }
-                    
+
                     handleTitle(tab, navigation, clickedIndex);
                 },
                 onNext: function (tab, navigation, index) {
@@ -225,7 +250,7 @@ var FormWizard = function () {
 
             $('#addOptions').on("click",function(){
                 addOption($('.surveyOptions').length + 1);
-                addScore($('.surveyScores').length + 1);
+                addScore($('.surveyOptions').length);
             });
 
             $('.button-add-question').on("click",function(){
@@ -235,10 +260,10 @@ var FormWizard = function () {
             //apply validation on select2 dropdown value change, this only needed for chosen dropdown integration.
             $('#questionType', form).change(function () {
                 form.validate().element($(this)); //revalidate the chosen dropdown value and show error or success message for the input
-                $('#addOptions').hide();    
+                $('#addOptions').hide();
                 $('#tempDiv').html('');
                 if( ["checkbox","radio","dropdownbox"].indexOf($(this).val()) != -1 )  {
-                    $('#addOptions').show();    
+                    $('#addOptions').show();
                 }
                 else if ( $(this).val() == "dual" ) {
                     console.log("rating");
