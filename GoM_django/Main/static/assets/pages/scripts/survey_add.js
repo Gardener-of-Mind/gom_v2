@@ -253,9 +253,27 @@ var FormWizard = function () {
                 addScore($('.surveyOptions').length);
             });
 
+            var questions = [];
             $('.button-add-question').on("click",function(){
-                sendQuestion('add');
-            })
+                var optionsText = $('.surveyOptions').map(function () {return this.value;}).get();
+                var scores = $('.surveyScores').map(function () {return parseInt(this.value);}).get();
+                var options = optionsText.map(function(optionText, i) {
+                    var option = { text: optionText };
+                    ['anxiety', 'depression', 'stress', 'survey'].forEach(function(scoreType, j) {
+                        option[scoreType + '_score'] = scores[4 * i + j];
+                    });
+                    return option;
+                });
+
+                questions.push({
+                    'survey_id': surveyId,
+                    'query_type': $('#questionType').val(),
+                    'text' : $('#questionText').val(),
+                    'options' : options,
+                });
+
+                resetQuestion();
+            });
 
             //apply validation on select2 dropdown value change, this only needed for chosen dropdown integration.
             $('#questionType', form).change(function () {
