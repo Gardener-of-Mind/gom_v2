@@ -59,6 +59,7 @@ class Question(Document):
     text = StringField(max_length=3000)
     query_type = StringField(max_length=50)
     options = ListField(EmbeddedDocumentField(Option))
+    eval_scheme = DictField()
 
     class Meta:
         verbose_name_plural = 'Questions'
@@ -73,7 +74,7 @@ class Response(Document):
     note downn the index of the option."""
     question = ReferenceField(Question)
     response_per_option = ListField()
-    text_response = StringField(max_length=500)
+    text_response = StringField(max_length=500, null=True)
     single_option = IntField(null=True)  # Index of slected option.
 
 
@@ -199,7 +200,3 @@ class admin_profile(models.Model):
         verbose_name_plural = 'admin_profile'
     def __unicode__(self):
         return str(self.name)
-
-
-
-
