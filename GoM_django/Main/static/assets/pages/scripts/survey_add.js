@@ -78,28 +78,16 @@ var FormWizard = function () {
             };
 
             var sendQuestion = function(type) {
-                var quesObj = {
-                    'questions' : true,
-                    'survey_id': surveyId,
-                    'query_type': $('#questionType').val(),
-                    'text' : $('#questionText').val(),
-                    'options[]' : $('.surveyOptions').map(function () {return this.value;}).get(),
-                    'score[]' : $('.surveyScores').map(function () {return parseInt(this.value);}).get() ,
-                }
+                console.log(questions)
                 $.ajax({
                     url:'.',
                     method:'POST',
                     headers : {
                         "X-CSRFToken" : getCookie('csrftoken')
                     },
-                    data: quesObj,
+                    data: { questions: questions },
                     success: function(response) {
-                        if(type="add") {
-                            resetQuestion();
-                        }
-                        else if(type == "submit") {
-                            window.location.href= "..";
-                        }
+                        window.location.href= "..";
                     },
                     error: function() {
                         alert("Some Error occured!\n Try submitting again");
@@ -240,6 +228,7 @@ var FormWizard = function () {
                 }
             });
             $('#form_wizard_1 .button-submit').click(function () {
+                addQuestions();
                 sendQuestion('submit');
             }).hide();
 
@@ -253,8 +242,7 @@ var FormWizard = function () {
                 addScore($('.surveyOptions').length);
             });
 
-            var questions = [];
-            $('.button-add-question').on("click",function(){
+            function addQuestions() {
                 var optionsText = $('.surveyOptions').map(function () {return this.value;}).get();
                 var scores = $('.surveyScores').map(function () {return parseInt(this.value);}).get();
                 var options = optionsText.map(function(optionText, i) {
@@ -271,7 +259,11 @@ var FormWizard = function () {
                     'text' : $('#questionText').val(),
                     'options' : options,
                 });
+            }
 
+            var questions = [];
+            $('.button-add-question').on("click",function(){
+                addQuestions();
                 resetQuestion();
             });
 
