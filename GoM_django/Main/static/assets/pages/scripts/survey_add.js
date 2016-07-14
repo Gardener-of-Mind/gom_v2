@@ -85,9 +85,12 @@ var FormWizard = function () {
                     headers : {
                         "X-CSRFToken" : getCookie('csrftoken')
                     },
-                    data: { questions: questions },
+                    data: { 
+                        survey_id: surveyId,
+                        questions: JSON.stringify(questions), 
+                    },
                     success: function(response) {
-                        window.location.href= "..";
+                        // window.location.href= "..";
                     },
                     error: function() {
                         alert("Some Error occured!\n Try submitting again");
@@ -254,7 +257,6 @@ var FormWizard = function () {
                 });
 
                 questions.push({
-                    'survey_id': surveyId,
                     'query_type': $('#questionType').val(),
                     'text' : $('#questionText').val(),
                     'options' : options,

@@ -21,7 +21,7 @@ from django.http import JsonResponse
 from django.core.urlresolvers import reverse
 from GoM_django.settings import DEFAULT_SURVEY_CONFIG, BASE_DIR
 import pickle
-import bson
+from bson.objectid import ObjectId
 # Create your views here.
 
 
@@ -108,19 +108,32 @@ def default_surveys(request):
 
 @login_required
 def take_survey(request, survey_id):
-    survey_id = bson.objectid.ObjectId(survey_id)
+    survey_id = ObjectId(survey_id)
     survey = Survey.objects(id=survey_id).first()
     user_response = SurveyResponses.objects(user_id=request.user.id,
                                             survey=survey).first()
     if request.POST:
-        pass  # Handle submission and set question
-
-    if user_response is None:
-        current_question = survey.questions.first()
-    else:
-        current_question = user_response.current_question
-    current_question = current_question.to_json()
-    return render(request, 'question.html', {'question': current_question})
+        if user_response is None:
+            next_question = survey.questions[0]
+        else:
+            question_id = ObjectId(request.POST['question_id'])
+            question = Question.object(id=ObjectId).first()
+            answer = request.POST['answer']
+            if question.query_type in ['dropdownbox', 'radio', 'rating', 'dual']:
+                question_response = Response(question=question,
+                                             single_option=answer)
+            elif question.query_type == 'text':
+                question_response = Response(question=question,
+                                             text_response=answer)
+            else:
+                answer = answer.getlist('answers[]')
+                question_response = Response(question=question,
+                                             response_per_option=answer)
+            next_question = some_magic_function()
+            next_question = user_response.current_question
+        next_question = next_question.to_json()
+        return HttpResponse(next_question)
+    return render(request, 'question.html')
 
 # ----------------------------------------------------------------------------
 
@@ -401,19 +414,25 @@ def add_survey(request):
             return HttpResponse(str(survey_id))
 
         elif 'questions' in request.POST:
-            survey_id = str(request.POST['survey_id'])
+            # return HttpResponse(request.POST['questions'])
+            survey_id = ObjectId(request.POST['survey_id'])
             survey = Survey.objects(id=survey_id).first()
+            questions = json.loads(request.POST['questions'])
+            for question_json in questions:
+                text = question_json['text']
+                query_type = question_json['query_type']
+                options = question_json['options']
+                question = Question(text=text, query_type=query_type)
 
-            text = request.POST['text']
-            query_type = request.POST['query_type']
-            options = request.POST.getlist('options[]')
-            score = request.POST.getlist('score[]')
-
-            question = Question(text=text, query_type=query_type,
-                                options=options, score=score,
-                                survey=survey_ob)
-            question.save()
-            survey.questions.append(question)
+                for option in options:
+                    option = json.loads(option)
+                    question.options.append(Option(text=option['text'],
+                                            anxiety_score=option['anxiety_score'],
+                                            depression_score=option['depression_score'],
+                                            stress_score=option['stress_score'],
+                                            survey_score=option['survey_score']))
+                question.save()
+                survey.questions.append(question)
             survey.save()
             return HttpResponse('success')
 
@@ -444,10 +463,10 @@ def add_activity(request):
             name = request.POST['name']
             category = request.POST['category']
             activity_ob = Activity(name=name, category=category)
-            activity_ob.save()
+            activity_ob.save()            
             acitivity_id = activity_ob.id
             return HttpResponse(str(acitivity_id))
-
+        
         elif 'task' in request.POST:
             acitivity_id = str(request.POST['activity_id'])
             activity_ob = Activity.objects(id=acitivity_id).first()
@@ -480,7 +499,7 @@ def view_activities(request):
 def assign_activity(request):
     if request.POST:
         user_id = int(request.POST['user_id'])
-        acitivty_id = str(request.POST['acitivty_id'])
+        acitivty_id = str(request.POST['acitivty_id']) 
         activity_ob = Activity.objects(id=acitivty_id).first()
         user_activity_ob = UserActivity(user_id = user_id, assigned_activity= activity_ob)
         uesr_activity_ob.save()
@@ -492,7 +511,7 @@ def assign_activity(request):
 def complete_task(request):
     user = request.user
     user_profile = user_profile.objects.get(user=user)
-
+    
     task_id = str(request.POST['task_id'])
     user_activity_id = str(request.POST['user_activity_id'])
 
