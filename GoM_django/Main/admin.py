@@ -2,8 +2,13 @@ from django.contrib import admin
 from Main.models import *
 
 class ProfileAdmin(admin.ModelAdmin):
-    list_display = ('name', 'gender', 'college', 'city')
+    list_display = ('name', 'gender', 'college', 'city', 'view_profile_url')
     search_fields = ['name']
+
+    def view_profile_url(self, obj):
+        return obj.view_profile_url()
+    view_profile_url.allow_tags = True
+    view_profile_url.short_description = 'View'
 
 class CoachAdmin(admin.ModelAdmin):
     # list_display = ('name', 'gender','email_id')

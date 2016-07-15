@@ -413,8 +413,9 @@ def coach_user_profile(request,user_id):
     try:
         profile = coach_profile.objects.get(user=user)
     except:
-        return HttpResponse('Coach Object Error')
-
+        # return HttpResponse('Coach Object Error')
+        profile = None
+        pass
     try:
         user_profile_ob = user_profile.objects.get(id= int(user_id))
     except:

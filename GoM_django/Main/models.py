@@ -125,10 +125,6 @@ class UserActivity(Document):
     assigned_activity = ReferenceField(Activity)
     user_id= IntField(null=True)
 
-
-
-
-
 # Relational DB models
 
 
@@ -165,7 +161,7 @@ class coach_profile(models.Model):
         return len(user_profile.objects.filter(coach=self))
 
     def view_profile_url(self):
-        return '<a href="/admin/show-coach/%s"> View </a>' % self.id
+        return '<a href="/admin/show-coach/%s/"> View </a>' % self.id
 
 
 class user_profile(models.Model):
@@ -188,11 +184,13 @@ class user_profile(models.Model):
     anxiety_score= models.IntegerField(default=0)
     depression_score= models.IntegerField(default=0)
     stress_score= models.IntegerField(default=0)
-    remarks = models.CharField(max_length=5000, default='')
+    remarks = models.CharField(max_length=5000, default='', null=True, blank=True)
     class Meta:
         verbose_name_plural = 'user_profile'
     def __unicode__(self):
         return str(self.name)
+    def view_profile_url(self):
+        return '<a href="/dashboard/%s/" target="_blank"> View </a>' % self.id
 
 
 
