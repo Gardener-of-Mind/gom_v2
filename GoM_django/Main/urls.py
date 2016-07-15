@@ -31,10 +31,10 @@ urlpatterns = [
     url(r'^profile/edit/$', views.edit_profile),
     url(r'^profile/help/$', views.profile_help),
 
-    url(r'^questions/$', views.questions),
-    url(r'^query/$', views.query),
+    # url(r'^questions/$', views.questions),
+    # url(r'^query/$', views.query),
 
-    url(r'^survey_submit/$', views.survey_submit),
+    # url(r'^survey_submit/$', views.survey_submit),
     url(r'^survey/add/$', views.add_survey),
     url(r'^survey/view$', views.view_surveys),
 
