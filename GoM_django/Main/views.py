@@ -96,7 +96,7 @@ def check_survey_response(request, user_id, survey_id):
             if question_type in ['dropdownbox', 'radio', 'rating', 'dual']:
                 response_details['answerlist'] = [question.options[question_response.single_option].text]
             elif question_type == 'text':
-                response_details['answerlist'] = [question_response.text_response]            
+                response_details['answerlist'] = [question_response.text_response]
             else:
                 response_details['answerlist'] = [question.options[index].text for index, bo in enumerate(question_response.response_per_option) if bo]
             all_responses.append(response_details)
@@ -353,21 +353,24 @@ def edit_profile(request):
 def profile_overview(request):
     user=request.user
     try:
+        profile_type = 'user'
         profile= user_profile.objects.get(user=user)
     except:
         pass
     try:
+        profile_type = 'coach'
         profile= coach_profile.objects.get(user=user)
     except:
         pass
     try:
+        profile_type = 'admin'
         profile= admin_profile.objects.get(user=user)
     except:
         pass
     if 'profile' not in locals():
         return HttpResponse('Error')
     else:
-        return render(request,'user/profile_overview.html', {'profile':profile})
+        return render(request,'user/profile_overview.html', {'profile':profile, 'profile_type':profile_type})
 
 
 
@@ -410,10 +413,10 @@ def coach_user_profile(request,user_id):
     except:
         return HttpResponse('User Profile object error')
 
-    user_survey_responses = SurveyResponses.objects(user=user_id)
+    user_survey_responses = SurveyResponses.objects(user_id=user_id)
     user_surveys = [(user_response.survey, user_respose.status) for user_response in user_survey_responses]
 
-    return render(request,'coach/user_details.html', {'profile' : profile, 'user_profile' : user_profile_ob, 'user_surveys': user_surveys})
+    return render(request,'coach/user_details.html', {'profile' : profile, 'user_profile' : user_profile_ob, 'user_surveys': user_surveys or range(3) })
 
 
 

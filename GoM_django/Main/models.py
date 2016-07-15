@@ -30,7 +30,7 @@ class survey(Document):
 class survey_questions(Document):
     text=StringField(max_length=1000)
     query_type= StringField(max_length=50)
-    options = ListField(null=True)  
+    options = ListField(null=True)
     score= ListField(blank=True,null=True)
     survey= ReferenceField(survey)
     class Meta:
@@ -133,7 +133,7 @@ class UserActivity(Document):
 
 
 class coach_profile(models.Model):
-    user = models.OneToOneField(User, null=True)    
+    user = models.OneToOneField(User, null=True)
     GENDERS = (
         ('M', 'Male'),
         ('F', 'Female'),
@@ -142,9 +142,9 @@ class coach_profile(models.Model):
     gender = models.CharField(max_length=1, choices=GENDERS)
     phone_one = models.BigIntegerField(blank=True,null=True, default='')
     email_id = models.EmailField(unique=True)
-    about_me= models.TextField(default='')  
+    about_me= models.TextField(default='')
     city = models.CharField(max_length=20, null=True)
-    profile_pic= models.ImageField(blank=True, upload_to='pictures', null=True, default='pictures/default.jpg')     
+    profile_pic= models.ImageField(blank=True, upload_to='pictures', null=True, default='pictures/default.jpg')
     status = models.BooleanField(default=False)
     created     = models.DateTimeField(editable=False, null=True)
 
@@ -168,7 +168,7 @@ class coach_profile(models.Model):
 
 
 class user_profile(models.Model):
-    user = models.OneToOneField(User, null=True)    
+    user = models.OneToOneField(User, null=True)
     GENDERS = (
         ('M', 'Male'),
         ('F', 'Female'),
@@ -182,18 +182,20 @@ class user_profile(models.Model):
     occupation= models.CharField(max_length=200, default='', blank=True)
     about_me= models.TextField(default='')
     coach = models.ForeignKey(coach_profile, null=True, default=None, blank= True)
-    profile_pic= models.ImageField(blank=True, upload_to='pictures', null=True, default='pictures/default.jpg') 
+    profile_pic= models.ImageField(blank=True, upload_to='pictures', null=True, default='pictures/default.jpg')
     # questions= models.BooleanField(default=False)
-    anxiety_score= models.IntegerField(blank=True,null=True)
+    anxiety_score= models.IntegerField(default=0)
+    depression_score= models.IntegerField(default=0)
+    stress_score= models.IntegerField(default=0)
     class Meta:
         verbose_name_plural = 'user_profile'
     def __unicode__(self):
         return str(self.name)
-    
+
 
 
 class admin_profile(models.Model):
-    user = models.OneToOneField(User, null=True)    
+    user = models.OneToOneField(User, null=True)
     GENDERS = (
         ('M', 'Male'),
         ('F', 'Female'),
@@ -202,7 +204,7 @@ class admin_profile(models.Model):
     gender = models.CharField(max_length=1, choices=GENDERS)
     phone_one = models.BigIntegerField(blank=True,null=True)
     email_id = models.EmailField(unique=True)
-    profile_pic= models.ImageField(blank=True, upload_to='pictures', null=True, default='pictures/default.jpg') 
+    profile_pic= models.ImageField(blank=True, upload_to='pictures', null=True, default='pictures/default.jpg')
 
     class Meta:
         verbose_name_plural = 'admin_profile'
