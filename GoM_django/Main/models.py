@@ -188,6 +188,7 @@ class user_profile(models.Model):
     anxiety_score= models.IntegerField(default=0)
     depression_score= models.IntegerField(default=0)
     stress_score= models.IntegerField(default=0)
+    remarks = models.CharField(max_length=5000, default='')
     class Meta:
         verbose_name_plural = 'user_profile'
     def __unicode__(self):

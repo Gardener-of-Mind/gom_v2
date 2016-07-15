@@ -576,7 +576,13 @@ def complete_task(request):
 
     return HttpResponse('success')
 
-
+def coach_diary(request, user_id):
+    # Here user_id is of student
+    if request.POST:
+        student_profile = user_profile.objects.get(id=user_id)
+        student_profile.remarks = request.POST['remarks']
+        student_profile.save()
+        return HttpResponse('Success')
 
 
 def flow(request, survey_id):
