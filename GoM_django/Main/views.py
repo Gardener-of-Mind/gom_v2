@@ -104,6 +104,8 @@ def check_survey_response(request, user_id, survey_id):
 
 
 
+
+
 def update_default_setting(request):
     if request.POST:
         survey_type = request.POST['survey_type']
@@ -112,6 +114,8 @@ def update_default_setting(request):
         fileObject = open(BASE_DIR + '/default_survey_settings.config', 'wb')
         pickle.dump(DEFAULT_SURVEY_CONFIG, fileObject)
         fileObject.close()
+        return HttpResponse('Success')
+    return HttpResponse('Failure')
 
 
 @login_required
@@ -172,6 +176,9 @@ def take_survey(request, survey_id):
 
             user_response.responses.append(question_response)
             next_question = resolve_next_question(question_response)
+            if next_question is None:
+                user_response.completed = True
+                return HttpResponse('Survey Completed')
             user_response.current_question = next_question  # The Question user will be answering now.
         next_question = next_question.to_json()
         return HttpResponse(next_question)
@@ -565,9 +572,6 @@ def complete_task(request):
     user_activity_ob.update_one(push__completed_tasks= task_ob)
 
     return HttpResponse('success')
-
-
-
 
 
 

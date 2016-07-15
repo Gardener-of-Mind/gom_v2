@@ -87,6 +87,7 @@ class Survey(Document):
     name = StringField(max_length=50)
     category = StringField(max_length=50)
     questions = ListField(ReferenceField(Question))
+    admin_approved = BooleanField(default=False)
 
 
 class SurveyResponses(Document):

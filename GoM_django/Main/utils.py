@@ -20,4 +20,6 @@ def resolve_next_question(question_response):
             if question_response.response_per_option == [bool(option_value) for option_value in rule['value']]:
                 next_question_id = rule['to']
                 break
+        if next_question_id == -1:
+            return None
     return Question.objects(id=ObjectId(next_question_id)).first()
