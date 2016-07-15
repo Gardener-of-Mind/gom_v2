@@ -87,7 +87,7 @@ function init() {
       }
 
       const incorrectToQuestions = q.conditions.
-        filter((c) => c.to < 0 || c.to >= questions.length);
+        filter((c) => c.to < 0 || c.to > questions.length);
 
       if (incorrectToQuestions.length) {
         isValid = false;
