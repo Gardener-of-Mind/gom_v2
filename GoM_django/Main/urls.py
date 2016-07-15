@@ -36,7 +36,7 @@ urlpatterns = [
 
     url(r'^survey_submit/$', views.survey_submit),
     url(r'^survey/add/$', views.add_survey),
-    url(r'^survey_view/$', views.view_surveys),
+    url(r'^survey/view$', views.view_surveys),
 
 
     url(r'^dashboard/$', views.dashboard),

@@ -500,7 +500,7 @@ def view_surveys(request):
         survey_ob = survey.objects(id=survey_id).first()
         survey_ob = survey_ob.to_json()
         return render(request, 'admin/survey_view.html', {'survey_ob' : survey_ob})
-    surveys = survey.objects.all()
+    surveys = Survey.objects()
     # surveys = surveys.to_json()
     return render(request, 'admin/surveys.html', {'surveys' : surveys})
 
