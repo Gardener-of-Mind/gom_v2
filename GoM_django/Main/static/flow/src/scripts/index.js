@@ -56,10 +56,13 @@ function init() {
         4. No value for testing set in condition
     */
 
+    let isValid = true;
+
     const noDefaultConditionQuestions = questions.
       filter((q) => q.conditions.length === 0);
 
     if (noDefaultConditionQuestions.length) {
+      isValid = false;
       alert(`At least default condition must be set:\n${noDefaultConditionQuestions.
         map((q) => `Q ${1 + q.idx})`).
         join('\n')
@@ -72,6 +75,7 @@ function init() {
         filter((c) => !c.to);
 
       if (noToQuestions.length) {
+        isValid = false;
         alert(`No destination question set:\n${noToQuestions.
           map((c) => `Q ${1 + q.idx}) -> ${c.idx ?
             `Condition ${c.idx}` :
@@ -86,6 +90,7 @@ function init() {
         filter((c) => c.to < 0 || c.to >= questions.length);
 
       if (incorrectToQuestions.length) {
+        isValid = false;
         alert(`Incorrect destination question set:\n${incorrectToQuestions.
           map((c) => `Q ${1 + q.idx}) -> ${c.idx ?
             `Condition ${c.idx}` :
@@ -100,6 +105,7 @@ function init() {
           filter((c) => !c.value);
 
       if (noValueQuestions.length) {
+        isValid = false;
         alert(`At least default condition must be set:\n${noValueQuestions.
           map((c) => `Q ${1 + q.idx}) - ${c.idx}`).
           join('\n')
@@ -108,10 +114,22 @@ function init() {
       }
     });
 
-    const data = questions.map((q) =>
-      q.conditions.map(({ from, to, value }) =>
-        ({ from, to, value })));
-    console.log(JSON.stringify(data, null, 2));
+    if (isValid) {
+      const data = questions.reduce((_data, q) => {
+        _data[q._id.$oid] = q.conditions.
+          map(({ from, to, value }) =>
+            ({ from, to, value }));
+
+        return _data;
+      }, {});
+
+      $.post('.', { evaluation_scheme: JSON.stringify(data) });
+    }
+
+    // questions.forEach((q) => {
+    //   q.eval_scheme = q.conditions.map(({ from, to, value }) =>
+    //     ({ from, to, value }));
+    // });
   });
 
   $('.add-condition').click(() => {
@@ -131,5 +149,6 @@ $.post('.', { questions: 1 }, (response) => {
       element: undefined,
     });
   });
+
   init();
 });
