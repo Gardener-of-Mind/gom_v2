@@ -9,6 +9,12 @@ function showForm() {
     $('.survey-form').delay(400).fadeIn(300);
 }
 
+$.ajaxSetup({
+    cache: false,
+    headers : {
+        "X-CSRFToken" : getCookie('csrftoken')
+    },
+})
 
 function sendSurvey(answers,sid) {
     console.log(answers);
@@ -35,62 +41,59 @@ $('.body-box').animate({
 }, 500);
 
 resetSurvey();
-startSurvey([{
-    category: 'category',
-    text: 'text',
-    query_type: 'text',
-    options: 'options',
-}, {
-    category: 'category',
-    text: 'text',
-    query_type: 'text',
-    options: 'options',
-}], 'sid');
+startSurvey('578801165237d745c1a1a7c8');
+var store = {
+    question: null,
+};
+function loadQuestion(answer) {
+    if (typeof answer === 'undefined') {
+        $.post('.', {
+            first: 1
+        }, function(response) {
+            store.question = JSON.parse(response)
+            generateQuestion(store.question);
+            // console.log(question)
 
-
-function startSurvey(quesAll,sid) {
-    var answers = [];
-    var index = 0;
-    var qlength = quesAll.length;
-
-    showForm();
-    generateQuestion(quesAll[index]);
-
-    $('.next-ques').click(function(){
-
-        $.ajax({
-            method: 'POST',
-            headers : { 'X-CSRFToken' : getCookie('csrftoken') },
-            data: {
-                'oid': sid,
-                'answers[]': answers
-            },
-            success: function(response) {
-                console.log(response)
-                // window.location.href = './../profile/edit/';
-            },
-            error: function() {
-                alert("error");
-            },
+            $('.next-ques').click(function(){
+                $('ques-cont').fadeOut(200);
+                var response = getAnswerObj(store.question['_id']);
+                if (response != false) {
+                    loadQuestion(response);
+                }
+            });
         });
+    } else {
+        $.post('.', {
+            answer: JSON.stringify(answer),
+            question_id: store.question._id.$oid
+        }, function(response) {
+            store.question = JSON.parse(response)
+            generateQuestion(store.question);
 
-        $('ques-cont').fadeOut(200);
-        var response = getAnswerObj(quesAll[index]['_id']);
-        if (response != false) {
-            answers.push(response);
-            ++index;
-            if (index < quesAll.length) {
-                $('.progress-front').css('width', Math.round((index*100)/quesAll.length)+'%');
-                $('.progress-percent').html(Math.round((index*100)/quesAll.length)+'% COMPLETED');
-                generateQuestion(quesAll[index]);
-            } else {
-                sendSurvey(answers,sid);
-            }
-        }
-    });
+            $('.next-ques').click(function(){
+                alert()
+                $('ques-cont').fadeOut(200);
+                var response = getAnswerObj(store.question['_id']);
+                if (response != false) {
+                    loadQuestion(response);
+                }
+            });
+        });
+    }
+}
+
+function startSurvey(sid) {
+    showForm();
+    loadQuestion();
 }
 
 function generateQuestion(quesObj){
+    console.log(
+        quesObj,
+        quesObj["category"],
+        quesObj["query_type"],
+        quesObj["text"],
+        quesObj["options"])
     $('.progress-title').html(quesObj["category"]);
 
     $('.ques').html(quesObj["text"]);

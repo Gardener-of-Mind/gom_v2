@@ -11,10 +11,10 @@ window.questions = questions;
 export default function renderQuestion(i) {
   const question = questions[i];
 
-  $('.question .heading').text(`Q${1 + i}) ${question.head}`);
-  $('.question .body > p').text(question.body);
+  $('.question .heading').text(`Q${1 + i}) ${question.category}`);
+  $('.question .body > p').text(question.text);
 
-  switch (question.type) {
+  switch (question.query_type) {
     case QUESTION_TYPES.CHOICE_SINGLE:
     case QUESTION_TYPES.CHOICE_MULTIPLE:
       $('.question .body .options').html(question.options.map((o, j) => (

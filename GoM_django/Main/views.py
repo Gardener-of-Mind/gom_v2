@@ -549,5 +549,14 @@ def complete_task(request):
 
 
 
-def flow(request):
+def flow(request, survey_id):
+    survey = Survey.objects(id=ObjectId(survey_id)).first()
+    if request.POST:
+        if 'questions' in request.POST:
+            questions = survey.questions
+            questions = [json.loads(question.to_json()) for question in questions]
+            return JsonResponse({'questions': json.dumps(questions)})
+        elif 'evaluation_scheme' in request.POST:
+            survey.evaluation_scheme = request.POST['flow']
+            survey.save()
     return render(request, 'flow/index.html')
