@@ -187,61 +187,61 @@ def take_survey(request, survey_id):
 # ----------------------------------------------------------------------------
 
 
-def questions(request):
-    if request.POST:
-        survey_id = str(request.POST['oid'])
-        surveys = survey.objects(id=survey_id)
-        questions_list = survey_questions.objects(survey= survey).order_by('id')
-    surveys= survey.objects.all().first()
-    oid = surveys.id
-    surveys= surveys.to_json()
-    # data = serializers.serialize("json", questions_list)
-    # return HttpResponse(queries)
-    return render(request,'initial_survey.html', {'oid':oid})
+# def questions(request):
+#     if request.POST:
+#         survey_id = str(request.POST['oid'])
+#         surveys = survey.objects(id=survey_id)
+#         questions_list = survey_questions.objects(survey= survey).order_by('id')
+#     surveys= Survey.objects.all().first()
+#     oid = surveys.id
+#     surveys= surveys.to_json()
+#     # data = serializers.serialize("json", questions_list)
+#     # return HttpResponse(queries)
+#     return render(request,'initial_survey.html', {'oid':oid})
 
 
 
-def query(request):
-    if request.POST:
-        survey_id = str(request.POST['oid'])
-        survey_ob = survey.objects(id=survey_id).first()
-        questions_list = survey_questions.objects(survey= survey_ob).order_by('id')
-        queries= questions_list.to_json()
-        return HttpResponse(queries)
+# def query(request):
+#     if request.POST:
+#         survey_id = str(request.POST['oid'])
+#         survey_ob = survey.objects(id=survey_id).first()
+#         questions_list = survey_questions.objects(survey= survey_ob).order_by('id')
+#         queries= questions_list.to_json()
+#         return HttpResponse(queries)
 
 
 
 
-def survey_submit(request):
-    user = request.user
-    try:
-        profile =user.user_profile
-    except:
-        return HttpResponse('Profile object error')
+# def survey_submit(request):
+#     user = request.user
+#     try:
+#         profile =user.user_profile
+#     except:
+#         return HttpResponse('Profile object error')
 
-    if request.POST:
-        answers_list = request.POST.getlist('answers[]')
-        # return HttpResponse(str(answers_list))
-        survey_id = str(request.POST['oid'])
-        survey_ob = survey.objects(id=survey_id).first()
-        questions = survey_questions.objects(survey=survey_ob)
-        category = str(survey_ob.category)
-        k=0
-        total_score= 0
-        # for query in questions:
-        #     answer = answers_list[k]
-        #     try:
-        #         answer_index = query.options.index(str(answer))
-        #         score = query.score['answer_index']
-        #     except:
-        #         pass
-        #     total_score+= score
-        #     k+=1
+#     if request.POST:
+#         answers_list = request.POST.getlist('answers[]')
+#         # return HttpResponse(str(answers_list))
+#         survey_id = str(request.POST['oid'])
+#         survey_ob = survey.objects(id=survey_id).first()
+#         questions = survey_questions.objects(survey=survey_ob)
+#         category = str(survey_ob.category)
+#         k=0
+#         total_score= 0
+#         # for query in questions:
+#         #     answer = answers_list[k]
+#         #     try:
+#         #         answer_index = query.options.index(str(answer))
+#         #         score = query.score['answer_index']
+#         #     except:
+#         #         pass
+#         #     total_score+= score
+#         #     k+=1
 
-        # if category == 'anxiety':
-        #     profile.anxiety_score += total_score
+#         # if category == 'anxiety':
+#         #     profile.anxiety_score += total_score
 
-        return HttpResponseRedirect('../profile/edit/')
+#         return HttpResponseRedirect('../profile/edit/')
 
 
 
@@ -594,6 +594,6 @@ def flow(request, survey_id):
             questions = [json.loads(question.to_json()) for question in questions]
             return JsonResponse({'questions': json.dumps(questions)})
         elif 'evaluation_scheme' in request.POST:
-            survey.evaluation_scheme = request.POST['flow']
+            survey.eval_scheme = request.POST['flow']
             survey.save()
     return render(request, 'flow/index.html')
