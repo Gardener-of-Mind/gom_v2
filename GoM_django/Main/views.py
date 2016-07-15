@@ -22,6 +22,7 @@ from django.core.urlresolvers import reverse
 from GoM_django.settings import DEFAULT_SURVEY_CONFIG, BASE_DIR
 import pickle
 from bson.objectid import ObjectId
+from utils import resolve_next_question
 # Create your views here.
 
 
@@ -113,24 +114,45 @@ def take_survey(request, survey_id):
     user_response = SurveyResponses.objects(user_id=request.user.id,
                                             survey=survey).first()
     if request.POST:
-        if user_response is None:
-            next_question = survey.questions[0]
-        else:
+        if 'answer' not in request.POST:  # you just revisited
+            if user_response in None:
+                next_question = survey.questions[0]
+            else:
+                next_question = user_response.current_question
+
+        else:  # you are submitting an answer
+            # If this is the first answer user_response does not exists
+            if user_response in None:
+                user_response = SurveyResponses(user_id=int(request.user.id),
+                                                survey=survey, survey_score=0)
+
             question_id = ObjectId(request.POST['question_id'])
-            question = Question.object(id=ObjectId).first()
+            question = Question.object(id=question_id).first()
             answer = request.POST['answer']
             if question.query_type in ['dropdownbox', 'radio', 'rating', 'dual']:
                 question_response = Response(question=question,
                                              single_option=answer)
+                user_response.survey_score += question.options[int(answer)].survey_score
+                user.anxiety_score += question.options[int(answer)].anxiety_score
+                user.depression_score += question.options[int(answer)].depression_score
+                user.stress_score += question.options[int(answer)].stress_score
             elif question.query_type == 'text':
                 question_response = Response(question=question,
                                              text_response=answer)
+                # TODO: Keep track of text_scores later
             else:
-                answer = answer.getlist('answers[]')
-                question_response = Response(question=question,
-                                             response_per_option=answer)
-            next_question = some_magic_function()
-            next_question = user_response.current_question
+                question_response = Response(question=question)
+                for number, option_answer in enumerate(answer):
+                    question_response.response_per_option.append(bool(option_answer))
+                    if bool(option_answer) is True:
+                        user_response.survey_score += question.options[int(number)].survey_score
+                        user.anxiety_score += question.options[int(number)].anxiety_score
+                        user.depression_score += question.options[int(number)].depression_score
+                        user.stress_score += question.options[int(number)].stress_score
+
+            user_response.respones.append(question_response)
+            next_question = resolve_next_question(question_response)
+            user_response.current_question = next_question  # The Question user will be answering now.
         next_question = next_question.to_json()
         return HttpResponse(next_question)
     return render(request, 'question.html')
