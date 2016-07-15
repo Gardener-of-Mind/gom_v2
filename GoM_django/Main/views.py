@@ -557,6 +557,7 @@ def flow(request, survey_id):
             questions = [json.loads(question.to_json()) for question in questions]
             return JsonResponse({'questions': json.dumps(questions)})
         elif 'evaluation_scheme' in request.POST:
-            survey.evaluation_scheme = request.POST['flow']
+            survey.evaluation_scheme = request.POST['evaluation_scheme']
             survey.save()
+            return HttpResponse('success')
     return render(request, 'flow/index.html')
