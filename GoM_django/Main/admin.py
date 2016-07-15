@@ -6,8 +6,21 @@ class ProfileAdmin(admin.ModelAdmin):
     search_fields = ['name']
 
 class CoachAdmin(admin.ModelAdmin):
-    list_display = ('name', 'gender','email_id')
+    # list_display = ('name', 'gender','email_id')
+
+    fieldsets = [(None, {'fields': ['name', 'gender','email_id', 'number_of_students', 'view_profile_url']}),]
+    list_display = ('name', 'gender','email_id', 'number_of_students', 'view_profile_url')
     search_fields = ['name']
+    # readonly_fields = ['address_2_html']
+
+    def number_of_students(self, obj):
+        return obj.number_of_students()
+
+    def view_profile_url(self, obj):
+        return obj.view_profile_url()
+    view_profile_url.allow_tags = True
+    number_of_students.short_description = 'Number of Students'
+    view_profile_url.short_description = 'View'
 
 class AdminAdmin(admin.ModelAdmin):
     list_display = ('name', 'gender', 'email_id')

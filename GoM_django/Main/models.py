@@ -149,6 +149,7 @@ class coach_profile(models.Model):
 
     class Meta:
         verbose_name_plural = 'coach_profile'
+
     def __unicode__(self):
         return str(self.name)
 
@@ -157,6 +158,12 @@ class coach_profile(models.Model):
         if not self.id:
             self.created = timezone.now()
         return super(coach_profile, self).save(*args, **kwargs)
+
+    def number_of_students(self):
+        return len(user_profile.objects.filter(coach=self))
+
+    def view_profile_url(self):
+        return '<a href="/admin/show-coach/%s"> View </a>' % self.id
 
 
 class user_profile(models.Model):
