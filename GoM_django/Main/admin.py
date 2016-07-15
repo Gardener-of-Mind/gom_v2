@@ -8,7 +8,7 @@ class ProfileAdmin(admin.ModelAdmin):
 class CoachAdmin(admin.ModelAdmin):
     # list_display = ('name', 'gender','email_id')
 
-    fieldsets = [(None, {'fields': ['name', 'gender','email_id']}),]
+    fieldsets = [(None, {'fields': ['name', 'gender','email_id', 'user', 'phone_one']}),]
     list_display = ('name', 'gender','email_id', 'number_of_students', 'view_profile_url', 'status')
     search_fields = ['name']
     # readonly_fields = ['address_2_html']

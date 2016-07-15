@@ -97,6 +97,7 @@ class SurveyResponses(Document):
     current_question = ReferenceField(Question, null=True)
     responses = ListField(ReferenceField(Response))
     survey_score = IntField()
+    completed = BooleanField(default=False)
 
 
 #Activity Models

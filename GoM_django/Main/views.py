@@ -84,6 +84,26 @@ def user_logout(request):
 # ----------------------------------------------------------------------------
 
 
+def check_survey_response(request, user_id, survey_id):
+    student_user = User.object.get(id=user_id)
+    if request.user.coach == request.user or student_user == request.user:
+        user_response = SurveyResponses.objects(user_id=user_id, survey_id=survey_id)
+        all_responses = []
+        for question_response in user_response.responses:
+            response_details = {}
+            question = question_response.question
+            response_details['question'] = question.text
+            if question_type in ['dropdownbox', 'radio', 'rating', 'dual']:
+                response_details['answerlist'] = [question.options[question_response.single_option].text]
+            elif question_type == 'text':
+                response_details['answerlist'] = [question_response.text_response]            
+            else:
+                response_details['answerlist'] = [question.options[index].text for index, bo in enumerate(question_response.response_per_option) if bo]
+            all_responses.append(response_details)
+    return render(request,'check_survey.html', {'all_responses':all_responses})
+
+
+
 def update_default_setting(request):
     if request.POST:
         survey_type = request.POST['survey_type']
@@ -390,7 +410,10 @@ def coach_user_profile(request,user_id):
     except:
         return HttpResponse('User Profile object error')
 
-    return render(request,'coach/user_details.html', {'profile' : profile, 'user_profile' : user_profile_ob})
+    user_survey_responses = SurveyResponses.objects(user=user_id)
+    user_surveys = [(user_response.survey, user_respose.status) for user_response in user_survey_responses]
+
+    return render(request,'coach/user_details.html', {'profile' : profile, 'user_profile' : user_profile_ob, 'user_surveys': user_surveys})
 
 
 
@@ -557,7 +580,6 @@ def flow(request, survey_id):
             questions = [json.loads(question.to_json()) for question in questions]
             return JsonResponse({'questions': json.dumps(questions)})
         elif 'evaluation_scheme' in request.POST:
-            survey.evaluation_scheme = request.POST['evaluation_scheme']
+            survey.evaluation_scheme = request.POST['flow']
             survey.save()
-            return HttpResponse('success')
     return render(request, 'flow/index.html')
