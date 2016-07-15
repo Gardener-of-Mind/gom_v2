@@ -52,7 +52,7 @@ urlpatterns = [
 
     url(r'^test/$', views.test_pic),
 
-    url(r'^flow/$', views.flow),
+    url(r'^survey/flow/(?P<survey_id>.*)/$', views.flow),
     url(r'^survey/take/(?P<survey_id>.*)/$', views.take_survey),
     url(r'^survey/default/$', views.default_surveys),
     url(r'^admin/default-setting/$', views.update_default_setting),

@@ -15,17 +15,17 @@ export default class Condition {
     this.value = undefined;
 
     if (type !== 'default') {
-      switch (question.type) {
-        case QUESTION_TYPES.SHORT:
-          this.short();
+      switch (question.query_type) {
+        case QUESTION_TYPES.text:
+          this.text();
           break;
 
-        case QUESTION_TYPES.CHOICE_SINGLE:
-          this.single();
+        case QUESTION_TYPES.radio:
+          this.radio();
           break;
 
-        case QUESTION_TYPES.CHOICE_MULTIPLE:
-          this.multiple();
+        case QUESTION_TYPES.checkbox:
+          this.checkbox();
           break;
 
         default:
@@ -35,7 +35,7 @@ export default class Condition {
     }
   }
 
-  short() {
+  text() {
     const $element = $(`
       <div class="from-group">
         <label class="col-md-3 control-label">Value:</label>
@@ -52,7 +52,7 @@ export default class Condition {
     this.element = $element;
   }
 
-  single() {
+  radio() {
     const $element = $(`
       <div class="col-md-10 col-md-offset-1">
         <div class="form-group">
@@ -77,7 +77,7 @@ export default class Condition {
     this.element = $element;
   }
 
-  multiple() {
+  checkbox() {
     const $element = $(`
       <div class="col-md-10 col-md-offset-1">
         <div class="form-group">

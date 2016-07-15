@@ -1,10 +1,10 @@
 const questionTypes = {
-  SHORT: 'short answer questions',
-  LONG: 'paragraph',
-  CHOICE_SINGLE: 'radio button based multiple choice question',
-  CHOICE_MULTIPLE: 'checkbox based multiple choice question',
-  DROPDOWN: 'DROPDOWN',
-  LINEAR_SCALE: 'LINEAR_SCALE',
+  dual: 'yes or no',
+  dropdownbox: 'dropdown',
+  radio: 'single choice',
+  checkbox: 'multiple choice',
+  rating: 'rating',
+  text: 'text',
 };
 
 export default questionTypes;
