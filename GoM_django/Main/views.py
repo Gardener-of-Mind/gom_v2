@@ -115,19 +115,19 @@ def take_survey(request, survey_id):
                                             survey=survey).first()
     if request.POST:
         if 'answer' not in request.POST:  # you just revisited
-            if user_response in None:
+            if user_response is None:
                 next_question = survey.questions[0]
             else:
                 next_question = user_response.current_question
 
         else:  # you are submitting an answer
             # If this is the first answer user_response does not exists
-            if user_response in None:
+            if user_response is None:
                 user_response = SurveyResponses(user_id=int(request.user.id),
                                                 survey=survey, survey_score=0)
 
             question_id = ObjectId(request.POST['question_id'])
-            question = Question.object(id=question_id).first()
+            question = Question.objects(id=question_id).first()
             answer = request.POST['answer']
             if question.query_type in ['dropdownbox', 'radio', 'rating', 'dual']:
                 question_response = Response(question=question,
@@ -150,7 +150,7 @@ def take_survey(request, survey_id):
                         user.depression_score += question.options[int(number)].depression_score
                         user.stress_score += question.options[int(number)].stress_score
 
-            user_response.respones.append(question_response)
+            user_response.responses.append(question_response)
             next_question = resolve_next_question(question_response)
             user_response.current_question = next_question  # The Question user will be answering now.
         next_question = next_question.to_json()
@@ -447,7 +447,6 @@ def add_survey(request):
                 question = Question(text=text, query_type=query_type)
 
                 for option in options:
-                    option = json.loads(option)
                     question.options.append(Option(text=option['text'],
                                             anxiety_score=option['anxiety_score'],
                                             depression_score=option['depression_score'],
@@ -485,10 +484,10 @@ def add_activity(request):
             name = request.POST['name']
             category = request.POST['category']
             activity_ob = Activity(name=name, category=category)
-            activity_ob.save()            
+            activity_ob.save()
             acitivity_id = activity_ob.id
             return HttpResponse(str(acitivity_id))
-        
+
         elif 'task' in request.POST:
             acitivity_id = str(request.POST['activity_id'])
             activity_ob = Activity.objects(id=acitivity_id).first()
@@ -521,7 +520,7 @@ def view_activities(request):
 def assign_activity(request):
     if request.POST:
         user_id = int(request.POST['user_id'])
-        acitivty_id = str(request.POST['acitivty_id']) 
+        acitivty_id = str(request.POST['acitivty_id'])
         activity_ob = Activity.objects(id=acitivty_id).first()
         user_activity_ob = UserActivity(user_id = user_id, assigned_activity= activity_ob)
         uesr_activity_ob.save()
@@ -533,7 +532,7 @@ def assign_activity(request):
 def complete_task(request):
     user = request.user
     user_profile = user_profile.objects.get(user=user)
-    
+
     task_id = str(request.POST['task_id'])
     user_activity_id = str(request.POST['user_activity_id'])
 

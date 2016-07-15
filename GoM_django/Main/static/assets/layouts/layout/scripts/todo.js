@@ -31,7 +31,7 @@ var AppTodo = function () {
                     },
                     data: dairyObj,
                     success:function(response){
-                        $('#todo-task-modal').hide();
+                        $('#todo-task-modal').modal('hide');
                         $('.diaries').prepend(''+
                             '<div class="portlet light bordered">'+
                                 '<div class="portlet-title">'+
