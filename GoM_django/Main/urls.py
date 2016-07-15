@@ -33,12 +33,12 @@ urlpatterns = [
 
     url(r'^questions/$', views.questions),
     url(r'^query/$', views.query),
-   
+
     url(r'^survey_submit/$', views.survey_submit),
-    url(r'^surveys/add/$', views.add_survey),
+    url(r'^survey/add/$', views.add_survey),
     url(r'^survey_view/$', views.view_surveys),
 
-   
+
     url(r'^dashboard/$', views.dashboard),
     url(r'^diary/$', views.diary),
     url(r'^dashboard/(?P<user_id>[0-9]+)/$', views.coach_user_profile),
