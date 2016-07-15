@@ -487,6 +487,18 @@
                                 <span class="title">Approved Coaches</span>
                             </a>
                         </li>
+                        <li class="nav-item start">
+                            <a href="/survey/add" class="nav-link">
+                                <i class="icon-settings"></i>
+                                <span class="title">Add survey</span>
+                            </a>
+                        </li>
+                        <li class="nav-item start">
+                            <a href="/admin" class="nav-link" target="_blank">
+                                <i class="icon-settings"></i>
+                                <span class="title">Manage accounts</span>
+                            </a>
+                        </li>
                     </ul>
                     <!-- END SIDEBAR MENU -->
                     <!-- END SIDEBAR MENU -->
@@ -526,14 +538,9 @@
                             <div class="portlet light bordered">
                                 <div class="portlet-title tabbable-line">
                                     <div class="caption">
-                                        <i class=" icon-graduation font-green"></i>
-                                        <span class="caption-subject font-green bold uppercase">Coach Applicants</span>
+                                        <i class=" icon-layers font-green"></i>
+                                        <span class="caption-subject font-green bold uppercase">Coaches</span>
                                     </div>
-                                    <ul class="nav nav-tabs">
-                                        <li class="active">
-                                            <a href="#tab_actions_pending" data-toggle="tab" aria-expanded="false"> Pending </a>
-                                        </li>
-                                    </ul>
                                 </div>
                                 <div class="portlet-body">
                                     <div class="tab-content">
@@ -556,12 +563,6 @@
                                                                 <span class="mt-action-date">{{coach.created.date}}</span>
                                                                 <span class="mt-action-dot bg-green"></span>
                                                                 <span class="mt=action-time">9:30-13:00</span>
-                                                            </div>
-                                                            <div class="mt-action-buttons ">
-                                                                <div class="btn-group btn-group-circle">
-                                                                    <button type="button" class="btn btn-outline green btn-sm">Appove</button>
-                                                                    <button type="button" class="btn btn-outline red btn-sm">Reject</button>
-                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -1153,7 +1154,7 @@
         <!-- END FOOTER -->
         <!--[if lt IE 9]>
 <script src="{% static 'assets/global/plugins/respond.min.js"></script>
-<script src="{% static 'assets/global/plugins/excanvas.min.js"></script> 
+<script src="{% static 'assets/global/plugins/excanvas.min.js"></script>
 <![endif]-->
         <!-- BEGIN CORE PLUGINS -->
         <script src="{% static 'assets/global/plugins/jquery.min.js' %}" type="text/javascript"></script>
