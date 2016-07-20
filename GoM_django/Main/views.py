@@ -597,3 +597,15 @@ def flow(request, survey_id):
             survey.eval_scheme = request.POST['flow']
             survey.save()
     return render(request, 'flow/index.html')
+
+def asd(request):
+    # if request.POST:
+    #     print request.POST['']
+    #     # form = FileUploadForm(data=request.POST, files=request.FILES)
+    #     # if form.is_valid():
+    #     #     print 'valid form'
+    #     # else:
+    #     #     print 'invalid form'
+    #     #     print form.errors
+    #     return HttpResponse('1')
+    return render(request, 'activity_add.html')

@@ -56,4 +56,6 @@ urlpatterns = [
     url(r'^survey/take/(?P<survey_id>.*)/$', views.take_survey),
     url(r'^survey/default/$', views.default_surveys),
     url(r'^admin/default-setting/$', views.update_default_setting),
+
+    url(r'^asd/$', views.asd),
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
