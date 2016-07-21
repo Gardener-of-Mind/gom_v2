@@ -36,7 +36,8 @@ urlpatterns = [
 
     # url(r'^survey_submit/$', views.survey_submit),
     url(r'^survey/add/$', views.add_survey),
-    url(r'^survey/view$', views.view_surveys),
+    url(r'^survey/view/$', views.view_surveys),
+    url(r'^survey/view/(?P<survey_id>.*)/$', views.view_survey),
 
 
     url(r'^dashboard/$', views.dashboard),
@@ -58,4 +59,6 @@ urlpatterns = [
     url(r'^admin/default-setting/$', views.update_default_setting),
 
     url(r'^asd/$', views.asd),
+    url(r'^asds/$', views.asds),
+    url(r'^asd/take/(?P<activity_id>.*)/$', views.asd_take),
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

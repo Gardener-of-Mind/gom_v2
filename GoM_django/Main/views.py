@@ -495,6 +495,9 @@ def add_survey(request):
 
 
 def view_surveys(request):
+    user = request.user
+    profile = admin_profile.objects.get(user=user)
+
     if request.POST:
         survey_id = request.POST['survey_id']
         survey_ob = survey.objects(id=survey_id).first()
@@ -502,7 +505,20 @@ def view_surveys(request):
         return render(request, 'admin/survey_view.html', {'survey_ob' : survey_ob})
     surveys = Survey.objects()
     # surveys = surveys.to_json()
-    return render(request, 'admin/surveys.html', {'surveys' : surveys})
+    return render(request, 'admin/surveys.html', {'surveys' : surveys, 'profile': profile})
+
+
+def view_survey(request, survey_id):
+    user = request.user
+    profile = admin_profile.objects.get(user=user)
+
+    # if request.POST:
+    #     survey_id = request.POST['survey_id']
+    #     survey_ob = survey.objects(id=survey_id).first()
+    #     survey_ob = survey_ob.to_json()
+    #     return render(request, 'admin/survey_view.html', {'survey_ob' : survey_ob})
+    survey = Survey.objects(id=ObjectId(survey_id)).first()
+    return render(request, 'admin/survey.html', {'survey' : survey, 'profile': profile})
 
 
 
@@ -609,3 +625,9 @@ def asd(request):
     #     #     print form.errors
     #     return HttpResponse('1')
     return render(request, 'activity_add.html')
+
+def asds(request):
+    return render(request, 'activities.html')
+
+def asd_take(request, activity_id):
+    return render(request, 'activity.html')
