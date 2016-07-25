@@ -310,67 +310,65 @@ def edit_profile(request):
     user=request.user
     try:
         profile= user_profile.objects.get(user=user)
+        profile_type = 'user'
     except:
-        return HttpResponse('Error')
+        profile= admin_profile.objects.get(user=user)
+        profile_type = 'admin'
 
+    if request.POST.get('profile_pic',False):
+        # try:
+        profile.profile_pic = request.FILES['display_pic']
+        profile.save()
+        return HttpResponseRedirect('.')
+        # except:
+            # return HttpResponse('Error')
+    if request.POST:
+        try:
+            name = str(request.POST['name'])
+        except:
+            name = ''
 
-    if 'profile' not in locals():
-        return HttpResponse('Error')
-    else:
-        if request.POST.get('profile_pic',False):
-            # try:
-            profile.profile_pic = request.FILES['display_pic']
-            profile.save()
-            return HttpResponseRedirect('.')
-            # except:
-                # return HttpResponse('Error')
-        if request.POST:
-            try:
-                name = str(request.POST['name'])
-            except:
-                name = ''
+        try:
+            gender = str(request.POST['gender'])
+        except:
+            gender = 'M'
 
-            try:
-                gender = str(request.POST['gender'])
-            except:
-                gender = 'M'
+        try:
+            college = str(request.POST['college'])
+        except:
+            college = ''
 
-            try:
-                college = str(request.POST['college'])
-            except:
-                college = ''
+        try:
+            city = str(request.POST['city'])
+        except:
+            city = ''
 
-            try:
-                city = str(request.POST['city'])
-            except:
-                city = ''
+        try:
+            occupation = str(request.POST['occupation'])
+        except:
+            occupation = ''
 
-            try:
-                occupation = str(request.POST['occupation'])
-            except:
-                occupation = ''
+        try:
+            phone = int(request.POST['phone'])
+        except:
+            phone = 0
 
-            try:
-                phone = int(request.POST['phone'])
-            except:
-                phone = 0
+        try:
+            about_me = str(request.POST['about_me'])
+        except:
+            about_me = ''
 
-            try:
-                about_me = str(request.POST['about_me'])
-            except:
-                about_me = ''
+        profile.name= name
+        profile.gender= gender
+        profile.college = college
+        profile.occupation = occupation
+        profile.phone = phone
+        profile.city= city
+        profile.about_me = about_me
+        profile.save()
+        return HttpResponseRedirect('.')
 
-            profile.name= name
-            profile.gender= gender
-            profile.college = college
-            profile.occupation = occupation
-            profile.phone = phone
-            profile.city= city
-            profile.about_me = about_me
-            profile.save()
-            return HttpResponseRedirect('.')
-
-        return render(request,'user/profile_account.html', {'profile':profile})
+    return render(request,'user/profile_account.html', {'profile':profile, 'profile_type':profile_type})
 
 
 

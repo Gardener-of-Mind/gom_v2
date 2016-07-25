@@ -90,7 +90,7 @@ var FormWizard = function () {
                         questions: JSON.stringify(questions),
                     },
                     success: function(response) {
-                        window.location.href= "/survey/flow/" + surveyId;
+                        // window.location.href= "/survey/flow/" + surveyId;
                     },
                     error: function() {
                         alert("Some Error occured!\n Try submitting again");
