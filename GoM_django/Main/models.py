@@ -100,30 +100,58 @@ class SurveyResponses(Document):
     survey_score = IntField()
     completed = BooleanField(default=False)
 
+class UserSurveyStatus(Document):
+    completed_surveys = ListField(ReferenceField(Survey))
+    pending_surveys = ListField(ReferenceField(Survey))
+    user_id = IntField(null=True)
 
 #Activity Models
 
 
+class Tag(Document):
+    name = StringField(max_length=50)
+        
 class Activity(Document):
-    name= StringField(max_length=50,blank=True)
-    category= StringField(max_length=50,blank=True)
-
-
-class Task(Document):
     title = StringField(max_length=100)
-    details = StringField(max_length=500,blank=True)
-    activity = ReferenceField(Activity)
+    details = StringField(max_length=1500, blank=True)
+    tags = ListField(ReferenceField(Tag))
+    next_allowed_after = IntField(default=0)   # Hours after which next activity is allowed.
 
     class Meta:
-        verbose_name_plural = 'Task'
+        verbose_name_plural = 'Activities'
+
     def __unicode__(self):
         return str(self.text)
 
 
-class UserActivity(Document):
-    completed_tasks = ListField(ReferenceField(Task))
-    assigned_activity = ReferenceField(Activity)
-    user_id= IntField(null=True)
+class ActivityResponse(Document):
+    activity = ReferenceField(Activity)
+    feedback = StringField(max_length=500, null=True)
+    rating = IntField(null=True)
+    time_completed = DateTimeField(default=datetime.datetime.now)
+
+
+class ActivityTrack(Document):
+    name = StringField(max_length=50)
+    category = StringField(max_length=50)
+    activity = ListField(ReferenceField(Activity))
+    admin_approved = BooleanField(default=False)
+    admin_only = BooleanField()  # Decide if coach is allowed to push activity.
+
+
+class ActivityTrackResponses(Document):
+    user_id = IntField()
+    track = ReferenceField(ActivityTrack)
+    current_activity = ReferenceField(Question, null=True)
+    responses = ListField(ReferenceField(Response))
+    completed = BooleanField(default=False)
+
+
+class UserActivityTrackStatus(Document):
+    completed_tracks = ListField(ReferenceField(ActivityTrack))  # Allow reordering. Remove completed.+
+    pending_tracks = ListField(ReferenceField(ActivityTrack))
+    user_id = IntField()
+
 
 # Relational DB models
 
