@@ -85,12 +85,12 @@ var FormWizard = function () {
                     headers : {
                         "X-CSRFToken" : getCookie('csrftoken')
                     },
-                    data: { 
+                    data: {
                         survey_id: surveyId,
-                        questions: JSON.stringify(questions), 
+                        questions: JSON.stringify(questions),
                     },
                     success: function(response) {
-                        // window.location.href= "..";
+                        window.location.href= "/survey/flow/" + surveyId;
                     },
                     error: function() {
                         alert("Some Error occured!\n Try submitting again");

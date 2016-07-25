@@ -3,11 +3,11 @@ from bson.objectid import ObjectId
 
 
 def resolve_next_question(question_response):
-    evaluation_scheme = question_response.question.evaluation_scheme
-    default_question_id = evaluation_scheme[0]['to']
+    eval_scheme = question_response.question.eval_scheme
+    default_question_id = eval_scheme[0]['to']
     next_question_id = default_question_id
     question_type = question_response.question.query_type
-    for rule in evaluation_scheme[1:]:
+    for rule in eval_scheme[1:]:
         if question_type in ['dropdownbox', 'radio', 'rating', 'dual']:
             if question_response.single_option == int(rule['value']):
                 next_question_id = rule['to']

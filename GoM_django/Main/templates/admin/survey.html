@@ -130,7 +130,7 @@
                             <!-- END SIDEBAR TOGGLER BUTTON -->
                         </li>
                         <li class="nav-item start">
-                            <a href="../dashboard/" class="nav-link">
+                            <a href="/dashboard" class="nav-link">
                                 <i class="icon-home"></i>
                                 <span class="title">Dashboard</span>
                             </a>
@@ -178,7 +178,7 @@
                         </li>
                         <li class="nav-item start active">
                             <a href="/survey/add" class="nav-link">
-                                <i class="icon-settings"></i>
+                                <i class="icon-notebook"></i>
                                 <span class="title">Surveys</span>
                             </a>
                         </li>
@@ -208,7 +208,7 @@
                                 <i class="fa fa-circle"></i>
                             </li>
                             <li>
-                                <a href="../">Survey</a>
+                                <a href="../">Surveys</a>
                                 <i class="fa fa-circle"></i>
                             </li>
                             <li>
@@ -233,20 +233,34 @@
                                 </div>
                                 <div class="portlet-body">
                                     <div class="tab-content">
-                                        <div class="tab-pane active" id="tab_actions_pending">
+                                        <div class="tab-pane active">
                                             <!-- BEGIN: Actions -->
                                             <div class="mt-actions">
-                                                <div class="mt-action" data-uid="coach.id">
-                                                    <div class="mt-action-body">
-                                                        <div class="mt-action-row">
-                                                            <div class="mt-action-info ">
-                                                                <div class="mt-action-details ">
-                                                                    <span class="mt-action-author">
-                                                                        {{question.text}}
-                                                                    </span>
+                                                <div class="mt-action-body">
+                                                    <div>
+                                                        <h3>{{question.text}}</h3>
+                                                    </div>
+                                                    <div>
+                                                        <form class="form-horizontal" method="POST">
+                                                            {% csrf_token %}
+                                                            <div class="form-body">
+                                                                <div class="tab-content">
+                                                                    <div class="tab-pane active">
+                                                                        <div class="form-group">
+                                                                        {% if question.query_type == "text" %}
+                                                                            <div class="col-md-12">
+                                                                                <input type="text" class="form-control">
+                                                                            </div>
+                                                                        {% elif question.query_type == "text" %}
+                                                                            <div class="col-md-12">
+                                                                                <input type="text" class="form-control">
+                                                                            </div>
+                                                                        {% endif %}
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
+                                                        </form>
                                                     </div>
                                                 </div>
                                             </div>

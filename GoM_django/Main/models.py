@@ -4,6 +4,8 @@ from django.db import models
 from mongoengine import *
 from django.utils import timezone
 
+import datetime
+
 class gauss(Document):
     email = StringField(required=True)
     first_name = StringField(max_length=50)
@@ -110,7 +112,7 @@ class UserSurveyStatus(Document):
 
 class Tag(Document):
     name = StringField(max_length=50)
-        
+
 class Activity(Document):
     title = StringField(max_length=100)
     details = StringField(max_length=1500, blank=True)
