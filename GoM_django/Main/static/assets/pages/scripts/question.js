@@ -167,7 +167,8 @@ function genCheckbox(options) {
     var data = '<div class="col-sm-12 mcq-type option-type" data-option-type="checkbox">';
 
     $.each(options,function(i,val){
-        data += '<div class="col-sm-6"> <label> <div class="mcq"> <input type="checkbox" name="checkbox-type" value="'+val+'">'+val+'</div> </label> </div>';
+        console.log(val)
+        data += '<div class="col-sm-6"> <label> <div class="mcq"> <input type="checkbox" name="checkbox-type">'+val.text+'</div> </label> </div>';
     });
 
     data += '</div>';
