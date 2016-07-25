@@ -184,6 +184,26 @@ def take_survey(request, survey_id):
         return HttpResponse(next_question)
     return render(request, 'question.html')
 
+@login_required
+def view_edit_survey(request, survey_id):
+    try:
+        profile= admin_profile.objects.get(user=request.user)
+    except:
+        return HttpResponse("Acess Denied")
+
+    try:
+        survey = Survey.objects(id=ObjectId(survey_id))
+    except:
+        return HttpResponse('Survey Not Found')
+    if request.POST:
+        questions = json.loads(request.POST['questions'])
+        for question_json in questions:
+            q_id = question_json['_id']
+            question = Question.objects(id=ObjectId(q_id))
+            question.text = question_json['text']
+            question.save()
+        survey.save()
+    return HttpResponse(survey.to_json())
 # ----------------------------------------------------------------------------
 
 
