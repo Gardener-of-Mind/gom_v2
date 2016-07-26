@@ -589,7 +589,7 @@ def view_tracks(request):
         return render(request, 'track_view.html', {'track': track})
 
     all_tracks = ActivityTrack.objects()
-    return render(request, 'all_tracks', {'all_tracks': all_tracks})
+    return render(request, 'activities.html', {'all_tracks': all_tracks})
 
 
 def view_track(request, track_id):

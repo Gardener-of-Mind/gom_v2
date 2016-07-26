@@ -406,7 +406,7 @@
                         </li>
 
                         <li class="nav-item start">
-                            <a href="../dashboard/" class="nav-link">
+                            <a href="/dashboard/" class="nav-link">
                                 <i class="icon-home"></i>
                                 <span class="title">Dashboard</span>
                             </a>
@@ -440,22 +440,10 @@
                                 </li>
                             </ul>
                         </li>
-                        <li class="nav-item start">
-                            <a href="/coachlist" class="nav-link">
-                                <i class="icon-home"></i>
-                                <span class="title">Approved Coaches</span>
-                            </a>
-                        </li>
                         <li class="nav-item start active open">
-                            <a href="/activity/add" class="nav-link">
+                            <a href="/activities" class="nav-link">
                                 <i class="icon-settings"></i>
-                                <span class="title">Add activity</span>
-                            </a>
-                        </li>
-                        <li class="nav-item start">
-                            <a href="/admin" class="nav-link" target="_blank">
-                                <i class="icon-settings"></i>
-                                <span class="title">Manage accounts</span>
+                                <span class="title">Activities</span>
                             </a>
                         </li>
                     </ul>
@@ -528,13 +516,13 @@
                                         <div class="tab-pane active" id="tab_actions_pending">
                                             <!-- BEGIN: Actions -->
                                             <div class="mt-actions">
-                                                {% for activity in activities %}
+                                                {% for activity in all_tracks %}
                                                 <div class="mt-action" data-uid="coach.id">
                                                     <div class="mt-action-body">
                                                         <div class="mt-action-row">
                                                             <div class="mt-action-info ">
                                                                 <div class="mt-action-details ">
-                                                                    <span class="mt-action-author">{{activity.name}}</span>
+                                                                    <span class="mt-action-author"><a href="/asd/take/123">{{activity.name}}</a></span>
                                                                     <p class="mt-action-desc">{{activity.category}}</p>
                                                                 </div>
                                                             </div>

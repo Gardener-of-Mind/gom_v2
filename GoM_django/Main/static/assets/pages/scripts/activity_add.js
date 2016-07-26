@@ -274,7 +274,7 @@ var FormWizard = function () {
             imageData.append('image', imageFile);
             questions.push({
               query_type: query_type,
-              text: $('#questionText').val(),
+              text: CKEDITOR.instances.questionText.getData(),
               image: imageData,
             });
             break;
@@ -284,7 +284,7 @@ var FormWizard = function () {
 
             questions.push({
               query_type: query_type,
-              text: $('#questionText').val(),
+              text: CKEDITOR.instances.questionText.getData(),
               videoUrl: videoUrl,
             });
             break;
@@ -292,7 +292,7 @@ var FormWizard = function () {
           case 'text':
             questions.push({
               query_type: query_type,
-              text: $('#questionText').val(),
+              text: CKEDITOR.instances.questionText.getData(),
             });
             break;
 
