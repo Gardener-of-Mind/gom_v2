@@ -5,9 +5,12 @@ var AppTodo = function () {
 
     // private functions & variables
 
+    var actor;
+
     var _initComponents = function() {
 
         $('.edit-diary').on("click",function(){
+            actor = 'edit';
             $parent = $(this).closest('.portlet.light.bordered');
             console.log("yo",$parent,$(parent).find('.diary-title'));
             $('#todo-task-modal .diary-modal-title').val($parent.find('.diary-title').html());
@@ -32,6 +35,9 @@ var AppTodo = function () {
                     data: dairyObj,
                     success:function(response){
                         $('#todo-task-modal').modal('hide');
+                        if (actor === 'edit') {
+                        console.log($('#todo-task-modal .diary-modal-save').data('did'))
+                        }
                         $('.diaries').prepend(''+
                             '<div class="portlet light bordered">'+
                                 '<div class="portlet-title">'+
@@ -68,10 +74,10 @@ var AppTodo = function () {
             }
             else
                 alert("Empty title or message");
-
         });
 
         $('.add-diary').on("click",function(){
+            actor = 'add';
             $('#todo-task-modal .diary-modal-title').val("");
             $('#todo-task-modal .diary-modal-date').val(new Date().toLocaleDateString());
             $('#todo-task-modal .diary-modal-message').val("");

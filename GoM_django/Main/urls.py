@@ -47,10 +47,10 @@ urlpatterns = [
     url(r'^coachlist/$', views.approved_coaches),
 
 
-    url(r'^activity/add/$', views.add_activity),
-    url(r'^activity_view/$', views.view_activities),
-    url(r'^assign_activity/$', views.assign_activity),
-    url(r'^complete_task/$', views.complete_task),
+    # url(r'^activity/add/$', views.add_activity),
+    # # url(r'^activity_view/$', views.view_activities),
+    # url(r'^assign_activity/$', views.assign_activity),
+    # url(r'^complete_task/$', views.complete_task),
 
     url(r'^test/$', views.test_pic),
 
@@ -59,7 +59,13 @@ urlpatterns = [
     url(r'^survey/default/$', views.default_surveys),
     url(r'^admin/default-setting/$', views.update_default_setting),
 
-    url(r'^asd/$', views.asd),
-    url(r'^asds/$', views.asds),
-    url(r'^asd/take/(?P<activity_id>.*)/$', views.asd_take),
+    url(r'^atrack/add/$', views.add_track),
+    url(r'^atrack/all/$', views.view_tracks),
+    url(r'^atrack/take/(?P<track_id>.*)/$', views.view_track),
+    url(r'^coach/atrack/assign/$', views.assign_activity_track),
+    url(r'^activity/complete/$', views.complete_activity),
+    url(r'^student/tracks/$', views.student_activity_profile),
+    url(r'^coach/diary/(?P<student_id>.*)/$', views.coach_diary),
+
+
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

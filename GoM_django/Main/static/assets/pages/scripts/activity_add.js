@@ -24,14 +24,18 @@ var FormWizard = function () {
           headers : {
             "X-CSRFToken" : getCookie('csrftoken')
           },
-          data: {'activity':true,'name':$('[name="sName"]').val(),'category':$('[name="sCategory"]').val()},
+          data: {
+            track: true,
+            name: $('[name="sName"]').val(),
+            category: $('[name="sCategory"]').val()
+          },
           success: function(response) {
             console.log(response);
             activityId = response;
           },
           error: function() {
             alert("Some Error occured");
-            window.location.reload();
+            // window.location.reload();
           }
         });
       }

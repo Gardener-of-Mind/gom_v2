@@ -105,6 +105,26 @@ var Dashboard = function() {
         init: function() {
             this.initEasyPieCharts();
             this.initChat();
+
+            $('#submit-student-note').click(function() {
+                $.ajax({
+                    url: '/coach/diary/' + student_id + '/',
+                    data: {
+                        remarks: CKEDITOR.instances.editor1.getData().replace(/\n/g, '\\n')
+                    },
+                    method: 'POST',
+                    headers : {
+                        "X-CSRFToken" : getCookie('csrftoken')
+                    },
+                    success: function(response) {
+                        console.log(response);
+                        activityId = response;
+                    },
+                    error: function() {
+                        alert("Some Error occured");
+                    }
+                })
+            })
         }
     };
 
@@ -114,4 +134,20 @@ if (App.isAngularJsApp() === false) {
     jQuery(document).ready(function() {
         Dashboard.init(); // init metronic core componets
     });
+}
+
+function getCookie(name) {
+  var cookieValue = null;
+  if (document.cookie && document.cookie != '') {
+    var cookies = document.cookie.split(';');
+    for (var i = 0; i < cookies.length; i++) {
+      var cookie = jQuery.trim(cookies[i]);
+      // Does this cookie string begin with the name we want?
+      if (cookie.substring(0, name.length + 1) == (name + '=')) {
+        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+        break;
+      }
+    }
+  }
+  return cookieValue;
 }

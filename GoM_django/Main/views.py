@@ -273,19 +273,19 @@ def dashboard(request):
     user=request.user
     try:
         profile= user_profile.objects.get(user=user)
-        user_activity_ob = UserActivity(id= int(user.id))
-        completed_tasks = user_activity_ob.completed_tasks
-        tasks=[]
-        for task_id in completed_tasks:
-            task_ob = Task.objects(id=task_id).first()
-            tasks.append(task_ob)
+        # user_activity_ob = UserActivity(id= int(user.id))
+        # completed_tasks = user_activity_ob.completed_tasks
+        # tasks=[]
+        # for task_id in completed_tasks:
+        #     task_ob = Task.objects(id=task_id).first()
+        #     tasks.append(task_ob)
 
-        assigned_activity = user_activity_ob.assigned_activity
-        all_tasks = Task.objects(activity= assigned_activity)
-        pending_tasks= list(set(all_tasks) - set(completed_tasks))
+        # assigned_activity = user_activity_ob.assigned_activity
+        # all_tasks = Task.objects(activity= assigned_activity)
+        # pending_tasks= list(set(all_tasks) - set(completed_tasks))
 
 
-        return render(request,'user/dashboard.html',{'profile': profile, 'completed_tasks' : completed_tasks, 'pending_tasks' :pending_tasks})
+        return render(request,'user/dashboard.html',{'profile': profile})
     except:
         pass
     try:
@@ -382,20 +382,23 @@ def edit_profile(request):
 def profile_overview(request):
     user=request.user
     try:
-        profile_type = 'user'
         profile= user_profile.objects.get(user=user)
+        profile_type = 'user'
     except:
         pass
     try:
-        profile_type = 'coach'
         profile= coach_profile.objects.get(user=user)
+        profile_type = 'coach'
     except:
         pass
     try:
-        profile_type = 'admin'
         profile= admin_profile.objects.get(user=user)
+        profile_type = 'admin'
     except:
         pass
+    print '+++++++++++++'
+    print profile_type
+    print '-------------'
     if 'profile' not in locals():
         return HttpResponse('Error')
     else:
@@ -410,14 +413,15 @@ def diary(request):
     user= request.user
     profile= user.user_profile
     if request.POST:
-        oid = str(request.POST.get('oid',False))
+        oid = request.POST['oid']
         text = str(request.POST['text'])
+        title = request.POST['title']
         try:
-            diary = Diary.objects(id= oid).first()
+            diary = Diary.objects(id= ObjectId(oid)).first()
+            diary.title = title
             diary.text_data = text
             diary.save()
         except:
-            title = str(request.POST['title'])
             diary = Diary(title=title,text_data=text, user_id =int(profile.id))
             diary.save()
         diary = {"title": diary.title, "modified_date": diary.modified_date.strftime('%B %d, %Y, %I:%M %p'), "text_data": diary.text_data}
@@ -446,7 +450,11 @@ def coach_user_profile(request,user_id):
     user_survey_responses = SurveyResponses.objects(user_id=user_id)
     user_surveys = [(user_response.survey, user_respose.status) for user_response in user_survey_responses]
 
-    return render(request,'coach/user_details.html', {'profile' : profile, 'user_profile' : user_profile_ob, 'user_surveys': user_surveys or range(3) })
+    return render(request, 'coach/user_details.html', {
+        'profile': profile,
+        'user_profile': user_profile_ob,
+        'user_surveys': user_surveys or range(3)
+    })
 
 
 
@@ -547,9 +555,9 @@ def view_survey(request, survey_id):
 
 # Activity Views here
 
-def add_activity(request):
+def add_track(request):
     user= request.user
-    profile = admin_profile.profile.objects.get(user=user)
+    profile = admin_profile.objects.get(user=user)
 
     if request.POST:
         if 'track' in request.POST:
@@ -560,12 +568,12 @@ def add_activity(request):
             return HttpResponse(str(track.id))
 
         elif 'activity' in request.POST:
-            track_id = str(request.POST['track_id'])
+            track_id = request.POST['track_id']
             track = ActivityTrack.objects(id=ObjectId(track_id)).first()
-            title = str(request.POST['title'])
-            details = str(request.POST['details'])
+            title = request.POST['title']
+            details = request.POST['details']
             next_allowed_after = int(request.POST['next_allowed_after'])
-            activity = Activity(title=title, details=details, track=activity_ob,
+            activity = Activity(title=title, details=details, track=track,
                                 next_allowed_after=next_allowed_after)
             activity.save()
             track.activity.append(activity)
@@ -589,7 +597,7 @@ def view_track(request, track_id):
     activity_track_response = ActivityTrackResponses.objects(user_id=request.user.id,
                                                                 track=track).first()
     if activity_track_response is None:
-        activity_track_response = ActivityTrackResponses(user_id=request.user.id, track=track, 
+        activity_track_response = ActivityTrackResponses(user_id=request.user.id, track=track,
                                                         current_activity=track.activity[0])
         activity_track_response.save()
     activity = user_activity_track_status.current_activity
@@ -631,7 +639,7 @@ def complete_activity(request):
         # create new response shit if it does not exist already
         activity_track_response = ActivityTrackResponses.objects(user_id=request.user.id, track=track).first()
         if activity_track_response is None:
-            activity_track_response = ActivityTrackResponses(user_id=request.user.id, track=track, 
+            activity_track_response = ActivityTrackResponses(user_id=request.user.id, track=track,
                                                             current_activity=track.activity[0])
             activity_track_response.save()
         feedback = request.POST['feedback']
