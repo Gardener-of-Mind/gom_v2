@@ -1,10 +1,12 @@
 function hideForm() {
-    $('.survey-form').fadeOut(300);
-    $('.survey-type').delay(400).fadeIn(300);
+    console.log('hideForm')
+        $('.survey-form').fadeOut(300);
+        $('.survey-type').delay(400).fadeIn(300);
 }
 
 
 function showForm() {
+    console.log('showForm')
     $('.survey-type').fadeOut(300);
     $('.survey-form').delay(400).fadeIn(300);
 }
@@ -17,6 +19,7 @@ $.ajaxSetup({
 })
 
 function sendSurvey(answers,sid) {
+    console.log('sendSurvey')
     console.log(answers);
     $.ajax({
         url : '../survey_submit/',
@@ -40,76 +43,78 @@ $('.body-box').animate({
     opacity: '1'
 }, 500);
 
-resetSurvey();
-tasks = [
-    {
-        query_type: "text",
-        text: "do this and that",
-    },
-    {
-        query_type: "video",
-        text: "do this and that",
-        videoUrl: "https://www.youtube.com/watch?v=RxPZh4AnWyk",
-    },
-];
+showForm();
 var store = {
     question: null,
 };
-startSurvey('578801165237d745c1a1a7c8');
 function loadQuestion(answer) {
-    // if (typeof answer === 'undefined') {
-    //     $.post('.', {
-    //         first: 1
-    //     }, function(response) {
-    //         store.question = JSON.parse(response)
-    //         generateQuestion(store.question);
-    //         // console.log(question)
+    console.log('loadQuestion')
+    if (typeof answer === 'undefined') {
+        $.post('.', {
+            first: 1
+        }, function(response) {
+            store.question = JSON.parse(response)
+            generateQuestion(store.question);
+            // console.log(question)
 
-    //         $('.next-ques').click(function(){
-    //             $('ques-cont').fadeOut(200);
-    //             var response = getAnswerObj(store.question['_id']);
-    //             if (response != false) {
-    //                 loadQuestion(response);
-    //             }
-    //         });
-    //     });
-    // } else {
-    //     $.post('.', {
-    //         answer: JSON.stringify(answer),
-    //         question_id: store.question._id.$oid
-    //     }, function(response) {
-    //         store.question = JSON.parse(response)
-    //         generateQuestion(store.question);
+            $('.next-ques').click(function(){
+                $('ques-cont').fadeOut(200);
+                var response = getAnswerObj(store.question['_id']);
+                if (response != false) {
+                    loadQuestion(response);
+                }
+            });
+        });
+    } else {
+        $.post('.', {
+            answer: JSON.stringify(answer),
+            question_id: store.question._id.$oid
+        }, function(response) {
+            store.question = JSON.parse(response)
+            generateQuestion(store.question);
 
-    //         $('.next-ques').click(function(){
-    //             alert()
-    //             $('ques-cont').fadeOut(200);
-    //             var response = getAnswerObj(store.question['_id']);
-    //             if (response != false) {
-    //                 loadQuestion(response);
-    //             }
-    //         });
-    //     });
-    // }
-    store.question = tasks.shift();
-    generateQuestion(store.question);
+            $('.next-ques').click(function(){
+                alert()
+                $('ques-cont').fadeOut(200);
+                var response = getAnswerObj(store.question['_id']);
+                if (response != false) {
+                    loadQuestion(response);
+                }
+            });
+        });
+    }
 }
 
 function startSurvey(sid) {
+    console.log('startSurvey')
     showForm();
-    loadQuestion();
+    // loadQuestion();
 }
 
 function generateQuestion(quesObj){
-    console.log(quesObj)
+    console.log('generateQuestion')
+    console.log(
+        quesObj,
+        quesObj["category"],
+        quesObj["query_type"],
+        quesObj["text"],
+        quesObj["options"])
     $('.progress-title').html(quesObj["category"]);
 
     $('.ques').html(quesObj["text"]);
 
     switch (quesObj["query_type"]) {
-        case "text"         :   genText();
+        case "dual"         :   genDual();
                                 break;
-        case "video"     :   genVideo(quesObj["videoUrl"]);
+        case "dropdownbox"  :   genSelect(quesObj["options"]);
+                                break;
+        case "radio"        :   genRadio(quesObj["options"]);
+                                break;
+        case "checkbox"     :   genCheckbox(quesObj["options"]);
+                                break;
+        case "rating"       :   genRating();
+                                break;
+        case "text"         :   genText();
                                 break;
     }
 
@@ -117,6 +122,7 @@ function generateQuestion(quesObj){
 }
 
 function genDual() {
+    console.log('genDual')
     var data = '<div class="col-sm-12 yes-no-type option-type" data-option-type="dual"> <div class="yes-no"> <span class="yes-no-ques">Choose between the two options.</span> <span class="yes-no-option yes-no-cross"><i class="fa fa-close"></i><span class="yes-no-tag">NO</span></span> <span class="yes-no-option yes-no-tick"><i class="fa fa-check"></i><span class="yes-no-tag">YES</span></span> </div> </div>';
 
     $('.options-cont').html(data);
@@ -129,6 +135,7 @@ function genDual() {
 }
 
 function genRating(options) {
+    console.log('genRating')
     var data = '<div class="col-sm-12 slider-type option-type" data-option-type="rating"> <div class="slider"> <div id="demo-simple-slider" class="dragdealer"> <div class="handle green-circle"> <div class="icon"></div> </div> </div> <table class="scale"> <tr> <td>1</td> <td>2</td> <td>3</td> <td>4</td> <td>5</td> <td>6</td> <td>7</td> <td>8</td> <td>9</td> <td>10</td> </tr> </table> </div> </div>';
 
     $('.options-cont').html(data);
@@ -139,6 +146,7 @@ function genRating(options) {
 
 
 function genSelect(options) {
+    console.log('genSelect')
     var data = '<div class="col-sm-12 select-type option-type" style="z-index: 1;" data-option-type="dropdownbox"> <form class="options" data-form-type="dropdownbox"> <div class="selectholder"> <label>CHOOSE SOME OPTION</label> <select><option value="...">...</option>';
     $.each(options,function(i,val){
         data += '<option value="'+val+'">'+val+'</option>';
@@ -151,6 +159,7 @@ function genSelect(options) {
 }
 
 function genRadio(options) {
+    console.log('genRadio')
     var data = '<div class="col-sm-12 main radio-type option-type " data-option-type="radio">';
 
     $.each(options,function(i,val){
@@ -163,11 +172,13 @@ function genRadio(options) {
     radioInit();
 }
 
-function genVideo(videoUrl) {
-    var data = '<iframe width="560" height="315" src="'+videoUrl+'" frameborder="0" allowfullscreen></iframe>';
+function genCheckbox(options) {
+    console.log('genCheckbox')
+    var data = '<div class="col-sm-12 mcq-type option-type" data-option-type="checkbox">';
 
     $.each(options,function(i,val){
-        data += '<div class="col-sm-6"> <label> <div class="mcq"> <input type="checkbox" name="checkbox-type" value="'+val+'">'+val+'</div> </label> </div>';
+        console.log(val)
+        data += '<div class="col-sm-6"> <label> <div class="mcq"> <input type="checkbox" name="checkbox-type">'+val.text+'</div> </label> </div>';
     });
 
     data += '</div>';
@@ -178,6 +189,7 @@ function genVideo(videoUrl) {
 }
 
 function genText() {
+    console.log('genText')
     var data = '<div class="col-sm-12 text-type option-type" data-option-type="text"> <textarea class="survey-textarea" placeholder="Just to give us a flavour..."></textarea> </div>';
     $('.options-cont').html(data);
 }
@@ -185,6 +197,7 @@ function genText() {
 
 
 function getCookie(name) {
+    console.log('getCookie')
     var cookieValue = null;
     if (document.cookie && document.cookie != '') {
         var cookies = document.cookie.split(';');
@@ -201,6 +214,7 @@ function getCookie(name) {
 }
 
 function sliderInit(){
+    console.log('sliderInit')
 
     var icon = $('.icon'),
     widget = $('.widget'),
@@ -232,6 +246,7 @@ function sliderInit(){
 }
 
 function selectInit(){
+    console.log('selectInit')
     // set up select boxes
     $('.selectholder').each(function(){
         $(this).children().hide();
@@ -301,6 +316,7 @@ function selectInit(){
 }
 
 function radioInit(){
+    console.log('radioInit')
       // set up radio boxes
     $('.radioholder').each(function(){
         $(this).children().hide();
@@ -327,6 +343,7 @@ function radioInit(){
 }
 
 function checkboxInit() {
+    console.log('checkboxInit')
     $('.mcq input[type="checkbox"]').change(function(){
         $(this).closest(".mcq").toggleClass('selected');
         return false;
@@ -334,6 +351,7 @@ function checkboxInit() {
 }
 
 function resetSurvey(){
+    console.log('resetSurvey')
     $('.progress-title').html("");
     $('.progress-percent').html("0% COMPLETED");
     $('.progess-front').css("width","0%");
@@ -342,6 +360,7 @@ function resetSurvey(){
 }
 
 function getAnswerObj(qid) {
+    console.log('getAnswerObj')
     var ansObj = "";
     switch($('.option-type').data("option-type")) {
         case "dual"         :   if($('.option-type .active').length != 0) {
@@ -370,6 +389,7 @@ function getAnswerObj(qid) {
                                 break;
         case "checkbox"     :   if($('.option-type input[type="checkbox"]:checked').length != 0) {
                                     ansObj = ($('.options-cont input[type="checkbox"]:checked').map(function () {return this.value;}).get());
+                                    console.log('()')
                                 }
                                 else {
                                     alert("Choose atleast one of the option!");
@@ -391,12 +411,3 @@ function getAnswerObj(qid) {
     }
     return ansObj;
 }
-
-$('.assign-activity').click(function() {
-    $('#activity-name').text($(this).parent().siblings().children().children().eq(0).text())
-    $('.assign-activity-modal-body').html(
-        students.map(function(s) {
-            return '<label>'+s.name+'<input type="checkbox" value="'+s.user.id+'"></label>'
-        })
-    )
-});

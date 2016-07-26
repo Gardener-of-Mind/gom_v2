@@ -570,15 +570,23 @@ def add_track(request):
         elif 'activity' in request.POST:
             track_id = request.POST['track_id']
             track = ActivityTrack.objects(id=ObjectId(track_id)).first()
-            title = request.POST['title']
-            details = request.POST['details']
-            next_allowed_after = int(request.POST['next_allowed_after'])
-            activity = Activity(title=title, details=details, track=track,
-                                next_allowed_after=next_allowed_after)
-            activity.save()
-            track.activity.append(activity)
-            return HttpResponse('success')
+            activities = json.loads(request.POST['activities'])
+            for activity_json in activities:
+                text = activity_json['text']
+                activity_type = activity_json['activity_type']
+                next_allowed_after = int(activity_json['next_allowed_after'])
+                activity = Activity(text=text,activity_type=activity_type,
+                                    next_allowed_after=next_allowed_after)
 
+                if 'video_url' in activity_json:
+                    activity.video_url = activity_json['video_url']
+                else:
+                    # ToDo: File Upload
+                    pass
+                activity.save()
+                track.activity.append(activity)
+            track.save()
+            return HttpResponse('success')
     return render(request, 'add_activity.html', {'profile': profile})
 
 
@@ -594,14 +602,12 @@ def view_tracks(request):
 
 def view_track(request, track_id):
     track = ActivityTrack.objects(id=ObjectId(track_id)).first()
-    activity_track_response = ActivityTrackResponses.objects(user_id=request.user.id,
-                                                                track=track).first()
+    activity_track_response = ActivityTrackResponses.objects(user_id=request.user.id, track=track).first()
     if activity_track_response is None:
-        activity_track_response = ActivityTrackResponses(user_id=request.user.id, track=track,
-                                                        current_activity=track.activity[0])
+        activity_track_response = ActivityTrackResponses(user_id=request.user.id, track=track, current_activity=track.activity[0])
         activity_track_response.save()
-    activity = user_activity_track_status.current_activity
-    return render(request, 'attempt_activity.html', {'activity': activity})
+    activity = activity_track_response.current_activity
+    return render(request, 'take_activity.html', {'activity': activity})
 
 
 
@@ -613,19 +619,24 @@ def view_track(request, track_id):
 #output: respones : 'success'
 def assign_activity_track(request):
     if request.POST:
-        student_ids = request.POST.getlist('student_ids')
+        student_ids = request.POST['student_ids']
+        student_ids = json.loads(student_ids)
+        print student_ids
         track_id = request.POST['track_id']
         track = ActivityTrack.objects(id=ObjectId(track_id)).first()
         for student_id in student_ids:
-            student_status = UserActivityTrackStatus.objects(user_id=student_id).first()
+            student_status = UserActivityTrackStatus.objects(user_id=int(student_id)).first()
             if student_status is None:
-                student_status = UserActivityTrackStatus(user_id=student_id)
-            student_status.pending_tasks.append(track)
+                student_status = UserActivityTrackStatus(user_id=int(student_id))
+            student_status.pending_tracks.append(track)
             student_status.save()
         return HttpResponse('success')
     else:
-        all_tracks = ActivityTrack.objects(admin_only=False)
-        return render(request, 'all_tracks', {'all_tracks': all_tracks})
+        all_tracks = ActivityTrack.objects()
+        # ToDo: all_tracks = ActivityTrack.objects(admin_only=False)
+        c_profile = coach_profile.objects.get(user=request.user)
+        students = c_profile.user_profile_set.all()
+        return render(request, 'all_tracks.html', {'all_tracks': all_tracks, 'students': students})
 
 
 #input=POST: task_id, user_activity_id
@@ -693,8 +704,11 @@ def flow(request, survey_id):
 
 
 def student_activity_profile(request):
-    pending_tracks = UserActivityTrackStatus.objects(user_id=request.user.id).pending_tracks
-    return render(request, 'activity_profile.html', {'pending_tracks': pending_tracks})
+    # return HttpResponse()
+    print request.user.id, "sdafsdafsdafsda"
+    user_track_status = UserActivityTrackStatus.objects(user_id=request.user.id).first()
+    pending_tracks = user_track_status.pending_tracks
+    return render(request, 'user/activity_profile.html', {'pending_tracks': pending_tracks})
 
 
 def asd(request):
@@ -714,4 +728,3 @@ def asds(request):
 
 def asd_take(request, activity_id):
     return render(request, 'activity.html')
-

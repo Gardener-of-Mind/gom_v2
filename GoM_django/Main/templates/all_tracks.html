@@ -9,7 +9,7 @@
 
     <head>
         <meta charset="utf-8" />
-        <title>ManaMaali | Dashboard</title>
+        <title>ManaMaali | Activities  </title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta content="width=device-width, initial-scale=1" name="viewport" />
         <meta content="" name="description" />
@@ -23,10 +23,8 @@
         <link href="{% static 'assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css' %}" rel="stylesheet" type="text/css" />
         <!-- END GLOBAL MANDATORY STYLES -->
         <!-- BEGIN PAGE LEVEL PLUGINS -->
-        <link href="{% static 'assets/global/plugins/bootstrap-daterangepicker/daterangepicker.min.css' %}" rel="stylesheet" type="text/css" />
-        <link href="{% static 'assets/global/plugins/morris/morris.css' %}" rel="stylesheet" type="text/css" />
-        <link href="{% static 'assets/global/plugins/fullcalendar/fullcalendar.min.css' %}" rel="stylesheet" type="text/css" />
-        <link href="{% static 'assets/global/plugins/jqvmap/jqvmap/jqvmap.css' %}" rel="stylesheet" type="text/css" />
+        <link href="{% static 'assets/global/plugins/select2/css/select2.min.css' %}" rel="stylesheet" type="text/css" />
+        <link href="{% static 'assets/global/plugins/select2/css/select2-bootstrap.min.css' %}" rel="stylesheet" type="text/css" />
         <!-- END PAGE LEVEL PLUGINS -->
         <!-- BEGIN THEME GLOBAL STYLES -->
         <link href="{% static 'assets/global/css/components-md.min.css' %}" rel="stylesheet" id="style_components" type="text/css" />
@@ -35,9 +33,9 @@
         <!-- BEGIN THEME LAYOUT STYLES -->
         <link href="{% static 'assets/layouts/layout/css/layout.min.css' %}" rel="stylesheet" type="text/css" />
         <link href="{% static 'assets/layouts/layout/css/themes/darkblue.min.css' %}" rel="stylesheet" type="text/css" id="style_color" />
-        <link href="{% static 'assets/layouts/layout/css/custom.css' %}" rel="stylesheet" type="text/css" />
+        <link href="{% static 'assets/layouts/layout/css/custom.min.css' %}" rel="stylesheet" type="text/css" />
         <!-- END THEME LAYOUT STYLES -->
-        <link rel="shortcut icon" href="{% static 'assets/global/img/favicon.ico' %}" />  </head>
+        <link rel="shortcut icon" href="favicon.ico" /> </head>
     <!-- END HEAD -->
 
     <body class="page-header-fixed page-sidebar-closed-hide-logo page-content-white page-md">
@@ -48,7 +46,7 @@
                 <!-- BEGIN LOGO -->
                 <div class="page-logo">
                     <a href="index.html">
-                        <img src="{% static 'assets/layouts/layout/img/logo.png' %}" alt="logo" class="logo-default logo-nav" /> </a>
+                        <img src="{% static 'assets/layouts/layout/img/logo.png' %}" alt="logo" class="logo-default" /> </a>
                     <div class="menu-toggler sidebar-toggler"> </div>
                 </div>
                 <!-- END LOGO -->
@@ -58,12 +56,299 @@
                 <!-- BEGIN TOP NAVIGATION MENU -->
                 <div class="top-menu">
                     <ul class="nav navbar-nav pull-right">
+                        <!-- BEGIN NOTIFICATION DROPDOWN -->
+                        <!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
+                        <li class="dropdown dropdown-extended dropdown-notification" id="header_notification_bar">
+                            <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                                <i class="icon-bell"></i>
+                                <span class="badge badge-default"> 7 </span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li class="external">
+                                    <h3>
+                                        <span class="bold">12 pending</span> notifications</h3>
+                                    <a href="page_user_profile_1.html">view all</a>
+                                </li>
+                                <li>
+                                    <ul class="dropdown-menu-list scroller" style="height: 250px;" data-handle-color="#637283">
+                                        <li>
+                                            <a href="javascript:;">
+                                                <span class="time">just now</span>
+                                                <span class="details">
+                                                    <span class="label label-sm label-icon label-success">
+                                                        <i class="fa fa-plus"></i>
+                                                    </span> New user registered. </span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:;">
+                                                <span class="time">3 mins</span>
+                                                <span class="details">
+                                                    <span class="label label-sm label-icon label-danger">
+                                                        <i class="fa fa-bolt"></i>
+                                                    </span> Server #12 overloaded. </span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:;">
+                                                <span class="time">10 mins</span>
+                                                <span class="details">
+                                                    <span class="label label-sm label-icon label-warning">
+                                                        <i class="fa fa-bell-o"></i>
+                                                    </span> Server #2 not responding. </span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:;">
+                                                <span class="time">14 hrs</span>
+                                                <span class="details">
+                                                    <span class="label label-sm label-icon label-info">
+                                                        <i class="fa fa-bullhorn"></i>
+                                                    </span> Application error. </span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:;">
+                                                <span class="time">2 days</span>
+                                                <span class="details">
+                                                    <span class="label label-sm label-icon label-danger">
+                                                        <i class="fa fa-bolt"></i>
+                                                    </span> Database overloaded 68%. </span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:;">
+                                                <span class="time">3 days</span>
+                                                <span class="details">
+                                                    <span class="label label-sm label-icon label-danger">
+                                                        <i class="fa fa-bolt"></i>
+                                                    </span> A user IP blocked. </span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:;">
+                                                <span class="time">4 days</span>
+                                                <span class="details">
+                                                    <span class="label label-sm label-icon label-warning">
+                                                        <i class="fa fa-bell-o"></i>
+                                                    </span> Storage Server #4 not responding dfdfdfd. </span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:;">
+                                                <span class="time">5 days</span>
+                                                <span class="details">
+                                                    <span class="label label-sm label-icon label-info">
+                                                        <i class="fa fa-bullhorn"></i>
+                                                    </span> System Error. </span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:;">
+                                                <span class="time">9 days</span>
+                                                <span class="details">
+                                                    <span class="label label-sm label-icon label-danger">
+                                                        <i class="fa fa-bolt"></i>
+                                                    </span> Storage server failed. </span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <!-- END NOTIFICATION DROPDOWN -->
+                        <!-- BEGIN INBOX DROPDOWN -->
+                        <!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
+                        <li class="dropdown dropdown-extended dropdown-inbox" id="header_inbox_bar">
+                            <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                                <i class="icon-envelope-open"></i>
+                                <span class="badge badge-default"> 4 </span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li class="external">
+                                    <h3>You have
+                                        <span class="bold">7 New</span> Messages</h3>
+                                    <a href="app_inbox.html">view all</a>
+                                </li>
+                                <li>
+                                    <ul class="dropdown-menu-list scroller" style="height: 275px;" data-handle-color="#637283">
+                                        <li>
+                                            <a href="#">
+                                                <span class="photo">
+                                                    <img src="{% static 'assets/layouts/layout3/img/avatar2.jpg' %}" class="img-circle" alt=""> </span>
+                                                <span class="subject">
+                                                    <span class="from"> Lisa Wong </span>
+                                                    <span class="time">Just Now </span>
+                                                </span>
+                                                <span class="message"> Vivamus sed auctor nibh congue nibh. auctor nibh auctor nibh... </span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <span class="photo">
+                                                    <img src="{% static 'assets/layouts/layout3/img/avatar3.jpg' %}" class="img-circle" alt=""> </span>
+                                                <span class="subject">
+                                                    <span class="from"> Richard Doe </span>
+                                                    <span class="time">16 mins </span>
+                                                </span>
+                                                <span class="message"> Vivamus sed congue nibh auctor nibh congue nibh. auctor nibh auctor nibh... </span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <span class="photo">
+                                                    <img src="{% static 'assets/layouts/layout3/img/avatar1.jpg' %}" class="img-circle" alt=""> </span>
+                                                <span class="subject">
+                                                    <span class="from"> Bob Nilson </span>
+                                                    <span class="time">2 hrs </span>
+                                                </span>
+                                                <span class="message"> Vivamus sed nibh auctor nibh congue nibh. auctor nibh auctor nibh... </span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <span class="photo">
+                                                    <img src="{% static 'assets/layouts/layout3/img/avatar2.jpg' %}" class="img-circle" alt=""> </span>
+                                                <span class="subject">
+                                                    <span class="from"> Lisa Wong </span>
+                                                    <span class="time">40 mins </span>
+                                                </span>
+                                                <span class="message"> Vivamus sed auctor 40% nibh congue nibh... </span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <span class="photo">
+                                                    <img src="{% static 'assets/layouts/layout3/img/avatar3.jpg' %}" class="img-circle" alt=""> </span>
+                                                <span class="subject">
+                                                    <span class="from"> Richard Doe </span>
+                                                    <span class="time">46 mins </span>
+                                                </span>
+                                                <span class="message"> Vivamus sed congue nibh auctor nibh congue nibh. auctor nibh auctor nibh... </span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <!-- END INBOX DROPDOWN -->
+                        <!-- BEGIN TODO DROPDOWN -->
+                        <!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
+                        <li class="dropdown dropdown-extended dropdown-tasks" id="header_task_bar">
+                            <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                                <i class="icon-calendar"></i>
+                                <span class="badge badge-default"> 3 </span>
+                            </a>
+                            <ul class="dropdown-menu extended tasks">
+                                <li class="external">
+                                    <h3>You have
+                                        <span class="bold">12 pending</span> tasks</h3>
+                                    <a href="app_todo.html">view all</a>
+                                </li>
+                                <li>
+                                    <ul class="dropdown-menu-list scroller" style="height: 275px;" data-handle-color="#637283">
+                                        <li>
+                                            <a href="javascript:;">
+                                                <span class="task">
+                                                    <span class="desc">New release v1.2 </span>
+                                                    <span class="percent">30%</span>
+                                                </span>
+                                                <span class="progress">
+                                                    <span style="width: 40%;" class="progress-bar progress-bar-success" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100">
+                                                        <span class="sr-only">40% Complete</span>
+                                                    </span>
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:;">
+                                                <span class="task">
+                                                    <span class="desc">Application deployment</span>
+                                                    <span class="percent">65%</span>
+                                                </span>
+                                                <span class="progress">
+                                                    <span style="width: 65%;" class="progress-bar progress-bar-danger" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100">
+                                                        <span class="sr-only">65% Complete</span>
+                                                    </span>
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:;">
+                                                <span class="task">
+                                                    <span class="desc">Mobile app release</span>
+                                                    <span class="percent">98%</span>
+                                                </span>
+                                                <span class="progress">
+                                                    <span style="width: 98%;" class="progress-bar progress-bar-success" aria-valuenow="98" aria-valuemin="0" aria-valuemax="100">
+                                                        <span class="sr-only">98% Complete</span>
+                                                    </span>
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:;">
+                                                <span class="task">
+                                                    <span class="desc">Database migration</span>
+                                                    <span class="percent">10%</span>
+                                                </span>
+                                                <span class="progress">
+                                                    <span style="width: 10%;" class="progress-bar progress-bar-warning" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100">
+                                                        <span class="sr-only">10% Complete</span>
+                                                    </span>
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:;">
+                                                <span class="task">
+                                                    <span class="desc">Web server upgrade</span>
+                                                    <span class="percent">58%</span>
+                                                </span>
+                                                <span class="progress">
+                                                    <span style="width: 58%;" class="progress-bar progress-bar-info" aria-valuenow="58" aria-valuemin="0" aria-valuemax="100">
+                                                        <span class="sr-only">58% Complete</span>
+                                                    </span>
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:;">
+                                                <span class="task">
+                                                    <span class="desc">Mobile development</span>
+                                                    <span class="percent">85%</span>
+                                                </span>
+                                                <span class="progress">
+                                                    <span style="width: 85%;" class="progress-bar progress-bar-success" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100">
+                                                        <span class="sr-only">85% Complete</span>
+                                                    </span>
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:;">
+                                                <span class="task">
+                                                    <span class="desc">New UI release</span>
+                                                    <span class="percent">38%</span>
+                                                </span>
+                                                <span class="progress progress-striped">
+                                                    <span style="width: 38%;" class="progress-bar progress-bar-important" aria-valuenow="18" aria-valuemin="0" aria-valuemax="100">
+                                                        <span class="sr-only">38% Complete</span>
+                                                    </span>
+                                                </span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <!-- END TODO DROPDOWN -->
                         <!-- BEGIN USER LOGIN DROPDOWN -->
                         <!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
                         <li class="dropdown dropdown-user">
                             <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-                                <img alt="" class="img-circle" src="{% static 'assets/layouts/layout/img/avatar3_small.jpg' %}" />
-                                <span class="username username-hide-on-mobile"> COACH </span>
+                                <img alt="" class="img-circle" src="{{ profile.profile_pic.url }}" />
+                                <span class="username username-hide-on-mobile"> {{ profile.name }} </span>
                                 <i class="fa fa-angle-down"></i>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-default">
@@ -71,7 +356,7 @@
                                     <a href="page_user_profile_1.html">
                                         <i class="icon-user"></i> My Profile </a>
                                 </li>
-                                <li class="divider"> </li>
+
                                 <li>
                                     <a href="page_user_login_1.html">
                                         <i class="icon-key"></i> Log Out </a>
@@ -119,8 +404,9 @@
                             <div class="sidebar-toggler"> </div>
                             <!-- END SIDEBAR TOGGLER BUTTON -->
                         </li>
-                        <li class="nav-item start   active open">
-                            <a href="javascript:;" class="nav-link">
+
+                        <li class="nav-item start">
+                            <a href="/dashboard/" class="nav-link">
                                 <i class="icon-home"></i>
                                 <span class="title">Dashboard</span>
                             </a>
@@ -146,7 +432,7 @@
                                         <span class="selected"></span>
                                     </a>
                                 </li>
-                                <li class="nav-item">
+                                <li class="nav-item  active open">
                                     <a href="../profile/help/" class="nav-link ">
                                         <i class="icon-support"></i>
                                         <span class="title">Help</span>
@@ -154,9 +440,9 @@
                                 </li>
                             </ul>
                         </li>
-                        <li class="nav-item start ">
-                            <a href="/coach/atrack/assign/" class="nav-link">
-                                <i class="icon-notebook"></i>
+                        <li class="nav-item start active open">
+                            <a href="/activities" class="nav-link">
+                                <i class="icon-settings"></i>
                                 <span class="title">Activities</span>
                             </a>
                         </li>
@@ -180,60 +466,52 @@
                                 <i class="fa fa-circle"></i>
                             </li>
                             <li>
-                                <span>Dashboard</span>
+                                <span>Form Stuff</span>
                             </li>
                         </ul>
+
                     </div>
                     <!-- END PAGE BAR -->
                     <!-- BEGIN PAGE TITLE-->
-                    <h3 class="page-title"> Dashboard
-                        <small>dashboard & statistics</small>
+                    <h3 class="page-title"> Activities
                     </h3>
                     <!-- END PAGE TITLE-->
                     <!-- END PAGE HEADER-->
                     <div class="row">
-                    	<div class="col-md-12">
-                            <div class="portlet light portlet-fit bordered">
-                                <div class="portlet-title">
+                        <div class="col-md-12">
+                            <div class="portlet light bordered">
+                                <div class="portlet-title tabbable-line">
                                     <div class="caption">
                                         <i class=" icon-layers font-green"></i>
-                                        <span class="caption-subject font-green bold uppercase">My Students</span>
+                                        <span class="caption-subject font-green bold uppercase">Activities</span>
                                     </div>
                                 </div>
                                 <div class="portlet-body">
-                                    <div class="mt-element-card mt-card-round mt-element-overlay">
-                                        <div class="row">
-                                        	{% for profile_ob in user_profiles %}
-                                            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
-                                                <div class="mt-card-item">
-                                                    <div class="mt-card-avatar mt-overlay-1">
-                                                        <img src="{{profile_ob.profile_pic.url}}">
-                                                        <div class="mt-overlay">
-                                                            <ul class="mt-info">
-                                                                <li>
-                                                                    <a class="btn default btn-outline" href="./{{profile_ob.id}}/">
-                                                                        <i class="icon-magnifier"></i>
-                                                                    </a>
-                                                                </li>
-                                                                <li>
-                                                                    <a class="btn default btn-outline" href="javascript:;">
-                                                                        <i class="icon-link"></i>
-                                                                    </a>
-                                                                </li>
-                                                            </ul>
+                                    <div class="tab-content">
+                                        <div class="tab-pane active" id="tab_actions_pending">
+                                            <!-- BEGIN: Actions -->
+                                            <div class="mt-actions">
+                                                {% for activity in all_tracks %}
+                                                <div class="mt-action" data-uid="coach.id">
+                                                    <div class="mt-action-body">
+                                                        <div class="mt-action-row">
+                                                            <div class="mt-action-info ">
+                                                                <div class="mt-action-details ">
+                                                                    <span class="activity-name">{{activity.name}}</span>
+                                                                    <p class="activity-category">{{activity.category}}</p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="mt-action-datetime ">
+                                                                <button class="btn btn-circle btn-default btn-sm edit-diary assign-activity" data-toggle="modal" href="#assign-activity-modal" data-activity-id="{{activity.id}}">
+                                                                    Assign
+                                                                </button>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                    <div class="mt-card-content">
-                                                        <h3 class="mt-card-name">
-                                                            <a href="./{{profile_ob.id}}/">
-                                                                {{profile_ob.name}}
-                                                            </a>
-                                                        </h3>
-                                                        <p class="mt-card-desc font-grey-mint">{{profile_ob.occupation}}</p>
-                                                    </div>
                                                 </div>
+                                                {% endfor %}
                                             </div>
-                                            {% endfor %}
+                                            <!-- END: Actions -->
                                         </div>
                                     </div>
                                 </div>
@@ -809,16 +1087,36 @@
         <!-- END CONTAINER -->
         <!-- BEGIN FOOTER -->
         <div class="page-footer">
-            <div class="page-footer-inner"> 2016 &copy; ManaMaali.
+            <div class="page-footer-inner"> 2014 &copy; Metronic by keenthemes.
+                <a href="http://themeforest.net/item/metronic-responsive-admin-dashboard-template/4021469?ref=keenthemes" title="Purchase Metronic just for 27$ and get lifetime updates for free" target="_blank">Purchase Metronic!</a>
             </div>
             <div class="scroll-to-top">
                 <i class="icon-arrow-up"></i>
             </div>
         </div>
         <!-- END FOOTER -->
+        <div id="assign-activity-modal" class="modal fade" role="dialog" aria-labelledby="myModalLabel10" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content scroller" style="height: 100%;" data-always-visible="1" data-rail-visible="0">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                        <p class="assign-activity-modal-title todo-inline" id="activity-name">Activity Name</p>
+                    </div>
+                    <div class="modal-body assign-activity-modal-body assign-activity-modal-bg">
+
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn default" data-dismiss="modal" aria-hidden="true">Close</button>
+                        <button class="btn green assign-activity-modal-save">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!--[if lt IE 9]>
-<script src="{% static 'assets/global/plugins/respond.min.js"></script>
-<script src="{% static 'assets/global/plugins/excanvas.min.js"></script>
+
+<script src="{% static 'assets/global/plugins/respond.min.js' %}"></script>
+<script src="{% static 'assets/global/plugins/excanvas.min.js' %}"></script>
 <![endif]-->
         <!-- BEGIN CORE PLUGINS -->
         <script src="{% static 'assets/global/plugins/jquery.min.js' %}" type="text/javascript"></script>
@@ -831,40 +1129,29 @@
         <script src="{% static 'assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js' %}" type="text/javascript"></script>
         <!-- END CORE PLUGINS -->
         <!-- BEGIN PAGE LEVEL PLUGINS -->
-        <script src="{% static 'assets/global/plugins/moment.min.js' %}" type="text/javascript"></script>
-        <script src="{% static 'assets/global/plugins/bootstrap-daterangepicker/daterangepicker.js' %}" type="text/javascript"></script>
-        <script src="{% static 'assets/global/plugins/morris/morris.min.js' %}" type="text/javascript"></script>
-        <script src="{% static 'assets/global/plugins/morris/raphael-min.js' %}" type="text/javascript"></script>
-        <script src="{% static 'assets/global/plugins/counterup/jquery.waypoints.min.js' %}" type="text/javascript"></script>
-        <script src="{% static 'assets/global/plugins/counterup/jquery.counterup.min.js' %}" type="text/javascript"></script>
-        <script src="{% static 'assets/global/plugins/amcharts/amcharts/amcharts.js' %}" type="text/javascript"></script>
-        <script src="{% static 'assets/global/plugins/amcharts/amcharts/serial.js' %}" type="text/javascript"></script>
-        <script src="{% static 'assets/global/plugins/amcharts/amcharts/pie.js' %}" type="text/javascript"></script>
-        <script src="{% static 'assets/global/plugins/amcharts/amcharts/radar.js' %}" type="text/javascript"></script>
-        <script src="{% static 'assets/global/plugins/amcharts/amcharts/themes/light.js' %}" type="text/javascript"></script>
-        <script src="{% static 'assets/global/plugins/amcharts/amcharts/themes/patterns.js' %}" type="text/javascript"></script>
-        <script src="{% static 'assets/global/plugins/amcharts/amcharts/themes/chalk.js' %}" type="text/javascript"></script>
-        <script src="{% static 'assets/global/plugins/amcharts/ammap/ammap.js' %}" type="text/javascript"></script>
-        <script src="{% static 'assets/global/plugins/amcharts/ammap/maps/js/worldLow.js' %}" type="text/javascript"></script>
-        <script src="{% static 'assets/global/plugins/amcharts/amstockcharts/amstock.js' %}" type="text/javascript"></script>
-        <script src="{% static 'assets/global/plugins/fullcalendar/fullcalendar.min.js' %}" type="text/javascript"></script>
-        <script src="{% static 'assets/global/plugins/flot/jquery.flot.min.js' %}" type="text/javascript"></script>
-        <script src="{% static 'assets/global/plugins/flot/jquery.flot.resize.min.js' %}" type="text/javascript"></script>
-        <script src="{% static 'assets/global/plugins/flot/jquery.flot.categories.min.js' %}" type="text/javascript"></script>
-        <script src="{% static 'assets/global/plugins/jquery-easypiechart/jquery.easypiechart.min.js' %}" type="text/javascript"></script>
-        <script src="{% static 'assets/global/plugins/jquery.sparkline.min.js' %}" type="text/javascript"></script>
+        <script src="{% static 'assets/global/plugins/select2/js/select2.full.min.js' %}" type="text/javascript"></script>
+        <script src="{% static 'assets/global/plugins/jquery-validation/js/jquery.validate.min.js' %}" type="text/javascript"></script>
+        <script src="{% static 'assets/global/plugins/jquery-validation/js/additional-methods.min.js' %}" type="text/javascript"></script>
+        <script src="{% static 'assets/global/plugins/bootstrap-wizard/jquery.bootstrap.wizard.min.js' %}" type="text/javascript"></script>
         <!-- END PAGE LEVEL PLUGINS -->
         <!-- BEGIN THEME GLOBAL SCRIPTS -->
         <script src="{% static 'assets/global/scripts/app.min.js' %}" type="text/javascript"></script>
         <!-- END THEME GLOBAL SCRIPTS -->
         <!-- BEGIN PAGE LEVEL SCRIPTS -->
-        <script src="{% static 'assets/pages/scripts/dashboard.min.js' %}" type="text/javascript"></script>
+        <script src="{% static 'assets/pages/scripts/all_tracks.js' %}" type="text/javascript"></script>
         <!-- END PAGE LEVEL SCRIPTS -->
         <!-- BEGIN THEME LAYOUT SCRIPTS -->
         <script src="{% static 'assets/layouts/layout/scripts/layout.min.js' %}" type="text/javascript"></script>
         <script src="{% static 'assets/layouts/layout/scripts/demo.min.js' %}" type="text/javascript"></script>
         <script src="{% static 'assets/layouts/global/scripts/quick-sidebar.min.js' %}" type="text/javascript"></script>
         <!-- END THEME LAYOUT SCRIPTS -->
+        <script type="text/javascript">
+            var students = [
+            {%for s in students%}
+                {name: "{{s.name}}", id: "{{s.user.id}}"},
+            {%endfor%}
+            ];
+        </script>
     </body>
 
 </html>

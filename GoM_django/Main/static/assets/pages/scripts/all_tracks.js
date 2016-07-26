@@ -391,12 +391,29 @@ function getAnswerObj(qid) {
     }
     return ansObj;
 }
-
+var track_id;
 $('.assign-activity').click(function() {
+    track_id = $(this).data('activity-id')
     $('#activity-name').text($(this).parent().siblings().children().children().eq(0).text())
     $('.assign-activity-modal-body').html(
         students.map(function(s) {
-            return '<label>'+s.name+'<input type="checkbox" value="'+s.user.id+'"></label>'
-        })
+            return ''+
+            '<div class="assign-checkbox">'+
+                '<input type="checkbox" class="liChild" value="'+s.id+'">'+
+                 s.name+
+            '</div>'
+        }).join('')
     )
 });
+$('.assign-activity-modal-save').click(function() {
+    $.ajax({
+        method: 'POST',
+        url: '.',
+        data: {
+            track_id: track_id,
+            student_ids: JSON.stringify($('.assign-checkbox input:checked').map(function(i,c) {
+                return c.value
+            }).toArray())
+        }
+    })
+})

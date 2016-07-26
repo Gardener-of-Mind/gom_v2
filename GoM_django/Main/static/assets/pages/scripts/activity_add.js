@@ -90,8 +90,9 @@ var FormWizard = function () {
             "X-CSRFToken" : getCookie('csrftoken')
           },
           data: {
-            activity_id: activityId,
-            questions: JSON.stringify(questions),
+            activity: true,
+            track_id: activityId,
+            activities: JSON.stringify(questions),
           },
           success: function(response) {
             // window.location.href= "..";
@@ -265,15 +266,17 @@ var FormWizard = function () {
       });
 
       function addQuestions() {
-        var query_type = $('#questionType').val();
-        switch (query_type) {
+        var activity_type = $('#questionType').val();
+        var next_allowed_after = $('#next_allowed_after').val();
+        switch (activity_type) {
           case 'image':
             var imageFile = $('#file').get(0).files[0];
             console.log(imageFile)
             var imageData = new FormData();
             imageData.append('image', imageFile);
             questions.push({
-              query_type: query_type,
+              activity_type: activity_type,
+              next_allowed_after: next_allowed_after,
               text: CKEDITOR.instances.questionText.getData(),
               image: imageData,
             });
@@ -283,15 +286,17 @@ var FormWizard = function () {
             var videoUrl = $('#url').val().replace(/.*watch\?v=(.*)/, "https://www.youtube.com/embed/$1");
 
             questions.push({
-              query_type: query_type,
+              activity_type: activity_type,
+              next_allowed_after: next_allowed_after,
               text: CKEDITOR.instances.questionText.getData(),
-              videoUrl: videoUrl,
+              video_url: videoUrl,
             });
             break;
 
           case 'text':
             questions.push({
-              query_type: query_type,
+              activity_type: activity_type,
+              next_allowed_after: next_allowed_after,
               text: CKEDITOR.instances.questionText.getData(),
             });
             break;

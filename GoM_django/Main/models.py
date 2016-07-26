@@ -114,8 +114,7 @@ class Tag(Document):
     name = StringField(max_length=50)
 
 class Activity(Document):
-    title = StringField(max_length=100)
-    details = StringField(max_length=1500, blank=True)
+    text = StringField(max_length=1500, blank=True)
     tags = ListField(ReferenceField(Tag))
     next_allowed_after = IntField(default=0)   # Hours after which next activity is allowed.
     activity_type = StringField(max_length=50)

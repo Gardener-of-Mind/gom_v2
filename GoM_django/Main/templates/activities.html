@@ -497,47 +497,19 @@
                                                         <div class="mt-action-row">
                                                             <div class="mt-action-info ">
                                                                 <div class="mt-action-details ">
-                                                                    <span class="mt-action-author"><a href="/asd/take/123">{{activity.name}}</a></span>
-                                                                    <p class="mt-action-desc">{{activity.category}}</p>
+                                                                    <span class="activity-name">{{activity.name}}</span>
+                                                                    <p class="activity-category">{{activity.category}}</p>
                                                                 </div>
                                                             </div>
                                                             <div class="mt-action-datetime ">
-                                                                <span>{{activity.id}}</span>
+                                                                <button class="btn btn-circle btn-default btn-sm edit-diary assign-activity" data-toggle="modal" href="#assign-activity-modal" data-activity-id="{{activity.id}}">
+                                                                    Assign
+                                                                </button>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 {% endfor %}
-                                                <div class="mt-action" data-uid="coach.id">
-                                                    <div class="mt-action-body">
-                                                        <div class="mt-action-row">
-                                                            <div class="mt-action-info ">
-                                                                <div class="mt-action-details ">
-                                                                    <span class="mt-action-author"><a href="/asd/take/123">{activity.name}</a></span>
-                                                                    <p class="mt-action-desc">{activity.category}</p>
-                                                                </div>
-                                                            </div>
-                                                            <div class="mt-action-datetime ">
-                                                                <span>{activity.id}</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="mt-action" data-uid="coach.id">
-                                                    <div class="mt-action-body">
-                                                        <div class="mt-action-row">
-                                                            <div class="mt-action-info ">
-                                                                <div class="mt-action-details ">
-                                                                    <span class="mt-action-author">{activity.name}</span>
-                                                                    <p class="mt-action-desc">{activity.category}</p>
-                                                                </div>
-                                                            </div>
-                                                            <div class="mt-action-datetime ">
-                                                                <span>{activity.id}</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
                                             </div>
                                             <!-- END: Actions -->
                                         </div>
@@ -1123,7 +1095,26 @@
             </div>
         </div>
         <!-- END FOOTER -->
+        <div id="assign-activity-modal" class="modal fade" role="dialog" aria-labelledby="myModalLabel10" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content scroller" style="height: 100%;" data-always-visible="1" data-rail-visible="0">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                        <p class="assign-activity-modal-title todo-inline" id="activity-name">Activity Name</p>
+                        <p class="assign-activity-modal-title todo-inline" id="activity-category">Activity Category</p>
+                    </div>
+                    <div class="modal-body assign-activity-modal-body assign-activity-modal-bg">
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn default" data-dismiss="modal" aria-hidden="true">Close</button>
+                        <button class="btn green diary-modal-save">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!--[if lt IE 9]>
+
 <script src="{% static 'assets/global/plugins/respond.min.js' %}"></script>
 <script src="{% static 'assets/global/plugins/excanvas.min.js' %}"></script>
 <![endif]-->
@@ -1154,6 +1145,16 @@
         <script src="{% static 'assets/layouts/layout/scripts/demo.min.js' %}" type="text/javascript"></script>
         <script src="{% static 'assets/layouts/global/scripts/quick-sidebar.min.js' %}" type="text/javascript"></script>
         <!-- END THEME LAYOUT SCRIPTS -->
+            console.log({{students}})
+        <script type="text/javascript">
+            var students = [];
+            {{students}}
+            {%for s in students%}
+                students.push({
+                    name: {{s.name}}
+                })
+            {%endfor%}
+        </script>
     </body>
 
 </html>
