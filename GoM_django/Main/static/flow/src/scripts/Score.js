@@ -1,112 +1,125 @@
 /* global $ */
 
-const conditions = {
-  '': 0,
-  'lesser than': 1,
-  'greater than': 2,
-  'lesser than or equal to': 3,
-  'greater than or equal to': 4,
-  between: 5,
-  'equal to': 6,
+const conditionOperators = {
+  'lesser than': 'lt',
+  'greater than': 'gt',
+  'equal to': 'eq',
 };
 
-const $score = $(`
-  <div id="score">
-    <span id="help">?</span> Score
+const groupOperators = {
+  and: 'and',
+  or: 'or',
+};
 
-    <select id="condition">
-      ${
-        Object.keys(conditions).map((k) => (
-          `<option value=${conditions[k]}>${k}</option>`
-        )).join('')
-      }
-    </select>
 
-    <input type="text" id="num-1" style="display:none" value="0" />
-    <span id="and" style="display:none">and</span>
-    <input type="text" id="num-2" style="display:none" value="0" />
-
-    <label id="not" style="display:none">Not <input type="checkbox" /></label>
-
-    <div id="english"></div>
-  </div>
-`);
-
-function renderEnglish() {
-  const parts = [
-    'Score',
-  ];
-
-  if ($score.find('#not input').prop('checked')) {
-    parts.push('not');
-  }
-
-  parts.push(
-    Object.keys(conditions).
-      filter((k) => conditions[k] === +$score.find('#condition').val()).
-      slice(0));
-
-  switch (+$score.find('#condition').val()) {
-    case 1:
-    case 2:
-    case 3:
-    case 4:
-    case 6:
-      parts.push(+$score.find('#num-1').val());
-      break;
-
-    case 5:
-      parts.push(+$score.find('#num-1').val());
-      parts.push('and');
-      parts.push(+$score.find('#num-2').val());
-      break;
-
-    default:
-  }
-  $score.find('#english').html(parts.join(' '));
+function condition(operator, value, negate = 0) {
+  return {
+    operator,
+    value,
+    negate,
+  };
 }
 
-$score.find('select').change(function onSelectChange() {
-  switch (+this.value) {
-    case 0:
-      $('#num-1').css('display', 'none');
-      $('#num-2').css('display', 'none');
-      $('#and').css('display', 'none');
-      $('#not').css('display', 'none');
-      break;
+function group(conditions, operator = '') {
+  return {
+    conditions,
+    operator,
+  };
+}
 
-    case 1:
-    case 2:
-    case 3:
-    case 4:
-    case 6:
-      $('#num-1').css('display', 'inline-block');
-      $('#num-2').css('display', 'none');
-      $('#and').css('display', 'none');
-      $('#not').css('display', 'inline-block');
-      break;
+function evaluate(x, expr) {
+  if ('conditions' in expr) {
+    return expr.conditions.
+      map((c) => evaluate(x, c)).
+      reduce((result, cResult) => {
+        switch (expr.operator) {
+          case 'and':
+            return result && cResult;
 
-    case 5:
-      $('#num-1').css('display', 'inline-block');
-      $('#num-2').css('display', 'inline-block');
-      $('#and').css('display', 'inline-block');
-      $('#not').css('display', 'inline-block');
-      break;
+          case 'or':
+            return result || cResult;
 
-    default:
+          default:
+            console.error('Invalid group operator:', expr);
+            return -1;
+        }
+      });
   }
 
-  renderEnglish();
-});
+  switch (expr.operator) {
+    case 'lt':
+      return expr.negate ?
+        (x >= expr.value) :
+        (x < expr.value);
 
-$score.find('input').change(() => {
-  renderEnglish();
-});
+    case 'gt':
+      return expr.negate ?
+        (x <= expr.value) :
+        (x > expr.value);
 
-$score.find('#help').hover(() => {
-  $score.find('#english').css('display', 'block');
-}, () => {
-  $score.find('#english').css('display', 'none');
-});
+    case 'eq':
+      return expr.negate ?
+        (x !== expr.value) :
+        (x === expr.value);
 
-export default $score;
+    default:
+      console.error('Invalid condition operator:', expr);
+      return -1;
+  }
+}
+
+
+const state = {
+  groupCount: 0,
+  conditionCount: 0,
+};
+
+function addCondition(groupIdx) {
+  const $conditionElement = $(`
+    <div style="background-color:#ddd;">
+      <label>
+        Score:
+      </label>
+
+      <select>
+        ${Object.keys(conditionOperators).map((op) => (
+          `<option>
+            ${op}
+          </option>`
+        )).join('')}
+      </select>
+
+      <input type="number" id="value" placeholder="Value" title="Value">
+
+      <input type="checkbox" id="negate" title="Negate">
+    </div>
+  `);
+
+  $(`#score-expression-group-${groupIdx}`).append($conditionElement);
+  console.log(groupIdx);
+}
+
+function addGroup() {
+  const idx = state.groupCount++;
+  const $groupElement = $(`
+    <div
+      class="score-expression-group" id="score-expression-group-${idx}"
+      style="background-color:#eee;"
+    >
+      <select id="operator">
+        <option value='and'>and</option>
+        <option value='or'>or</option>
+      </select>
+    </div>
+  `);
+
+  const btn = $('<button> + </button>')[0];
+  btn.onclick = () => addCondition(idx);
+  $groupElement.append(btn);
+  $('#score-modal .modal-body').append($groupElement);
+}
+
+const addGroupBtn = $('<button title="Add Group">+</button>')[0];
+addGroupBtn.onclick = addGroup;
+
+export { addGroupBtn };

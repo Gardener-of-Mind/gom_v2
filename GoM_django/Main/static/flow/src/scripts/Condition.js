@@ -2,7 +2,7 @@
 
 import QUESTION_TYPES from './QuestionTypes';
 
-// import Score from './Score';
+import { addGroupBtn } from './Score';
 
 export default class Condition {
   constructor(question, type = '') {
@@ -13,6 +13,8 @@ export default class Condition {
     this.from = question.idx;
     this.to = 1 + question.idx;
     this.value = undefined;
+
+    this.scoreCondition = null;
 
     if (type !== 'default') {
       switch (question.query_type) {
@@ -31,16 +33,18 @@ export default class Condition {
         default:
       }
 
-      // this.element = Score;
+      this.score();
     }
   }
 
   text() {
     const $element = $(`
-      <div class="from-group">
-        <label class="col-md-3 control-label">Value:</label>
-        <div class="col-md-9">
-          <input type="text" class="form-control" name="value" placeholder="Condition value" />
+      <div class="col-md-10 col-md-offset-1">
+        <div class="from-group">
+          <label class="col-md-3 control-label">Value:</label>
+          <div class="col-md-9">
+            <input type="text" class="form-control" name="value" placeholder="Condition value" />
+          </div>
         </div>
       </div>
     `);
@@ -105,5 +109,31 @@ export default class Condition {
       this.value = checked;
     });
     this.element = $element;
+  }
+
+  score() {
+    const $scoreInput = $(`
+      <input
+        type="text"
+        class="form-control"
+        id="score"
+        placeholder="Score condition"
+      >`)[0];
+    $scoreInput.onfocus = () => {
+      $('#score-modal').modal();
+      $('#score-modal').data('curr', `${this.from}/${this.idx}`);
+      $('#score-modal .modal-body').html(addGroupBtn);
+    };
+
+    const $scoreElement = $(`
+      <div class="from-group">
+        <label class="col-md-3 control-label">Score:</label>
+        <div class="col-md-9"></div>
+      </div>
+    `);
+
+    $scoreElement.find('div').append($scoreInput);
+
+    this.element.append($scoreElement);
   }
 }

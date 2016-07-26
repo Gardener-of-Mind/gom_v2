@@ -152,3 +152,6 @@ $.post('.', { questions: 1 }, (response) => {
 
   init();
 });
+
+$('.add-condition.btn').click();
+$('#score').focus();
