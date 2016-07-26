@@ -133,7 +133,9 @@ function genRating(options) {
 
     $('.options-cont').html(data);
 
-    sliderInit();
+    setTimeout(function() {
+        sliderInit();
+    }, 500)
 }
 
 

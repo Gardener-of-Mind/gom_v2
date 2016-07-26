@@ -47,49 +47,6 @@ showForm();
 var store = {
     question: null,
 };
-function loadQuestion(answer) {
-    console.log('loadQuestion')
-    if (typeof answer === 'undefined') {
-        $.post('.', {
-            first: 1
-        }, function(response) {
-            store.question = JSON.parse(response)
-            generateQuestion(store.question);
-            // console.log(question)
-
-            $('.next-ques').click(function(){
-                $('ques-cont').fadeOut(200);
-                var response = getAnswerObj(store.question['_id']);
-                if (response != false) {
-                    loadQuestion(response);
-                }
-            });
-        });
-    } else {
-        $.post('.', {
-            answer: JSON.stringify(answer),
-            question_id: store.question._id.$oid
-        }, function(response) {
-            store.question = JSON.parse(response)
-            generateQuestion(store.question);
-
-            $('.next-ques').click(function(){
-                alert()
-                $('ques-cont').fadeOut(200);
-                var response = getAnswerObj(store.question['_id']);
-                if (response != false) {
-                    loadQuestion(response);
-                }
-            });
-        });
-    }
-}
-
-function startSurvey(sid) {
-    console.log('startSurvey')
-    showForm();
-    // loadQuestion();
-}
 
 function generateQuestion(quesObj){
     console.log('generateQuestion')
@@ -356,7 +313,7 @@ function resetSurvey(){
     $('.progress-percent').html("0% COMPLETED");
     $('.progess-front').css("width","0%");
     $('.ques').html("");
-    $('.options-cont').html();
+    $('.options-cont').html("");
 }
 
 function getAnswerObj(qid) {
@@ -411,3 +368,57 @@ function getAnswerObj(qid) {
     }
     return ansObj;
 }
+
+
+$('#done').click(function() {
+    hideForm()
+
+    setTimeout(function() {
+        resetSurvey()
+        showForm();
+
+        $('.ques').html('<p>Please rate how you feel after taking the activity.</p>');
+
+        var data = '<div class="col-sm-12 slider-type option-type" data-option-type="rating"> <div class="slider"> <div id="demo-simple-slider" class="dragdealer"> <div class="handle green-circle"> <div class="icon"></div> </div> </div> <table class="scale"> <tr> <td>1</td> <td>2</td> <td>3</td> <td>4</td> <td>5</td> <td>6</td> <td>7</td> <td>8</td> <td>9</td> <td>10</td> </tr> </table> </div> </div>';
+        $('.options-cont').html(data);
+
+        $('#done').text('SUBMIT');
+        $('#done').click(function() {
+            $.post('.', {
+                feedback: getSliderValue()[0]
+            }, function(res) {
+                console.log(res);
+            });
+        });
+
+        setTimeout(function() {
+            var icon = $('.icon'),
+            widget = $('.widget'),
+            steps = 10,
+            dd = new Dragdealer('demo-simple-slider',{
+                horizontal: true,
+                steps: steps,
+                speed: 0.3,
+                loose: false,
+                animationCallback: function(x, y) {
+                    var percent = parseInt(steps * (x*100), 10);
+                    icon.css({'background-position-y': (750 * x * 9/10 + 75) + 'px'});
+                }
+            });
+            dd.setStep(5);
+            var openWidget = function(){
+                setTimeout(function(){
+                    widget.addClass('active');
+                }, 800);
+                widget.addClass('loaded');
+            };
+
+            $(window).ready(function(){
+                openWidget();
+                window.getSliderValue = function(){
+                    return dd.getStep();
+                }
+            });
+        }, 500)
+    }, 300);
+});

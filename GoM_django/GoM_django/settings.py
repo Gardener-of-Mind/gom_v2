@@ -84,7 +84,7 @@ WSGI_APPLICATION = 'GoM_django.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db2.sqlite3'),
+        'NAME': os.path.join(BASE_DIR, 'db3.sqlite3'),
     }
 }
 
@@ -127,7 +127,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 #     'mongodb://%s:%s@%s/%s' \
 #     % (_MONGODB_USER, _MONGODB_PASSWD, _MONGODB_HOST, _MONGODB_NAME)
 
-mongoengine.connect('gauss2_DB')
+mongoengine.connect('gauss3_DB')
 
 # Default Surveys Settings
 
