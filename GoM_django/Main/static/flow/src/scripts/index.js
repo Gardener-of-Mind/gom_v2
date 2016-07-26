@@ -123,7 +123,9 @@ function init() {
         return _data;
       }, {});
 
-      $.post('.', { evaluation_scheme: JSON.stringify(data) });
+      $.post('.', {
+        evaluation_scheme: JSON.stringify(data),
+      }, () => (location.pathname = '/survey/view/'));
     }
 
     // questions.forEach((q) => {
