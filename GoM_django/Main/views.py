@@ -548,36 +548,50 @@ def add_activity(request):
     profile = admin_profile.profile.objects.get(user=user)
 
     if request.POST:
-        if 'activity' in request.POST:
+        if 'track' in request.POST:
             name = request.POST['name']
             category = request.POST['category']
-            activity_ob = Activity(name=name, category=category)
-            activity_ob.save()
-            acitivity_id = activity_ob.id
-            return HttpResponse(str(acitivity_id))
+            track = ActivityTrack(name=name, category=category)
+            track.save()
+            return HttpResponse(str(track.id))
 
-        elif 'task' in request.POST:
-            acitivity_id = str(request.POST['activity_id'])
-            activity_ob = Activity.objects(id=acitivity_id).first()
+        elif 'activity' in request.POST:
+            track_id = str(request.POST['track_id'])
+            track = ActivityTrack.objects(id=ObjectId(track_id)).first()
             title = str(request.POST['title'])
             details = str(request.POST['details'])
-            task_ob = Task(title= title, details= details, activity= activity_ob)
-            task_ob.save()
+            next_allowed_after = int(request.POST['next_allowed_after'])
+            activity = Activity(title=title, details=details, track=activity_ob,
+                                next_allowed_after=next_allowed_after)
+            activity.save()
+            track.activity.append(activity)
             return HttpResponse('success')
 
-    return render('request', 'admin/add_activity.html', {'profile' : profile} )
+    return render(request, 'add_activity.html', {'profile': profile})
 
 
-
-def view_activities(request):
+def view_tracks(request):
     if request.POST:
-        acitivity_id = request.POST['acitivity_id']
-        activity_ob = Activity.objects(id=acitivity_id).first()
-        activity_ob = activity_ob.to_json()
-        return render(request, 'admin/activity_view.html', {'activity_ob' : activity_ob})
-    activities = Activity.objects.all()
-    activities = acitivities.to_json()
-    return render(request, '', {'acitivities' : activities})
+        track_id = request.POST['track_id']
+        track = ActivityTrack.objects(id=ObjectId(track_id)).first()
+        return render(request, 'track_view.html', {'track': track})
+
+    all_tracks = ActivityTrack.objects()
+    return render(request, 'all_tracks', {'all_tracks': all_tracks})
+
+
+def view_track(request, track_id):
+    track = ActivityTrack.objects(id=ObjectId(track_id)).first()
+    activity_track_response = ActivityTrackResponses.objects(user_id=request.user.id,
+                                                                track=track).first()
+    if activity_track_response is None:
+        activity_track_response = ActivityTrackResponses(user_id=request.user.id, track=track, 
+                                                        current_activity=track.activity[0])
+        activity_track_response.save()
+    activity = user_activity_track_status.current_activity
+    return render(request, 'attempt_activity.html', {'activity': activity})
+
+
 
 
 
@@ -585,36 +599,69 @@ def view_activities(request):
 
 #input:POST: user_id, activity_id
 #output: respones : 'success'
-def assign_activity(request):
+def assign_activity_track(request):
     if request.POST:
-        user_id = int(request.POST['user_id'])
-        acitivty_id = str(request.POST['acitivty_id'])
-        activity_ob = Activity.objects(id=acitivty_id).first()
-        user_activity_ob = UserActivity(user_id = user_id, assigned_activity= activity_ob)
-        uesr_activity_ob.save()
+        student_ids = request.POST.getlist('student_ids')
+        track_id = request.POST['track_id']
+        track = ActivityTrack.objects(id=ObjectId(track_id)).first()
+        for student_id in student_ids:
+            student_status = UserActivityTrackStatus.objects(user_id=student_id).first()
+            if student_status is None:
+                student_status = UserActivityTrackStatus(user_id=student_id)
+            student_status.pending_tasks.append(track)
+            student_status.save()
         return HttpResponse('success')
+    else:
+        all_tracks = ActivityTrack.objects(admin_only=False)
+        return render(request, 'all_tracks', {'all_tracks': all_tracks})
 
 
 #input=POST: task_id, user_activity_id
 #output=response: 'success'
-def complete_task(request):
-    user = request.user
-    user_profile = user_profile.objects.get(user=user)
-
-    task_id = str(request.POST['task_id'])
-    user_activity_id = str(request.POST['user_activity_id'])
-
-    user_activity_ob = UserActivity(id= user_activity_id)
-    task_ob = Task(id =task_id).first()
-
-    user_activity_ob.update_one(push__completed_tasks= task_ob)
-
-    return HttpResponse('success')
-
-def coach_diary(request, user_id):
-    # Here user_id is of student
+def complete_activity(request):
     if request.POST:
-        student_profile = user_profile.objects.get(id=user_id)
+        track_id = request.POST['track_id']
+        track = ActivityTrack.objects(id=ObjectId(track_id)).first()
+        activity_id = request.POST['activity_id']
+        activity = Activity.objects(id=ObjectId(activity_id))
+        # create new response shit if it does not exist already
+        activity_track_response = ActivityTrackResponses.objects(user_id=request.user.id, track=track).first()
+        if activity_track_response is None:
+            activity_track_response = ActivityTrackResponses(user_id=request.user.id, track=track, 
+                                                            current_activity=track.activity[0])
+            activity_track_response.save()
+        feedback = request.POST['feedback']
+        rating = int(request.POST['rating'])
+        time_completed = request.POST['time_completed']  # Convert to proper datetime
+        activity_response = ActivityResponse(activity=activity, feedback=feedback, rating=rating, time_completed=time_completed)
+        activity_response.save()
+
+        activity_track_response.responses.append(activity_response)
+        if len(activity_track_response.responses) == len(track.activity):
+            activity_track_response.completed = True
+            activity_track_response.current_activity = None
+
+            # Also remove from pending and move to Completed in case of UserActivityTrackStatus
+
+        else:
+            activity_track_response.current_activity = track.activity.objects()[len(activity_track_response.responses)]
+        activity_track_response.save()
+        return HttpResponse('sucess')
+
+    # user = request.user
+    # user_profile = user_profile.objects.get(user=user)
+
+    # task_id = str(request.POST['task_id'])
+    # user_activity_id = str(request.POST['user_activity_id'])
+
+    # user_activity_ob = UserActivity(id= user_activity_id)
+    # task_ob = Task(id =task_id).first()
+
+    # user_activity_ob.update_one(push__completed_tasks= task_ob)
+
+def coach_diary(request, student_id):
+    if request.POST:
+        student_profile = user_profile.objects.get(id=student_id)
         student_profile.remarks = request.POST['remarks']
         student_profile.save()
         return HttpResponse('Success')
@@ -631,6 +678,12 @@ def flow(request, survey_id):
             survey.eval_scheme = json.loads(request.POST['evaluation_scheme'])
             survey.save()
     return render(request, 'flow/index.html')
+
+
+def student_activity_profile(request):
+    pending_tracks = UserActivityTrackStatus.objects(user_id=request.user.id).pending_tracks
+    return render(request, 'activity_profile.html', {'pending_tracks': pending_tracks})
+
 
 def asd(request):
     # if request.POST:
@@ -649,3 +702,4 @@ def asds(request):
 
 def asd_take(request, activity_id):
     return render(request, 'activity.html')
+

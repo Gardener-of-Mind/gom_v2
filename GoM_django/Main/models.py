@@ -144,8 +144,8 @@ class ActivityTrack(Document):
 class ActivityTrackResponses(Document):
     user_id = IntField()
     track = ReferenceField(ActivityTrack)
-    current_activity = ReferenceField(Question, null=True)
-    responses = ListField(ReferenceField(Response))
+    current_activity = ReferenceField(Activity, null=True)
+    responses = ListField(ReferenceField(ActivityResponse))
     completed = BooleanField(default=False)
 
 
