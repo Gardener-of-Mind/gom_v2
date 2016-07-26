@@ -312,8 +312,12 @@ def edit_profile(request):
         profile= user_profile.objects.get(user=user)
         profile_type = 'user'
     except:
-        profile= admin_profile.objects.get(user=user)
-        profile_type = 'admin'
+        try:
+            profile= admin_profile.objects.get(user=user)
+            profile_type = 'admin'
+        except:
+            profile= coach_profile.objects.get(user=user)
+            profile_type = 'coach'
 
     if request.POST.get('profile_pic',False):
         # try:
