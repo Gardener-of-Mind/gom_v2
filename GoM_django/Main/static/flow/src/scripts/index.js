@@ -102,11 +102,11 @@ function init() {
       }
 
       const noValueQuestions = q.conditions.slice(1).
-          filter((c) => !c.value);
+        filter((c) => !c.value);
 
       if (noValueQuestions.length) {
         isValid = false;
-        alert(`At least default condition must be set:\n${noValueQuestions.
+        alert(`Destination value for condition must be set:\n${noValueQuestions.
           map((c) => `Q ${1 + q.idx}) - ${c.idx}`).
           join('\n')
         }

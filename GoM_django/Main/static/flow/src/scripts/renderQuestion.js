@@ -15,9 +15,18 @@ export default function renderQuestion(i) {
   $('.question .body > p').text(question.text);
 
   switch (question.query_type) {
-    case QUESTION_TYPES.CHOICE_SINGLE:
-    case QUESTION_TYPES.CHOICE_MULTIPLE:
+    case QUESTION_TYPES.radio:
+    case QUESTION_TYPES.checkbox:
+    case QUESTION_TYPES.dropdownbox:
       $('.question .body .options').html(question.options.map((o, j) => (
+        `<p>
+          ${String.fromCharCode(65 + j)}) ${o.text}
+        </p>`
+      )).join(' '));
+      break;
+
+    case QUESTION_TYPES.dual:
+      $('.question .body .options').html(['Yes', 'No'].map((o, j) => (
         `<p>
           ${String.fromCharCode(65 + j)}) ${o}
         </p>`

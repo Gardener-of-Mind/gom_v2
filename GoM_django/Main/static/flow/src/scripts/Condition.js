@@ -127,19 +127,81 @@ export default class Condition {
   dual() {
     const $element = $(`
       <div class="col-md-10 col-md-offset-1">
+        <div class="form-group">
+          <div class="radio">
+          </div>
+        </div>
+      </div>
+    `);
+    for (let i = 0; i < 2; i++) {
+      $element.find('.radio').append(`
+        <div class="col-md-2">
+          <label class="radio-inline">
+            <input type="radio" name="value" value="${i}" />
+            <span>Option ${String.fromCharCode(65 + i)}</span>
+          </label>
+        </div>
+      `);
+    }
+    $element.find('input[name="value"]').change((e) => {
+      this.value = e.target.value;
+    });
+    this.element = $element;
+  }
+
+  rating() {
+    const $element = $(`
+      <div class="col-md-10 col-md-offset-1">
         <div class="from-group">
           <label class="col-md-3 control-label">Value:</label>
-          <div class="col-md-9">
-            <input type="text" class="form-control" name="value" placeholder="Condition value" />
+          <div class="col-md-2">
+            <select class="form-control" name="value" title="Condition value">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+              <option value="9">9</option>
+              <option value="10">10</option>
+            </select>
           </div>
         </div>
       </div>
     `);
 
-    $element.find('input').change((e) => {
+    $element.find('select').change((e) => {
       this.value = e.target.value;
     });
+    this.value = '1';
 
+    this.element = $element;
+  }
+
+  dropdownbox() {
+    const $element = $(`
+      <div class="col-md-10 col-md-offset-1">
+        <div class="form-group">
+          <div class="radio">
+          </div>
+        </div>
+      </div>
+    `);
+    for (let i = 0; i < this.question.options.length; i++) {
+      $element.find('.radio').append(`
+        <div class="col-md-2">
+          <label class="radio-inline">
+            <input type="radio" name="value" value="${i}" />
+            <span>Option ${String.fromCharCode(65 + i)}</span>
+          </label>
+        </div>
+      `);
+    }
+    $element.find('input[name="value"]').change((e) => {
+      this.value = e.target.value;
+    });
     this.element = $element;
   }
 
