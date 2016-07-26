@@ -646,7 +646,8 @@ def complete_activity(request):
         track_id = request.POST['track_id']
         track = ActivityTrack.objects(id=ObjectId(track_id)).first()
         activity_id = request.POST['activity_id']
-        activity = Activity.objects(id=ObjectId(activity_id))
+        activity = Activity.objects(id=ObjectId(activity_id)).first()
+        user_track_status = UserActivityTrackStatus.objects(user_id=request.user.id).first()
         # create new response shit if it does not exist already
         activity_track_response = ActivityTrackResponses.objects(user_id=request.user.id, track=track).first()
         if activity_track_response is None:
@@ -658,18 +659,21 @@ def complete_activity(request):
         time_completed = datetime.datetime.now()
         activity_response = ActivityResponse(activity=activity, feedback=feedback, rating=rating, time_completed=time_completed)
         activity_response.save()
+        print 'HO PAYA'
 
         activity_track_response.responses.append(activity_response)
         if len(activity_track_response.responses) == len(track.activity):
             activity_track_response.completed = True
             activity_track_response.current_activity = None
-
+            user_track_status.completed_tracks.append(track)
+            user_track_status.pending_tracks.remove(track)
+            user_track_status.save()
             # Also remove from pending and move to Completed in case of UserActivityTrackStatus
 
         else:
-            activity_track_response.current_activity = track.activity.objects()[len(activity_track_response.responses)]
+            activity_track_response.current_activity = track.activity[len(activity_track_response.responses)]
         activity_track_response.save()
-        return HttpResponse('sucess')
+        return HttpResponse(json.dumps({"status": 'success', "next": not activity_track_response.completed}))
 
     # user = request.user
     # user_profile = user_profile.objects.get(user=user)

@@ -31,6 +31,18 @@ export default class Condition {
           this.checkbox();
           break;
 
+        case QUESTION_TYPES.dual:
+          this.dual();
+          break;
+
+        case QUESTION_TYPES.rating:
+          this.rating();
+          break;
+
+        case QUESTION_TYPES.dropdownbox:
+          this.dropdownbox();
+          break;
+
         default:
       }
 
@@ -58,7 +70,6 @@ export default class Condition {
   }
 
   radio() {
-    console.log(this.question)
     const $element = $(`
       <div class="col-md-10 col-md-offset-1">
         <div class="form-group">
@@ -110,6 +121,25 @@ export default class Condition {
       }
       this.value = checked;
     });
+    this.element = $element;
+  }
+
+  dual() {
+    const $element = $(`
+      <div class="col-md-10 col-md-offset-1">
+        <div class="from-group">
+          <label class="col-md-3 control-label">Value:</label>
+          <div class="col-md-9">
+            <input type="text" class="form-control" name="value" placeholder="Condition value" />
+          </div>
+        </div>
+      </div>
+    `);
+
+    $element.find('input').change((e) => {
+      this.value = e.target.value;
+    });
+
     this.element = $element;
   }
 
