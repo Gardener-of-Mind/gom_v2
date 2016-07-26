@@ -280,7 +280,8 @@ var FormWizard = function () {
             break;
 
           case 'video':
-            var videoUrl = $('#url').val();
+            var videoUrl = $('#url').val().replace(/.*watch\?v=(.*)/, "https://www.youtube.com/embed/$1");
+
             questions.push({
               query_type: query_type,
               text: $('#questionText').val(),
