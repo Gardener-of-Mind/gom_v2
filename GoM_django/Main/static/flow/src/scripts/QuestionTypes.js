@@ -1,8 +1,8 @@
 const questionTypes = {
-  dual: 'yes or no',
-  dropdownbox: 'dropdown',
-  radio: 'single choice',
-  checkbox: 'multiple choice',
+  dual: 'dual',
+  dropdownbox: 'dropdownbox',
+  radio: 'radio',
+  checkbox: 'checkbox',
   rating: 'rating',
   text: 'text',
 };

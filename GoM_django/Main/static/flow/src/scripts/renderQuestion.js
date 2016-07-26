@@ -11,7 +11,7 @@ window.questions = questions;
 export default function renderQuestion(i) {
   const question = questions[i];
 
-  $('.question .heading').text(`Q${1 + i}) ${question.category}`);
+  $('.question .heading').text(`Q${1 + i})`);
   $('.question .body > p').text(question.text);
 
   switch (question.query_type) {

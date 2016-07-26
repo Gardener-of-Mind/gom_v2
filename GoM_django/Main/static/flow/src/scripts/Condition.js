@@ -16,6 +16,7 @@ export default class Condition {
 
     this.scoreCondition = null;
 
+    console.log(question.query_type, QUESTION_TYPES.checkbox)
     if (type !== 'default') {
       switch (question.query_type) {
         case QUESTION_TYPES.text:
@@ -33,7 +34,7 @@ export default class Condition {
         default:
       }
 
-      this.score();
+      // this.score();
     }
   }
 
@@ -57,6 +58,7 @@ export default class Condition {
   }
 
   radio() {
+    console.log(this.question)
     const $element = $(`
       <div class="col-md-10 col-md-offset-1">
         <div class="form-group">

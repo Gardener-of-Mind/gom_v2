@@ -247,17 +247,20 @@
                                                                 <div class="tab-content">
                                                                     <div class="tab-pane active">
                                                                         <div class="form-group">
-                                                                        {% if question.query_type == "text" %}
+                                                                        {% if question.query_type == 'text' %}
                                                                             <label class="control-label col-md-3">
                                                                                 Answer
                                                                             </label>
                                                                             <div class="col-md-4">
-                                                                                <input type="text" class="form-control" name="sCategory" />
+                                                                                <input class="form-control" name="sCategory" type="text">
                                                                             </div>
                                                                         {% elif question.query_type == "radio" %}
-                                                                            <div class="col-md-12">
-                                                                                <input type="text" class="form-control">
-                                                                            </div>
+                                                                            {% for op in question.options %}
+                                                                                <label class="col-md-4">
+                                                                                    <input class="form-control" name="sCategory" type="radio" disabled>
+                                                                                    {{op.text}}
+                                                                                </label>
+                                                                            {% endfor %}
                                                                         {% endif %}
                                                                         </div>
                                                                     </div>

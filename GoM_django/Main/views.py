@@ -655,7 +655,7 @@ def complete_activity(request):
             activity_track_response.save()
         feedback = request.POST['feedback']
         rating = int(request.POST['rating'])
-        time_completed = request.POST['time_completed']  # Convert to proper datetime
+        time_completed = datetime.datetime.now()
         activity_response = ActivityResponse(activity=activity, feedback=feedback, rating=rating, time_completed=time_completed)
         activity_response.save()
 
