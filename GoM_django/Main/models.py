@@ -118,6 +118,9 @@ class Activity(Document):
     details = StringField(max_length=1500, blank=True)
     tags = ListField(ReferenceField(Tag))
     next_allowed_after = IntField(default=0)   # Hours after which next activity is allowed.
+    activity_type = StringField(max_length=50)
+    image = ImageField(null=True)
+    video_url = URLField(null=True)
 
     class Meta:
         verbose_name_plural = 'Activities'
