@@ -639,6 +639,29 @@ def assign_activity_track(request):
         return render(request, 'all_tracks.html', {'all_tracks': all_tracks, 'students': students})
 
 
+def assign_survey(request):
+    if request.POST:
+        student_ids = request.POST['student_ids']
+        student_ids = json.loads(student_ids)
+        print student_ids
+        survey_id = request.POST['survey_id']
+        survey = Survey.objects(id=ObjectId(survey_id)).first()
+        for student_id in student_ids:
+            student_status = UserSurveyStatus.objects(user_id=int(student_id)).first()
+            if student_status is None:
+                student_status = UserSurveyStatus(user_id=int(student_id))
+            student_status.pending_surveys.append(survey)
+            student_status.save()
+        return HttpResponse('success')
+    else:
+        all_surveys = Survey.objects()
+        # ToDo: all_tracks = Survey.objects(admin_only=False)
+        c_profile = coach_profile.objects.get(user=request.user)
+        students = c_profile.user_profile_set.all()
+        return render(request, 'all_tracks.html', {'all_surveys': all_tracks, 'students': students})
+
+
+
 #input=POST: task_id, user_activity_id
 #output=response: 'success'
 def complete_activity(request):
