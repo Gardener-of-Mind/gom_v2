@@ -184,8 +184,8 @@ def take_survey(request, survey_id):
                 user_response.completed = True
                 user_survey_status = UserSurveyStatus.objects(user_id=request.user.id).first()
                 user_survey_status.completed_surveys.append(survey)
-                user_survey_status.pending_surveys.remove(survey
-)                user_survey_status.save()
+                user_survey_status.pending_surveys.remove(survey)
+                user_survey_status.save()
                 return HttpResponse('Survey Completed')
             user_response.current_question = next_question  # The Question user will be answering now.
         next_question = next_question.to_json()

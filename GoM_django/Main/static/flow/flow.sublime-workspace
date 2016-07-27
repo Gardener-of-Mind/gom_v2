@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"_",
+				"_id"
+			],
+			[
 				"fn",
 				"function"
 			],
@@ -95,30 +99,6 @@
 	},
 	"buffers":
 	[
-		{
-			"file": "src/scripts/Condition.js",
-			"settings":
-			{
-				"buffer_size": 6045,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "src/scripts/index.js",
-			"settings":
-			{
-				"buffer_size": 3993,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "src/scripts/renderQuestion.js",
-			"settings":
-			{
-				"buffer_size": 1259,
-				"line_ending": "Unix"
-			}
-		}
 	],
 	"build_system": "",
 	"build_system_choices":
@@ -127,10 +107,18 @@
 	"build_varint": "",
 	"command_palette":
 	{
-		"height": 80.0,
-		"last_filter": "rename",
+		"height": 101.0,
+		"last_filter": "json",
 		"selected_items":
 		[
+			[
+				"json",
+				"JSON Reindent: reindent file or selection"
+			],
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
 			[
 				"rename",
 				"File: Rename"
@@ -215,9 +203,10 @@
 	],
 	"file_history":
 	[
-		"/home/zhirzh/code/Gardener-of-Mind/GoM_django/Main/static/flow/src/scripts/QuestionTypes.js",
-		"/home/zhirzh/code/Gardener-of-Mind/GoM_django/Main/static/flow/src/scripts/renderQuestion.js",
 		"/home/zhirzh/code/Gardener-of-Mind/GoM_django/Main/static/flow/src/scripts/Condition.js",
+		"/home/zhirzh/code/Gardener-of-Mind/GoM_django/Main/static/flow/src/scripts/index.js",
+		"/home/zhirzh/code/Gardener-of-Mind/GoM_django/Main/static/flow/src/scripts/renderQuestion.js",
+		"/home/zhirzh/code/Gardener-of-Mind/GoM_django/Main/static/flow/src/scripts/QuestionTypes.js",
 		"/home/zhirzh/code/Gardener-of-Mind/GoM_django/Main/static/flow/build/bundle.js",
 		"/home/zhirzh/code/Gardener-of-Mind/GoM_django/Main/urls.py",
 		"/home/zhirzh/code/Gardener-of-Mind/GoM_django/Main/views.py",
@@ -261,7 +250,6 @@
 		"/home/zhirzh/code/Gardener-of-Mind/GoM_django/Main/templates/take_survey.html",
 		"/home/zhirzh/code/Gardener-of-Mind/GoM_django/Main/static/assets/pages/scripts/survey_add.js",
 		"/home/zhirzh/code/Gardener-of-Mind/GoM_django/Main/utils.py",
-		"/home/zhirzh/code/Gardener-of-Mind/GoM_django/Main/static/flow/src/scripts/index.js",
 		"/home/zhirzh/code/pokewhere/static/legacy.js",
 		"/home/zhirzh/code/pokewhere/pokewhere.py",
 		"/home/zhirzh/code/pokewhere/server.py",
@@ -512,99 +500,8 @@
 	"groups":
 	[
 		{
-			"selected": 1,
 			"sheets":
 			[
-				{
-					"buffer": 0,
-					"file": "src/scripts/Condition.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 6045,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								4745,
-								4745
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Babel/JavaScript (Babel).sublime-syntax",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 4627.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "src/scripts/index.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 3993,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								3417,
-								3417
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Babel/JavaScript (Babel).sublime-syntax",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 3198.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "src/scripts/renderQuestion.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1259,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								653,
-								653
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Babel/JavaScript (Babel).sublime-syntax",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 203.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				}
 			]
 		}
 	],
@@ -981,7 +878,7 @@
 	"show_open_files": true,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 250.0,
+	"side_bar_width": 131.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{
