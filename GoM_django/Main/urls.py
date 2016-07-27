@@ -39,6 +39,7 @@ urlpatterns = [
     url(r'^survey/view/$', views.view_surveys),
     url(r'^survey/view/(?P<survey_id>.*)/$', views.view_survey),
     url(r'^survey/modify/(?P<survey_id>.*)/$', views.view_edit_survey),
+    url(r'^student/surveys/$', views.student_survey_profile),
 
 
     url(r'^dashboard/$', views.dashboard),

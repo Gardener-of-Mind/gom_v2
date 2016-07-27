@@ -1,0 +1,989 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"fn",
+				"function"
+			],
+			[
+				"U",
+				"UserActivityTrackStatus"
+			],
+			[
+				"acti",
+				"activity"
+			],
+			[
+				"ac",
+				"activity_type"
+			],
+			[
+				"stude",
+				"student_ids"
+			],
+			[
+				"stu",
+				"student_ids"
+			],
+			[
+				"st",
+				"student_ids"
+			],
+			[
+				"str",
+				"stringify"
+			],
+			[
+				"ass",
+				"assign_activity"
+			],
+			[
+				"Ht",
+				"HttpResponse"
+			],
+			[
+				"sid",
+				"surveyId"
+			],
+			[
+				"opac",
+				"setOpacity"
+			],
+			[
+				"fun",
+				"function"
+			],
+			[
+				"iz",
+				"iconSize"
+			],
+			[
+				"g",
+				"google"
+			],
+			[
+				"wi",
+				"with"
+			],
+			[
+				"ma",
+				"markers"
+			],
+			[
+				"cn",
+				"console"
+			],
+			[
+				"pg",
+				"PGoApi"
+			],
+			[
+				"Fd",
+				"FormData"
+			],
+			[
+				"For",
+				"FormData"
+			],
+			[
+				"htt",
+				"HttpResponse"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "src/scripts/Condition.js",
+			"settings":
+			{
+				"buffer_size": 6045,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/scripts/index.js",
+			"settings":
+			{
+				"buffer_size": 3993,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/scripts/renderQuestion.js",
+			"settings":
+			{
+				"buffer_size": 1259,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 80.0,
+		"last_filter": "rename",
+		"selected_items":
+		[
+			[
+				"rename",
+				"File: Rename"
+			],
+			[
+				"html",
+				"Set Syntax: HTML"
+			],
+			[
+				"rena",
+				"File: Rename"
+			],
+			[
+				"httml",
+				"Set Syntax: HTML (Tcl)"
+			],
+			[
+				"re",
+				"File: Rename"
+			],
+			[
+				"ren",
+				"File: Rename"
+			],
+			[
+				"disa",
+				"SublimeLinter: Disable Linter"
+			],
+			[
+				"ena",
+				"SublimeLinter: Enable Linting"
+			],
+			[
+				"pytho",
+				"Set Syntax: Python"
+			],
+			[
+				"ins",
+				"Package Control: Install Package"
+			],
+			[
+				"remo",
+				"Package Control: Remove Package"
+			],
+			[
+				"in",
+				"Package Control: Install Package"
+			],
+			[
+				"babe",
+				"Set Syntax: JavaScript (Babel)"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 467.0
+	},
+	"console":
+	{
+		"height": 188.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = '2915d1851351e5ee549c20394736b442' + '8bc59f460fa1548d1514676163dafc88'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/home/zhirzh/code/Gardener-of-Mind/GoM_django/Main/static/flow",
+		"/home/zhirzh/code/Gardener-of-Mind/GoM_django/Main/static/flow/src",
+		"/home/zhirzh/code/Gardener-of-Mind/GoM_django/Main/static/flow/src/scripts"
+	],
+	"file_history":
+	[
+		"/home/zhirzh/code/Gardener-of-Mind/GoM_django/Main/static/flow/src/scripts/QuestionTypes.js",
+		"/home/zhirzh/code/Gardener-of-Mind/GoM_django/Main/static/flow/src/scripts/renderQuestion.js",
+		"/home/zhirzh/code/Gardener-of-Mind/GoM_django/Main/static/flow/src/scripts/Condition.js",
+		"/home/zhirzh/code/Gardener-of-Mind/GoM_django/Main/static/flow/build/bundle.js",
+		"/home/zhirzh/code/Gardener-of-Mind/GoM_django/Main/urls.py",
+		"/home/zhirzh/code/Gardener-of-Mind/GoM_django/Main/views.py",
+		"/home/zhirzh/code/Gardener-of-Mind/GoM_django/Main/templates/take_activity.html",
+		"/home/zhirzh/code/Gardener-of-Mind/GoM_django/Main/templates/question.html",
+		"/home/zhirzh/code/Gardener-of-Mind/GoM_django/Main/static/assets/pages/scripts/question.js",
+		"/home/zhirzh/code/Gardener-of-Mind/GoM_django/Main/static/assets/pages/scripts/take_activity.js",
+		"/home/zhirzh/code/Gardener-of-Mind/GoM_django/Main/templates/coach/dashboard.html",
+		"/home/zhirzh/code/Gardener-of-Mind/GoM_django/Main/templates/activity.html",
+		"/home/zhirzh/code/Gardener-of-Mind/GoM_django/Main/static/assets/pages/scripts/activity.js",
+		"/home/zhirzh/code/Gardener-of-Mind/GoM_django/Main/models.py",
+		"/home/zhirzh/code/Gardener-of-Mind/GoM_django/GoM_django/settings.py",
+		"/home/zhirzh/code/pokewhere/dump/raw_1469500007.json",
+		"/home/zhirzh/code/pokewhere/dump/raw_1469500517.json",
+		"/home/zhirzh/code/pokewhere/dump/raw_1469501028.json",
+		"/home/zhirzh/code/Gardener-of-Mind/GoM_django/Main/templates/activities.html",
+		"/home/zhirzh/code/Gardener-of-Mind/GoM_django/Main/templates/all_tracks.html",
+		"/home/zhirzh/code/Gardener-of-Mind/GoM_django/Main/static/assets/pages/scripts/activities.js",
+		"/home/zhirzh/code/Gardener-of-Mind/GoM_django/Main/templates/user/diary.html",
+		"/home/zhirzh/code/Gardener-of-Mind/GoM_django/Main/templates/user/profile_account.html",
+		"/home/zhirzh/code/Gardener-of-Mind/GoM_django/Main/templates/user/profile_help.html",
+		"/home/zhirzh/code/Gardener-of-Mind/GoM_django/Main/templates/add_activity.html",
+		"/home/zhirzh/code/Gardener-of-Mind/GoM_django/Main/static/assets/pages/scripts/activity_add.js",
+		"/home/zhirzh/code/Gardener-of-Mind/GoM_django/Main/templates/user/activity_profile.html",
+		"/home/zhirzh/code/Gardener-of-Mind/GoM_django/Main/static/assets/pages/scripts/all_tracks.js",
+		"/home/zhirzh/code/Gardener-of-Mind/GoM_django/Main/templates/user/profile_overview.html",
+		"/home/zhirzh/code/Gardener-of-Mind/GoM_django/Main/templates/user/dashboard.html",
+		"/home/zhirzh/code/Gardener-of-Mind/GoM_django/Main/static/assets/layouts/layout/scripts/todo.js",
+		"/home/zhirzh/code/Gardener-of-Mind/GoM_django/Main/templates/coach/user_details.html",
+		"/home/zhirzh/code/Gardener-of-Mind/GoM_django/Main/templates/coach/profile_help.html",
+		"/home/zhirzh/code/Gardener-of-Mind/GoM_django/Main/templates/coach/profile_overview.html",
+		"/home/zhirzh/code/Gardener-of-Mind/GoM_django/Main/templates/coach/profile_account.html",
+		"/home/zhirzh/code/Gardener-of-Mind/GoM_django/Main/templates/admin/surveys.html",
+		"/home/zhirzh/code/Gardener-of-Mind/GoM_django/Main/templates/admin/dashboard.html",
+		"/home/zhirzh/code/Gardener-of-Mind/GoM_django/Main/static/assets/pages/scripts/userview.js",
+		"/home/zhirzh/code/Gardener-of-Mind/GoM_django/Main/static/assets/global/plugins/ckeditor/ckeditor.js",
+		"/home/zhirzh/code/Gardener-of-Mind/GoM_django/Main/templates/admin/survey_add.html",
+		"/home/zhirzh/code/Gardener-of-Mind/GoM_django/Main/templates/admin/survey.html",
+		"/home/zhirzh/code/Gardener-of-Mind/GoM_django/Main/templates/admin/approved_coach.html",
+		"/home/zhirzh/code/Gardener-of-Mind/GoM_django/Main/static/assets/pages/scripts/take_survey.js",
+		"/home/zhirzh/code/Gardener-of-Mind/GoM_django/Main/templates/take_survey.html",
+		"/home/zhirzh/code/Gardener-of-Mind/GoM_django/Main/static/assets/pages/scripts/survey_add.js",
+		"/home/zhirzh/code/Gardener-of-Mind/GoM_django/Main/utils.py",
+		"/home/zhirzh/code/Gardener-of-Mind/GoM_django/Main/static/flow/src/scripts/index.js",
+		"/home/zhirzh/code/pokewhere/static/legacy.js",
+		"/home/zhirzh/code/pokewhere/pokewhere.py",
+		"/home/zhirzh/code/pokewhere/server.py",
+		"/home/zhirzh/code/pokewhere/dump (2)/raw_1469472904.json",
+		"/home/zhirzh/code/pokewhere/.gitignore",
+		"/home/zhirzh/code/pokewhere/dump/raw_1469474469.json",
+		"/home/zhirzh/code/pokewhere/dump/raw_1469473939.json",
+		"/home/zhirzh/code/pokewhere/dump/raw_1469473414.json",
+		"/home/zhirzh/code/pokewhere/dump/raw_1469472370.json",
+		"/home/zhirzh/code/pokewhere/dump/raw_1469471858.json",
+		"/home/zhirzh/code/pokewhere/dump/raw_1469471347.json",
+		"/home/zhirzh/code/pokewhere/dump/raw_1469470624.json",
+		"/home/zhirzh/code/pokewhere/dump/raw_1469459516.json",
+		"/home/zhirzh/code/pokewhere/dump/raw_1469472904.json",
+		"/home/zhirzh/code/pokewhere/config.json",
+		"/home/zhirzh/code/pokewhere/config.2.json",
+		"/home/zhirzh/.heroku/config.json",
+		"/home/zhirzh/code/Gardener-of-Mind/GoM_django/GoM_django/urls.py",
+		"/home/zhirzh/todo",
+		"/home/zhirzh/asd",
+		"/home/zhirzh/pokewhere/requirements.txt",
+		"/home/zhirzh/pokewhere/config.json",
+		"/home/zhirzh/pokewhere/templates/root.html",
+		"/home/zhirzh/pokewhere/templates/legacy.html",
+		"/home/zhirzh/pokewhere/server.py",
+		"/home/zhirzh/pokewhere/raw.json",
+		"/home/zhirzh/pokewhere/data.json",
+		"/home/zhirzh/pokewhere/data.js",
+		"/home/zhirzh/pgoapi/examples/raw_data.json",
+		"/home/zhirzh/pgoapi/examples/data.js",
+		"/home/zhirzh/pgoapi/examples/index.html",
+		"/home/zhirzh/pgoapi/examples/data.json",
+		"/home/zhirzh/pgoapi/examples/data.1.json",
+		"/home/zhirzh/.config/sublime-text-3/Packages/User/Preferences.sublime-settings",
+		"/home/zhirzh/.bash_aliases",
+		"/home/zhirzh/pgoapi/examples/pokemons.json",
+		"/home/zhirzh/pgoapi/examples/data.2.json",
+		"/home/zhirzh/pgoapi/examples/spiral_poi_search.py",
+		"/home/zhirzh/pgoapi/examples/data.3.json",
+		"/home/zhirzh/pgoapi/examples/pokemon.json",
+		"/home/zhirzh/pgoapi/examples/asd.py",
+		"/home/zhirzh/.gitdiff",
+		"/home/zhirzh/pgoapi/examples/pokewhere.py",
+		"/home/zhirzh/code/Gardener-of-Mind/GoM_django/kachra.txt",
+		"/home/zhirzh/.config/sublime-text-3/Packages/User/SublimeLinter.sublime-settings",
+		"/home/zhirzh/pgoapi/pokecli.py",
+		"/home/zhirzh/code/Gardener-of-Mind/GoM_django/Main/templates/activity_add.html",
+		"/home/zhirzh/tofo",
+		"/home/zhirzh/.config/synapse/config.json",
+		"/home/zhirzh/asd/index.js",
+		"/home/zhirzh/code/Gardener-of-Mind/.gitignore",
+		"/home/zhirzh/code/Gardener-of-Mind/123",
+		"/home/zhirzh/.local/share/applications/blender.desktop",
+		"/home/zhirzh/.bashrc",
+		"/home/zhirzh/.local/share/blender-2.77a/blender.desktop",
+		"/home/zhirzh/.bash_history",
+		"/home/zhirzh/.config/sublime-text-3/Packages/User/JS.sublime-build",
+		"/home/zhirzh/.eslintrc",
+		"/home/zhirzh/index.js",
+		"/home/zhirzh/asd/package.json",
+		"/home/zhirzh/.config/sublime-text-3/Installed Packages/JavaScript & Coffeescript Build Systems.sublime-package",
+		"/home/zhirzh/.config/sublime-text-3/Packages/User/Default (Linux).sublime-keymap",
+		"/home/zhirzh/.config/sublime-text-3/Packages/SublimeLinter/SublimeLinter.sublime-settings",
+		"/home/zhirzh/asd/.eslintrc.yml",
+		"/home/zhirzh/asd.js",
+		"/home/zhirzh/asd/.eslintrc",
+		"/home/zhirzh/test.py",
+		"/home/zhirzh/.config/sublime-text-3/Packages/Default/Default (Linux).sublime-keymap",
+		"/home/zhirzh/.config/sublime-text-3/Packages/User/JSON.sublime-settings",
+		"/home/zhirzh/.config/sublime-text-3/Packages/User/Distraction Free.sublime-settings",
+		"/home/zhirzh/.config/sublime-text-3/Packages/Default/Preferences.sublime-settings",
+		"/home/zhirzh/.config/sublime-text-3/Packages/User/Python.sublime-settings",
+		"/home/zhirzh/.git-prompt.sh",
+		"/home/zhirzh/.ps1.sh"
+	],
+	"find":
+	{
+		"height": 45.0
+	},
+	"find_in_files":
+	{
+		"height": 120.0,
+		"where_history":
+		[
+			"",
+			".html",
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"radio",
+			"checkbox",
+			"at lea",
+			"submit",
+			"1",
+			"radio",
+			"single",
+			"QUESTION_TYPES.CHOICE_SINGLE",
+			"checkbox",
+			":",
+			"score(",
+			"score",
+			"this.element",
+			"`",
+			"Q.*\\)",
+			"post",
+			"sliderInit",
+			"genRating",
+			"drag",
+			"hideForm",
+			"resetSurvey",
+			"sliderInit",
+			"startSurvey",
+			"t-q",
+			"view_track",
+			"y/t",
+			"e_s",
+			"sliderInit",
+			"genR",
+			"NaN",
+			"\"\"NaN\"\"",
+			"NaN",
+			"N",
+			"2",
+			"anx",
+			"ifra",
+			"query",
+			"startSurvey",
+			"resetSurvey",
+			"showForm",
+			"startSurvey",
+			"showForm",
+			"loadQuestion",
+			"showForm",
+			"startSurvey",
+			"resetSurvey",
+			"function ",
+			"{%",
+			"{{",
+			"()",
+			"function ",
+			"()",
+			"function ",
+			"loadQuestion",
+			"startSurvey",
+			"QUESTION",
+			"next q",
+			"Survey",
+			"survey",
+			"take_s",
+			"query_type",
+			"query_type: ",
+			"query_type",
+			"questionText",
+			"task",
+			"Questions",
+			"questions",
+			"post",
+			"sendQuestion",
+			"addQuestions",
+			"ckedit",
+			"ajax",
+			"add_track",
+			"assi",
+			"profile_ob.id",
+			"user_pro",
+			"d/",
+			"take",
+			"assign",
+			"user_id",
+			"w_t",
+			"students",
+			"map",
+			"activity",
+			"active",
+			"Activitys",
+			"slimScrollDiv",
+			"dashb",
+			"survey",
+			"student_activity_profile",
+			"My Activities",
+			"chosen",
+			"s",
+			"diary",
+			"modal",
+			"FOR ",
+			"name",
+			"dashboard",
+			"ties.ht",
+			".children()",
+			".children()[",
+			"$(this)",
+			"{activity.name}",
+			".text()\n",
+			"activity-",
+			"action",
+			"assign-activity",
+			"id=\"",
+			"assign-activity",
+			"assign-activity-modal",
+			"-modal",
+			"toggle=\"",
+			"toggle=\"#",
+			".modal",
+			"$",
+			"todo-task-modal",
+			"-modal",
+			"assign-task",
+			"todo-task-modal",
+			"#todo-task-modal",
+			"diar",
+			".html:",
+			"actions",
+			"dashboa",
+			"{% ",
+			"view_tracks",
+			"nav-l",
+			"My Diary"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": true,
+		"regex": false,
+		"replace_history":
+		[
+			"activity",
+			"activities",
+			"activity",
+			"<a href=\"/survey/view\" class=\"nav-link\">",
+			"survey",
+			"",
+			"activity",
+			"activies",
+			"activity",
+			"activities",
+			"activity"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 1,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "src/scripts/Condition.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 6045,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								4745,
+								4745
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Babel/JavaScript (Babel).sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 4627.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "src/scripts/index.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3993,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3417,
+								3417
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Babel/JavaScript (Babel).sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 3198.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "src/scripts/renderQuestion.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1259,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								653,
+								653
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Babel/JavaScript (Babel).sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 203.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 37.0
+	},
+	"input":
+	{
+		"height": 43.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "flow.sublime-project",
+	"replace":
+	{
+		"height": 70.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"in",
+				"src/scripts/index.js"
+			],
+			[
+				"rq",
+				"src/scripts/renderQuestion.js"
+			],
+			[
+				"qty",
+				"src/scripts/QuestionTypes.js"
+			],
+			[
+				"cjs",
+				"src/scripts/Condition.js"
+			],
+			[
+				"takeacjs",
+				"GoM_django/Main/static/assets/pages/scripts/take_activity.js"
+			],
+			[
+				"take",
+				"GoM_django/Main/templates/take_activity.html"
+			],
+			[
+				"qjs",
+				"GoM_django/Main/static/assets/pages/scripts/question.js"
+			],
+			[
+				"qhtml",
+				"GoM_django/Main/templates/question.html"
+			],
+			[
+				"vp",
+				"GoM_django/Main/views.py"
+			],
+			[
+				"u",
+				"GoM_django/Main/urls.py"
+			],
+			[
+				"set",
+				"GoM_django/GoM_django/settings.py"
+			],
+			[
+				"acjs",
+				"GoM_django/Main/static/assets/pages/scripts/activity.js"
+			],
+			[
+				"mode",
+				"GoM_django/Main/models.py"
+			],
+			[
+				"question.js",
+				"GoM_django/Main/static/assets/pages/scripts/question.js"
+			],
+			[
+				"view",
+				"GoM_django/Main/views.py"
+			],
+			[
+				"activity_add.js",
+				"GoM_django/Main/static/assets/pages/scripts/activity_add.js"
+			],
+			[
+				"vie",
+				"GoM_django/Main/views.py"
+			],
+			[
+				"all_tracks",
+				"GoM_django/Main/templates/all_tracks.html"
+			],
+			[
+				"co/das",
+				"GoM_django/Main/templates/coach/dashboard.html"
+			],
+			[
+				"acti",
+				"GoM_django/Main/templates/activities.html"
+			],
+			[
+				"add_",
+				"GoM_django/Main/templates/add_activity.html"
+			],
+			[
+				"add_ac",
+				"GoM_django/Main/templates/add_activity.html"
+			],
+			[
+				"allt",
+				"GoM_django/Main/templates/all_tracks.html"
+			],
+			[
+				"trackjs",
+				"GoM_django/Main/static/assets/pages/scripts/all_tracks.js"
+			],
+			[
+				"ur",
+				"GoM_django/Main/urls.py"
+			],
+			[
+				"surveys",
+				"GoM_django/Main/templates/admin/surveys.html"
+			],
+			[
+				"views",
+				"GoM_django/Main/views.py"
+			],
+			[
+				"activities.js",
+				"GoM_django/Main/static/assets/pages/scripts/activities.js"
+			],
+			[
+				"todo.js",
+				"GoM_django/Main/static/assets/layouts/layout/scripts/todo.js"
+			],
+			[
+				"diar",
+				"GoM_django/Main/templates/user/diary.html"
+			],
+			[
+				"acts.html",
+				"GoM_django/Main/templates/activities.html"
+			],
+			[
+				"url",
+				"GoM_django/Main/urls.py"
+			],
+			[
+				"admin/das",
+				"GoM_django/Main/templates/admin/dashboard.html"
+			],
+			[
+				"ckeditor.js",
+				"GoM_django/Main/static/assets/global/plugins/ckeditor/ckeditor.js"
+			],
+			[
+				"userview.js",
+				"GoM_django/Main/static/assets/pages/scripts/userview.js"
+			],
+			[
+				"user_details.html",
+				"GoM_django/Main/templates/coach/user_details.html"
+			],
+			[
+				"profile_overview",
+				"GoM_django/Main/templates/user/profile_overview.html"
+			],
+			[
+				"coac/das",
+				"GoM_django/Main/templates/coach/dashboard.html"
+			],
+			[
+				"user_details",
+				"GoM_django/Main/templates/coach/user_details.html"
+			],
+			[
+				"user/acc",
+				"GoM_django/Main/templates/user/profile_account.html"
+			],
+			[
+				"surve",
+				"GoM_django/Main/templates/admin/survey_add.html"
+			],
+			[
+				"roved_c",
+				"GoM_django/Main/templates/admin/approved_coach.html"
+			],
+			[
+				"survey",
+				"GoM_django/Main/templates/admin/survey.html"
+			],
+			[
+				"sadjs",
+				"GoM_django/Main/static/assets/pages/scripts/survey_add.js"
+			],
+			[
+				"user/profile_account",
+				"GoM_django/Main/templates/user/profile_account.html"
+			],
+			[
+				"profiac",
+				"GoM_django/Main/templates/coach/profile_account.html"
+			],
+			[
+				"over",
+				"GoM_django/Main/templates/coach/profile_overview.html"
+			],
+			[
+				"surv",
+				"GoM_django/Main/templates/admin/survey_add.html"
+			],
+			[
+				"srvys",
+				"GoM_django/Main/templates/admin/surveys.html"
+			],
+			[
+				"sa",
+				"GoM_django/Main/static/assets/pages/scripts/survey_add.js"
+			],
+			[
+				"sadht",
+				"GoM_django/Main/templates/admin/survey_add.html"
+			],
+			[
+				"utils",
+				"GoM_django/Main/utils.py"
+			],
+			[
+				"mod",
+				"GoM_django/Main/models.py"
+			],
+			[
+				"v",
+				"GoM_django/Main/views.py"
+			],
+			[
+				"admin/sur",
+				"GoM_django/Main/templates/admin/surveys.html"
+			],
+			[
+				"pr",
+				"GoM_django/Main/templates/user/profile_overview.html"
+			],
+			[
+				"admindas",
+				"GoM_django/Main/templates/admin/dashboard.html"
+			],
+			[
+				"prov",
+				"GoM_django/Main/templates/user/profile_overview.html"
+			],
+			[
+				"user/das",
+				"GoM_django/Main/templates/user/dashboard.html"
+			],
+			[
+				"activity.",
+				"GoM_django/Main/templates/activity.html"
+			],
+			[
+				"actyjs",
+				"GoM_django/Main/static/assets/pages/scripts/activity.js"
+			],
+			[
+				"survey_add",
+				"GoM_django/Main/static/assets/pages/scripts/survey_add.js"
+			],
+			[
+				"surveys.",
+				"GoM_django/Main/templates/admin/surveys.html"
+			],
+			[
+				"activities",
+				"GoM_django/Main/templates/activities.html"
+			],
+			[
+				"qstn",
+				"GoM_django/Main/templates/question.html"
+			],
+			[
+				"activi",
+				"GoM_django/Main/templates/activities.html"
+			],
+			[
+				"proac",
+				"GoM_django/Main/templates/coach/profile_account.html"
+			],
+			[
+				"acadd",
+				"GoM_django/Main/static/assets/pages/scripts/activity_add.js"
+			],
+			[
+				"act",
+				"GoM_django/Main/templates/activity_add.html"
+			],
+			[
+				"suraddjs",
+				"GoM_django/Main/static/assets/pages/scripts/survey_add.js"
+			],
+			[
+				"ad/sys",
+				"GoM_django/Main/templates/admin/surveys.html"
+			],
+			[
+				"pac",
+				"package.json"
+			],
+			[
+				"es",
+				".eslintrc.yml"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 59.0,
+		"last_filter": "profile_overview",
+		"selected_items":
+		[
+			[
+				"profile_overview",
+				"profile_overview"
+			]
+		],
+		"width": 1328.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": false,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 250.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

@@ -380,7 +380,7 @@ $('#done').click(function() {
         var feedback;
         $('.ques').html('<p>Please express how you feel after taking the activity.</p>');
         $('.options-cont').html('<div><textarea class="col-sm-12" style="resize:vertical;min-height:200px;" id="feedback"></textarea></div>');
-        $('#action').html('<div class="next-ques" id="submit-feedback" style="cursor:pointer;">SUBMIT FEEDBACK</div>');
+        $('#action').html('<button class="next-ques" id="submit-feedback" style="cursor:pointer;">SUBMIT FEEDBACK</button>');
 
         $('#submit-feedback').click(function() {
             feedback = $('#feedback').val();
@@ -418,7 +418,7 @@ $('#done').click(function() {
                 });
             }, 500);
 
-            $('#action').html('<div class="next-ques" id="submit" style="cursor:pointer;">SUBMIT</div>');
+            $('#action').html('<button class="next-ques" id="submit" style="cursor:pointer;">SUBMIT</button>');
             $('#submit').click(function() {
                 $.post('/activity/complete/', {
                     track_id: location.pathname.split('/').filter(Boolean).pop(),

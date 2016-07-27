@@ -117,15 +117,22 @@ function init() {
     if (isValid) {
       const data = questions.reduce((_data, q) => {
         _data[q._id.$oid] = q.conditions.
-          map(({ from, to, value }) =>
-            ({ from, to, value }));
+          map(({ to, value }) => {
+            return ({
+              to: (to < questions.length) ?
+                questions[to]._id.$oid :
+                -1,
+              value,
+            });
+          });
 
         return _data;
       }, {});
 
       $.post('.', {
         evaluation_scheme: JSON.stringify(data),
-      }, () => (location.pathname = '/survey/view/'));
+      });
+      // }, () => (location.pathname = '/survey/view/'));
     }
 
     // questions.forEach((q) => {

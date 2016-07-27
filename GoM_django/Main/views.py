@@ -137,6 +137,8 @@ def take_survey(request, survey_id):
     survey = Survey.objects(id=survey_id).first()
     user_response = SurveyResponses.objects(user_id=request.user.id,
                                             survey=survey).first()
+    user_prof = user_profile.objects.get(user=request.user)  # chu satwik
+    # has no clue about naming conventions in python.
     if request.POST:
         if 'answer' not in request.POST:  # you just revisited
             if user_response is None:
@@ -152,14 +154,14 @@ def take_survey(request, survey_id):
 
             question_id = ObjectId(request.POST['question_id'])
             question = Question.objects(id=question_id).first()
-            answer = request.POST['answer']
+            answer = json.loads(request.POST['answer'])
             if question.query_type in ['dropdownbox', 'radio', 'rating', 'dual']:
                 question_response = Response(question=question,
-                                             single_option=answer)
+                                             single_option=int(answer))
                 user_response.survey_score += question.options[int(answer)].survey_score
-                user.anxiety_score += question.options[int(answer)].anxiety_score
-                user.depression_score += question.options[int(answer)].depression_score
-                user.stress_score += question.options[int(answer)].stress_score
+                user_prof.anxiety_score += question.options[int(answer)].anxiety_score
+                user_prof.depression_score += question.options[int(answer)].depression_score
+                user_prof.stress_score += question.options[int(answer)].stress_score
             elif question.query_type == 'text':
                 question_response = Response(question=question,
                                              text_response=answer)
@@ -174,14 +176,16 @@ def take_survey(request, survey_id):
                         user.depression_score += question.options[int(number)].depression_score
                         user.stress_score += question.options[int(number)].stress_score
 
+            # question_response.save()
             user_response.responses.append(question_response)
-            next_question = resolve_next_question(question_response)
+            # user_response.save()
+            next_question = resolve_next_question(question_response, survey)
             if next_question is None:
                 user_response.completed = True
-                user_survey_status = UserSurveyStatus.objects(user_id=request.user.id)
+                user_survey_status = UserSurveyStatus.objects(user_id=request.user.id).first()
                 user_survey_status.completed_surveys.append(survey)
-                user_survey_status.pending_tasks.remove(survey)
-                user_survey_status.save()
+                user_survey_status.pending_surveys.remove(survey
+)                user_survey_status.save()
                 return HttpResponse('Survey Completed')
             user_response.current_question = next_question  # The Question user will be answering now.
         next_question = next_question.to_json()
@@ -662,7 +666,7 @@ def assign_survey(request):
         # ToDo: all_tracks = Survey.objects(admin_only=False)
         c_profile = coach_profile.objects.get(user=request.user)
         students = c_profile.user_profile_set.all()
-        return render(request, 'all_tracks.html', {'all_surveys': all_tracks, 'students': students})
+        return render(request, 'assign_surveys.html', {'all_surveys': all_surveys, 'students': students})
 
 
 
@@ -729,7 +733,14 @@ def flow(request, survey_id):
             questions = [json.loads(question.to_json()) for question in questions]
             return JsonResponse({'questions': json.dumps(questions)})
         elif 'evaluation_scheme' in request.POST:
-            survey.eval_scheme = json.loads(request.POST['evaluation_scheme'])
+            eval_scheme = json.loads(request.POST['evaluation_scheme'])
+            questions = [Question.objects(id=ObjectId(q_id)).first() for q_id in eval_scheme]
+            for question in questions:
+                print "%%%%%%%%%%%%%%%%%"
+                print type(eval_scheme[str(question.id)])
+                question.eval_scheme = eval_scheme[str(question.id)]
+                question.save()
+            # print "**********", survey.eval_scheme, "**************"
             survey.save()
         return HttpResponse('success')
     return render(request, 'flow/index.html')
@@ -742,6 +753,13 @@ def student_activity_profile(request):
     pending_tracks = user_track_status.pending_tracks
     return render(request, 'user/activity_profile.html', {'pending_tracks': pending_tracks})
 
+
+def student_survey_profile(request):
+    # return HttpResponse()
+    # print request.user.id, "sdafsdafsdafsda"
+    user_survey_status = UserSurveyStatus.objects(user_id=request.user.id).first()
+    pending_surveys = user_survey_status.pending_surveys
+    return render(request, 'user/survey_profile.html', {'pending_surveys': pending_surveys})
 
 def asd(request):
     # if request.POST:

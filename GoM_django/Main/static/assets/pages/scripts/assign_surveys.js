@@ -1,6 +1,6 @@
 function hideForm() {
-        $('.survey-form').fadeOut(300);
-        $('.survey-type').delay(400).fadeIn(300);
+    $('.survey-form').fadeOut(300);
+    $('.survey-type').delay(400).fadeIn(300);
 }
 
 
@@ -41,56 +41,58 @@ $('.body-box').animate({
 }, 500);
 
 resetSurvey();
-startSurvey('578801165237d745c1a1a7c8');
+tasks = [
+    {
+        query_type: "text",
+        text: "do this and that",
+    },
+    {
+        query_type: "video",
+        text: "do this and that",
+        videoUrl: "https://www.youtube.com/watch?v=RxPZh4AnWyk",
+    },
+];
 var store = {
     question: null,
 };
+startSurvey('578801165237d745c1a1a7c8');
 function loadQuestion(answer) {
-    if (typeof answer === 'undefined') {
-        $.post('.', {
-            first: 1
-        }, function(response) {
-            store.question = JSON.parse(response)
-            generateQuestion(store.question);
-            // console.log(question)
+    // if (typeof answer === 'undefined') {
+    //     $.post('.', {
+    //         first: 1
+    //     }, function(response) {
+    //         store.question = JSON.parse(response)
+    //         generateQuestion(store.question);
+    //         // console.log(question)
 
-            $('.next-ques').click(function(){
-                $('ques-cont').fadeOut(200);
-                var response = getAnswerObj(store.question['_id']);
-                console.log(response)
-                if (response != false) {
-                    loadQuestion(response);
-                }
-            });
-        });
-    } else {
-        if (answer === 'YES') {
-            answer = 0;
-        }
-        if (answer === 'NO') {
-            answer = 1;
-        }
-        $.post('.', {
-            answer: JSON.stringify(answer),
-            question_id: store.question._id.$oid
-        }, function(response) {
-            if (response === 'Survey Completed') {
-                location.pathname = '/student/surveys/';
-            }
+    //         $('.next-ques').click(function(){
+    //             $('ques-cont').fadeOut(200);
+    //             var response = getAnswerObj(store.question['_id']);
+    //             if (response != false) {
+    //                 loadQuestion(response);
+    //             }
+    //         });
+    //     });
+    // } else {
+    //     $.post('.', {
+    //         answer: JSON.stringify(answer),
+    //         question_id: store.question._id.$oid
+    //     }, function(response) {
+    //         store.question = JSON.parse(response)
+    //         generateQuestion(store.question);
 
-            store.question = JSON.parse(response)
-            generateQuestion(store.question);
-
-            $('.next-ques').click(function(){
-                alert()
-                $('ques-cont').fadeOut(200);
-                var response = getAnswerObj(store.question['_id']);
-                if (response != false) {
-                    loadQuestion(response);
-                }
-            });
-        });
-    }
+    //         $('.next-ques').click(function(){
+    //             alert()
+    //             $('ques-cont').fadeOut(200);
+    //             var response = getAnswerObj(store.question['_id']);
+    //             if (response != false) {
+    //                 loadQuestion(response);
+    //             }
+    //         });
+    //     });
+    // }
+    store.question = tasks.shift();
+    generateQuestion(store.question);
 }
 
 function startSurvey(sid) {
@@ -99,28 +101,15 @@ function startSurvey(sid) {
 }
 
 function generateQuestion(quesObj){
-    console.log(
-        quesObj,
-        quesObj["category"],
-        quesObj["query_type"],
-        quesObj["text"],
-        quesObj["options"])
+    console.log(quesObj)
     $('.progress-title').html(quesObj["category"]);
 
     $('.ques').html(quesObj["text"]);
 
     switch (quesObj["query_type"]) {
-        case "dual"         :   genDual();
-                                break;
-        case "dropdownbox"  :   genSelect(quesObj["options"]);
-                                break;
-        case "radio"        :   genRadio(quesObj["options"]);
-                                break;
-        case "checkbox"     :   genCheckbox(quesObj["options"]);
-                                break;
-        case "rating"       :   genRating();
-                                break;
         case "text"         :   genText();
+                                break;
+        case "video"     :   genVideo(quesObj["videoUrl"]);
                                 break;
     }
 
@@ -144,9 +133,7 @@ function genRating(options) {
 
     $('.options-cont').html(data);
 
-    setTimeout(function() {
-        sliderInit();
-    }, 500)
+    sliderInit();
 }
 
 
@@ -154,7 +141,7 @@ function genRating(options) {
 function genSelect(options) {
     var data = '<div class="col-sm-12 select-type option-type" style="z-index: 1;" data-option-type="dropdownbox"> <form class="options" data-form-type="dropdownbox"> <div class="selectholder"> <label>CHOOSE SOME OPTION</label> <select><option value="...">...</option>';
     $.each(options,function(i,val){
-        data += '<option value="'+i+'">'+val.text+'</option>';
+        data += '<option value="'+val+'">'+val+'</option>';
     });
     data += '</select> </div></div>';
 
@@ -167,7 +154,7 @@ function genRadio(options) {
     var data = '<div class="col-sm-12 main radio-type option-type " data-option-type="radio">';
 
     $.each(options,function(i,val){
-        data += '<div class="col-sm-6"> <div class="radioholder"> <input type="radio" name="radio-type" value="'+i+'"> <label>'+ val.text +'</label> </div> </div>';
+        data += '<div class="col-sm-6"> <div class="radioholder"> <input type="radio" name="radio-type" value="'+val+'"> <label>'+ val +'</label> </div> </div>';
     })
     data += '</div>';
 
@@ -176,12 +163,11 @@ function genRadio(options) {
     radioInit();
 }
 
-function genCheckbox(options) {
-    var data = '<div class="col-sm-12 mcq-type option-type" data-option-type="checkbox">';
+function genVideo(videoUrl) {
+    var data = '<iframe width="560" height="315" src="'+videoUrl+'" frameborder="0" allowfullscreen></iframe>';
 
     $.each(options,function(i,val){
-        console.log(val)
-        data += '<div class="col-sm-6"> <label> <div class="mcq"> <input type="checkbox" name="checkbox-type">'+val.text+'</div> </label> </div>';
+        data += '<div class="col-sm-6"> <label> <div class="mcq"> <input type="checkbox" name="checkbox-type" value="'+val+'">'+val+'</div> </label> </div>';
     });
 
     data += '</div>';
@@ -392,7 +378,7 @@ function getAnswerObj(qid) {
                                 break;
 
                                 break;
-        case "rating"       :   ansObj = (getSliderValue()[0] - 1);
+        case "rating"       :   ansObj = (getSliderValue()[0]);
                                 break;
         case "text"         :   if($('.survey-textarea').val()!="") {
                                     ansObj = ($('.survey-textarea').val());
@@ -405,3 +391,29 @@ function getAnswerObj(qid) {
     }
     return ansObj;
 }
+var survey_id;
+$('.assign-survey').click(function() {
+    survey_id = $(this).data('survey-id')
+    $('#survey-name').text($(this).parent().siblings().children().children().eq(0).text())
+    $('.assign-survey-modal-body').html(
+        students.map(function(s) {
+            return ''+
+            '<div class="assign-checkbox">'+
+                '<input type="checkbox" class="liChild" value="'+s.id+'">'+
+                 s.name+
+            '</div>'
+        }).join('')
+    )
+});
+$('.assign-survey-modal-save').click(function() {
+    $.ajax({
+        method: 'POST',
+        url: '.',
+        data: {
+            survey_id: survey_id,
+            student_ids: JSON.stringify($('.assign-checkbox input:checked').map(function(i,c) {
+                return c.value
+            }).toArray())
+        }
+    })
+})

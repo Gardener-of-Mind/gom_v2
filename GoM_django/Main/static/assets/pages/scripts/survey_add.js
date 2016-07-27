@@ -246,10 +246,25 @@ var FormWizard = function () {
             });
 
             function addQuestions() {
+                var query_type = $('#questionType').val();
                 var optionsText = $('.surveyOptions').map(function () {return this.value;}).get();
+                if (optionsText.length === 0) {
+                    switch (query_type) {
+                        case 'dual':
+                            optionsText = ['YES', 'NO'];
+                            break;
+
+                        case 'rating':
+                            optionsText = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+                            break;
+
+                        default:
+                    }
+                }
+
                 var scores = $('.surveyScores').map(function () {return parseInt(this.value);}).get();
                 var options = optionsText.map(function(optionText, i) {
-                    var option = { text: optionText };
+                    var option = { text: '' + optionText };
                     ['anxiety', 'depression', 'stress', 'survey'].forEach(function(scoreType, j) {
                         option[scoreType + '_score'] = scores[4 * i + j];
                     });
@@ -261,6 +276,7 @@ var FormWizard = function () {
                     'text' : $('#questionText').val(),
                     'options' : options,
                 });
+                console.log(questions.slice(-1))
             }
 
             var questions = [];
