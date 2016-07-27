@@ -6,7 +6,7 @@ var SessionTimeout = function () {
             message: 'Your session is about to expire.',
             keepAliveUrl: '../demo/timeout-keep-alive.php',
             redirUrl: 'page_user_lock_1.html',
-            logoutUrl: 'page_user_login_1.html',
+            logoutUrl: '/logout',
             warnAfter: 5000, //warn after 5 seconds
             redirAfter: 10000, //redirect after 10 secons,
             countdownMessage: 'Redirecting in {timer} seconds.',
@@ -23,6 +23,6 @@ var SessionTimeout = function () {
 
 }();
 
-jQuery(document).ready(function() {    
+jQuery(document).ready(function() {
    SessionTimeout.init();
 });

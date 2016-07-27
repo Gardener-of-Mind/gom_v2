@@ -69,12 +69,12 @@
                             </a>
                             <ul class="dropdown-menu dropdown-menu-default">
                                 <li>
-                                    <a href="../profile/">
+                                    <a href="/profile/">
                                         <i class="icon-user"></i> My Profile </a>
                                 </li>
                                 <li class="divider"> </li>
                                 <li>
-                                    <a href="../../logout/">
+                                    <a href="/logout/">
                                         <i class="icon-key"></i> Log Out </a>
                                 </li>
                             </ul>
@@ -82,11 +82,13 @@
                         <!-- END USER LOGIN DROPDOWN -->
                         <!-- BEGIN QUICK SIDEBAR TOGGLER -->
                         <!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
+                        {% if profile_type == 'user' %}
                         <li class="dropdown dropdown-quick-sidebar-toggler">
                             <a href="javascript:;" class="dropdown-toggle">
                                 <i class="icon-logout"></i>
                             </a>
                         </li>
+                        {% endif %}
                         <!-- END QUICK SIDEBAR TOGGLER -->
                     </ul>
                 </div>

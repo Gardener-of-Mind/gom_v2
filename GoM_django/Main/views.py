@@ -605,7 +605,7 @@ def view_tracks(request):
         return render(request, 'track_view.html', {'track': track})
 
     all_tracks = ActivityTrack.objects()
-    return render(request, 'activities.html', {'all_tracks': all_tracks})
+    return render(request, 'activities.html', {'all_tracks': all_tracks, 'profile': admin_profile.objects.get(user=request.user)})
 
 
 def view_track(request, track_id):
@@ -644,7 +644,11 @@ def assign_activity_track(request):
         # ToDo: all_tracks = ActivityTrack.objects(admin_only=False)
         c_profile = coach_profile.objects.get(user=request.user)
         students = c_profile.user_profile_set.all()
-        return render(request, 'all_tracks.html', {'all_tracks': all_tracks, 'students': students})
+        return render(request, 'all_tracks.html', {
+            'all_tracks': all_tracks,
+            'students': students,
+            'profile':coach_profile.objects.get(user=request.user)
+        })
 
 
 def assign_survey(request):
@@ -751,7 +755,9 @@ def student_activity_profile(request):
     print request.user.id, "sdafsdafsdafsda"
     user_track_status = UserActivityTrackStatus.objects(user_id=request.user.id).first()
     pending_tracks = user_track_status.pending_tracks
-    return render(request, 'user/activity_profile.html', {'pending_tracks': pending_tracks})
+
+    profile= user_profile.objects.get(user=request.user)
+    return render(request, 'user/activity_profile.html', {'pending_tracks': pending_tracks, 'profile': profile})
 
 
 def student_survey_profile(request):
@@ -759,7 +765,9 @@ def student_survey_profile(request):
     # print request.user.id, "sdafsdafsdafsda"
     user_survey_status = UserSurveyStatus.objects(user_id=request.user.id).first()
     pending_surveys = user_survey_status.pending_surveys
-    return render(request, 'user/survey_profile.html', {'pending_surveys': pending_surveys})
+
+    profile= user_profile.objects.get(user=request.user)
+    return render(request, 'user/survey_profile.html', {'pending_surveys': pending_surveys, 'profile': profile})
 
 def asd(request):
     # if request.POST:
