@@ -1,7 +1,8 @@
 var survey_type;
 var survey_id;
-$("#set-default-btn").click(function() {
+$(".set-default-btn").click(function() {
     survey_id = ($(this).data('sid'))
+    console.log($(this).data('sid'))
 })
 $('#save-default').click(function() {
     if ($("#anxiety")[0].checked) {

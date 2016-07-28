@@ -5,7 +5,7 @@ function getSurvey(sid) {
         headers : { 'X-CSRFToken' : getCookie('csrftoken') },
 		data: { 'survey_type': sid },
 		success: function(response) {
-			console.log('success');
+			location.pathname=response;
 		},
 		error: function() {
 			console.log('error');

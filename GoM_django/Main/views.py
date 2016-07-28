@@ -120,6 +120,14 @@ def update_default_setting(request):
 
 @login_required
 def default_surveys(request):
+    student_status = UserSurveyStatus.objects(user_id=request.user.id).first()
+    if student_status is None:
+        student_status = UserSurveyStatus(user_id=request.user.id)
+    for survey_id in DEFAULT_SURVEY_CONFIG.values():
+        if survey_id is not None:
+            survey = Survey.objects(id=ObjectId(survey_id)).first()
+            student_status.pending_surveys.append(survey)
+    student_status.save()
     if request.POST:
         survey_type = request.POST['survey_type']
         survey_id = DEFAULT_SURVEY_CONFIG[survey_type]
@@ -127,7 +135,7 @@ def default_surveys(request):
             return JsonResponse({'message':
                             'This Survey is Not available at the Moment.'})
         redirect_url = '/survey/take/%s' % str(survey_id)
-        return HttpResponseRedirect(redirect_url)
+        return HttpResponse(redirect_url)
     return render(request, 'default_survey.html')
 
 
@@ -137,6 +145,7 @@ def take_survey(request, survey_id):
     survey = Survey.objects(id=survey_id).first()
     user_response = SurveyResponses.objects(user_id=request.user.id,
                                             survey=survey).first()
+
     user_prof = user_profile.objects.get(user=request.user)  # chu satwik
     # has no clue about naming conventions in python.
     if request.POST:
