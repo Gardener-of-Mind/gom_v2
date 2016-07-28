@@ -34,7 +34,7 @@ def index(request):
 
 def user_login(request):
     if request.user.is_authenticated():
-        return HttpResponseRedirect('../dashboard/')
+        return HttpResponseRedirect('/dashboard/')
 
     if request.POST:
         username= request.POST['username']
@@ -44,8 +44,8 @@ def user_login(request):
             login(request,user)
             # profile= user_profile.objects.filter(user=user)
             # if profile.questions == False:
-                # return HttpResponseRedirect('../dashboard/')
-            return HttpResponseRedirect('../dashboard/')
+                # return HttpResponseRedirect('/dashboard/')
+            return HttpResponseRedirect('/dashboard/')
     return render(request,'login.html')
 
 
@@ -78,7 +78,7 @@ def register(request):
 
 def user_logout(request):
     logout(request)
-    return redirect('../')
+    return redirect('/')
 
 # New Survey Views
 # ----------------------------------------------------------------------------
@@ -278,7 +278,7 @@ def view_edit_survey(request, survey_id):
 #         # if category == 'anxiety':
 #         #     profile.anxiety_score += total_score
 
-#         return HttpResponseRedirect('../profile/edit/')
+#         return HttpResponseRedirect('/profile/edit/')
 
 
 
@@ -679,7 +679,7 @@ def assign_survey(request):
         # ToDo: all_tracks = Survey.objects(admin_only=False)
         c_profile = coach_profile.objects.get(user=request.user)
         students = c_profile.user_profile_set.all()
-        return render(request, 'assign_surveys.html', {'all_surveys': all_surveys, 'students': students})
+        return render(request, 'assign_surveys.html', {'all_surveys': all_surveys, 'students': students, 'profile': coach_profile.objects.get(user=request.user)})
 
 
 

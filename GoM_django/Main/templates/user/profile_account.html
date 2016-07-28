@@ -48,7 +48,7 @@
             <div class="page-header-inner ">
                 <!-- BEGIN LOGO -->
                 <div class="page-logo">
-                    <a href="../../dashboard/">
+                    <a href="/dashboard/">
                         <img src="{% static 'assets/layouts/layout/img/logo.png' %}" alt="logo" class="logo-default logo-nav" /> </a>
                     <div class="menu-toggler sidebar-toggler"> </div>
                 </div>
@@ -115,6 +115,7 @@
                     <!-- DOC: Set data-auto-scroll="false" to disable the sidebar from auto scrolling/focusing -->
                     <!-- DOC: Set data-keep-expand="true" to keep the submenues expanded -->
                     <!-- DOC: Set data-auto-speed="200" to adjust the sub menu slide up/down speed -->
+                    {% if profile_type == 'user' %}
                     <ul class="page-sidebar-menu  page-header-fixed page-sidebar-menu-closed " data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200" style="padding-top: 20px">
                         <!-- DOC: To remove the sidebar toggler from the sidebar you just need to completely remove the below "sidebar-toggler-wrapper" LI element -->
                         <li class="sidebar-toggler-wrapper hide">
@@ -124,7 +125,7 @@
                         </li>
 
                         <li class="nav-item start ">
-                            <a href="../../dashboard/" class="nav-link">
+                            <a href="/dashboard/" class="nav-link">
                                 <i class="icon-home"></i>
                                 <span class="title">Dashboard</span>
                             </a>
@@ -138,7 +139,7 @@
                             </a>
                             <ul class="sub-menu">
                                 <li class="nav-item  ">
-                                    <a href="../" class="nav-link ">
+                                    <a href="/profile/" class="nav-link ">
                                         <i class="icon-user"></i>
                                         <span class="title">Overview</span>
                                     </a>
@@ -151,7 +152,7 @@
                                     </a>
                                 </li>
                                 <li class="nav-item  ">
-                                    <a href="../help/" class="nav-link ">
+                                    <a href="/profile/help/" class="nav-link ">
                                         <i class="icon-support"></i>
                                         <span class="title">Help</span>
                                     </a>
@@ -171,12 +172,70 @@
                             </a>
                         </li>
                         <li class="nav-item ">
-                            <a href="../../diary/" class="nav-link">
+                            <a href="/diary/" class="nav-link">
                                 <i class="icon-notebook"></i>
                                 <span class="title">My Diary</span>
                             </a>
                         </li>
                     </ul>
+                    {% elif profile_type == 'coach' %}
+                    <ul class="page-sidebar-menu  page-header-fixed page-sidebar-menu-closed " data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200" style="padding-top: 20px">
+                        <!-- DOC: To remove the sidebar toggler from the sidebar you just need to completely remove the below "sidebar-toggler-wrapper" LI element -->
+                        <li class="sidebar-toggler-wrapper hide">
+                            <!-- BEGIN SIDEBAR TOGGLER BUTTON -->
+                            <div class="sidebar-toggler"> </div>
+                            <!-- END SIDEBAR TOGGLER BUTTON -->
+                        </li>
+
+                        <li class="nav-item start ">
+                            <a href="/dashboard/" class="nav-link">
+                                <i class="icon-home"></i>
+                                <span class="title">Dashboard</span>
+                            </a>
+                        </li>
+                        <li class="nav-item  active open">
+                            <a href="javascript:;" class="nav-link nav-toggle">
+                                <i class="icon-user"></i>
+                                <span class="title">Profile</span>
+                                <span class="selected"></span>
+                                <span class="arrow open"></span>
+                            </a>
+                            <ul class="sub-menu">
+                                <li class="nav-item  ">
+                                    <a href="/profile/" class="nav-link ">
+                                        <i class="icon-user"></i>
+                                        <span class="title">Overview</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item  active open">
+                                    <a href="javascript:;" class="nav-link ">
+                                        <i class="icon-wrench"></i>
+                                        <span class="title">Account Settings</span>
+                                        <span class="selected"></span>
+                                    </a>
+                                </li>
+                                <li class="nav-item  ">
+                                    <a href="/profile/help/" class="nav-link ">
+                                        <i class="icon-support"></i>
+                                        <span class="title">Help</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item start ">
+                            <a href="/coach/atrack/assign/" class="nav-link">
+                                <i class="icon-notebook"></i>
+                                <span class="title">Activities</span>
+                            </a>
+                        </li>
+                        <li class="nav-item start ">
+                            <a href="/coach/atrack/assign/" class="nav-link">
+                                <i class="icon-notebook"></i>
+                                <span class="title">Activities</span>
+                            </a>
+                        </li>
+                    </ul>
+                    {% endif %}
                     <!-- END SIDEBAR MENU -->
                     <!-- END SIDEBAR MENU -->
                 </div>
@@ -192,11 +251,11 @@
                     <div class="page-bar">
                         <ul class="page-breadcrumb">
                             <li>
-                                <a href="./../../">Home</a>
+                                <a href="/dashboard/">Home</a>
                                 <i class="fa fa-circle"></i>
                             </li>
                             <li>
-                                <a href="./../">Profile</a>
+                                <a href="/profile/">Profile</a>
                                 <i class="fa fa-circle"></i>
                             </li>
                             <li>
@@ -231,7 +290,7 @@
                                     <div class="profile-usermenu">
                                         <ul class="nav">
                                             <li>
-                                                <a href="../">
+                                                <a href="/profile/">
                                                     <i class="icon-home"></i> Overview </a>
                                             </li>
                                             <li class="active">
@@ -239,7 +298,7 @@
                                                     <i class="icon-settings"></i> Account Settings </a>
                                             </li>
                                             <li>
-                                                <a href="../help/">
+                                                <a href="/profile/help/">
                                                     <i class="icon-info"></i> Help </a>
                                             </li>
                                         </ul>
@@ -413,7 +472,7 @@
                                                             <!--end profile-settings-->
                                                             <div class="margin-top-10">
                                                                 <a href="javascript:;" class="btn red"> Save Changes </a>
-                                                                <a href="./../" class="btn default"> Back </a>
+                                                                <a href="../" class="btn default"> Back </a>
                                                             </div>
                                                         </form>
                                                     </div>
