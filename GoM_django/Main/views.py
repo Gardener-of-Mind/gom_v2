@@ -72,7 +72,7 @@ def register(request):
         login(request,auth_user)
         # except:
         #     return HttpResponse('Error')
-        return HttpResponseRedirect('../questions/')
+        return HttpResponseRedirect('/survey/default/')
     return render(request,'register.html')
 
 
