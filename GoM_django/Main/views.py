@@ -35,6 +35,9 @@ def index(request):
 def user_login(request):
     if request.user.is_authenticated():
         return HttpResponseRedirect('/dashboard/')
+        student_status = UserSurveyStatus.objects(user_id=request.user.id).first()
+        if student_status is None:
+            student_status = UserSurveyStatus(user_id=request.user.id)
 
     if request.POST:
         username= request.POST['username']
@@ -45,7 +48,10 @@ def user_login(request):
             # profile= user_profile.objects.filter(user=user)
             # if profile.questions == False:
                 # return HttpResponseRedirect('/dashboard/')
-            return HttpResponseRedirect('/dashboard/')
+                return HttpResponseRedirect('/dashboard/')
+        student_status = UserSurveyStatus.objects(user_id=request.user.id).first()
+        if student_status is None:
+            student_status = UserSurveyStatus(user_id=request.user.id)
     return render(request,'login.html')
 
 
@@ -761,8 +767,12 @@ def flow(request, survey_id):
 
 def student_activity_profile(request):
     # return HttpResponse()
-    print request.user.id, "sdafsdafsdafsda"
+    # print request.user.id, "sdafsdafsdafsda"
     user_track_status = UserActivityTrackStatus.objects(user_id=request.user.id).first()
+    # student_status = UserSurveyStatus.objects(user_id=request.user.id).first()
+    if user_track_status is None:
+        student_status = UserActivityTrackStatus(user_id=request.user.id)
+        user_track_status.save()
     pending_tracks = user_track_status.pending_tracks
 
     profile= user_profile.objects.get(user=request.user)
