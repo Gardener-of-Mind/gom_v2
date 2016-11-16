@@ -35,7 +35,7 @@ var FormWizard = function () {
           },
           error: function() {
             alert("Some Error occured");
-            // window.location.reload();
+            window.location.reload();
           }
         });
       }
@@ -95,7 +95,8 @@ var FormWizard = function () {
             activities: JSON.stringify(questions),
           },
           success: function(response) {
-            // window.location.href= "..";
+            alert('Activity created')
+            window.location.href= "/atrack/all/";
           },
           error: function() {
             alert("Some Error occured!\n Try submitting again");
@@ -280,6 +281,8 @@ var FormWizard = function () {
               text: CKEDITOR.instances.questionText.getData(),
               image: imageData,
             });
+            CKEDITOR.instances.questionText.setData('');
+
             break;
 
           case 'video':
@@ -291,6 +294,8 @@ var FormWizard = function () {
               text: CKEDITOR.instances.questionText.getData(),
               video_url: videoUrl,
             });
+            CKEDITOR.instances.questionText.setData('');
+
             break;
 
           case 'text':
@@ -299,6 +304,8 @@ var FormWizard = function () {
               next_allowed_after: next_allowed_after,
               text: CKEDITOR.instances.questionText.getData(),
             });
+            CKEDITOR.instances.questionText.setData('');
+
             break;
 
           default:
@@ -310,6 +317,7 @@ var FormWizard = function () {
       $('.button-add-question').on("click",function(){
         addQuestions();
         resetQuestion();
+        $('#task-details').html(questions.length + 1)
       });
 
       //apply validation on select2 dropdown value change, this only needed for chosen dropdown integration.

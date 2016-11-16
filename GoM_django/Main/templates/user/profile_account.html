@@ -41,7 +41,7 @@
         <link rel="shortcut icon" href="favicon.ico" /> </head>
     <!-- END HEAD -->
 
-    <body class="page-header-fixed page-sidebar-closed-hide-logo page-container-bg-solid page-content-white page-sidebar-closed page-md page-sidebar-fixed">
+    <body class="page-header-fixed page-sidebar-closed-hide-logo page-container-bg-solid page-content-white page-md page-sidebar-fixed">
         <!-- BEGIN HEADER -->
         <div class="page-header navbar navbar-fixed-top">
             <!-- BEGIN HEADER INNER -->
@@ -116,7 +116,7 @@
                     <!-- DOC: Set data-keep-expand="true" to keep the submenues expanded -->
                     <!-- DOC: Set data-auto-speed="200" to adjust the sub menu slide up/down speed -->
                     {% if profile_type == 'user' %}
-                    <ul class="page-sidebar-menu  page-header-fixed page-sidebar-menu-closed " data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200" style="padding-top: 20px">
+                    <ul class="page-sidebar-menu  page-header-fixed" data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200" style="padding-top: 20px">
                         <!-- DOC: To remove the sidebar toggler from the sidebar you just need to completely remove the below "sidebar-toggler-wrapper" LI element -->
                         <li class="sidebar-toggler-wrapper hide">
                             <!-- BEGIN SIDEBAR TOGGLER BUTTON -->
@@ -179,7 +179,7 @@
                         </li>
                     </ul>
                     {% elif profile_type == 'coach' %}
-                    <ul class="page-sidebar-menu  page-header-fixed page-sidebar-menu-closed " data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200" style="padding-top: 20px">
+                    <ul class="page-sidebar-menu  page-header-fixed" data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200" style="padding-top: 20px">
                         <!-- DOC: To remove the sidebar toggler from the sidebar you just need to completely remove the below "sidebar-toggler-wrapper" LI element -->
                         <li class="sidebar-toggler-wrapper hide">
                             <!-- BEGIN SIDEBAR TOGGLER BUTTON -->
@@ -235,6 +235,86 @@
                             </a>
                         </li>
                     </ul>
+                    {% elif profile_type == 'admin' %}
+                        <ul class="page-sidebar-menu  page-header-fixed" data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200" style="padding-top: 20px">
+                            <!-- DOC: To remove the sidebar toggler from the sidebar you just need to completely remove the below "sidebar-toggler-wrapper" LI element -->
+                            <li class="sidebar-toggler-wrapper hide">
+                                <!-- BEGIN SIDEBAR TOGGLER BUTTON -->
+                                <div class="sidebar-toggler"> </div>
+                                <!-- END SIDEBAR TOGGLER BUTTON -->
+                            </li>
+                            <li class="nav-item start">
+                                <a href="/dashboard" class="nav-link">
+                                    <i class="icon-home"></i>
+                                    <span class="title">Dashboard</span>
+                                </a>
+                            </li>
+                            <li class="nav-item active">
+                                <a href="javascript:;" class="nav-link nav-toggle">
+                                    <i class="icon-user"></i>
+                                    <span class="title">Profile</span>
+                                    <span class="selected"></span>
+                                    <span class="arrow open"></span>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li class="nav-item start ">
+                                        <a href="/profile/" class="nav-link ">
+                                            <i class="icon-user"></i>
+                                            <span class="title">Overview</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item  active open">
+                                        <a href="/profile/edit/" class="nav-link ">
+                                            <i class="icon-wrench"></i>
+                                            <span class="title">Account Settings</span>
+                                            <span class="selected"></span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="/profile/help/" class="nav-link ">
+                                            <i class="icon-support"></i>
+                                            <span class="title">Help</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="nav-item start">
+                                <a href="/coachlist" class="nav-link">
+                                    <i class="icon-home"></i>
+                                    <span class="title">Approved Coaches</span>
+                                </a>
+                            </li>
+                            <li class="nav-item start">
+                                <a href="/survey/add" class="nav-link">
+                                    <i class="icon-settings"></i>
+                                    <span class="title">Add survey</span>
+                                </a>
+                            </li>
+                            <li class="nav-item start">
+                                <a href="/survey/view" class="nav-link">
+                                    <i class="icon-notebook"></i>
+                                    <span class="title">Surveys</span>
+                                </a>
+                            </li>
+                           <li class="nav-item start">
+                                <a href="/atrack/add/" class="nav-link">
+                                    <i class="icon-settings"></i>
+                                    <span class="title">Add Track</span>
+                                </a>
+                            </li>
+                            <li class="nav-item start">
+                                <a href="/atrack/all/" class="nav-link">
+                                    <i class="icon-notebook"></i>
+                                    <span class="title">Tracks</span>
+                                </a>
+                            </li>
+                            <li class="nav-item start">
+                                <a href="/admin" class="nav-link" target="_blank">
+                                    <i class="icon-settings"></i>
+                                    <span class="title">Manage accounts</span>
+                                </a>
+                            </li>
+                        </ul>
                     {% endif %}
                     <!-- END SIDEBAR MENU -->
                     <!-- END SIDEBAR MENU -->
