@@ -35,7 +35,7 @@
         <!-- BEGIN THEME LAYOUT STYLES -->
         <link href="{% static 'assets/layouts/layout/css/layout.min.css' %}" rel="stylesheet" type="text/css" />
         <link href="{% static 'assets/layouts/layout/css/themes/darkblue.min.css' %}" rel="stylesheet" type="text/css" id="style_color" />
-        <link href="{% static 'assets/layouts/layout/css/custom.css' %}" rel="stylesheet" type="text/css" />
+        <link href="{% static 'assets/layouts/layout/css/custom.min.css' %}" rel="stylesheet" type="text/css" />
         <!-- END THEME LAYOUT STYLES -->
         <link rel="shortcut icon" href="{% static 'assets/global/img/favicon.ico' %}" />  </head>
     <!-- END HEAD -->
@@ -234,44 +234,42 @@
                     <!-- END PAGE TITLE-->
                     <!-- END PAGE HEADER-->
                     <div class="row">
-                    	<div class="col-md-12">
-                            <div class="portlet light portlet-fit bordered">
-                                <div class="portlet-title">
+                        <div class="col-md-12">
+                            <div class="portlet light bordered">
+                                <div class="portlet-title tabbable-line">
                                     <div class="caption">
                                         <i class=" icon-layers font-green"></i>
                                         <span class="caption-subject font-green bold uppercase">Coaches</span>
                                     </div>
                                 </div>
                                 <div class="portlet-body">
-                                    <div class="mt-element-card mt-card-round mt-element-overlay">
-                                        <div class="row">
-                                        	{% for profile_ob in user_profiles %}
-                                            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
-                                                <div class="mt-card-item">
-                                                    <div class="mt-card-avatar mt-overlay-1">
-                                                        <img src="{% static 'assets/pages/img/avatars/team5.jpg' %}">
-                                                        <div class="mt-overlay">
-                                                            <ul class="mt-info">
-                                                                <li>
-                                                                    <a class="btn default btn-outline" href="./{{profile_ob.id}}/">
-                                                                        <i class="icon-magnifier"></i>
-                                                                    </a>
-                                                                </li>
-                                                                <li>
-                                                                    <a class="btn default btn-outline" href="javascript:;">
-                                                                        <i class="icon-link"></i>
-                                                                    </a>
-                                                                </li>
-                                                            </ul>
+                                    <div class="tab-content">
+                                        <div class="tab-pane active" id="tab_actions_pending">
+                                            <!-- BEGIN: Actions -->
+                                            <div class="mt-actions">
+                                                {% for coach in coach_obs %}
+                                                <div class="mt-action" data-uid="coach.id">
+                                                    <div class="mt-action-img">
+                                                        <img src="{{coach.profile_pic.url}}"> </div>
+                                                    <div class="mt-action-body">
+                                                        <div class="mt-action-row">
+                                                            <div class="mt-action-info ">
+                                                                <div class="mt-action-details ">
+                                                                    <span class="mt-action-author">{{coach.name}}</span>
+                                                                    <p class="mt-action-desc">{{coach.about_me}}</p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="mt-action-datetime ">
+                                                                <span class="mt-action-date">{{coach.created.date}}</span>
+                                                                <span class="mt-action-dot bg-green"></span>
+                                                                <span class="mt=action-time">9:30-13:00</span>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                    <div class="mt-card-content">
-                                                        <h3 class="mt-card-name">{{profile_ob.name}}</h3>
-                                                        <p class="mt-card-desc font-grey-mint">{{profile_ob.occupation}}</p>
-                                                    </div>
                                                 </div>
+                                                {% endfor %}
                                             </div>
-                                            {% endfor %}
+                                            <!-- END: Actions -->
                                         </div>
                                     </div>
                                 </div>
