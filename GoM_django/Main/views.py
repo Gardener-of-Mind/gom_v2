@@ -48,7 +48,7 @@ def user_login(request):
             # profile= user_profile.objects.filter(user=user)
             # if profile.questions == False:
                 # return HttpResponseRedirect('/dashboard/')
-                return HttpResponseRedirect('/dashboard/')
+            return HttpResponseRedirect('/dashboard/')
         student_status = UserSurveyStatus.objects(user_id=request.user.id).first()
         if student_status is None:
             student_status = UserSurveyStatus(user_id=request.user.id)
