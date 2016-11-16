@@ -13,7 +13,7 @@ class ProfileAdmin(admin.ModelAdmin):
 class CoachAdmin(admin.ModelAdmin):
     # list_display = ('name', 'gender','email_id')
 
-    fieldsets = [(None, {'fields': ['name', 'gender','email_id', 'user', 'phone_one']}),]
+    fieldsets = [(None, {'fields': ['name', 'gender','email_id', 'user', 'phone_one', 'status']}),]
     list_display = ('name', 'gender','email_id', 'number_of_students', 'view_profile_url', 'status')
     search_fields = ['name']
     # readonly_fields = ['address_2_html']
@@ -29,7 +29,7 @@ class CoachAdmin(admin.ModelAdmin):
 
 class AdminAdmin(admin.ModelAdmin):
     list_display = ('name', 'gender', 'email_id')
-    search_fields = ['name']    
+    search_fields = ['name']
 admin.site.register(user_profile, ProfileAdmin)
 admin.site.register(coach_profile, CoachAdmin)
 admin.site.register(admin_profile, AdminAdmin)
