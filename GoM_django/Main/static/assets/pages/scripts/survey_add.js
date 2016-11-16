@@ -29,9 +29,10 @@ var FormWizard = function () {
                         console.log(response);
                         surveyId = response;
                     },
-                    error: function() {
+                    error: function(err) {
                         alert("Some Error occured");
-                        window.location.reload();
+                        throw err;
+                        // window.location.reload();
                     }
                 });
             }

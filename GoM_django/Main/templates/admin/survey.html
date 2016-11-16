@@ -251,34 +251,16 @@
                                                 <div class="mt-action-body">
                                                     <div>
                                                         <h3>{{question.text}}</h3>
-                                                    </div>
-                                                    <div>
-                                                        <form class="form-horizontal" method="POST">
-                                                            {% csrf_token %}
-                                                            <div class="form-body">
-                                                                <div class="tab-content">
-                                                                    <div class="tab-pane active">
-                                                                        <div class="form-group">
-                                                                        {% if question.query_type == 'text' %}
-                                                                            <label class="control-label col-md-3">
-                                                                                Answer
-                                                                            </label>
-                                                                            <div class="col-md-4">
-                                                                                <input class="form-control" name="sCategory" type="text">
-                                                                            </div>
-                                                                        {% elif question.query_type == "radio" %}
-                                                                            {% for op in question.options %}
-                                                                                <label class="col-md-4">
-                                                                                    <input class="form-control" name="sCategory" type="radio" disabled>
-                                                                                    {{op.text}}
-                                                                                </label>
-                                                                            {% endfor %}
-                                                                        {% endif %}
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </form>
+                                                        <div>
+                                                            {% if question.query_type == "radio" or question.query_type == "dual" %}
+                                                                <br>
+                                                                <h4>Options</h4>
+                                                                <br>
+                                                                {% for op in question.options %}
+                                                                    <p>{{op.text}}</p>
+                                                                {% endfor %}
+                                                            {% endif %}
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
