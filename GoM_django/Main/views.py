@@ -771,7 +771,7 @@ def student_activity_profile(request):
     user_track_status = UserActivityTrackStatus.objects(user_id=request.user.id).first()
     # student_status = UserSurveyStatus.objects(user_id=request.user.id).first()
     if user_track_status is None:
-        student_status = UserActivityTrackStatus(user_id=request.user.id)
+        user_track_status = UserActivityTrackStatus(user_id=request.user.id)
         user_track_status.save()
     pending_tracks = user_track_status.pending_tracks
 
@@ -783,6 +783,9 @@ def student_survey_profile(request):
     # return HttpResponse()
     # print request.user.id, "sdafsdafsdafsda"
     user_survey_status = UserSurveyStatus.objects(user_id=request.user.id).first()
+    if user_survey_status is None:
+        user_survey_status = UserSurveyStatus(user_id=request.user.id)
+        user_survey_status.save()
     pending_surveys = user_survey_status.pending_surveys
 
     profile= user_profile.objects.get(user=request.user)
