@@ -129,8 +129,20 @@ function init() {
         return _data;
       }, {});
 
-      $.post('.', {
-        evaluation_scheme: JSON.stringify(data),
+      $.ajax({
+        type: 'POST',
+        url: '.',
+        data: {
+          evaluation_scheme: JSON.stringify(data),
+        },
+        success: () => {
+          alert('SUCCESS!!');
+          location.pathname = '/survey/view/';
+        },
+        error: (err) => {
+          alert('Some error occured');
+          throw err;
+        },
       });
       // }, () => (location.pathname = '/survey/view/'));
     }
