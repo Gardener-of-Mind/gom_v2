@@ -70,4 +70,5 @@ urlpatterns = [
     url(r'^coach/diary/(?P<student_id>.*)/$', views.coach_diary),
 
 
+    url(r'^.*$', views.gom_client),
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -23,8 +23,9 @@ from GoM_django.settings import DEFAULT_SURVEY_CONFIG, BASE_DIR
 import pickle
 from bson.objectid import ObjectId
 from utils import resolve_next_question
-# Create your views here.
 
+from django.middleware import csrf
+# Create your views here.
 
 def index(request):
     if request.user.is_authenticated():
@@ -48,7 +49,7 @@ def user_login(request):
             # profile= user_profile.objects.filter(user=user)
             # if profile.questions == False:
                 # return HttpResponseRedirect('/dashboard/')
-                return HttpResponseRedirect('/dashboard/')
+            return HttpResponseRedirect('/dashboard/')
         student_status = UserSurveyStatus.objects(user_id=request.user.id).first()
         if student_status is None:
             student_status = UserSurveyStatus(user_id=request.user.id)
@@ -490,7 +491,7 @@ def approved_coaches(request):
         return HttpResponse('Admin object Error')
 
     coach_obs = coach_profile.objects.filter(status=True)
-    return render(request, 'admin/approved_coach.html', {'profile' : profile, 'coach_obs' : coach_obs})
+    return HttpResponse(json.dumps({"coaches": coach_obs}))
 
 
 
@@ -513,37 +514,33 @@ def add_survey(request):
     user = request.user
     profile = admin_profile.objects.get(user=user)
 
-    if request.POST:
-        if 'survey' in request.POST:
-            name = request.POST['name']
-            category = request.POST['category']
-            survey = Survey(name=str(name), category=str(category))
-            survey.save()
-            survey_id = survey.id
-            return HttpResponse(str(survey_id))
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        name = data['name']
+        category = data['category']
+        questions = data['questions']
 
-        elif 'questions' in request.POST:
-            # return HttpResponse(request.POST['questions'])
-            survey_id = ObjectId(request.POST['survey_id'])
-            survey = Survey.objects(id=survey_id).first()
-            questions = json.loads(request.POST['questions'])
-            for question_json in questions:
-                text = question_json['text']
-                query_type = question_json['query_type']
-                options = question_json['options']
-                question = Question(text=text, query_type=query_type)
+        survey = Survey(name=str(name), category=str(category))
+        for question_json in questions:
+            text = question_json['text']
+            query_type = question_json['type']
+            options = question_json['options']
+            question = Question(text=text, query_type=query_type)
+            question.save()
 
-                for option in options:
-                    question.options.append(Option(text=option['text'],
-                                            anxiety_score=option['anxiety_score'],
-                                            depression_score=option['depression_score'],
-                                            stress_score=option['stress_score'],
-                                            survey_score=option['survey_score']))
-                question.save()
-                survey.questions.append(question)
-            survey.save()
-            return HttpResponse('success')
+            for option in options:
+                question.options.append(Option(text=option['text'],
+                                        anxiety_score=option['scores']['Anxiety'],
+                                        depression_score=option['scores']['Depression'],
+                                        stress_score=option['scores']['Stress'],
+                                        survey_score=option['scores']['Survey']))
+            question.save()
+            survey.questions.append(question)
+        survey.save()
 
+        return HttpResponse('success')
+
+    return HttpResponse('123')
     return render(request, 'admin/survey_add.html', {'profile': profile})
 
 
@@ -551,14 +548,44 @@ def view_surveys(request):
     user = request.user
     profile = admin_profile.objects.get(user=user)
 
-    if request.POST:
-        survey_id = request.POST['survey_id']
-        survey_ob = survey.objects(id=survey_id).first()
-        survey_ob = survey_ob.to_json()
-        return render(request, 'admin/survey_view.html', {'survey_ob' : survey_ob})
+    # if request.POST:
+    #     survey_id = request.POST['survey_id']
+    #     survey_ob = survey.objects(id=survey_id).first()
+    #     survey_ob = survey_ob.to_json()
+    #     return render(request, 'admin/survey_view.html', {'survey_ob' : survey_ob})
     surveys = Survey.objects()
-    # surveys = surveys.to_json()
-    return render(request, 'admin/surveys.html', {'surveys' : surveys, 'profile': profile})
+    resp = {
+        'surveys': []
+    }
+    for s in surveys:
+        r_survey = {
+            'name': s['name'],
+            'category': s['category'],
+            'questions': [],
+        }
+
+        for q in s.questions:
+            r_question = {
+                'text': q.text,
+                'type': q.query_type,
+                'options': [],
+            }
+
+            for o in q.options:
+                r_option = {
+                    'text': o.text,
+                    'scores': {
+                        'Survey': o.survey_score,
+                        'Anxiety': o.anxiety_score,
+                        'Depression': o.depression_score,
+                        'Stress': o.stress_score,
+                    }
+                }
+
+                r_question['options'].append(r_option)
+            r_survey['questions'].append(r_question)
+        resp['surveys'].append(r_survey)
+    return JsonResponse(resp)
 
 
 def view_survey(request, survey_id):
@@ -579,7 +606,7 @@ def view_survey(request, survey_id):
 # Activity Views here
 
 def add_track(request):
-    user= request.user
+    user = request.user
     profile = admin_profile.objects.get(user=user)
 
     if request.POST:
@@ -620,7 +647,41 @@ def view_tracks(request):
         return render(request, 'track_view.html', {'track': track})
 
     all_tracks = ActivityTrack.objects()
-    return render(request, 'activities.html', {'all_tracks': all_tracks, 'profile': admin_profile.objects.get(user=request.user)})
+    all_tracks = ActivityTrack.objects()
+    resp = {
+        'activities': []
+    }
+    for a in all_tracks:
+        r_survey = {
+            'name': a['name'],
+            'category': a['category'],
+            'questions': [],
+        }
+
+        for q in a.questions:
+            r_question = {
+                'text': q.text,
+                'type': q.query_type,
+                'options': [],
+            }
+
+            for o in q.options:
+                r_option = {
+                    'text': o.text,
+                    'scores': {
+                        'Survey': o.survey_score,
+                        'Anxiety': o.anxiety_score,
+                        'Depression': o.depression_score,
+                        'Stress': o.stress_score,
+                    }
+                }
+
+                r_question['options'].append(r_option)
+            r_survey['questions'].append(r_question)
+        resp['surveys'].append(r_survey)
+    return JsonResponse(resp)
+    # return render(request, 'activities.html', {'all_tracks': all_tracks, 'profile': admin_profile.objects.get(user=request.user)})
+    return HttpResponse(json.dumps(all_tracks.to_json()))
 
 
 def view_track(request, track_id):
@@ -788,20 +849,5 @@ def student_survey_profile(request):
     profile= user_profile.objects.get(user=request.user)
     return render(request, 'user/survey_profile.html', {'pending_surveys': pending_surveys, 'profile': profile})
 
-def asd(request):
-    # if request.POST:
-    #     print request.POST['']
-    #     # form = FileUploadForm(data=request.POST, files=request.FILES)
-    #     # if form.is_valid():
-    #     #     print 'valid form'
-    #     # else:
-    #     #     print 'invalid form'
-    #     #     print form.errors
-    #     return HttpResponse('1')
-    return render(request, 'activity_add.html')
-
-def asds(request):
-    return render(request, 'activities.html')
-
-def asd_take(request, activity_id):
-    return render(request, 'activity.html')
+def gom_client(request):
+    return render(request, 'gom_client/index.html')
