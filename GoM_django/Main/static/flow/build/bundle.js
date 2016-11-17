@@ -146,7 +146,7 @@
 	      }
 	
 	      var incorrectToQuestions = q.conditions.filter(function (c) {
-	        return c.to < 0 || c.to > _questions2.default.length;
+	        return c.to < -1 || c.to > _questions2.default.length;
 	      });
 	
 	      if (incorrectToQuestions.length) {
@@ -174,6 +174,7 @@
 	          var to = _ref.to,
 	              value = _ref.value;
 	
+	          to = to < 0 ? _questions2.default.length : to;
 	          return {
 	            to: to < _questions2.default.length ? _questions2.default[to]._id.$oid : -1,
 	            value: value

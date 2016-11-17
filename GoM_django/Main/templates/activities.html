@@ -225,14 +225,20 @@
                                                         <div class="mt-action-row">
                                                             <div class="mt-action-info ">
                                                                 <div class="mt-action-details ">
-                                                                    <span class="activity-name">{{activity.name}}</span>
-                                                                    <p class="activity-category">{{activity.category}}</p>
+                                                                    <span class="mt-action-author">
+                                                                        <a href="{{activity.id}}">
+                                                                            {{activity.name}}
+                                                                        </a>
+                                                                    </span>
+                                                                    <p class="mt-action-desc">{{activity.category}}</p>
                                                                 </div>
                                                             </div>
                                                             <div class="mt-action-datetime ">
-                                                                <button class="btn btn-circle btn-default btn-sm edit-diary assign-activity" data-toggle="modal" href="#assign-activity-modal" data-activity-id="{{activity.id}}">
-                                                                    Assign
-                                                                </button>
+                                                                <span class="mt-action-date">
+                                                                    <!-- <button class="btn btn-circle btn-default btn-sm set-default-btn" data-toggle="modal" href="#set-default" data-sid="{{activity.id}}">
+                                                                        Set default
+                                                                    </button> -->
+                                                                </span>
                                                             </div>
                                                         </div>
                                                     </div>

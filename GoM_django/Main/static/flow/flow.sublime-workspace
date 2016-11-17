@@ -107,10 +107,14 @@
 	"build_varint": "",
 	"command_palette":
 	{
-		"height": 101.0,
-		"last_filter": "json",
+		"height": 217.0,
+		"last_filter": "disa",
 		"selected_items":
 		[
+			[
+				"disa",
+				"SublimeLinter: Disable Linting"
+			],
 			[
 				"json",
 				"JSON Reindent: reindent file or selection"
@@ -144,10 +148,6 @@
 				"File: Rename"
 			],
 			[
-				"disa",
-				"SublimeLinter: Disable Linter"
-			],
-			[
 				"ena",
 				"SublimeLinter: Enable Linting"
 			],
@@ -176,7 +176,7 @@
 				"Package Control: Install Package"
 			]
 		],
-		"width": 467.0
+		"width": 521.0
 	},
 	"console":
 	{
@@ -197,12 +197,18 @@
 	},
 	"expanded_folders":
 	[
-		"/home/zhirzh/code/Gardener-of-Mind/GoM_django/Main/static/flow",
-		"/home/zhirzh/code/Gardener-of-Mind/GoM_django/Main/static/flow/src",
-		"/home/zhirzh/code/Gardener-of-Mind/GoM_django/Main/static/flow/src/scripts"
+		"/home/zhirzh/gom/gom_v2/GoM_django/Main/static/flow",
+		"/home/zhirzh/gom/gom_v2/GoM_django/Main/static/flow/build",
+		"/home/zhirzh/gom/gom_v2/GoM_django/Main/static/flow/src",
+		"/home/zhirzh/gom/gom_v2/GoM_django/Main/static/flow/src/scripts"
 	],
 	"file_history":
 	[
+		"/home/zhirzh/gom/gom_v2/GoM_django/Main/static/flow/src/scripts/renderQuestion.js",
+		"/home/zhirzh/gom/gom_v2/GoM_django/Main/static/flow/src/scripts/Condition.js",
+		"/home/zhirzh/gom/gom_v2/GoM_django/Main/static/flow/src/scripts/index.js",
+		"/home/zhirzh/gom/gom_v2/GoM_django/Main/static/flow/src/scripts/renderCondition.js",
+		"/home/zhirzh/gom/gom_v2/GoM_django/Main/templates/flow/index.html",
 		"/home/zhirzh/code/Gardener-of-Mind/GoM_django/Main/static/flow/src/scripts/Condition.js",
 		"/home/zhirzh/code/Gardener-of-Mind/GoM_django/Main/static/flow/src/scripts/index.js",
 		"/home/zhirzh/code/Gardener-of-Mind/GoM_django/Main/static/flow/src/scripts/renderQuestion.js",
@@ -327,7 +333,7 @@
 	],
 	"find":
 	{
-		"height": 45.0
+		"height": 40.0
 	},
 	"find_in_files":
 	{
@@ -344,6 +350,35 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"questions[to]._id.$oid :",
+			"inco",
+			"new con",
+			"new condition",
+			"Condition",
+			"condition",
+			"Condition",
+			"constructor",
+			"-1",
+			" set",
+			"set",
+			"this.to",
+			"condition.to",
+			"renderQuestion",
+			"activeQuestion",
+			"next",
+			"btn-block ",
+			"10",
+			"padding-",
+			"-right",
+			" style=\"padding-left:0\"",
+			"col-md-5",
+			"btn-block",
+			" col-md-offset-1",
+			"10",
+			"5",
+			" style",
+			"btn btn-block",
+			">",
 			"radio",
 			"checkbox",
 			"at lea",
@@ -442,36 +477,7 @@
 			"FOR ",
 			"name",
 			"dashboard",
-			"ties.ht",
-			".children()",
-			".children()[",
-			"$(this)",
-			"{activity.name}",
-			".text()\n",
-			"activity-",
-			"action",
-			"assign-activity",
-			"id=\"",
-			"assign-activity",
-			"assign-activity-modal",
-			"-modal",
-			"toggle=\"",
-			"toggle=\"#",
-			".modal",
-			"$",
-			"todo-task-modal",
-			"-modal",
-			"assign-task",
-			"todo-task-modal",
-			"#todo-task-modal",
-			"diar",
-			".html:",
-			"actions",
-			"dashboa",
-			"{% ",
-			"view_tracks",
-			"nav-l",
-			"My Diary"
+			"ties.ht"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -878,7 +884,7 @@
 	"show_open_files": true,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 131.0,
+	"side_bar_width": 179.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

@@ -17,7 +17,6 @@ $.ajaxSetup({
 })
 
 function sendSurvey(answers,sid) {
-    console.log(answers);
     $.ajax({
         url : '../survey_submit/',
         method: 'POST',
@@ -54,11 +53,11 @@ function loadQuestion(answer) {
             generateQuestion(store.question);
             // console.log(question)
 
-            $('.next-ques').click(function(){
+            $('.next-ques')[0].onclick = (function(){
                 $('ques-cont').fadeOut(200);
                 var response = getAnswerObj(store.question['_id']);
                 console.log(response)
-                if (response != false) {
+                if (response !== false) {
                     loadQuestion(response);
                 }
             });
@@ -81,11 +80,10 @@ function loadQuestion(answer) {
             store.question = JSON.parse(response)
             generateQuestion(store.question);
 
-            $('.next-ques').click(function(){
-                alert()
+            $('.next-ques')[0].onclick = (function(){
                 $('ques-cont').fadeOut(200);
                 var response = getAnswerObj(store.question['_id']);
-                if (response != false) {
+                if (response !== false) {
                     loadQuestion(response);
                 }
             });
@@ -99,12 +97,6 @@ function startSurvey(sid) {
 }
 
 function generateQuestion(quesObj){
-    console.log(
-        quesObj,
-        quesObj["category"],
-        quesObj["query_type"],
-        quesObj["text"],
-        quesObj["options"])
     $('.progress-title').html(quesObj["category"]);
 
     $('.ques').html(quesObj["text"]);
@@ -180,7 +172,6 @@ function genCheckbox(options) {
     var data = '<div class="col-sm-12 mcq-type option-type" data-option-type="checkbox">';
 
     $.each(options,function(i,val){
-        console.log(val)
         data += '<div class="col-sm-6"> <label> <div class="mcq"> <input type="checkbox" name="checkbox-type">'+val.text+'</div> </label> </div>';
     });
 
@@ -255,11 +246,10 @@ function selectInit(){
         // set up dropdown element
         $(this).append('<div class="selectdropdown"></div>');
       $(this).children('select').children('option').each(function(){
-            if($(this).attr('value') != '0') {
-                $drop = $(this).parent().siblings('.selectdropdown');
-                var name = $(this).attr('value');
-                $drop.append('<span>'+name+'</span>');
-            }
+            $drop = $(this).parent().siblings('.selectdropdown');
+            var name = $(this).text();
+            var value = $(this).attr('value');
+            $drop.append('<span data-value="'+value+'">'+name+'</span>');
         });
         // on click, show dropdown
         $(this).click(function(){
@@ -270,7 +260,7 @@ function selectInit(){
                 // change span back to selected option text
                 if($(this).children('select').val() != '0') {
                     $(this).children('.desc').fadeOut(100, function(){
-                        $(this).text($(this).siblings("select").val());
+                        $(this).text($('span.active').text());
                         $(this).fadeIn(100);
                     });
                 }
@@ -282,7 +272,7 @@ function selectInit(){
                     // change span back to selected option text
                     if($(this).children('select').val() != '0') {
                         $(this).children('.desc').fadeOut(100, function(){
-                            $(this).text($(this).siblings("select").val());
+                            $(this).text($('span.active').text());
                             $(this).fadeIn(100);
                         });
                     }
@@ -294,7 +284,7 @@ function selectInit(){
                 // change span to show select box title while open
                 if($(this).children('select').val() != '0') {
                     $(this).children('.desc').fadeOut(100, function(){
-                        $(this).text($(this).siblings("select").children("option[value=0]").text());
+                        $(this).text($('span.active').text());
                         $(this).fadeIn(100);
                     });
                 }
@@ -305,10 +295,11 @@ function selectInit(){
     $('.selectholder .selectdropdown span').click(function(){
         $(this).siblings().removeClass('active');
         $(this).addClass('active');
-        var value = $(this).text();
+        var text = $(this).text();
+        var value = $(this).data('value');
         $(this).parent().siblings('select').val(value);
         $(this).parent().siblings('.desc').fadeOut(100, function(){
-            $(this).text(value);
+            $(this).text(text);
             $(this).fadeIn(100);
         });
     });
@@ -383,7 +374,13 @@ function getAnswerObj(qid) {
                                 }
                                 break;
         case "checkbox"     :   if($('.option-type input[type="checkbox"]:checked').length != 0) {
-                                    ansObj = ($('.options-cont input[type="checkbox"]:checked').map(function () {return this.value;}).get());
+                                    ansObj = [];
+                                    $('.options-cont input[type="checkbox"]').each(function(i) {
+                                        if (this.checked) {
+                                            ansObj.push(i)
+                                        }
+                                    })
+                                    // ansObj = ($('.options-cont input[type="checkbox"]:checked').map(function () {return this.value;}).get());
                                 }
                                 else {
                                     alert("Choose atleast one of the option!");

@@ -86,8 +86,7 @@ function init() {
       `);
       }
 
-      const incorrectToQuestions = q.conditions.
-        filter((c) => c.to < 0 || c.to > questions.length);
+      const incorrectToQuestions = q.conditions.filter((c) => c.to < -1 || c.to > questions.length);
 
       if (incorrectToQuestions.length) {
         isValid = false;
@@ -118,6 +117,7 @@ function init() {
       const data = questions.reduce((_data, q) => {
         _data[q._id.$oid] = q.conditions.
           map(({ to, value }) => {
+            to = to < 0 ? questions.length : to;
             return ({
               to: (to < questions.length) ?
                 questions[to]._id.$oid :

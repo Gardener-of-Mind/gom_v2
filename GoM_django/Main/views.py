@@ -187,9 +187,9 @@ def take_survey(request, survey_id):
                     question_response.response_per_option.append(bool(option_answer))
                     if bool(option_answer) is True:
                         user_response.survey_score += question.options[int(number)].survey_score
-                        user.anxiety_score += question.options[int(number)].anxiety_score
-                        user.depression_score += question.options[int(number)].depression_score
-                        user.stress_score += question.options[int(number)].stress_score
+                        user_prof.anxiety_score += question.options[int(number)].anxiety_score
+                        user_prof.depression_score += question.options[int(number)].depression_score
+                        user_prof.stress_score += question.options[int(number)].stress_score
 
             # question_response.save()
             user_response.responses.append(question_response)
@@ -808,3 +808,13 @@ def asds(request):
 
 def asd_take(request, activity_id):
     return render(request, 'activity.html')
+
+def view_activity(request, track_id):
+    track = ActivityTrack.objects(id=ObjectId(track_id)).first()
+    print track.activity
+    return HttpResponse(json.dumps([json.loads(a.to_json()) for a in track.activity]))
+    return render(request, 'activity/view.html', {'activity': track})
+
+def edit_activity(request, activity_id):
+    activity = Activity.objects(id=ObjectId(activity_id)).first()
+    return render(request, 'activity/view.html', {'activity': activity})
