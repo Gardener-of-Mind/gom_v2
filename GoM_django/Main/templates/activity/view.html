@@ -160,11 +160,23 @@
                                 <span class="username username-hide-on-mobile"> {{profile.name}} </span>
                                 <i class="fa fa-angle-down"></i>
                             </a>
-                            <ul class="dropdown-menu dropdown-menu-default">
+                                                        <ul class="dropdown-menu dropdown-menu-default">
                                 <li>
-                                    <a href="/profile">
+                                                                <ul class="dropdown-menu dropdown-menu-default">
+                                <li>
+                                    <a href="page_user_profile_1.html">
                                         <i class="icon-user"></i> My Profile </a>
                                 </li>
+                                <li class="divider"> </li>
+                                <li>
+                                    <a href="/logout">
+                                        <i class="icon-key"></i> Log Out </a>
+                                </li>
+                            </ul>
+<a href="/profile">
+                                        <i class="icon-user"></i> My Profile </a>
+                                </li>
+                                <li class="divider"> </li>
                                 <li>
                                     <a href="/logout">
                                         <i class="icon-key"></i> Log Out </a>
@@ -289,7 +301,7 @@
                                 <i class="fa fa-circle"></i>
                             </li>
                             <li>
-                                <a href="/activity/view/">Activities</a>
+                                <a href="/atrack/all/">Activities</a>
                                 <i class="fa fa-circle"></i>
                             </li>
                             <li>
@@ -335,6 +347,9 @@
                                                                         <button class="edit btn btn-circle btn-default btn-sm set-default-btn" data-toggle="modal" href="#edit-modal" data-aid="{{activity.id}}" data-tid="{{task.id}}" data-idx="{{ forloop.counter }}">
                                                                             Edit
                                                                         </button>
+                                                                        <button class="delete btn btn-circle btn-danger btn-sm set-danger-btn" data-aid="{{activity.id}}" data-tid="{{task.id}}" data-idx="{{ forloop.counter }}">
+                                                                            Delete
+                                                                        </button>
                                                                     </span>
                                                                 </div>
                                                             </div>
@@ -356,8 +371,7 @@
         <!-- END CONTAINER -->
         <!-- BEGIN FOOTER -->
         <div class="page-footer">
-            <div class="page-footer-inner"> 2014 &copy; Metronic by keenthemes.
-                <a href="http://themeforest.net/item/metronic-responsive-admin-dashboard-template/4021469?ref=keenthemes" title="Purchase Metronic just for 27$ and get lifetime updates for free" target="_blank">Purchase Metronic!</a>
+            <div class="page-footer-inner"> 2016 &copy; ManaMaali.
             </div>
             <div class="scroll-to-top">
                 <i class="icon-arrow-up"></i>

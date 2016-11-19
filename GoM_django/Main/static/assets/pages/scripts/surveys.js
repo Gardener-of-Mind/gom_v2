@@ -3,6 +3,20 @@ var survey_id;
 $(".set-default-btn").click(function() {
     survey_id = ($(this).data('sid'))
     console.log($(this).data('sid'))
+    $.ajax({
+        url:'/admin/default-setting/',
+        method:'POST',
+        headers : {
+            "X-CSRFToken" : getCookie('csrftoken')
+        },
+        data: {
+            // survey_type: survey_type,
+            survey_id: survey_id,
+        },
+        success: function() {
+            alert('SUCCESS!!');
+        }
+    })
 })
 $('#save-default').click(function() {
     if ($("#anxiety")[0].checked) {
@@ -12,20 +26,6 @@ $('#save-default').click(function() {
     } else if ($("#stress")[0].checked) {
         survey_type = ('stress')
     }
-    $.ajax({
-        url:'/admin/default-setting/',
-        method:'POST',
-        headers : {
-            "X-CSRFToken" : getCookie('csrftoken')
-        },
-        data: {
-            survey_type: survey_type,
-            survey_id: survey_id,
-        },
-        success: function() {
-            $('#set-default').modal('hide');
-        }
-    })
 })
 
 function getCookie(name) {

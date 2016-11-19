@@ -894,3 +894,6 @@ def add_single_activity(request):
     track.activity.append(activity)
     track.save()
     return HttpResponse('success')
+
+def delete_activity(request):
+    return HttpResponse('success')

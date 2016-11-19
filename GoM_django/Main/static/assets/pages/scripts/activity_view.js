@@ -22,7 +22,7 @@ var tid;
 var idx;
 var task;
 
-$('.edit').click(function() {
+$('button.edit').click(function() {
   aid = $(this).data('aid');
   tid = $(this).data('tid');
   idx = $(this).data('idx');
@@ -37,6 +37,36 @@ $('.edit').click(function() {
     },
   })
 })
+
+$('button.delete').click(function() {
+  aid = $(this).data('aid');
+  tid = $(this).data('tid');
+  idx = $(this).data('idx');
+  $("#activity-idx").html('Activity '+idx);
+
+  var sure = confirm([
+    'Delete activity '+idx,
+    'Are you sure?'
+  ].join('\n'));
+
+  if (sure) {
+    $.ajax({
+      url: '/activity/delete/',
+      method:'POST',
+      headers : {
+        "X-CSRFToken" : getCookie('csrftoken')
+      },
+      data: {
+        track_id: aid,  // this is correct: activity@client = track@server
+        activity_id: tid,  // this is correct: task@client = activity@server
+      },
+      success: function(resp) {
+        window.location.reload();
+        console.log(resp)
+      }
+    });
+  }
+});
 
 $('.modal-save').click(function() {
   $.ajax({
