@@ -430,7 +430,7 @@ $('#done').click(function() {
                     if (res.next) {
                         location.reload();
                     } else {
-                        location.pathname='/';
+                        location.pathname='/student/tracks/';
                     }
                 });
             });

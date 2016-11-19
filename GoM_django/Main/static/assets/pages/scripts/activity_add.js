@@ -30,7 +30,6 @@ var FormWizard = function () {
             category: $('[name="sCategory"]').val()
           },
           success: function(response) {
-            console.log(response);
             activityId = response;
           },
           error: function() {
@@ -82,7 +81,6 @@ var FormWizard = function () {
       };
 
       var sendQuestion = function(type) {
-        console.log(questions)
         $.ajax({
           url:'.',
           method:'POST',
@@ -205,7 +203,6 @@ var FormWizard = function () {
         'previousSelector': '.button-previous',
         onTabClick: function (tab, navigation, index, clickedIndex) {
           return false;
-          console.log(tab,"onTabClick");
 
           success.hide();
           error.hide();
@@ -218,7 +215,6 @@ var FormWizard = function () {
         onNext: function (tab, navigation, index) {
           success.hide();
           error.hide();
-          console.log(tab,"onNext");
           if (form.valid() == false) {
             return false;
           }
@@ -226,7 +222,6 @@ var FormWizard = function () {
           handleTitle(tab, navigation, index);
         },
         onTabShow: function (tab, navigation, index) {
-          console.log(tab,"onTabShow");
 
           var total = navigation.find('li').length;
           var current = index + 1;
@@ -272,17 +267,28 @@ var FormWizard = function () {
         switch (activity_type) {
           case 'image':
             var imageFile = $('#file').get(0).files[0];
-            console.log(imageFile)
-            var imageData = new FormData();
-            imageData.append('image', imageFile);
-            questions.push({
-              activity_type: activity_type,
-              next_allowed_after: next_allowed_after,
-              text: CKEDITOR.instances.questionText.getData(),
-              image: imageData,
-            });
-            CKEDITOR.instances.questionText.setData('');
 
+            var reader = new FileReader();
+
+            // Closure to capture the file information.
+            reader.onload = (function(theFile) {
+              return function(e) {
+                // Render thumbnail.
+                console.log(theFile.name)
+                questions.push({
+                  activity_type: activity_type,
+                  next_allowed_after: next_allowed_after,
+                  text: CKEDITOR.instances.questionText.getData(),
+                  image: e.target.result,
+                });
+                CKEDITOR.instances.questionText.setData('');
+
+                // sendQuestion('submit');
+              };
+            })(imageFile);
+
+            // Read in the image file as a data URL.
+            reader.readAsDataURL(imageFile);
             break;
 
           case 'video':
@@ -295,6 +301,7 @@ var FormWizard = function () {
               video_url: videoUrl,
             });
             CKEDITOR.instances.questionText.setData('');
+            // sendQuestion('submit');
 
             break;
 
@@ -305,12 +312,12 @@ var FormWizard = function () {
               text: CKEDITOR.instances.questionText.getData(),
             });
             CKEDITOR.instances.questionText.setData('');
+            // sendQuestion('submit');
 
             break;
 
           default:
         }
-        console.log(questions)
       }
 
       var questions = [];

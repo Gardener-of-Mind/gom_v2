@@ -70,6 +70,9 @@ urlpatterns = [
     url(r'^coach/diary/(?P<student_id>.*)/$', views.coach_diary),
 
 
-    url(r'^atrack/all/(?P<track_id>.*)/$', views.view_activity),
+    url(r'^atrack/all/(?P<track_id>\w+)/$', views.view_activity),
+    url(r'^atrack/all/(?P<track_id>\w+)/(?P<activity_id>.*)/$', views.view_activity),
     # url(r'^atrack/(?P<track_id>.*)/edit/$', views.edit_activity),
+    url(r'^atrack/view/(?P<track_id>.*)/$', views.completed_track),
+    url(r'^activity/add_single/$', views.add_single_activity),
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

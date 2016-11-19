@@ -140,3 +140,6 @@ if not os.path.isfile(BASE_DIR + '/default_survey_settings.config'):
 fileObject = open(BASE_DIR + '/default_survey_settings.config', 'r')
 DEFAULT_SURVEY_CONFIG = pickle.load(fileObject)
 fileObject.close()
+
+# DATA_UPLOAD_MAX_MEMORY_SIZE =
+MAX_UPLOAD_SIZE = '500000'

@@ -200,7 +200,7 @@
                                 <div class="portlet-title tabbable-line">
                                     <div class="caption">
                                         <i class=" icon-layers font-green"></i>
-                                        <span class="caption-subject font-green bold uppercase">Activities</span>
+                                        <span class="caption-subject font-green bold uppercase">Pending Activities</span>
                                     </div>
                                 </div>
                                 <div class="portlet-body">
@@ -216,6 +216,47 @@
                                                                 <div class="mt-action-details ">
                                                                     <span class="mt-action-author">
                                                                         <a href="/atrack/take/{{track.id}}/">
+                                                                            {{track.name}}
+                                                                        </a>
+                                                                    </span>
+                                                                    <p class="mt-action-desc">{{track.category}}</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                {% endfor %}
+                                            </div>
+                                            <!-- END: Actions -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="portlet light bordered">
+                                <div class="portlet-title tabbable-line">
+                                    <div class="caption">
+                                        <i class=" icon-layers font-green"></i>
+                                        <span class="caption-subject font-green bold uppercase">Completed Activities</span>
+                                    </div>
+                                </div>
+                                <div class="portlet-body">
+                                    <div class="tab-content">
+                                        <div class="tab-pane active" id="tab_actions_pending">
+                                            <!-- BEGIN: Actions -->
+                                            <div class="mt-actions">
+                                                {% for track in completed_tracks %}
+                                                <div class="mt-action" data-uid="coach.id">
+                                                    <div class="mt-action-body">
+                                                        <div class="mt-action-row">
+                                                            <div class="mt-action-info ">
+                                                                <div class="mt-action-details ">
+                                                                    <span class="mt-action-author">
+                                                                        <a href="/atrack/view/{{track.id}}/">
                                                                             {{track.name}}
                                                                         </a>
                                                                     </span>

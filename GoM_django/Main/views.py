@@ -23,9 +23,9 @@ from GoM_django.settings import DEFAULT_SURVEY_CONFIG, BASE_DIR
 import pickle
 from bson.objectid import ObjectId
 from utils import resolve_next_question
+from bson.binary import Binary
+import base64
 # Create your views here.
-
-
 def index(request):
     if request.user.is_authenticated():
         return HttpResponseRedirect('/dashboard/')
@@ -582,8 +582,11 @@ def add_track(request):
     user= request.user
     profile = admin_profile.objects.get(user=user)
 
+    print 1111111111
     if request.POST:
+        print 22222222
         if 'track' in request.POST:
+            print 3333333333
             name = request.POST['name']
             category = request.POST['category']
             track = ActivityTrack(name=name, category=category)
@@ -591,6 +594,8 @@ def add_track(request):
             return HttpResponse(str(track.id))
 
         elif 'activity' in request.POST:
+            print 444444444444
+            print request.POST.keys()
             track_id = request.POST['track_id']
             track = ActivityTrack.objects(id=ObjectId(track_id)).first()
             activities = json.loads(request.POST['activities'])
@@ -603,9 +608,15 @@ def add_track(request):
 
                 if 'video_url' in activity_json:
                     activity.video_url = activity_json['video_url']
-                else:
-                    # ToDo: File Upload
-                    pass
+
+                # if 'image' in activity_json:
+                #     # image = activity_json['image'].split('base64,')
+                #     image = activity_json['image']
+                #     print 11111111
+                #     print image.split('base64,')[1].decode('base64')
+                #     print 11111111
+                #     activity.image = image.split('base64,')[1].decode('base64')
+
                 activity.save()
                 track.activity.append(activity)
             track.save()
@@ -623,14 +634,34 @@ def view_tracks(request):
     return render(request, 'activities.html', {'all_tracks': all_tracks, 'profile': admin_profile.objects.get(user=request.user)})
 
 
+# def view_track(request, track_id):
+#     track = ActivityTrack.objects(id=ObjectId(track_id)).first()
+#     activity_track_response = ActivityTrackResponses.objects(user_id=request.user.id, track=track).first()
+#     if activity_track_response is None:
+#         activity_track_response = ActivityTrackResponses(user_id=request.user.id, track=track, current_activity=track.activity[0])
+#         activity_track_response.save()
+#     activity = activity_track_response.current_activity
+#     return render(request, 'take_activity.html', {'activity': activity})
 def view_track(request, track_id):
     track = ActivityTrack.objects(id=ObjectId(track_id)).first()
-    activity_track_response = ActivityTrackResponses.objects(user_id=request.user.id, track=track).first()
+    activity_track_response = ActivityTrackResponses.objects(user_id=request.user.id, track=track).order_by('-id').first()
     if activity_track_response is None:
         activity_track_response = ActivityTrackResponses(user_id=request.user.id, track=track, current_activity=track.activity[0])
         activity_track_response.save()
     activity = activity_track_response.current_activity
-    return render(request, 'take_activity.html', {'activity': activity})
+    if activity is None: # Create New Response Shit
+        new_track_response = ActivityTrackResponses(user_id=request.user.id, track=track, current_activity=track.activity[0])
+        new_track_response.save()
+        activity = new_track_response.current_activity
+    track_count = len(ActivityTrackResponses.objects(user_id=request.user.id, track=track))
+    return render(request, 'take_activity.html', {'activity': activity, 'track_count': track_count})
+
+def completed_track(request, track_id):
+    track = ActivityTrack.objects(id=ObjectId(track_id)).first()
+    activity_track_response = ActivityTrackResponses.objects(user_id=request.user.id, track=track).first()
+    profile = user_profile.objects.get(user=request.user)
+    return render(request, 'view_completed_activity.html', {'track': track, 'profile': profile})
+
 
 
 
@@ -699,7 +730,7 @@ def complete_activity(request):
         activity = Activity.objects(id=ObjectId(activity_id)).first()
         user_track_status = UserActivityTrackStatus.objects(user_id=request.user.id).first()
         # create new response shit if it does not exist already
-        activity_track_response = ActivityTrackResponses.objects(user_id=request.user.id, track=track).first()
+        activity_track_response = ActivityTrackResponses.objects(user_id=request.user.id, track=track).order_by('-id').first()
         if activity_track_response is None:
             activity_track_response = ActivityTrackResponses(user_id=request.user.id, track=track,
                                                             current_activity=track.activity[0])
@@ -712,11 +743,12 @@ def complete_activity(request):
         print 'HO PAYA'
 
         activity_track_response.responses.append(activity_response)
+        print len(activity_track_response.responses), len(track.activity)
         if len(activity_track_response.responses) == len(track.activity):
             activity_track_response.completed = True
             activity_track_response.current_activity = None
-            user_track_status.completed_tracks.append(track)
-            user_track_status.pending_tracks.remove(track)
+            # user_track_status.completed_tracks.append(track)
+            # user_track_status.pending_tracks.remove(track)
             user_track_status.save()
             # Also remove from pending and move to Completed in case of UserActivityTrackStatus
 
@@ -774,9 +806,14 @@ def student_activity_profile(request):
         user_track_status = UserActivityTrackStatus(user_id=request.user.id)
         user_track_status.save()
     pending_tracks = user_track_status.pending_tracks
+    completed_tracks = user_track_status.completed_tracks
 
     profile= user_profile.objects.get(user=request.user)
-    return render(request, 'user/activity_profile.html', {'pending_tracks': pending_tracks, 'profile': profile})
+    return render(request, 'user/activity_profile.html', {
+        'pending_tracks': pending_tracks,
+        'completed_tracks': completed_tracks,
+        'profile': profile
+    })
 
 
 def student_survey_profile(request):
@@ -809,12 +846,51 @@ def asds(request):
 def asd_take(request, activity_id):
     return render(request, 'activity.html')
 
-def view_activity(request, track_id):
+def view_activity(request, track_id, activity_id = None):
+    profile = admin_profile.objects.get(user=request.user)
     track = ActivityTrack.objects(id=ObjectId(track_id)).first()
-    print track.activity
-    return HttpResponse(json.dumps([json.loads(a.to_json()) for a in track.activity]))
-    return render(request, 'activity/view.html', {'activity': track})
+    if activity_id:
+        if request.method == 'POST':
+            activity = Activity.objects(id=ObjectId(request.POST['activity_id'])).first()
+            activity.activity_type = request.POST['activity_type']
+            activity.text = request.POST['text']
+
+            if 'video_url' in request.POST:
+                activity.video_url = request.POST['video_url']
+
+            activity.save()
+            return HttpResponse('success')
+
+        for a in track.activity:
+            if a.id == ObjectId(activity_id):
+                return HttpResponse(a.to_json())
+    return render(request, 'activity/view.html', {'activity': track, 'profile': profile})
 
 def edit_activity(request, activity_id):
     activity = Activity.objects(id=ObjectId(activity_id)).first()
     return render(request, 'activity/view.html', {'activity': activity})
+
+def add_single_activity(request):
+    track_id = request.POST['track_id']
+    track = ActivityTrack.objects(id=ObjectId(track_id)).first()
+    text = request.POST['text']
+    activity_type = request.POST['activity_type']
+    next_allowed_after = int(request.POST['next_allowed_after'])
+    activity = Activity(text=text,activity_type=activity_type,
+                        next_allowed_after=next_allowed_after)
+
+    if 'video_url' in request.POST:
+        activity.video_url = request.POST['video_url']
+
+    # if 'image' in request.POST:
+    #     # image = request.POST['image'].split('base64,')
+    #     image = request.POST['image']
+    #     print 11111111
+    #     print image.split('base64,')[1].decode('base64')
+    #     print 11111111
+    #     activity.image = image.split('base64,')[1].decode('base64')
+
+    activity.save()
+    track.activity.append(activity)
+    track.save()
+    return HttpResponse('success')
