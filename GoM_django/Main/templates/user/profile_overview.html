@@ -67,20 +67,9 @@
                                 <span class="username username-hide-on-mobile user-name"> {{profile.name}} </span>
                                 <i class="fa fa-angle-down"></i>
                             </a>
-                                                        <ul class="dropdown-menu dropdown-menu-default">
+                            <ul class="dropdown-menu dropdown-menu-default">
                                 <li>
-                                                                <ul class="dropdown-menu dropdown-menu-default">
-                                <li>
-                                    <a href="page_user_profile_1.html">
-                                        <i class="icon-user"></i> My Profile </a>
-                                </li>
-                                <li class="divider"> </li>
-                                <li>
-                                    <a href="/logout">
-                                        <i class="icon-key"></i> Log Out </a>
-                                </li>
-                            </ul>
-<a href="/profile">
+                                    <a href="/profile">
                                         <i class="icon-user"></i> My Profile </a>
                                 </li>
                                 <li class="divider"> </li>
@@ -93,7 +82,7 @@
                         <!-- END USER LOGIN DROPDOWN -->
                         <!-- BEGIN QUICK SIDEBAR TOGGLER -->
                         <!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
-                        {% if profile_type == 'user' %}
+                        {% if profile_type == 'user' or profile_type == 'coach' %}
                         <li class="dropdown dropdown-quick-sidebar-toggler">
                             <a href="javascript:;" class="dropdown-toggle">
                                 <i class="icon-logout"></i>
@@ -663,7 +652,7 @@
             </div>
             <!-- END CONTENT -->
             <!-- BEGIN QUICK SIDEBAR -->
-            {% if profile_type == 'user' %}
+            {% if profile_type == 'user' or profile_type == 'coach' %}
             <a href="javascript:;" class="page-quick-sidebar-toggler">
                 <i class="icon-login"></i>
             </a>
