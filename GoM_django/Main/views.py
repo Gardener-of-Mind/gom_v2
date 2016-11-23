@@ -471,12 +471,15 @@ def coach_user_profile(request,user_id):
         return HttpResponse('User Profile object error')
 
     user_survey_responses = SurveyResponses.objects(user_id=user_id)
+    print 1111111111
+    print user_survey_responses
+    print 1111111111
     user_surveys = [(user_response.survey, user_respose.status) for user_response in user_survey_responses]
 
     return render(request, 'coach/user_details.html', {
         'profile': profile,
         'user_profile': user_profile_ob,
-        'user_surveys': user_surveys or range(3)
+        'user_surveys': user_surveys
     })
 
 
@@ -896,4 +899,12 @@ def add_single_activity(request):
     return HttpResponse('success')
 
 def delete_activity(request):
+  if request.POST:
+    track_id = request.POST['track_id']
+    activity_id = request.POST['activity_id']
+    track = ActivityTrack.objects(id=ObjectId(track_id)).first()
+    activity = Activity.objects(id=ObjectId(activity_id)).first()
+    track.activity.remove(activity)
+    track.save()
+    print 123
     return HttpResponse('success')

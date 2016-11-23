@@ -89,22 +89,29 @@ $('.modal-save').click(function() {
 });
 
 $('.modal-submit').click(function() {
+  var data = {
+    activity: true,
+    track_id: $('#add-activity').data('aid'),  // this is correct: activity@client = track@server
+    // activity_id: tid,  // this is correct: task@client = activity@server
+    text: CKEDITOR.instances.questionText.getData(),
+    next_allowed_after: $('#next_allowed_after').val(),
+    activity_type: $('#questionType').val(),
+  };
+  switch (data.activity_type) {
+    case 'video':
+      data.video_url = $('#url').val().replace(/.*watch\?v=(.*)/, "https://www.youtube.com/embed/$1");
+      break;
+  }
+
   $.ajax({
     url: '/activity/add_single/',
     method:'POST',
     headers : {
       "X-CSRFToken" : getCookie('csrftoken')
     },
-    data: {
-      activity: true,
-      track_id: $('#add-activity').data('aid'),  // this is correct: activity@client = track@server
-      // activity_id: tid,  // this is correct: task@client = activity@server
-      text: CKEDITOR.instances.questionText.getData(),
-      next_allowed_after: $('#next_allowed_after').val(),
-      activity_type: $('#questionType').val(),
-    },
+    data: data,
     success: function(resp) {
-      // window.location.reload();
+      window.location.reload();
       console.log(resp)
     }
   });
