@@ -310,9 +310,10 @@ def dashboard(request):
         # assigned_activity = user_activity_ob.assigned_activity
         # all_tasks = Task.objects(activity= assigned_activity)
         # pending_tasks= list(set(all_tasks) - set(completed_tasks))
+        user_survey_status = UserSurveyStatus.objects(user_id=user.id).first()
 
 
-        return render(request,'user/dashboard.html',{'profile': profile})
+        return render(request,'user/dashboard.html',{'profile': profile, 'user_survey_status': user_survey_status})
     except:
         pass
     try:
@@ -473,14 +474,15 @@ def coach_user_profile(request,user_id):
         user_profile_ob = user_profile.objects.get(id= int(user_id))
     except:
         return HttpResponse('User Profile object error')
+    # return HttpResponse(user_profile.name)
 
-    user_survey_responses = SurveyResponses.objects(user_id=user_id)
-    user_surveys = [(user_response.survey, user_respose.status) for user_response in user_survey_responses]
+    user_survey_status = UserSurveyStatus.objects(user_id=user_profile_ob.user.id).first()
 
     return render(request, 'coach/user_details.html', {
         'profile': profile,
         'user_profile': user_profile_ob,
-        'user_surveys': user_surveys
+        'completed_surveys': user_survey_status.completed_surveys,
+        'pending_surveys': user_survey_status.pending_surveys,
     })
 
 

@@ -277,11 +277,19 @@
                                                     <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 282px;"><div class="scroller" style="height: 282px; overflow: hidden; width: auto;" data-always-visible="1" data-rail-visible1="0" data-handle-color="#D7DCE2" data-initialized="1">
                                                         <!-- START TASK LIST -->
                                                         <ul class="task-list">
-                                                            {% for survey in user_surveys %}
+                                                            {% for survey in pending_surveys %}
                                                             <li>
                                                                 <div class="task-title">
                                                                     <span class="task-title-sp">{{survey.name}}</span>
-                                                                    <span class="label label-sm label-success">{{survey.status}}</span>
+                                                                    <span class="label label-sm label-danger">Pending</span>
+                                                                </div>
+                                                            </li>
+                                                            {% endfor %}
+                                                            {% for survey in complete_surveys %}
+                                                            <li>
+                                                                <div class="task-title">
+                                                                    <span class="task-title-sp">{{survey.name}}</span>
+                                                                    <span class="label label-sm label-success">Completed</span>
                                                                 </div>
                                                             </li>
                                                             {% endfor %}
