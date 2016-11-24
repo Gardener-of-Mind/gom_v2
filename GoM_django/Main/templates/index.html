@@ -32,6 +32,13 @@
         <script src="https://oss.maxcdn.com/libs/respond.js' %}/1.4.2/respond.min.js' %}"></script>
     <![endif]-->
 
+    <style type="text/css">
+        .long-text {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+    </style>
 </head>
 
 <body id="page-top" class="index">
@@ -137,7 +144,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
-                    <h2 class="section-heading">How it all works</h2>
+                    <h2 class="section-heading">How it all works<br>&nbsp;</h2>
                     <!-- <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3> -->
                 </div>
             </div>
@@ -235,8 +242,8 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
-                    <h2 class="section-heading">About</h2>
-                    <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
+                    <h2 class="section-heading">About Us</h2>
+                    <h3 class="section-subheading text-muted">Follow our Journey.</h3>
                 </div>
             </div>
             <div class="row">
@@ -263,7 +270,7 @@
                             <div class="timeline-panel">
                                 <div class="timeline-heading">
                                     <h4>October 2015</h4>
-                                    <h4 class="subheading">An Agency is Born</h4>
+                                    <h4 class="subheading">Second Phase</h4>
                                 </div>
                                 <div class="timeline-body">
                                     <p class="text-muted">Second phase of Mana Maali Student Wellness Program was introduced across all four BITS campuses (Pilani, Hyderabad, Goa and Dubai)</p>
@@ -277,7 +284,7 @@
                             <div class="timeline-panel">
                                 <div class="timeline-heading">
                                     <h4>May 2016 and onwards</h4>
-                                    <h4 class="subheading">Transition to Full Service</h4>
+                                    <h4 class="subheading">Currently Rolling</h4>
                                 </div>
                                 <div class="timeline-body">
                                     <p class="text-muted">Third and on-going phase of Mana Maali Student Wellness Program</p>
@@ -303,21 +310,21 @@
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <h2 class="section-heading">Our Amazing Team</h2>
-                    <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
+                    <h3 class="section-subheading text-muted"> </h3>
                 </div>
             </div>
             <div class="row">
                 <div class="col-sm-3">
                     <div class="team-member">
                         <img src="{% static '/media/team/barr.jpg' %}" class="img-responsive img-circle" alt="">
-                        <h4>Dr. C. Barr Taylor, MD</h4>
-                        <p class="text-muted">Project Investigator,<br>Director of Stanford’s Behavioral<br>&nbsp;</p>
+                        <h4 class="long-text">Dr. C. Barr Taylor, MD</h4>
+                        <p class="text-muted long-text">Project Investigator,<br>Director of Stanford’s<br>Behavioral Medicine Lab</p>
                         <ul class="list-inline social-buttons">
-                            <li><a href="#"><i class="fa fa-twitter"></i></a>
+                            <li><a href="mail:btaylor@stanford.edu"><i class="fa fa-envelope"></i></a>
                             </li>
-                            <li><a href="#"><i class="fa fa-facebook"></i></a>
+                            <li><a href="https://med.stanford.edu/profiles/craig-taylor" target="_blank"><i class="fa fa-university"></i></a>
                             </li>
-                            <li><a href="#"><i class="fa fa-linkedin"></i></a>
+                            <!-- <li><a href="#"><i class="fa fa-linkedin"></i></a> -->
                             </li>
                         </ul>
                     </div>
@@ -325,29 +332,29 @@
                 <div class="col-sm-3">
                     <div class="team-member">
                         <img src="{% static '/media/team/michelle.jpg' %}" class="img-responsive img-circle" alt="">
-                        <h4>Dr. Michelle G. Newman</h4>
-                        <p class="text-muted">Project Investogator<br>Director of Penn State’s Lab<br>for Anxiety and Depression.</p>
+                        <h4 class="long-text">Dr. Michelle G. Newman</h4>
+                        <p class="text-muted long-text">Project Investogator<br>Director of Penn State’s Lab<br>for Anxiety and Depression.</p>
                         <ul class="list-inline social-buttons">
-                            <li><a href="#"><i class="fa fa-twitter"></i></a>
                             </li>
-                            <li><a href="#"><i class="fa fa-facebook"></i></a>
+                            <li><a href="https://www.linkedin.com/in/michelle-newman-68ba9b14" target="_blank"><i class="fa fa-linkedin" ></i></a>
                             </li>
-                            <li><a href="#"><i class="fa fa-linkedin"></i></a>
+                            <li><a href="mailto:mgn1@psu.edu"><i class="fa fa-envelope"></i></a>
                             </li>
+                            <li><a href="http://psych.la.psu.edu/directory/mgn1" target="_blank"><i class="fa fa-university"></i></a>
                         </ul>
                     </div>
                 </div>
                 <div class="col-sm-3">
                     <div class="team-member">
                         <img src="{% static '/media/team/josef.jpg' %}" class="img-responsive img-circle" alt="">
-                        <h4>Dr. Josef I. Ruzek</h4>
-                        <p class="text-muted">Project Investigator, Director,<br>Dissemination and Training, U.S.<br>Department of Veterans Affair</p>
+                        <h4 class="long-text">Dr. Josef I. Ruzek</h4>
+                        <p class="text-muted long-text">Project Investigator, Director,<br>Dissemination and Training, U.S.<br>Department of Veterans Affair</p>
                         <ul class="list-inline social-buttons">
-                            <li><a href="#"><i class="fa fa-twitter"></i></a>
+                            <li><a href="https://www.facebook.com/josef.ruzek" target="_blank"><i class="fa fa-facebook"></i></a>
                             </li>
-                            <li><a href="#"><i class="fa fa-facebook"></i></a>
+                            <li><a href="mailto:Josef.Ruzek@va.gov"><i class="fa fa-envelope"></i></a>
                             </li>
-                            <li><a href="#"><i class="fa fa-linkedin"></i></a>
+                            <li><a href="http://www.ptsd.va.gov/about/divisions/dissemination/josef_i_ruzek_phd.asp" target="_blank"><i class="fa fa-university"></i></a>
                             </li>
                         </ul>
                     </div>
@@ -355,113 +362,156 @@
                 <div class="col-sm-3">
                     <div class="team-member">
                         <img src="{% static '/media/team/nitya.jpg' %}" class="img-responsive img-circle" alt="">
-                        <h4>Nitya Kanuri</h4>
-                        <p class="text-muted">Project Coordinator<br>&nbsp;<br>&nbsp;</p>
+                        <h4 class="long-text">Nitya Kanuri</h4>
+                        <p class="text-muted long-text">Project Coordinator<br> Open Data Manager<br> Crisis Text Line, New York</p>
                         <ul class="list-inline social-buttons">
-                            <li><a href="#"><i class="fa fa-twitter"></i></a>
+                            <li><a href="https://www.facebook.com/nityakanuri" target="_blank"><i class="fa fa-facebook"></i></a>
                             </li>
-                            <li><a href="#"><i class="fa fa-facebook"></i></a>
+                            <li><a href="https://www.linkedin.com/in/nityakanuri" target="_blank"><i class="fa fa-linkedin"></i></a>
                             </li>
-                            <li><a href="#"><i class="fa fa-linkedin"></i></a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-sm-3">
-                    <div class="team-member">
-                        <img src="{% static '/media/team/bona.jpg' %}" class="img-responsive img-circle" alt="">
-                        <h4>Ms. Bona Colaco</h4>
-                        <p class="text-muted">Coach Supervisor, Clinical Psychologist, Mana Maali<br>&nbsp;</p>
-                        <ul class="list-inline social-buttons">
-                            <li><a href="#"><i class="fa fa-twitter"></i></a>
-                            </li>
-                            <li><a href="#"><i class="fa fa-facebook"></i></a>
-                            </li>
-                            <li><a href="#"><i class="fa fa-linkedin"></i></a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-sm-3">
-                    <div class="team-member">
-                        <img src="{% static '/media/team/manjula.jpg' %}" class="img-responsive img-circle" alt="">
-                        <h4>Dr. M. Manjula</h4>
-                        <p class="text-muted">Project Investigator, Clinical Psychology, NIMHANS, Bangalore</p>
-                        <ul class="list-inline social-buttons">
-                            <li><a href="#"><i class="fa fa-twitter"></i></a>
-                            </li>
-                            <li><a href="#"><i class="fa fa-facebook"></i></a>
-                            </li>
-                            <li><a href="#"><i class="fa fa-linkedin"></i></a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-sm-3">
-                    <div class="team-member">
-                        <img src="{% static 'index/img/team/2.jpg' %}" class="img-responsive img-circle" alt="">
-                        <h4>Dr. Rahul Banerjee</h4>
-                        <p class="text-muted">H.O.D. CSE BITS Pilani Campus<br>Tech Team Supervisor</p>
-                        <ul class="list-inline social-buttons">
-                            <li><a href="#"><i class="fa fa-twitter"></i></a>
-                            </li>
-                            <li><a href="#"><i class="fa fa-facebook"></i></a>
-                            </li>
-                            <li><a href="#"><i class="fa fa-linkedin"></i></a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-sm-3">
-                    <div class="team-member">
-                        <img src="{% static '/media/team/abhimanyu.jpg' %}" class="img-responsive img-circle" alt="">
-                        <h4>Abhimanyu Rawat</h4>
-                        <p class="text-muted">Tech Lead,<br>CS BITS Pilani Campus</p>
-                        <ul class="list-inline social-buttons">
-                            <li><a href="#"><i class="fa fa-twitter"></i></a>
-                            </li>
-                            <li><a href="#"><i class="fa fa-facebook"></i></a>
-                            </li>
-                            <li><a href="#"><i class="fa fa-linkedin"></i></a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-sm-3">
-                    <div class="team-member">
-                        <img src="{% static 'index/img/team/3.jpg' %}" class="img-responsive img-circle" alt="">
-                        <h4>Tarun Kumar Vangani</h4>
-                        <p class="text-muted">Tech Lead,<br>CS BITS Pilani Campus</p>
-                        <ul class="list-inline social-buttons">
-                            <li><a href="#"><i class="fa fa-twitter"></i></a>
-                            </li>
-                            <li><a href="#"><i class="fa fa-facebook"></i></a>
-                            </li>
-                            <li><a href="#"><i class="fa fa-linkedin"></i></a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-sm-3">
-                    <div class="team-member">
-                        <img src="{% static 'index/img/team/3.jpg' %}" class="img-responsive img-circle" alt="">
-                        <h4>Shirsh Zibbu</h4>
-                        <p class="text-muted">Tech Lead,<br>CS BITS Pilani Campus</p>
-                        <ul class="list-inline social-buttons">
-                            <li><a href="#"><i class="fa fa-twitter"></i></a>
-                            </li>
-                            <li><a href="#"><i class="fa fa-facebook"></i></a>
-                            </li>
-                            <li><a href="#"><i class="fa fa-linkedin"></i></a>
+                            <li><a href="https://twitter.com/nitya_kanuri" target="_blank"><i class="fa fa-twitter"></i></a>
                             </li>
                         </ul>
                     </div>
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-8 col-lg-offset-2 text-center">
-                    <p class="large text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut eaque, laboriosam veritatis, quos non quis ad perspiciatis, totam corporis ea, alias ut unde.</p>
+                <div class="col-sm-3">
+                    <div class="row">
+                        <div class="col-sm-12 col-sm-offset-6">
+                            <div class="team-member">
+                                <img src="{% static '/media/team/bona.jpg' %}" class="img-responsive img-circle" alt="">
+                                <h4 class="long-text">Bona Colaco</h4>
+                                <p class="text-muted long-text">Coach Supervisor,<br>Clinical Psychologist,<br>Mana Maali</p>
+                                <ul class="list-inline social-buttons">
+                                   <!--  <li><a href="#"><i class="fa fa-twitter"></i></a>
+                                    </li> -->
+                                    <li><a href="https://www.facebook.com/bona.colaco" target="_blank"><i class="fa fa-facebook"></i></a>
+                                    </li>
+                                    <li><a href="https://www.linkedin.com/in/bona-colaco-8745b923" target="_blank"><i class="fa fa-linkedin"></i></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+                <div class="col-sm-3">
+                    <div class="row">
+                        <div class="col-sm-12 col-sm-offset-6">
+                            <div class="team-member">
+                                <img src="{% static '/media/team/manjula.jpg' %}" class="img-responsive img-circle" alt="">
+                                <h4 class="long-text">Dr. M. Manjula</h4>
+                                <p class="text-muted long-text">Project Investigator,<br>Clinical Psychology,<br>NIMHANS, Bangalore</p>
+                                <ul class="list-inline social-buttons">
+                                    <li><a href="http://www.nimhans.ac.in/users/dr-m-manjula" target="_blank"><i class="fa fa-university"></i></a>
+                                    </li>
+                                    <!-- <li><a href="#"><i class="fa fa-facebook"></i></a> -->
+                                    </li>
+                                    <!-- <li><a href="#"><i class="fa fa-linkedin"></i></a> -->
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="row">
+                        <div class="col-sm-12 col-sm-offset-6">
+                            <div class="team-member">
+                                <img src="{% static 'index/img/team/2.jpg' %}" class="img-responsive img-circle" alt="">
+                                <h4 class="long-text">Dr. Rahul Banerjee</h4>
+                                <p class="text-muted long-text">Tech Team Supervisor,<br>H.O.D. CSE BITS Pilani Campus<br>&nbsp;</p>
+                                <ul class="list-inline social-buttons">
+                                    <li><a href="https://in.linkedin.com/in/rahulbanerjeebits" target="_blank"><i class="fa fa-linkedin"></i></a>
+                                    </li>
+                                    <li><a href="mailto:rahul@pilani.bits-pilani.ac.in"><i class="fa fa-envelope"></i></a>
+                                    </li>
+                                    <li><a href="www.bits-pilani.ac.in/pilani/rahulbanerjee/profile" target="_blank"><i class="fa fa-university"></i></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                                <div class="col-sm-3">
+                    <div class="row">
+                        <div class="col-sm-12 col-sm-offset-6">
+                            <div class="team-member">
+                                <img src="{% static '/media/team/abhimanyu.jpg' %}" class="img-responsive img-circle" alt="">
+                                <h4 class="long-text">Abhimanyu Rawat</h4>
+                                <p class="text-muted long-text">Online Platform Tech  Lead,<br>CS BITS Pilani Campus</p>
+                                <ul class="list-inline social-buttons">
+                                    <li><a href="mailto:abhimanyurawat@yahoo.com" target="_blank"><i class="fa fa-envelope"></i></a>
+                                    </li>
+                                    <li><a href="https://github.com/ABresting" target="_blank"><i class="fa fa-github"></i></a>
+                                    </li>
+                                    <li><a href="https://www.facebook.com/Abhimanyurawat14" target="_blank"><i class="fa fa-facebook"></i></a>
+                                    </li>
+                                    <li><a href="https://in.linkedin.com/in/abhimanyu-rawat-3347b45b" target="_blank"><i class="fa fa-linkedin"></i></a>
+                                    </li>
+                                    <li><a href="https://twitter.com/MrAbhimanyu" target="_blank"><i class="fa fa-twitter"></i></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-3">
+                    <div class="row">
+                        <div class="col-sm-12 col-sm-offset-6">
+                            <div class="team-member">
+                                <img src="{% static 'index/img/team/3.jpg' %}" class="img-responsive img-circle" alt="">
+                                <h4 class="long-text">Tarun Kumar Vangani</h4>
+                                <p class="text-muted long-text">Backend Developer,<br>CS BITS Pilani Campus</p>
+                                <ul class="list-inline social-buttons">
+                                    <li><a href="mailto:reach.tarun.here@gmail.com" target="_blank"><i class="fa fa-envelope"></i></a>
+                                    </li>
+                                    <li><a href="https://github.com/reachtarunhere" target="_blank"><i class="fa fa-github"></i></a>
+                                    </li>
+                                    <li><a href="https://www.facebook.com/reachtarunhere" target="_blank"><i class="fa fa-facebook"></i></a>
+                                    </li>
+                                    <li><a href="https://in.linkedin.com/in/tarunkv" target="_blank"><i class="fa fa-linkedin"></i></a>
+                                    </li>
+                                    <li><a href="https://twitter.com/reachtarunhere" target="_blank"><i class="fa fa-twitter"></i></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-3">
+                    <div class="row">
+                        <div class="col-sm-12 col-sm-offset-6">
+                            <div class="team-member">
+                                <img src="{% static 'index/img/team/3.jpg' %}" class="img-responsive img-circle" alt="">
+                                <h4 class="long-text">Shirsh Zibbu</h4>
+                                <p class="text-muted long-text">Front-end Developer,<br>CS BITS Pilani Campus</p>
+                                <ul class="list-inline social-buttons">
+                                    <li><a href="mailto:zibbu.shirsh@gmail.com" target="_blank"><i class="fa fa-envelope"></i></a>
+                                    </li>
+                                    <li><a href="https://github.com/zhirzh" target="_blank"><i class="fa fa-github"></i></a>
+                                    </li>
+                                    <li><a href="https://www.facebook.com/zibbu.shirsh" target="_blank"><i class="fa fa-facebook"></i></a>
+                                    </li>
+                                    <li><a href="https://in.linkedin.com/in/shirsh-zibbu" target="_blank"><i class="fa fa-linkedin"></i></a>
+                                    </li>
+                                    <li><a href="https://twitter.com/zhirzh" target="_blank"><i class="fa fa-twitter"></i></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row">
+              <!--   <div class="col-lg-8 col-lg-offset-2 text-center">
+                    <p class="large text-muted"> </p>
+                </div> -->
             </div>
         </div>
     </section>
@@ -471,32 +521,32 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-2 col-md-4 col-sm-6">
-                    <a href="#">
+                    <a href="http://med.stanford.edu/" target="_blank">
                         <img src="{% static '/media/sponsors/1.png' %}" class="img-responsive img-centered" alt="" style="max-height: 100px">
                     </a>
                 </div>
                 <div class="col-lg-2 col-md-4 col-sm-6">
-                    <a href="#">
+                    <a href="http://www.psu.edu/" target="_blank">
                         <img src="{% static '/media/sponsors/2.png' %}" class="img-responsive img-centered" alt="" style="max-height: 100px">
                     </a>
                 </div>
                 <div class="col-lg-2 col-md-4 col-sm-6">
-                    <a href="#">
+                    <a href="http://www.ptsd.va.gov/" target="_blank">
                         <img src="{% static '/media/sponsors/3.png' %}" class="img-responsive img-centered" alt="" style="max-height: 100px">
                     </a>
                 </div>
                 <div class="col-lg-2 col-md-4 col-sm-6">
-                    <a href="#">
+                    <a href="http://www.nimhans.ac.in/" target="_blank">
                         <img src="{% static '/media/sponsors/4.jpg' %}" class="img-responsive img-centered" alt="" style="max-height: 100px">
                     </a>
                 </div>
                 <div class="col-lg-2 col-md-4 col-sm-6">
-                    <a href="#">
+                    <a href="http://www.whiteswanfoundation.org/" target="_blank">
                         <img src="{% static '/media/sponsors/5.png' %}" class="img-responsive img-centered" alt="" style="max-height: 100px">
                     </a>
                 </div>
                 <div class="col-lg-2 col-md-4 col-sm-6">
-                    <a href="#">
+                    <a href="https://www.paloaltou.edu/" target="_blank">
                         <img src="{% static '/media/sponsors/6.png' %}" class="img-responsive img-centered" alt="" style="max-height: 100px">
                     </a>
                 </div>
@@ -510,7 +560,7 @@
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <h2 class="section-heading">Contact Us</h2>
-                    <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
+                    <h3 class="section-subheading text-muted">Your feedback is valuable to us.</h3>
                 </div>
             </div>
             <div class="row">
@@ -553,16 +603,16 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-4">
-                    <span class="copyright">Copyright &copy; Your Website 2014</span>
+                    <span class="copyright">Copyright &copy; ManaMaali 2016</span>
                 </div>
                 <div class="col-md-4">
                     <ul class="list-inline social-buttons">
-                        <li><a href="#"><i class="fa fa-twitter"></i></a>
+                      <!--   <li><a href="#"><i class="fa fa-twitter"></i></a>
                         </li>
                         <li><a href="#"><i class="fa fa-facebook"></i></a>
                         </li>
                         <li><a href="#"><i class="fa fa-linkedin"></i></a>
-                        </li>
+                        </li> -->
                     </ul>
                 </div>
                 <div class="col-md-4">
