@@ -4,6 +4,8 @@ var FormWizard = function () {
   return {
     //main function to initiate the module
     init: function () {
+      var readyToUpload = true;
+
       if (!jQuery().bootstrapWizard) {
         return;
       }
@@ -233,7 +235,15 @@ var FormWizard = function () {
       });
       $('#form_wizard_1 .button-submit').click(function () {
         addQuestions();
-        sendQuestion('submit');
+        (function sendQuestionWrapper() {
+          console.log(readyToUpload)
+          if (readyToUpload) {
+            sendQuestion('submit');
+            return;
+          }
+
+          setTimeout(sendQuestionWrapper, 1000);
+        })();
       }).hide();
 
       // hide add question button and submit button
@@ -266,14 +276,13 @@ var FormWizard = function () {
         var next_allowed_after = $('#next_allowed_after').val();
         switch (activity_type) {
           case 'image':
+            readyToUpload = false;
             var imageFile = $('#file').get(0).files[0];
 
             var reader = new FileReader();
 
-            // Closure to capture the file information.
             reader.onload = (function(theFile) {
               return function(e) {
-                // Render thumbnail.
                 console.log(theFile.name)
                 questions.push({
                   activity_type: activity_type,
@@ -282,6 +291,7 @@ var FormWizard = function () {
                   image: e.target.result,
                 });
                 CKEDITOR.instances.questionText.setData('');
+                readyToUpload = true;
 
                 // sendQuestion('submit');
               };

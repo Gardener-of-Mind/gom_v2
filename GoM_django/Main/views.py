@@ -24,7 +24,11 @@ import pickle
 from bson.objectid import ObjectId
 from utils import resolve_next_question
 from bson.binary import Binary
+from PIL import Image
+from io import BytesIO
 import base64
+from gridfs import GridFS
+import cStringIO
 # Create your views here.
 def index(request):
     if request.user.is_authenticated():
@@ -471,9 +475,6 @@ def coach_user_profile(request,user_id):
         return HttpResponse('User Profile object error')
 
     user_survey_responses = SurveyResponses.objects(user_id=user_id)
-    print 1111111111
-    print user_survey_responses
-    print 1111111111
     user_surveys = [(user_response.survey, user_respose.status) for user_response in user_survey_responses]
 
     return render(request, 'coach/user_details.html', {
@@ -585,11 +586,8 @@ def add_track(request):
     user= request.user
     profile = admin_profile.objects.get(user=user)
 
-    print 1111111111
     if request.POST:
-        print 22222222
         if 'track' in request.POST:
-            print 3333333333
             name = request.POST['name']
             category = request.POST['category']
             track = ActivityTrack(name=name, category=category)
@@ -597,7 +595,6 @@ def add_track(request):
             return HttpResponse(str(track.id))
 
         elif 'activity' in request.POST:
-            print 444444444444
             print request.POST.keys()
             track_id = request.POST['track_id']
             track = ActivityTrack.objects(id=ObjectId(track_id)).first()
@@ -612,13 +609,24 @@ def add_track(request):
                 if 'video_url' in activity_json:
                     activity.video_url = activity_json['video_url']
 
-                # if 'image' in activity_json:
-                #     # image = activity_json['image'].split('base64,')
-                #     image = activity_json['image']
-                #     print 11111111
-                #     print image.split('base64,')[1].decode('base64')
-                #     print 11111111
-                #     activity.image = image.split('base64,')[1].decode('base64')
+                if 'image' in activity_json:
+                    # image = activity_json['image'].split('base64,')
+                    image = activity_json['image']
+                    print 11111111
+                    img_string = image.split('base64,')[1]
+                    print 11111111
+
+
+                    imageData = img_string
+                    file_like = cStringIO.StringIO(base64.decodestring(imageData))
+                    PILImage = Image.open(file_like)
+                    PILImage.save('media/activities/temp.jpg')
+
+
+                    # im = Image.open(BytesIO(base64.b64decode(img_string)))
+                    # im.save('123.jpg')
+                    # im.seek(0)
+                    activity.image.put(open('media/activities/temp.jpg'))
 
                 activity.save()
                 track.activity.append(activity)
