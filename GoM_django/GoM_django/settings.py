@@ -133,7 +133,7 @@ mongoengine.connect('gauss3_DB')
 
 if not os.path.isfile(BASE_DIR + '/default_survey_settings.config'):
     fileObject = open(BASE_DIR + '/default_survey_settings.config', 'wb')
-    DEFAULT_SURVEY_CONFIG = {'Anxiety': None, 'Depression': None, 'Stress': None}
+    DEFAULT_SURVEY_CONFIG = {'Default': None}
     pickle.dump(DEFAULT_SURVEY_CONFIG, fileObject)
     fileObject.close()
 

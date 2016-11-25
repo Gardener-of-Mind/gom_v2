@@ -118,7 +118,7 @@ def check_survey_response(request, user_id, survey_id):
 
 def update_default_setting(request):
     if request.POST:
-        survey_type = request.POST['survey_type']
+        survey_type = 'Default'
         survey_id = request.POST['survey_id']
         DEFAULT_SURVEY_CONFIG[survey_type] = survey_id
         fileObject = open(BASE_DIR + '/default_survey_settings.config', 'wb')
@@ -138,16 +138,13 @@ def default_surveys(request):
             survey = Survey.objects(id=ObjectId(survey_id)).first()
             student_status.pending_surveys.append(survey)
     student_status.save()
-    if request.POST:
-        survey_type = request.POST['survey_type']
-        survey_id = DEFAULT_SURVEY_CONFIG[survey_type]
-        if survey_id is None:
-            return JsonResponse({'message':
-                            'This Survey is Not available at the Moment.'})
-        redirect_url = '/survey/take/%s' % str(survey_id)
-        return HttpResponse(redirect_url)
-    return render(request, 'default_survey.html')
-
+    survey_type = 'Default'
+    survey_id = DEFAULT_SURVEY_CONFIG[survey_type]
+    if survey_id is None:
+        return JsonResponse({'message':
+                        'This Survey is Not available at the Moment.'})
+    redirect_url = '/survey/take/%s' % str(survey_id)
+    return HttpResponse(redirect_url)
 
 @login_required
 def take_survey(request, survey_id):
