@@ -61,6 +61,8 @@ def user_login(request):
 
 def register(request):
     if request.POST:
+        return HttpResponse('')
+        
         username= request.POST['username']
         email_id= request.POST['email']
         password = request.POST['password']

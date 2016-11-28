@@ -57,14 +57,14 @@ var Register = function () {
 	            },
 
 	            submitHandler: function (form) {
-	                form.submit();
+	                // form.submit();
 	            }
 	        });
 
 			$('.register-form input').keypress(function (e) {
 	            if (e.which == 13) {
 	                if ($('.register-form').validate().form()) {
-	                    $('.register-form').submit();
+	                    // $('.register-form').submit();
 	                }
 	                return false;
 	            }
