@@ -49,7 +49,7 @@ class Diary(Document):
 # Models for Survey
 
 class Option(EmbeddedDocument):
-    text = StringField(max_length=500)
+    text = StringField(max_length=1000)
     survey_score = IntField(default=0)
     anxiety_score = IntField(default=0)
     depression_score = IntField(default=0)
@@ -58,7 +58,7 @@ class Option(EmbeddedDocument):
 
 class Question(Document):
     """ Stores Question Details and Evaluation Scheme"""
-    text = StringField(max_length=3000)
+    text = StringField(max_length=5000)
     query_type = StringField(max_length=50)
     options = ListField(EmbeddedDocumentField(Option))
     eval_scheme = ListField()
@@ -76,7 +76,7 @@ class Response(Document):
     note downn the index of the option."""
     question = ReferenceField(Question)
     response_per_option = ListField()
-    text_response = StringField(max_length=500, null=True)
+    text_response = StringField(max_length=15000, null=True)
     single_option = IntField(null=True)  # Index of slected option.
 
 
@@ -86,8 +86,8 @@ class Survey(Document):
     Whenever a question is replaced we update all SurveyResponses that
     refer to that particular question. If an old attempted question is edited
     then no effect. """
-    name = StringField(max_length=50)
-    category = StringField(max_length=50)
+    name = StringField(max_length=100)
+    category = StringField(max_length=100)
     questions = ListField(ReferenceField(Question))
     admin_approved = BooleanField(default=False)
 
@@ -111,13 +111,13 @@ class UserSurveyStatus(Document):
 
 
 class Tag(Document):
-    name = StringField(max_length=50)
+    name = StringField(max_length=200)
 
 class Activity(Document):
-    text = StringField(max_length=1500, blank=True)
+    text = StringField(max_length=20000, blank=True)
     tags = ListField(ReferenceField(Tag))
     next_allowed_after = IntField(default=0)   # Hours after which next activity is allowed.
-    activity_type = StringField(max_length=50)
+    activity_type = StringField(max_length=100)
     image = ImageField(null=True)
     video_url = URLField(null=True)
 
@@ -130,14 +130,14 @@ class Activity(Document):
 
 class ActivityResponse(Document):
     activity = ReferenceField(Activity)
-    feedback = StringField(max_length=500, null=True)
+    feedback = StringField(max_length=15000, null=True)
     rating = IntField(null=True)
     time_completed = DateTimeField(default=datetime.datetime.now)
 
 
 class ActivityTrack(Document):
-    name = StringField(max_length=50)
-    category = StringField(max_length=50)
+    name = StringField(max_length=100)
+    category = StringField(max_length=100)
     activity = ListField(ReferenceField(Activity))
     admin_approved = BooleanField(default=False)
     admin_only = BooleanField()  # Decide if coach is allowed to push activity.
@@ -216,7 +216,7 @@ class user_profile(models.Model):
     anxiety_score= models.IntegerField(default=0)
     depression_score= models.IntegerField(default=0)
     stress_score= models.IntegerField(default=0)
-    remarks = models.CharField(max_length=5000, default='', null=True, blank=True)
+    remarks = models.CharField(max_length=20000, default='', null=True, blank=True)
     class Meta:
         verbose_name_plural = 'user_profile'
     def __unicode__(self):
