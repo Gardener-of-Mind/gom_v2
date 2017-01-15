@@ -378,62 +378,62 @@ $('#done').click(function() {
         showForm();
 
         var feedback;
-        $('.ques').html('<p>Please express how you feel after taking the activity.</p>');
-        $('.options-cont').html('<div><textarea class="col-sm-12" style="resize:vertical;min-height:200px;" id="feedback"></textarea></div>');
+        $('.ques').html('<p>Thank you for completing this module.</p>');
+        // $('.options-cont').html('<div><textarea class="col-sm-12" style="resize:vertical;min-height:200px;" id="feedback"></textarea></div>');
         $('#action').html('<button class="next-ques" id="submit-feedback" style="cursor:pointer;">SUBMIT FEEDBACK</button>');
 
-        $('#submit-feedback').click(function() {
-            feedback = $('#feedback').val();
+        // $('#submit-feedback').click(function() {
+        //     feedback = $('#feedback').val();
 
-            $('.ques').html('<p>Please rate how you feel after taking the activity.</p>');
-            $('.options-cont').html('<div class="col-sm-12 slider-type option-type" data-option-type="rating"> <div class="slider"> <div id="demo-simple-slider" class="dragdealer"> <div class="handle green-circle"> <div class="icon"></div> </div> </div> <table class="scale"> <tr> <td>1</td> <td>2</td> <td>3</td> <td>4</td> <td>5</td> <td>6</td> <td>7</td> <td>8</td> <td>9</td> <td>10</td> </tr> </table> </div> </div>');
+        //     $('.ques').html('<p>Please rate how you feel after taking the activity.</p>');
+        //     $('.options-cont').html('<div class="col-sm-12 slider-type option-type" data-option-type="rating"> <div class="slider"> <div id="demo-simple-slider" class="dragdealer"> <div class="handle green-circle"> <div class="icon"></div> </div> </div> <table class="scale"> <tr> <td>1</td> <td>2</td> <td>3</td> <td>4</td> <td>5</td> <td>6</td> <td>7</td> <td>8</td> <td>9</td> <td>10</td> </tr> </table> </div> </div>');
 
-            setTimeout(function() {
-                var icon = $('.icon'),
-                widget = $('.widget'),
-                steps = 10,
-                dd = new Dragdealer('demo-simple-slider',{
-                    horizontal: true,
-                    steps: steps,
-                    speed: 0.3,
-                    loose: false,
-                    animationCallback: function(x, y) {
-                        var percent = parseInt(steps * (x*100), 10);
-                        icon.css({'background-position-y': (750 * x * 9/10 + 75) + 'px'});
-                    }
-                });
-                dd.setStep(5);
-                var openWidget = function(){
-                    setTimeout(function(){
-                        widget.addClass('active');
-                    }, 800);
-                    widget.addClass('loaded');
-                };
+        //     setTimeout(function() {
+        //         var icon = $('.icon'),
+        //         widget = $('.widget'),
+        //         steps = 10,
+        //         dd = new Dragdealer('demo-simple-slider',{
+        //             horizontal: true,
+        //             steps: steps,
+        //             speed: 0.3,
+        //             loose: false,
+        //             animationCallback: function(x, y) {
+        //                 var percent = parseInt(steps * (x*100), 10);
+        //                 icon.css({'background-position-y': (750 * x * 9/10 + 75) + 'px'});
+        //             }
+        //         });
+        //         dd.setStep(5);
+        //         var openWidget = function(){
+        //             setTimeout(function(){
+        //                 widget.addClass('active');
+        //             }, 800);
+        //             widget.addClass('loaded');
+        //         };
 
-                $(window).ready(function(){
-                    openWidget();
-                    window.getSliderValue = function(){
-                        return dd.getStep();
-                    }
-                });
-            }, 500);
+        //         $(window).ready(function(){
+        //             openWidget();
+        //             window.getSliderValue = function(){
+        //                 return dd.getStep();
+        //             }
+        //         });
+        //     }, 500);
 
-            $('#action').html('<button class="next-ques" id="submit" style="cursor:pointer;">SUBMIT</button>');
-            $('#submit').click(function() {
-                $.post('/activity/complete/', {
-                    track_id: location.pathname.split('/').filter(Boolean).pop(),
-                    activity_id: activity_id,
-                    rating: getSliderValue()[0],
-                    feedback: feedback,
-                }, function(res) {
-                    res = JSON.parse(res);
-                    if (res.next) {
-                        location.reload();
-                    } else {
-                        location.pathname='/student/tracks/';
-                    }
-                });
-            });
-        })
+        //     $('#action').html('<button class="next-ques" id="submit" style="cursor:pointer;">SUBMIT</button>');
+        //     $('#submit').click(function() {
+        //         $.post('/activity/complete/', {
+        //             track_id: location.pathname.split('/').filter(Boolean).pop(),
+        //             activity_id: activity_id,
+        //             rating: getSliderValue()[0],
+        //             feedback: feedback,
+        //         }, function(res) {
+        //             res = JSON.parse(res);
+        //             if (res.next) {
+        //                 location.reload();
+        //             } else {
+        //                 location.pathname='/student/tracks/';
+        //             }
+        //         });
+        //     });
+        // })
     }, 300);
 });
