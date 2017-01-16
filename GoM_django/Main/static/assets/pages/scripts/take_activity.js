@@ -450,11 +450,11 @@ $(function() {
         rating: 0,
         feedback: '',
     }, function(res) {
-        res = JSON.parse(res);
-        if (res.next) {
-            location.reload();
-        } else {
-            location.pathname='/student/tracks/';
+        // res = JSON.parse(res);
+        // if (res.next) {
+        //     location.reload();
+        // } else {
+        //     location.pathname='/student/tracks/';
         }
     });
 })
