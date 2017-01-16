@@ -437,24 +437,3 @@ $('#done').click(function() {
         })
     }, 300);
 });
-
-
-$(function() {
-    $.post('/activity/complete/', {
-        track_id: location.pathname.split('/').filter(Boolean).pop(),
-        activity_id: activity_id,
-
-        // rating: getSliderValue()[0],
-        // feedback: feedback,
-
-        rating: 0,
-        feedback: '',
-    }, function(res) {
-        // res = JSON.parse(res);
-        // if (res.next) {
-        //     location.reload();
-        // } else {
-        //     location.pathname='/student/tracks/';
-        }
-    });
-})
