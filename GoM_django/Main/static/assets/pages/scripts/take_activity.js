@@ -380,7 +380,7 @@ $('#done').click(function() {
         var feedback;
         $('.ques').html('<p>Thank you for completing this module.</p>');
         $('.options-cont').html('<div><textarea class="col-sm-3" style="resize:vertical;min-height:200px;" id="feedback"></textarea></div>');
-        $('#action').html('<button class="next-ques" id="submit-feedback" style="cursor:pointer;">SUBMIT FEEDBACK</button>');
+        $('#action').html('<button class="next-ques" id="submit-feedback" style="cursor:pointer;">DONE</button>');
 
         $('#submit-feedback').click(function() {
             feedback = $('#feedback').val();
